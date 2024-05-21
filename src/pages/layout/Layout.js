@@ -1,20 +1,17 @@
-import React from 'react';
-import { Outlet } from 'react-router-dom';
+import React from "react";
+import { Outlet } from "react-router-dom";
+import S from "./style";
 
 const Layout = () => {
     return (
         <div>
-            <header>
-                헤더
-            </header>
+            <S.Header>헤더</S.Header>
 
             <main>
                 <Outlet />
             </main>
-            
-            <footer>
-                푸터
-            </footer>
+
+            <footer>푸터</footer>
         </div>
     );
 };
