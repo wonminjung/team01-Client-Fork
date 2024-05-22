@@ -1,4 +1,4 @@
-import React from 'react';
+import React, { useEffect } from 'react';
 import BasicButton from '../../components/button/BasicButton';
 import BasicInput from '../../components/input/BasicInput';
 import BasicCheckbox from '../../components/checkbox/BasicCheckbox';
@@ -8,8 +8,31 @@ const Main = () => {
     const inputPlaceholder = "아무거나 입력해주세요!!";
     const tagId = "banana";
 
+    useEffect(()=>{
+        const main = document.querySelector("main");
+        const search = document.querySelector("#searchBox");
+        const header = document.querySelector("header");
+        const scrollEvent = ()=>{
+            const top = document.documentElement.scrollTop;
+            if(top>500){
+                search.classList.remove("big","down")
+                header.style.position = "sticky"
+            }else{
+                search.classList.add("big","down");
+                header.style.position = "relative"
+            }
+        }
+        if(main.firstChild.id === "main"){
+            search.classList.add("big","down");
+            console.log("has main")
+        }else{
+            search.classList.remove("big","down");
+        }
+        window.addEventListener('scroll', scrollEvent);
+    })
+    
     return (
-        <div>
+        <div id='main'>
             메인
             <ul>
                 <li>li1</li>

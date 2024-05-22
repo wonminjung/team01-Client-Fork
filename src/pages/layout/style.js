@@ -6,6 +6,7 @@ const PALETTE = theme.PALETTE;
 
 S.LayoutWrapper = styled.div`
     width: 100%;
+    height: 200vh;
 `
 S.Header = styled.header`
     width: 100%;
@@ -33,6 +34,9 @@ S.SearchWrapper = styled.div`
     height: 48px;
     &.big{
         height: 68px;
+    }
+    &.down{
+        top: 475px;
     }
     & .smallBox,.bigBox{
         display: flex;
