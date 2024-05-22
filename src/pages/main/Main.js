@@ -15,7 +15,6 @@ const Main = () => {
                 <li>li1</li>
                 <li>li2</li>
             </ul>
-            
             <div style={{margin:"30px"}}>
                 <BasicButton>
                     버튼
