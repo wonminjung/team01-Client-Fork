@@ -6,13 +6,13 @@ const PALETTE = theme.PALETTE;
 
 S.LayoutWrapper = styled.div`
     width: 100%;
-    height: 200vh;
 `
 S.Header = styled.header`
     width: 100%;
     height: 100px;
     display: flex;
-    position: relative;
+    position: -webkit-sticky;
+    position: sticky;
     top: 0;
     background-color: white;
     justify-content: space-between;
@@ -32,6 +32,7 @@ S.SearchWrapper = styled.div`
     border: 1px solid ${PALETTE.yellow};
     border-radius: 40px;
     height: 48px;
+    background-color: white;
     &.big{
         height: 68px;
     }
@@ -51,6 +52,7 @@ S.SearchWrapper = styled.div`
             display: flex;
             justify-content: center;
             align-items: center;
+            cursor: pointer;
         }
         &>span{
             display: inline-block;
@@ -156,6 +158,7 @@ S.SearchWrapper = styled.div`
         border: none;
         background-color: transparent;
         width: 100%;
+        height: 100%;
         cursor: pointer;
         transition: 0.3s;
         &:active{
@@ -185,6 +188,78 @@ S.SearchBtn = styled.div`
     }
     & a:hover{
         background-color: #e79700;
+    }
+`
+S.UserMenu = styled.div`
+    display: flex;
+    justify-content: space-around;
+    align-items: center;
+    border: 1px solid ${PALETTE.yellow};
+    border-radius: 30px;
+    width: 86px;
+    min-width: 86px;
+    height: 48px;
+    padding-left: 8px;
+    cursor: pointer;
+    transition: transform 0.3s;
+    &:active{
+        transform: scale(0.95);
+    }
+    & div:first-child svg{
+        width: 16px;
+        height: 16px;
+        & path{
+            fill: ${PALETTE.yellow};
+        }
+    } 
+    & div:last-child svg{
+        width: 32px;
+        height: 32px;
+        & path{
+            fill: ${PALETTE.yellow};
+        }
+    }
+`
+S.Footer = styled.footer`
+    width: 100%;
+    height: 130px;
+    background-color: #f7f7f7;
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    padding: 28px 0 34px;
+    border-top: 1px solid ${PALETTE.gray[200]};
+    &>div{
+        width: 100%;
+        max-width: 1015px;
+        display: flex;
+        flex-direction: column;
+        &>div{
+            display: flex;
+            &:first-child{
+                justify-content: space-between;
+                margin-bottom: 12px;
+                &>div{
+                    display: flex;
+                    font-size: 14px;
+                    &>div:first-child{
+                        margin-right: 10px;
+                    }
+                    &>div:last-child a{
+                        color: ${PALETTE.black};
+                    }
+                }
+            }
+            &:last-child{
+                border-top: 1px solid ${PALETTE.gray[200]};
+                padding-top: 12px;
+                & p{
+                    font-size: 10px;
+                    color: ${PALETTE.gray[300]};
+                    line-height: 12px;
+                }
+            }
+        }
     }
 `
 export default S;

@@ -1,15 +1,12 @@
-import React, { useEffect } from 'react';
+import React from 'react';
+import Header from '../layout/Header';
 
 const DetailContainer = () => {
-    useEffect(()=>{
-        const main = document.querySelector("main");
-        const search = document.querySelector("#searchBox");
-        main.firstChild.id !== "main"? search.classList.remove("big","down") : search.classList.add("big","down");
-    })
     return (
-        <div>
-            
-        </div>
+        <>
+            <Header />
+            <div></div>
+        </>
     );
 };
 
