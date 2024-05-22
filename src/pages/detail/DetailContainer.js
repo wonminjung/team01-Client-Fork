@@ -1,12 +1,15 @@
-import React from 'react';
-import Header from '../layout/Header';
+import React, { useEffect } from 'react';
+import ResetHeader from '../layout/ResetHeader';
+import S from './style';
 
 const DetailContainer = () => {
+
+    ResetHeader();
+    
     return (
-        <>
-            <Header />
-            <div></div>
-        </>
+        <S.DetailContainer>
+            디테일
+        </S.DetailContainer>
     );
 };
 

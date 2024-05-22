@@ -33,6 +33,8 @@ S.SearchWrapper = styled.div`
     border-radius: 40px;
     height: 48px;
     background-color: white;
+    top: 0;
+    transition: top 0.3s;
     &.big{
         height: 68px;
     }

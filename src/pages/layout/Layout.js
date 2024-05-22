@@ -1,13 +1,13 @@
 import React from "react";
 import { Outlet } from "react-router-dom";
 import S from "./style";
-// import Header from "./Header";
+import Header from "./Header";
 import Footer from "./Footer";
 
 const Layout = () => {
     return (
         <S.LayoutWrapper>
-            {/* <Header /> */}
+            <Header />
 
             <main>
                 <Outlet />

@@ -2,7 +2,7 @@ import React, { useEffect } from 'react';
 import BasicButton from '../../components/button/BasicButton';
 import BasicInput from '../../components/input/BasicInput';
 import BasicCheckbox from '../../components/checkbox/BasicCheckbox';
-import Header from '../layout/Header';
+// import Header from '../layout/Header';
 import S from './style';
 
 const Main = () => {
@@ -14,10 +14,12 @@ const Main = () => {
         // 선언문
         const header = document.querySelector("header");
         const search = document.querySelector("#searchBox");
+
+        // 스크롤 이벤트
         const scrollEvent = () => {
             let offsetTop = document.documentElement.scrollTop;
-            console.log(offsetTop);
-            if(offsetTop>500){
+            // offset 400 이상일때 검색바 위로 작게붙이기
+            if(offsetTop>400){
                 header.style.position = "sticky";
                 search.classList.remove("big","down");
             }else{
@@ -29,6 +31,8 @@ const Main = () => {
         // 메인 헤더 디자인 변경
         header.style.position = "relative";
         search.classList.add("big","down");
+
+        // 스크롤 이벤트
         window.addEventListener("scroll",scrollEvent);
         return ()=>{
             window.removeEventListener("scroll",scrollEvent);
@@ -37,7 +41,7 @@ const Main = () => {
     
     return (
         <>
-            <Header/>
+            {/* <Header/> */}
             <S.MainContainer>
                 메인
                 <ul>
