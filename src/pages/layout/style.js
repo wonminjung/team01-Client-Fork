@@ -41,7 +41,7 @@ S.SearchWrapper = styled.div`
     &.down{
         top: 475px;
     }
-    & .smallBox,.bigBox{
+    & .smallBox,.bigBox form{
         display: flex;
         justify-content: start;
         align-items: center;
@@ -90,16 +90,16 @@ S.SearchWrapper = styled.div`
     & .bigBox{
         display: none;
         height: 100%;
-        & div{
+        & form>div{
             cursor: pointer;
         }
-        &>span{
+        & form>span{
             display: inline-block;
             width: 1px;
             height: 32px;
             background-color: ${PALETTE.yellow};
         }
-        &>div{
+        & form>div{
             display: flex;
             flex-direction: column;
             justify-content: center;
@@ -111,11 +111,12 @@ S.SearchWrapper = styled.div`
             &:hover{
                 background-color: ${PALETTE.gray[100]};
             }
-            &:active{
-                transform: scale(0.97);
+            &:active>div:first-of-type,&:active>div:nth-of-type(2){
+                transform: scale(0.99);
             }
-            &:first-of-type{
+            &.locationBox{
                 width: 284px;
+                position: relative;
                 & input{
                     border: none;
                     color: ${PALETTE.black};
@@ -125,14 +126,30 @@ S.SearchWrapper = styled.div`
                         color: ${PALETTE.gray[300]};
                     }
                 }
+                & .locationPopup{
+                    display: none;
+                    position: absolute;
+                    top: 80px;
+                    box-shadow: 0 6px 10px rgba(0,0,0,0.15);
+                    border-radius: 20px;
+                    width: 300px;
+                    max-height: 200px;
+                    left: 0;
+                    padding: 20px;
+                    cursor: default;
+                    overflow-y: scroll;
+                    & .content{
+                        height: 500px;
+                    }
+                }
             }
-            &:nth-of-type(2){
+            &.checkInBox{
                 width: 141px;
             }
-            &:nth-of-type(3){
+            &.checkOutBox{
                 width: 141px;
             }
-            &:nth-of-type(4){
+            &.guestBox{
                 width: 226px;
             }
             &:last-child{
@@ -146,8 +163,10 @@ S.SearchWrapper = styled.div`
                 font-weight: 600;
                 font-size: 12px;
                 margin-bottom: 4px;
+                width: 100%;
             }
-            &>div:last-of-type{
+            &>div:nth-of-type(2){
+                width: 100%;
                 font-size: 14px;
                 color: ${PALETTE.gray[300]};
             }
@@ -161,6 +180,7 @@ S.SearchWrapper = styled.div`
         background-color: transparent;
         width: 100%;
         height: 100%;
+        color: ${PALETTE.black};
         cursor: pointer;
         transition: 0.3s;
         &:active{
@@ -246,6 +266,7 @@ S.Footer = styled.footer`
                     font-size: 14px;
                     &>div:first-child{
                         margin-right: 10px;
+                        color: ${PALETTE.black};
                     }
                     &>div:last-child a{
                         color: ${PALETTE.black};
