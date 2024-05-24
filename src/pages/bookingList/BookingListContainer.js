@@ -1,10 +1,12 @@
 import React from 'react';
+import NavSwiper from './NavSwiper';
+import S from './style';
 
 const BookingListContainer = () => {
     return (
-        <div>
-            
-        </div>
+        <S.SwiperWrapper>
+            <NavSwiper />
+        </S.SwiperWrapper>
     );
 };
 
