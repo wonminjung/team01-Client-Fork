@@ -77,4 +77,34 @@ S.MainContainer = styled.div`
         }
     }
 `
+S.CategoryContainer = styled.div`
+    padding: 24px 50px;
+    & .swiper-slide{
+        & .categoryCard{
+            display: flex;
+            flex-direction: column;
+            justify-content: center;
+            align-items: center;
+            cursor: pointer;
+            opacity: 0.5;
+            &.active{
+                opacity: 1;
+            }
+            &>div{
+                &:first-child{
+                    width: 24px;
+                    height: 24px;
+                    margin-bottom: 10px;
+                    & img{
+                        width: 100%;
+                    }
+                }
+                &:last-child{
+                    font-size: 12px;
+                    font-weight: 500;
+                }
+            }
+        }
+    }
+`
 export default S;

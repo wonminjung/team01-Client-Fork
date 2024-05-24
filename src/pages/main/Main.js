@@ -1,6 +1,7 @@
 import React, { useEffect } from 'react';
 import S from './style';
-import Banner from './TestSwiper';
+import Banner from './MainBanner';
+import Category from './CategorySlider';
 
 const Main = () => {
 
@@ -35,8 +36,10 @@ const Main = () => {
     
     return (
         <S.MainContainer>
-            <Banner/>
-            메인
+            <Banner />
+            <S.CategoryContainer>
+                <Category />
+            </S.CategoryContainer>
         </S.MainContainer>
     );
 };

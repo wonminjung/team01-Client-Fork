@@ -1,4 +1,4 @@
-import React, { useEffect } from 'react';
+import React from 'react';
 import ResetHeader from '../layout/ResetHeader';
 import S from './style';
 import BasicButton from '../../components/button/BasicButton';
