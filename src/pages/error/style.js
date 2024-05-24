@@ -1,6 +1,6 @@
 import styled from "styled-components";
 import theme from "../../global/theme";
-import notF from "./images/404-image.gif"
+
 
 const S = {};
 
@@ -53,8 +53,6 @@ const S = {};
     S.PNFimage = styled.img`
         width: 312px;
         height: 428px;
-        alt: "(404)Page Not Found image";
     `;
-
 
 export default S;
