@@ -30,7 +30,7 @@ const PageNotFound = () => {
 
                 <S.PNFMessageSectionWrapper>
                     <S.PNFimageWrapper>
-                        <img src="https://a0.muscache.com/airbnb/static/error_pages/404-Airbnb_final-d652ff855b1335dd3eedc3baa8dc8b69.gif" width="313" height="428" alt="Girl has dropped her ice cream."></img>
+                        <S.PNFimage src="./images/pages/error/404-image.gif"/>
                     </S.PNFimageWrapper>
                 </S.PNFMessageSectionWrapper>
             </S.PNFMessageContainer>
