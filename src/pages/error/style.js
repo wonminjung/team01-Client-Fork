@@ -1,6 +1,5 @@
 import styled from "styled-components";
 import theme from "../../global/theme";
-import notF from "./images/404-image.gif"
 
 const S = {};
 
