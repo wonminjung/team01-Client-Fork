@@ -34,7 +34,7 @@ export default function Banner(){
       onAutoplayTimeLeft={onAutoplayTimeLeft}
       slidesPerView={1}
     >
-      {banner.map((banner,i)=><SwiperSlide key={i}><img src={`./images/pages/main/banner${i+1}.jpg`} /></SwiperSlide>)}
+      {banner.map((banner,i)=><SwiperSlide key={i}><img src={`./images/pages/main/banner${i+1}.jpg`} alt={`배너${i+1}`} /></SwiperSlide>)}
         <div className="autoplay-progress" slot="container-end">
             <svg viewBox="0 0 48 48" ref={progressCircle}>
                 <circle cx="24" cy="24" r="20"></circle>

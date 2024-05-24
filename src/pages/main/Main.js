@@ -9,7 +9,7 @@ const Main = () => {
         // 선언문
         const header = document.querySelector("header");
         const search = document.querySelector("#searchBox");
-
+        
         // 스크롤 이벤트
         const scrollEvent = () => {
             let offsetTop = document.documentElement.scrollTop;

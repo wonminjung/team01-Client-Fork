@@ -1,8 +1,8 @@
 import { styled } from 'styled-components';
-import theme from '../../global/theme';
+// import theme from '../../global/theme';
 
 const S = {}
-const PALETTE = theme.PALETTE;
+// const PALETTE = theme.PALETTE;
 
 S.MainContainer = styled.div`
     height: 200vh;
@@ -86,6 +86,7 @@ S.CategoryContainer = styled.div`
             justify-content: center;
             align-items: center;
             cursor: pointer;
+            transition: 0.3s;
             opacity: 0.5;
             &.active{
                 opacity: 1;
