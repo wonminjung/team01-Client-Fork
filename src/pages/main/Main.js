@@ -2,14 +2,15 @@ import React, { useEffect } from 'react';
 import S from './style';
 import Banner from './MainBanner';
 import Category from './CategorySlider';
+import CategoryContents from './CategoryContents';
 
 const Main = () => {
-
+    
     useEffect(()=>{
         // 선언문
         const header = document.querySelector("header");
         const search = document.querySelector("#searchBox");
-        
+
         // 스크롤 이벤트
         const scrollEvent = () => {
             let offsetTop = document.documentElement.scrollTop;
@@ -40,6 +41,7 @@ const Main = () => {
             <S.CategoryContainer>
                 <Category />
             </S.CategoryContainer>
+            <CategoryContents />
         </S.MainContainer>
     );
 };

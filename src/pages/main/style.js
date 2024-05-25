@@ -1,8 +1,8 @@
 import { styled } from 'styled-components';
-// import theme from '../../global/theme';
+import theme from '../../global/theme';
 
 const S = {}
-// const PALETTE = theme.PALETTE;
+const PALETTE = theme.PALETTE;
 
 S.MainContainer = styled.div`
     height: 200vh;
@@ -79,6 +79,9 @@ S.MainContainer = styled.div`
 `
 S.CategoryContainer = styled.div`
     padding: 24px 50px;
+    display: flex;
+    justify-content: center;
+    align-items: center;
     & .swiper-slide{
         & .categoryCard{
             display: flex;
@@ -87,7 +90,7 @@ S.CategoryContainer = styled.div`
             align-items: center;
             cursor: pointer;
             transition: 0.3s;
-            opacity: 0.5;
+            opacity: 0.4;
             &.active{
                 opacity: 1;
             }
@@ -103,9 +106,67 @@ S.CategoryContainer = styled.div`
                 &:last-child{
                     font-size: 12px;
                     font-weight: 500;
+                    width: 100%;
+                    text-align: center;
+                    white-space: nowrap;
                 }
             }
+            &:hover{
+                transform: scale(1.07);
+            }
         }
+        
+    }
+    & .swiper-button-prev, .swiper-button-next{
+        width: 60px;
+        height: 100%;
+        background: linear-gradient(270deg, #fff 50%, transparent);
+        top: 50%;
+        margin: auto;
+        transform: translateY(-50%);
+    }
+    & .swiper-button-prev{
+        left: 0;
+        background: linear-gradient(90deg, #fff 50%, transparent);
+    }
+    & .swiper-button-next{
+        right: 0;
+    }
+    & .swiper-button-prev:hover, .swiper-button-next:hover{
+        transform: translateY(-50%);
+        &::after{
+            color: #fff;
+            transform: scale(1.1);
+            background-color: ${PALETTE.yellow};
+            border: 1px solid ${PALETTE.yellow};
+            box-shadow: 0 0 3px ${PALETTE.yellow};
+        }
+    }
+    & .swiper-button-prev::after, .swiper-button-next::after{
+        font-size: 16px;
+        font-weight: bold;
+        color: ${PALETTE.gray[300]};
+        width: 30px;
+        height: 30px;
+        display: flex;
+        justify-content: center;
+        align-items: center;
+        border: 1px solid ${PALETTE.gray[200]};
+        border-radius: 50%;
+        box-shadow: 0 0 3px ${PALETTE.gray[300]};
+        background: #fff;
+        transition: transform, background-color 0.3s;
+    }
+    & .swiper-button-prev.swiper-button-disabled, .swiper-button-next.swiper-button-disabled{
+        opacity: 0;
+    }
+`
+S.CategoryFilter = styled.div`
+    & button{
+        width: 84px;
+        height: 48px;
+        justify-content: space-around;
+        color: ${PALETTE.black};
     }
 `
 export default S;

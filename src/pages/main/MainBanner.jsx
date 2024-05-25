@@ -27,7 +27,7 @@ export default function Banner(){
       allowTouchMove={false}
       loop={true}
       autoplay={{
-        delay: 5000,
+        delay: 7000,
         disableOnInteraction: false,
       }}
       modules={[EffectFade, Navigation, Pagination, Autoplay]}
