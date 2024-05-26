@@ -33,6 +33,7 @@ const Main = () => {
         return ()=>{
             window.removeEventListener("scroll",scrollEvent);
         }
+        
     },[])
     
     return (

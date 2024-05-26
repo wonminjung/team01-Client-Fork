@@ -7,46 +7,52 @@ const CategoryContents = () => {
     const contentData = [
         {
             id : "1",
+            cate : "coolPool",
             img : ["./images/pages/main/image1-1.jpg","./images/pages/main/image1-2.jpg","./images/pages/main/image1-3.jpg","./images/pages/main/image1-4.jpg","./images/pages/main/image1-5.jpg"],
-            title : "title1",
-            address : "address1",
+            title : "위드독 독채 풀빌라",
+            address : "충남/태안군",
             dayPrice : "150000"
         },
-        // {
-        //     id : "2",
-        //     img : ["img2-1","img2-2","img2-3","img2-4","img2-5"],
-        //     title : "title2",
-        //     address : "address2",
-        //     dayPrice : "200000"
-        // },
-        // {
-        //     id : "3",
-        //     img : ["img3-1","img3-2","img3-3","img3-4","img3-5"],
-        //     title : "title3",
-        //     address : "address3",
-        //     dayPrice : "250000"
-        // },
-        // {
-        //     id : "4",
-        //     img : ["img4-1","img4-2","img4-3","img4-4","img4-5"],
-        //     title : "title4",
-        //     address : "address4",
-        //     dayPrice : "250000"
-        // },
-        // {
-        //     id : "5",
-        //     img : ["img5-1","img5-2","img5-3","img5-4","img5-5"],
-        //     title : "title5",
-        //     address : "address5",
-        //     dayPrice : "250000"
-        // },
-        // {
-        //     id : "6",
-        //     img : ["img6-1","img6-2","img6-3","img6-4","img6-5"],
-        //     title : "title6",
-        //     address : "address6",
-        //     dayPrice : "250000"
-        // }
+        {
+            id : "2",
+            cate : "coolPool",
+            img : ["./images/pages/main/image2-1.jpg","./images/pages/main/image2-2.jpg","./images/pages/main/image2-3.jpg","./images/pages/main/image2-4.jpg","./images/pages/main/image2-5.jpg"],
+            title : "강화도 럭셔리 대형 풀빌라",
+            address : "인천/강화도",
+            dayPrice : "200000"
+        },
+        {
+            id : "3",
+            cate : "coolPool",
+            img : ["./images/pages/main/image3-1.jpg","./images/pages/main/image3-2.jpg","./images/pages/main/image3-3.jpg","./images/pages/main/image3-4.jpg","./images/pages/main/image3-5.jpg"],
+            title : "6.다온빌(스파/개별풀)",
+            address : "서면/양양",
+            dayPrice : "250000"
+        },
+        {
+            id : "4",
+            cate : "coolPool",
+            img : ["./images/pages/main/image4-1.jpg","./images/pages/main/image4-2.jpg","./images/pages/main/image4-3.jpg","./images/pages/main/image4-4.jpg","./images/pages/main/image4-5.jpg"],
+            title : "독채풀빌라 스테이호은",
+            address : "경기/양평군",
+            dayPrice : "250000"
+        },
+        {
+            id : "5",
+            cate : "coolPool",
+            img : ["./images/pages/main/image5-1.jpg","./images/pages/main/image5-2.jpg","./images/pages/main/image5-3.jpg","./images/pages/main/image5-4.jpg","./images/pages/main/image5-5.jpg"],
+            title : "별담하늘담",
+            address : "경기/양평군",
+            dayPrice : "250000"
+        },
+        {
+            id : "6",
+            cate : "coolPool",
+            img : ["./images/pages/main/image6-1.jpg","./images/pages/main/image6-2.jpg","./images/pages/main/image6-3.jpg","./images/pages/main/image6-4.jpg","./images/pages/main/image6-5.jpg"],
+            title : "춘천 유유자적 일동",
+            address : "춘천/서면",
+            dayPrice : "250000"
+        }
     ]
     return (
         <S.CategoryContentBox>
@@ -62,7 +68,7 @@ const CategoryContents = () => {
                             </div>
                             <div className="addAndPriceBox">
                                 <span className="address">{data.address}</span>
-                                <span className="price">{data.dayPrice}</span>
+                                <span className="price">{"￦" + data.dayPrice}</span>
                             </div>
                             <div className="linkBox">예약하기</div>
                         </div>

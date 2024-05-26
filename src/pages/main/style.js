@@ -177,6 +177,11 @@ S.CategoryContentBox = styled.div`
     flex-wrap: wrap;
     & .content{
         width: 50%;
+        padding: 10px;
+        transition: 0.3s;
+        &:hover{
+            transform: scale(1.02);
+        }
         @media(min-width: 1000px){
             width: calc(100% / 3);
         }
@@ -190,8 +195,97 @@ S.CategoryContentBox = styled.div`
             width: calc(100% / 6);
         }
         & a{
-            & .imgBox{}
-            & .textBox{}
+            color: ${PALETTE.black};
+            & .imgBox{
+                & .swiper-slide{
+                    aspect-ratio: 5/3;
+                    border-radius: 20px;
+                    overflow: hidden;
+                    & img{
+                        width: 100%;
+                        height: inherit;
+                        object-fit: cover;
+                        border-radius: 20px;
+                    }
+                }
+                & .swiper-pagination-bullet{
+                    background-color: #fff;
+                    opacity: 0.4;
+                }
+                & .swiper-pagination-bullet-active{
+                    background-color: #fff;
+                    opacity: 1;
+                }
+                &:hover{
+                    & .swiper-button-prev, .swiper-button-next{
+                        display: flex;
+                    }
+                }
+                & .swiper-button-prev, .swiper-button-next{
+                    display: none;
+                    width: 60px;
+                    height: 60px;
+                    top: 50%;
+                    transform: translateY(-50%);
+                    margin-top: 0;
+                    transition: opacity 0.3s;
+                    &::after{
+                        font-size: 14px;
+                        color: ${PALETTE.gray[300]};
+                        background-color: #fff;
+                        width: 30px;
+                        height: 30px;
+                        display: flex;
+                        justify-content: center;
+                        align-items: center;
+                        border: 1px solid ${PALETTE.gray[200]};
+                        border-radius: 50%;
+                        font-weight: bold;
+                        transition: 0.3s;
+                    }
+                }
+                & .swiper-button-prev, .swiper-button-next{
+                    &:hover::after{
+                        border: ${PALETTE.yellow};
+                        background-color: ${PALETTE.yellow};
+                        color: #fff;
+                    }
+                }
+                & .swiper-button-prev{
+                    left: 0;
+                }
+                & .swiper-button-next{
+                    right: 0;
+                }
+                & .swiper-button-prev.swiper-button-disabled, .swiper-button-next.swiper-button-disabled{
+                    opacity: 0;
+                }
+            }
+            & .textBox{
+                padding: 20px 0;
+                text-align: center;
+                & .titleBox{
+                    font-size: 20px;
+                    margin-bottom: 13px;
+                    font-weight: bold;
+                }
+                & .addAndPriceBox{
+                    font-size: 14px;
+                    margin-bottom: 28px;
+                    & .address{
+                        color: ${PALETTE.gray[300]};
+                    }
+                    & .price{
+                        color: ${PALETTE.yellow};
+                        display: inline-block;
+                        margin-left: 10px;
+                    }
+                }
+                & .linkBox{
+                    font-size: 12px;
+                    font-weight: bold;
+                }
+            }
         }
     }
 `

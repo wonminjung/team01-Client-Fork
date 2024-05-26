@@ -75,6 +75,7 @@ export default function Category(){
   ]
   const selectSlide = (i) => {
     setSlide(i);
+    console.log("selected")
   }
   return (
     <>
