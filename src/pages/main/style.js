@@ -169,4 +169,30 @@ S.CategoryFilter = styled.div`
         color: ${PALETTE.black};
     }
 `
+S.CategoryContentBox = styled.div`
+    display: flex;
+    padding: 0 50px 50px;
+    justify-content: flex-start;
+    align-items: flex-start;
+    flex-wrap: wrap;
+    & .content{
+        width: 50%;
+        @media(min-width: 1000px){
+            width: calc(100% / 3);
+        }
+        @media(min-width: 1300px){
+            width: calc(100% / 4);
+        }
+        @media(min-width: 1550px){
+            width: calc(100% / 5);
+        }
+        @media(min-width: 1900px){
+            width: calc(100% / 6);
+        }
+        & a{
+            & .imgBox{}
+            & .textBox{}
+        }
+    }
+`
 export default S;
