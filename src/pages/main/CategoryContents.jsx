@@ -1,9 +1,11 @@
 import React from 'react';
-import { Link } from 'react-router-dom';
+import { Link, useSearchParams } from 'react-router-dom';
 import Content from './ContentSlider';
 import S from './style';
 
 const CategoryContents = () => {
+    const [searchParams, setSearchParams] = useSearchParams('?cate=coolPool');
+    const getKey = searchParams.get("cate");
     const contentData = [
         {
             id : "1",
@@ -56,7 +58,7 @@ const CategoryContents = () => {
     ]
     return (
         <S.CategoryContentBox>
-            {contentData.map((data,i)=>
+            {contentData.filter((data)=>data.cate===`${getKey}`).map((data,i)=>
                 <div key={i} className="content">
                     <Link to={`/detail?content=${data.id}`}>
                         <div className="imgBox">

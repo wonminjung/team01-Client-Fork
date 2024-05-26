@@ -77,12 +77,15 @@ S.MainContainer = styled.div`
         }
     }
 `
+/* 카테고리 컨테이너 */
 S.CategoryContainer = styled.div`
     padding: 24px 50px;
     display: flex;
     justify-content: center;
     align-items: center;
+    /* 카테고리 슬라이드 */
     & .swiper-slide{
+        /* 카테고리 카드 */
         & .categoryCard{
             display: flex;
             flex-direction: column;
@@ -91,6 +94,8 @@ S.CategoryContainer = styled.div`
             cursor: pointer;
             transition: 0.3s;
             opacity: 0.4;
+            color: ${PALETTE.black};
+            /* 카드 활성화시 */
             &.active{
                 opacity: 1;
             }
