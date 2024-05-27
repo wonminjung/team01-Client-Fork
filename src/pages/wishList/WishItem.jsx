@@ -36,8 +36,8 @@ const WishItem = () => {
                     
                 </Link>
             </div>
-            
-
+    
+    
         </S.WishItemWrapper>
     );
 };
