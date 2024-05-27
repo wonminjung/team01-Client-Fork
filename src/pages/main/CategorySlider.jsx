@@ -5,15 +5,10 @@ import 'swiper/css';
 import 'swiper/css/navigation';
 
 import { Navigation } from 'swiper/modules';
-import { useState } from 'react';
 import FilterBox from './FilterBox';
 import { useNavigate, useSearchParams } from 'react-router-dom';
 
 export default function Category(){
-  const [curSlide, setSlide] = useState(0);
-  const [searchParams, setSearchParams] = useSearchParams('?cate=coolPool');
-  const getKey = searchParams.get('cate');
-  const navigate = useNavigate();
   const category = [
     {
       id: 1,
@@ -117,10 +112,12 @@ export default function Category(){
       tag: "스키"
     }
   ]
-  const selectSlide = (nav,i) => {
-    setSlide(i);
+  const [searchParams, setSearchParams] = useSearchParams('?cate=coolPool');
+  const getKey = searchParams.get('cate');
+  const navigate = useNavigate();
+  const setCur = category.filter((cate)=>cate.cate === getKey)[0].id - 1;
+  const selectSlide = (nav) => {
     navigate(`/?cate=${nav}`);
-    console.log("selected");
   }
   return (
     <>
@@ -135,7 +132,7 @@ export default function Category(){
       >
         {category.map((cate,i)=>
           <SwiperSlide key={i}>
-            <div className={`categoryCard ${i === curSlide? "active" : ""}`} onClick={() => selectSlide(cate.cate,i)}>
+            <div className={`categoryCard ${i === setCur? "active" : ""}`} onClick={() => selectSlide(cate.cate)}>
               <div>
                 <img src={cate.img} alt={`categoty${i+1}`}/>
               </div>
