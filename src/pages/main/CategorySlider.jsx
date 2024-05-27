@@ -126,7 +126,6 @@ export default function Category(){
         navigation={true}
         modules={[Navigation]}
         slidesPerGroup={14}
-        spaceBetween={10}
         slidesPerView={14}
         allowTouchMove={false}
       >
