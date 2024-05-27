@@ -18,6 +18,7 @@ S.Header = styled.header`
     justify-content: space-between;
     align-items: center;
     padding: 0 30px;
+    z-index: 2;
     &.scrolled {
         border-bottom: 1px solid ${PALETTE.gray[300]};
     }
