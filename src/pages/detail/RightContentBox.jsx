@@ -1,10 +1,11 @@
 import React from 'react';
+import S from './style';
 
 const RightContentBox = () => {
     return (
-        <div>
-            
-        </div>
+        <S.RightBox>
+            오른쪽박스
+        </S.RightBox>
     );
 };
 

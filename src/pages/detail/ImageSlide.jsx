@@ -8,16 +8,16 @@ import { EffectCoverflow, Pagination } from 'swiper/modules';
 
 export default function ImageSlide({img}) {
   const images = img;
-  console.log(images);
   return (
     <Swiper
         effect={'coverflow'}
         grabCursor={true}
         centeredSlides={true}
         slidesPerView={3}
+        spaceBetween={20}
         loop={true}
         coverflowEffect={{
-            rotate: 50,
+            rotate: 40,
             stretch: 0,
             depth: 100,
             modifier: 1,

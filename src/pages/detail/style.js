@@ -54,4 +54,103 @@ S.DetailContentBox = styled.div`
     width: 100%;
     display: flex;
 `
+S.LeftBox = styled.div`
+    width: calc(100% - 430px);
+    & .titleBox{
+        & h6{
+            font-size: 20px;
+            font-weight: 400;
+            margin-bottom: 15px;
+        }
+        & ul{
+            
+        }
+    }
+    & .dIcon{
+        margin-bottom: 15px;
+        position: relative;
+        font-size: 14px;
+        color: ${PALETTE.gray[300]};
+        
+        &::before{
+            margin-right: 7px;
+            display: inline-block;
+            width: 15px;
+            height: 15px;
+            vertical-align: bottom;
+        }
+        &.user::before{
+            content: url("./images/pages/detail/user.svg");
+        }
+        &.room::before{
+            content: url("./images/pages/detail/house.svg");
+        }
+        &.bed::before{
+            content: url("./images/pages/detail/bed-single.svg");
+        }
+        &.bath::before{
+            content: url("./images/pages/detail/bath.svg");
+        }
+        &.picture::before{
+            content: url("./images/pages/detail/image.svg");
+        }
+        &.wifi::before{
+            content: url("./images/pages/detail/wifi-full.svg");
+        }
+        &.tv::before{
+            content: url("./images/pages/detail/tv.svg");
+        }
+        &.car::before{
+            content: url("./images/pages/detail/car.svg");
+        }
+        &.pool::before{
+            content: url("./images/pages/detail/pool.svg");
+        }
+        &.time::before{
+            content: url("./images/pages/detail/clock.svg");
+        }
+        &.check::before{
+            content: url("./images/pages/detail/credit-card.svg");
+        }
+        &.users::before{
+            content: url("./images/pages/detail/users.svg");
+        }
+        &.pet::before{
+            content: url("./images/pages/detail/paw.svg");
+        }
+        &.moon::before{
+            content: url("./images/pages/detail/moon.svg");
+        }
+        &.photo::before{
+            content: url("./images/pages/detail/camera.svg");
+        }
+        &.memo::before{
+            content: url("./images/pages/detail/text-document.svg");
+        }
+        &.trash::before{
+            content: url("./images/pages/detail/bin.svg");
+        }
+        &.lock::before{
+            content: url("./images/pages/detail/bag.svg");
+        }
+        &.off::before{
+            content: url("./images/pages/detail/power.svg");
+        }
+        &.note::before{
+            content: url("./images/pages/detail/note.svg");
+        }
+        &.caution::before{
+            content: url("./images/pages/detail/Combined Shape.svg");
+        }
+        &.eye::before{
+            content: url("./images/pages/detail/eye.svg");
+        }
+        &.bell::before{
+            content: url("./images/pages/detail/bell.svg");
+        }
+    }
+`
+S.RightBox = styled.div`
+    width: 430px;
+`
 export default S;
