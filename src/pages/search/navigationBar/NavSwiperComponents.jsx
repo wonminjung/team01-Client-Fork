@@ -8,12 +8,15 @@ import 'swiper/css/navigation';
 
 
 const NavSwiperComponents = (props) => {
-    console.log(props);
+    const { data } = props;
     
     return (
-        <SwiperSlide>
-            1
-        </SwiperSlide>
+        <S.SwiperSlide>
+            <S.CategoryWrapper>
+                <S.CategoryImg src={data.imgUrl}/>
+                <S.CategoryName>{data.name}</S.CategoryName>
+            </S.CategoryWrapper>
+        </S.SwiperSlide>
     );
 };
 
