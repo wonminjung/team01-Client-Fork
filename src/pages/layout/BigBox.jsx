@@ -33,7 +33,7 @@ const BigBox = () => {
                     <div>게스트 추가</div>
                 </div>
                 <S.SearchBtn>
-                    <Link to={"/detail"}>
+                    <Link to={"/search"}>
                         <FontAwesomeIcon icon={faMagnifyingGlass} />
                     </Link>
                 </S.SearchBtn>
