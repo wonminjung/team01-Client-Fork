@@ -1,12 +1,23 @@
 import React from 'react';
-import NavSwiper from './NavSwiper';
-import S from './style';
+import S from './style'
+import BookingDetail from './BookingDetail';
+import BookingItem from './BookingItem';
+
 
 const BookingListContainer = () => {
     return (
-        <S.SwiperWrapper>
-            <NavSwiper />
-        </S.SwiperWrapper>
+        <S.BookingListContainer >
+            <S.TitleWrapper>
+                <h1 className="pageTitle">여행</h1>
+                <h4 className="pageSubTitle">예정된 예약</h4>
+            </S.TitleWrapper>
+            <S.BookingLists >
+                <div className="BookingList">
+                    <BookingItem/>
+                    <BookingDetail/>
+                </div>
+            </S.BookingLists >
+        </S.BookingListContainer >
     );
 };
 
