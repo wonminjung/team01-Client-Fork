@@ -13,7 +13,7 @@ const SmallBox = () => {
             <span></span>
             <div><button>게스트 추가</button></div>
             <S.SearchBtn>
-                <Link to={"/detail"}>
+                <Link to={"/search"}>
                     <FontAwesomeIcon icon={faMagnifyingGlass} />
                 </Link>
             </S.SearchBtn>
