@@ -1,20 +1,25 @@
 import React from 'react';
 import S from './style';
+import LeftTitleBox from './LeftTitleBox';
+import LeftHostBox from './LeftHostBox';
 
-const LeftContentBox = ({data}) => {
-    console.log(data);
-    const {address,convenience,discription,roomData,title} = data;
+const LeftContentBox = ({contentData, hostData, commentData}) => {
+    const {address,convenience,discription,roomData} = contentData;
+    const {hostId,name,profileImg,email,phone} = hostData;
+    const {userId,body,star,grade} = commentData;
+    const starAvr = () => {
+        let number = 0;
+        for(let i = 0; i < commentData.length; i++){
+            number += commentData[i].star;
+        }
+        number = number / commentData.length;
+        return number.toFixed(1);
+    }
     return (
         <S.LeftBox>
-            <div className="titleBox">
-                <h6>{address}의 별장 전체</h6>
-                <ul>
-                    <li className='dIcon user'>최대 인원 {roomData.maxUser}명</li>
-                    <li className='dIcon room'>침실 {roomData.bedroom}개</li>
-                    <li className='dIcon bed'>침대 {roomData.bed}개</li>
-                    <li className='dIcon bath'>욕실 {roomData.bathroom}개</li>
-                </ul>
-            </div>
+            <LeftTitleBox address={address} roomData={roomData}/>
+            <LeftHostBox profileImg={profileImg} name={name} starAvr={starAvr} commentData={commentData}/>
+            
         </S.LeftBox>
     );
 };

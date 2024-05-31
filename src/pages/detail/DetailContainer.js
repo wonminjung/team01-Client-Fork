@@ -11,6 +11,7 @@ const DetailContainer = () => {
     ResetHeader();
     const contentData = [
         {
+            userId : "example1",
             id : "1",
             cate : "coolPool",
             img : ["./images/pages/main/image1-1.jpg","./images/pages/main/image1-2.jpg","./images/pages/main/image1-3.jpg","./images/pages/main/image1-4.jpg","./images/pages/main/image1-5.jpg"],
@@ -34,6 +35,7 @@ const DetailContainer = () => {
             },
         },
         {
+            userId : "hyeona023",
             id : "2",
             cate : "coolPool",
             img : ["./images/pages/main/image2-1.jpg","./images/pages/main/image2-2.jpg","./images/pages/main/image2-3.jpg","./images/pages/main/image2-4.jpg","./images/pages/main/image2-5.jpg"],
@@ -57,6 +59,7 @@ const DetailContainer = () => {
             },
         },
         {
+            userId : "example1",
             id : "3",
             cate : "coolPool",
             img : ["./images/pages/main/image3-1.jpg","./images/pages/main/image3-2.jpg","./images/pages/main/image3-3.jpg","./images/pages/main/image3-4.jpg","./images/pages/main/image3-5.jpg"],
@@ -80,6 +83,7 @@ const DetailContainer = () => {
             },
         },
         {
+            userId : "hyeona023",
             id : "4",
             cate : "coolPool",
             img : ["./images/pages/main/image4-1.jpg","./images/pages/main/image4-2.jpg","./images/pages/main/image4-3.jpg","./images/pages/main/image4-4.jpg","./images/pages/main/image4-5.jpg"],
@@ -103,6 +107,7 @@ const DetailContainer = () => {
             },
         },
         {
+            userId : "example1",
             id : "5",
             cate : "coolPool",
             img : ["./images/pages/main/image5-1.jpg","./images/pages/main/image5-2.jpg","./images/pages/main/image5-3.jpg","./images/pages/main/image5-4.jpg","./images/pages/main/image5-5.jpg"],
@@ -126,6 +131,7 @@ const DetailContainer = () => {
             },
         },
         {
+            userId : "hyeona023",
             id : "6",
             cate : "coolPool",
             img : ["./images/pages/main/image6-1.jpg","./images/pages/main/image6-2.jpg","./images/pages/main/image6-3.jpg","./images/pages/main/image6-4.jpg","./images/pages/main/image6-5.jpg"],
@@ -149,18 +155,125 @@ const DetailContainer = () => {
             },
         }
     ]
+    const commentData = [
+        {
+            id : 1,
+            userId : "hyeona023",
+            contentId : 1,
+            body : "너무 만족스러운 여행이었어요~",
+            star : 4,
+            grade : {
+                clean : 5,
+                accuracy : 4,
+                communication : 5,
+                location : 4.5,
+                priceSatis : 4.5,
+            }
+        },
+        {
+            id : 2,
+            userId : "example2",
+            contentId : 1,
+            body : "너무 만족스러운 여행이었어요~ 너무 만족스러운 여행이었어요~",
+            star : 5,
+            grade : {
+                clean : 5,
+                accuracy : 5,
+                communication : 5,
+                location : 5,
+                priceSatis : 4.5,
+            }
+        },
+        {
+            id : 3,
+            userId : "example2",
+            contentId : 2,
+            body : "너무 만족스러운 여행이었어요~",
+            star : 4,
+            grade : {
+                clean : 5,
+                accuracy : 5,
+                communication : 5,
+                location : 5,
+                priceSatis : 5,
+            }
+        },
+        {
+            id : 4,
+            userId : "example1",
+            contentId : 2,
+            body : "대충 만족스러운 여행이었어요",
+            star : 4,
+            grade : {
+                clean : 5,
+                accuracy : 3,
+                communication : 4,
+                location : 5,
+                priceSatis : 3,
+            }
+        },
+    ]
+    const userData = [
+        {
+            id : 1,
+            userId : "hyeona023",
+            password : "1234",
+            name : "현아",
+            profileImg : "./images/pages/detail/user/1/thumb.jpg",
+            email : "hyeona@gmail.com",
+            address : {
+                city : "Kulas Light",
+                street : "Gwenborough",
+                suit : "Apt. 556",
+                zipcode : "92998-3874",
+            },
+            phone : "010-1234-1234",
+        },
+        {
+            id : 2,
+            userId : "example1",
+            password : "1234",
+            name : "닉네임1",
+            profileImg : "./images/pages/detail/user/2/thumb.jpg",
+            email : "example1@gmail.com",
+            address : {
+                city : "Kulas Light",
+                street : "Gwenborough",
+                suit : "Apt. 556",
+                zipcode : "92998-3874",
+            },
+            phone : "010-4321-4321",
+        },
+        {
+            id : 3,
+            userId : "example2",
+            password : "1234",
+            name : "닉네임2",
+            profileImg : "./images/pages/detail/user/3/thumb.jpg",
+            email : "example2@gmail.com",
+            address : {
+                city : "Kulas Light",
+                street : "Gwenborough",
+                suit : "Apt. 556",
+                zipcode : "92998-3874",
+            },
+            phone : "010-1111-1111",
+        }
+    ]
     const [searchParams,setSerchParams] = useSearchParams();
     const contentId = searchParams.get('content');
     const content = contentData.filter((data)=> data.id === contentId)[0];
-    const {img,title,address,dayPrice} = content;
+    const user = userData.filter((data)=> content.userId === data.userId)[0];
+    const comment = commentData.filter((data)=> data.contentId == content.id);
+    const {img,title,dayPrice} = content;
     return (
         <S.DetailContainer>
             <S.DetailWrapper>
                 <TitleBox title={title}/>
                 <ImageSlide img={img}/>
                 <S.DetailContentBox>
-                    <LeftContentBox data={content}/>
-                    <RightContentBox />
+                    <LeftContentBox contentData={content} hostData={user} commentData={comment}/>
+                    <RightContentBox price={dayPrice}/>
                 </S.DetailContentBox>
             </S.DetailWrapper>
         </S.DetailContainer>

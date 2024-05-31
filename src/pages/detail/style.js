@@ -149,6 +149,7 @@ S.LeftBox = styled.div`
             content: url("./images/pages/detail/bell.svg");
         }
     }
+    & .hostBox{}
 `
 S.RightBox = styled.div`
     width: 430px;
