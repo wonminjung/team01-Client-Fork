@@ -13,6 +13,20 @@ const commonStyle = css`
     justify-content: center;
 `;
 
+const navButtonStyle = css`
+    width: 28px;
+    height: 28px;
+    border-radius: 50%;
+    background-color: white;
+    top: 50%;
+    margin-top: 0;
+    transform: translate(-50%, -50%);
+    background-size: 70% 70%;
+    background-position: center;
+    background-repeat: no-repeat;
+    border: 1px solid ${theme.PALETTE.gray[200]};
+`;
+
 const S = {};
     // NavSwiperContainer.js
     S.NavBfAfContainer = styled.div`
@@ -62,22 +76,44 @@ const S = {};
         }
 
         & > .swiper-button-prev {
-            /* display: none; */
+            ${navButtonStyle}
+            background-image: url("./images/pages/search/navigationBar/categoryButton/arrow_back_ios_24dp.svg");
+            background-position-x: 8px;
+            left: 18px;
+            
+            &:hover {
+                background-image: url("./images/pages/search/navigationBar/categoryButton/arrow_back_ios_24dp_white.svg");
+                background-color: ${theme.PALETTE.yellow};
+                border: none;
+            }
+            
+            &::after {
+                display: none;
+            }
         }
-
+        
         & > .swiper-button-next {
-            /* display: none; */
+            ${navButtonStyle}
+            background-image: url("./images/pages/search/navigationBar/categoryButton/arrow_forward_ios_24dp.svg");
+            background-position-x: 5px;
+            right: -8px;
+            
+            &:hover {
+                background-image: url("./images/pages/search/navigationBar/categoryButton/arrow_forward_ios_24dp_white.svg");
+                background-color: ${theme.PALETTE.yellow};
+                border: none;
+            }
+
+            &::after {
+                display: none;
+            }
         } 
     `;
 
     S.SwiperSlide = styled(SwiperSlide)`
         ${commonStyle};
-    `;
 
-    S.SearchResult = styled(SwiperSlide)`
-        ${commonStyle};
-
-        & > .afterLine {
+        .searchResultAfterLine {
             display: flex;
             justify-content: flex-end;
             width: 35%;
@@ -108,11 +144,24 @@ const S = {};
             content: "";
             width: 100%;
             height: 2px;
-            cursor: pointer;
             opacity: 0.5;
             position: absolute;
             background-color: ${theme.PALETTE.yellow};
             top: 26px;
+        }
+
+        &.navButtonChecked {
+            opacity: 1;
+
+            & > div::after {
+                content: "";
+                width: 100%;
+                height: 2px;
+                opacity: 1;
+                position: absolute;
+                background-color: ${theme.PALETTE.yellow};
+                top: 26px;
+            }
         }
     `;
 
