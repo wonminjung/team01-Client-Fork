@@ -19,6 +19,7 @@ S.Header = styled.header`
     align-items: center;
     padding: 0 30px;
     z-index: 2;
+    box-shadow: 0 2px 16px rgba(0, 0, 0, 0.08);
     &.scrolled {
         border-bottom: 1px solid ${PALETTE.gray[300]};
     }
@@ -91,6 +92,9 @@ S.SearchWrapper = styled.div`
     & .bigBox{
         display: none;
         height: 100%;
+        & form{
+            position: relative;
+        }
         & form>div{
             cursor: pointer;
         }
@@ -112,12 +116,8 @@ S.SearchWrapper = styled.div`
             &:hover{
                 background-color: ${PALETTE.gray[100]};
             }
-            &:active>div:first-of-type,&:active>div:nth-of-type(2){
-                transform: scale(0.99);
-            }
             &.locationBox{
                 width: 284px;
-                position: relative;
                 & input{
                     border: none;
                     color: ${PALETTE.black};
@@ -127,31 +127,17 @@ S.SearchWrapper = styled.div`
                         color: ${PALETTE.gray[300]};
                     }
                 }
-                & .locationPopup{
-                    display: none;
-                    position: absolute;
-                    top: 80px;
-                    box-shadow: 0 6px 10px rgba(0,0,0,0.15);
-                    border-radius: 20px;
-                    width: 300px;
-                    max-height: 200px;
-                    left: 0;
-                    padding: 20px;
-                    cursor: default;
-                    overflow-y: scroll;
-                    & .content{
-                        height: 500px;
-                    }
-                }
             }
             &.checkInBox{
                 width: 141px;
             }
             &.checkOutBox{
                 width: 141px;
+                position: relative;
             }
             &.guestBox{
                 width: 226px;
+                position: relative;
             }
             &:last-child{
                 padding: 9px 9px 9px 0;
@@ -170,6 +156,71 @@ S.SearchWrapper = styled.div`
                 width: 100%;
                 font-size: 14px;
                 color: ${PALETTE.gray[300]};
+            }
+        }
+        & .popup{
+            display: none;
+            position: absolute;
+            top: 80px;
+            box-shadow: 0 6px 10px rgba(0,0,0,0.15);
+            border-radius: 20px;
+            width: 300px;
+            height: fit-content;
+            padding: 15px 15px 5px;
+            cursor: default;
+            overflow-y: scroll;
+            background-color: #fff;
+            &::-webkit-scrollbar{
+                width: 6px;
+            }
+            &::-webkit-scrollbar-thumb{
+                background-color: ${PALETTE.yellow};
+                border-radius: 3px;
+            }
+            &::-webkit-scrollbar-track{}
+            &.location{
+                display: block;
+                left: 0;
+                & .content{
+                    width: 100%;
+                    display: flex;
+                    flex-wrap: wrap;
+                    & div{
+                        width: calc(100% / 3);
+                        padding: 0 5px;
+                        margin-bottom: 10px;
+                        & span{
+                            font-size: 14px;
+                            font-weight: 400;
+                            border: 1px solid #DDDDDD;
+                            border-radius: 15px;
+                            padding: 10px 0;
+                            display: inline-block;
+                            transition: 0.3s;
+                            cursor: pointer;
+                            width: 100%;
+                            text-align: center;
+                            &:hover{
+                                background-color: ${PALETTE.yellow};
+                                border-color: ${PALETTE.yellow};
+                                color: #fff;
+
+                            }
+                        }
+                    }
+                }
+            }
+            &.checkIn{
+                display: block;
+                width: 600px;
+                left: 50%;
+                transform: translate(-50%);
+                & .content{}
+            }
+            &.guest{
+                display: block;
+                right: -57px;
+                & .content{}
             }
         }
     }

@@ -583,7 +583,7 @@ S.DetailCommentBox = styled.div`
                 }
                 & .commentBBox{
                     & p{
-                        font-size: 20px;
+                        font-size: 16px;
                         color: ${PALETTE.black};
                         overflow: hidden;
                         white-space: normal;
