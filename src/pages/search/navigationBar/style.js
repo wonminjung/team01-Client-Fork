@@ -5,34 +5,45 @@ import { Swiper, SwiperSlide } from 'swiper/react';
 import theme from "../../../global/theme";
 import BasicButton from "../../../components/button/BasicButton";
 
-const commonStyle = css`
-    height: 48px;
-    margin-top: 16px;
-    margin-bottom: 12px;
+const navSlideButtonStyle = css`
+    width: 32px;
+    height: 32px;
     display: flex;
     justify-content: center;
-`;
-
-const navButtonStyle = css`
-    width: 28px;
-    height: 28px;
-    border-radius: 50%;
-    background-color: white;
+    align-items: center;
     top: 50%;
     margin-top: 0;
-    transform: translate(-50%, -50%);
-    background-size: 70% 70%;
-    background-position: center;
-    background-repeat: no-repeat;
+    border-radius: 50%;
+    background-color: white;
     border: 1px solid ${theme.PALETTE.gray[200]};
+    transition: 0.3s;
+`;
+
+const slideButtonAfterStyle = css`
+    color: ${theme.PALETTE.gray[300]};
+    font-size: 14px;
+    font-weight: ${theme.FONT_WEIGHT.bold};
+`;
+
+const slideButtonHoverStyle = css`
+    background-color: ${theme.PALETTE.yellow};
+    transition: opacity 0.3s;
+    border: none;
+
+    &::after {
+        color: white;
+    }
 `;
 
 const S = {};
     // NavSwiperContainer.js
     S.NavBfAfContainer = styled.div`
         position: fixed;
+        background-color: white;
         width: 100%;
+        height: 78px;
         user-select: none;
+        z-index: 10;
 
         &::before {
             content: "";
@@ -55,6 +66,7 @@ const S = {};
         display: flex;
         justify-content: space-between;
         align-items: center;
+        background-color: inherit;
     `;
 
     S.FilterButton = styled(BasicButton)`
@@ -63,55 +75,55 @@ const S = {};
         border-radius: 14px
     `;
 
-    S.NavSwiperWrapper = styled.div`
-        width: 88vw;
-        height: 78px;
-    `;
-
     S.Swiper = styled(Swiper)`
-        height: 100%;
+        width: 100%;
+        height: 78px;
+        margin: 0;
+
+        & > .swiper-button-prev {
+            ${navSlideButtonStyle}
+            left: 0;
+            transform: translate(50%, -50%);
+            
+            &::after {
+                ${slideButtonAfterStyle};
+                transform: translate(-10%, 3.5%);
+            }
+
+            &:hover {
+                ${slideButtonHoverStyle};
+            }
+            
+        }
+        
+        & > .swiper-button-next {
+            ${navSlideButtonStyle}
+            right: 0;
+            transform: translate(-50%, -50%);
+            
+            &::after {
+                ${slideButtonAfterStyle};
+                transform: translate(10%, 3.5%);
+            }
+
+            &:hover {
+                ${slideButtonHoverStyle};
+            }
+
+        }
 
         & > .swiper-button-disabled {
             display: none;
         }
 
-        & > .swiper-button-prev {
-            ${navButtonStyle}
-            background-image: url("./images/pages/search/navigationBar/categoryButton/arrow_back_ios_24dp.svg");
-            background-position-x: 8px;
-            left: 18px;
-            
-            &:hover {
-                background-image: url("./images/pages/search/navigationBar/categoryButton/arrow_back_ios_24dp_white.svg");
-                background-color: ${theme.PALETTE.yellow};
-                border: none;
-            }
-            
-            &::after {
-                display: none;
-            }
-        }
-        
-        & > .swiper-button-next {
-            ${navButtonStyle}
-            background-image: url("./images/pages/search/navigationBar/categoryButton/arrow_forward_ios_24dp.svg");
-            background-position-x: 5px;
-            right: -8px;
-            
-            &:hover {
-                background-image: url("./images/pages/search/navigationBar/categoryButton/arrow_forward_ios_24dp_white.svg");
-                background-color: ${theme.PALETTE.yellow};
-                border: none;
-            }
-
-            &::after {
-                display: none;
-            }
-        } 
     `;
 
     S.SwiperSlide = styled(SwiperSlide)`
-        ${commonStyle};
+        height: 48px;
+        margin-top: 16px;
+        margin-bottom: 12px;
+        display: flex;
+        justify-content: center;
 
         .searchResultAfterLine {
             display: flex;
@@ -147,7 +159,7 @@ const S = {};
             opacity: 0.5;
             position: absolute;
             background-color: ${theme.PALETTE.yellow};
-            top: 26px;
+            top: 24px;
         }
 
         &.navButtonChecked {
@@ -160,7 +172,7 @@ const S = {};
                 opacity: 1;
                 position: absolute;
                 background-color: ${theme.PALETTE.yellow};
-                top: 26px;
+                top: 24px;
             }
         }
     `;
@@ -174,7 +186,7 @@ const S = {};
         position: relative;
         display: flex;
         flex-direction: column;
-        font-size: 14px;
+        font-size: 12px;
     `;
 
 export default S;

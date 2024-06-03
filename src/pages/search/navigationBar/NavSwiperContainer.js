@@ -17,10 +17,9 @@ import NavSwiperComponents from './NavSwiperComponents';
 import S from './style';
 
 
-
 const NavSwiperContainer = () => {
 
-   const [ isNavActivate, setNavActivate ] = useState(null);
+   const [ isNavActivate, setNavActivate ] = useState(0);
 
    const category = [
       {
@@ -113,7 +112,7 @@ const NavSwiperContainer = () => {
       },
    ];
    
-   const categoryHalf = (category.length / 2) + 2;
+   const categoryHalf = (category.length / 1.5) + 2;
    const swiperOptions = {
       slidesPerView: categoryHalf,
       slidesPerGroup: Math.floor(categoryHalf),
@@ -122,26 +121,23 @@ const NavSwiperContainer = () => {
       modules: [Navigation],
    };
 
-
    return (
       <S.NavBfAfContainer>
          <S.NavLeftRightPadding>
-            <S.NavSwiperWrapper>
-               <S.Swiper {...swiperOptions}>
-                  {
-                     category.map((data, i) => (
-                        <S.SwiperSlide key={i}>
-                           <NavSwiperComponents 
-                              data={data} 
-                              index={i}
-                              isNavActivate={isNavActivate} 
-                              setNavActivate={setNavActivate}
-                           />
-                        </S.SwiperSlide>
-                     ))
-                  }
-               </S.Swiper>
-            </S.NavSwiperWrapper>
+            <S.Swiper {...swiperOptions}>
+               {
+                  category.map((data, i) => (
+                     <S.SwiperSlide key={i}>
+                        <NavSwiperComponents 
+                           data={data} 
+                           index={i}
+                           isNavActivate={isNavActivate} 
+                           setNavActivate={setNavActivate}
+                        />
+                     </S.SwiperSlide>
+                  ))
+               }
+            </S.Swiper>
 
             <S.FilterButton>
                <FontAwesomeIcon icon={faSliders}/>
