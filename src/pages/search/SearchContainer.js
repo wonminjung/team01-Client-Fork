@@ -1,4 +1,4 @@
-import React, { useEffect } from 'react';
+import React from 'react';
 import NavSwiperContainer from './navigationBar/NavSwiperContainer';
 import SearchMainContainer from './main/SearchMainContainer';
 import ResetHeader from '../layout/ResetHeader';

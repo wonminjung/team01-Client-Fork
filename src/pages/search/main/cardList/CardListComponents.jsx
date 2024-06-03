@@ -15,7 +15,6 @@ const CardListComponents = ({cardList}) => {
         pagination: { dynamicBullets: true },
         navigation: true,
         allowTouchMove: false,
-        navigation: true,
         modules: [Navigation, Pagination],
     };
 
@@ -29,7 +28,7 @@ const CardListComponents = ({cardList}) => {
                     {
                         imgUrl.map((img, i) => 
                             <S.SwiperSlide key={i}>
-                                <img src={img}/>
+                                <img src={img} alt="숙소 이미지"/>
                             </S.SwiperSlide>
                         )
                     }

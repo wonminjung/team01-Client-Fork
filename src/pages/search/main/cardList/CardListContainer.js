@@ -1,4 +1,4 @@
-import React, { useState } from 'react';
+import React from 'react';
 import S from './style';
 import CardListComponents from './CardListComponents';
 import NavigatePageComponents from './NavigatePageComponents';
