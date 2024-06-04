@@ -1,6 +1,4 @@
 import React, { useState } from 'react';
-// Import Swiper React components
-import { Swiper, SwiperSlide } from 'swiper/react';
 
 // Import Swiper styles
 import 'swiper/css';
@@ -17,10 +15,15 @@ import NavSwiperComponents from './NavSwiperComponents';
 import S from './style';
 
 
-
 const NavSwiperContainer = () => {
 
+   const [ isNavActivate, setNavActivate ] = useState(0);
+
    const category = [
+      {
+         name: "검색결과",
+         imgUrl: "./images/pages/search/navigationBar/searchResult.jpg"
+      }, 
       {
          name: "방",
          imgUrl: "./images/pages/search/navigationBar/room.jpg"
@@ -107,47 +110,32 @@ const NavSwiperContainer = () => {
       },
    ];
    
-   const categoryHalf = category.length / 2 + 2;
+   const categoryHalf = (category.length / 1.5) + 2;
    const swiperOptions = {
       slidesPerView: categoryHalf,
       slidesPerGroup: Math.floor(categoryHalf),
+      allowTouchMove: false,
       navigation: true,
       modules: [Navigation],
    };
 
-
-
    return (
       <S.NavBfAfContainer>
          <S.NavLeftRightPadding>
-            <S.NavSwiperWrapper>
-               <S.Swiper {...swiperOptions}>
-                  <S.SearchResult slot="container-start">
-                     <S.CategoryWrapper>
-                        <S.CategoryImg src="./images/pages/search/navigationBar/searchResult.jpg"/>
-                        <S.CategoryName>검색결과</S.CategoryName>
-                     </S.CategoryWrapper>
-                     <div className="afterLine"/>
-                  </S.SearchResult>
-
-                  {/* {
-                     category.map((data, i) => (
-                        <NavSwiperComponents data={data} key={i}/>
-                     ))
-                  } */}
-
-                  {
-                     category.map((data, i) => (
-                        <S.SwiperSlide key={i}>
-                           <S.CategoryWrapper>
-                              <S.CategoryImg src={data.imgUrl}/>
-                              <S.CategoryName>{data.name}</S.CategoryName>
-                           </S.CategoryWrapper>
-                        </S.SwiperSlide>
-                     ))
-                  }
-               </S.Swiper>
-            </S.NavSwiperWrapper>
+            <S.Swiper {...swiperOptions}>
+               {
+                  category.map((data, i) => (
+                     <S.SwiperSlide key={i}>
+                        <NavSwiperComponents 
+                           data={data} 
+                           index={i}
+                           isNavActivate={isNavActivate} 
+                           setNavActivate={setNavActivate}
+                        />
+                     </S.SwiperSlide>
+                  ))
+               }
+            </S.Swiper>
 
             <S.FilterButton>
                <FontAwesomeIcon icon={faSliders}/>

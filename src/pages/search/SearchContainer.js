@@ -1,11 +1,17 @@
 import React from 'react';
 import NavSwiperContainer from './navigationBar/NavSwiperContainer';
+import SearchMainContainer from './main/SearchMainContainer';
+import ResetHeader from '../layout/ResetHeader';
 
 const SearchContainer = () => {
+
+    ResetHeader();
+
     return (
-        <div style={{height: "1000px"}}>
+        <>
             <NavSwiperContainer/>
-        </div>
+            <SearchMainContainer/>
+        </>
     );
 };
 
