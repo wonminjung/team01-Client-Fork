@@ -67,7 +67,7 @@ const S = {};
 
         & > .swiper-button-next {
             /* display: none; */
-        } 
+        }
     `;
 
     S.SwiperSlide = styled(SwiperSlide)`
