@@ -111,7 +111,7 @@ S.SearchWrapper = styled.div`
             align-items: start;
             height: 100%;
             padding-left: 24px;
-            transition: 0.3s;
+            transition: background-color 0.3s;
             border-radius: 40px;
             &:hover{
                 background-color: ${PALETTE.gray[100]};
@@ -196,7 +196,7 @@ S.SearchWrapper = styled.div`
                             border-radius: 15px;
                             padding: 10px 0;
                             display: inline-block;
-                            transition: 0.3s;
+                            transition: color border-color background-color 0.3s;
                             cursor: pointer;
                             width: 100%;
                             text-align: center;
@@ -212,32 +212,31 @@ S.SearchWrapper = styled.div`
             }
             &.checkIn{
                 display: block;
-                width: 600px;
+                width: fit-content;
+                height: fit-content;
                 left: 50%;
                 transform: translate(-50%);
-                & .content{}
+                & .content{
+                    & .rdrDayToday .rdrDayNumber span:after{
+                        background: ${PALETTE.yellow};
+                    }
+                }
             }
             &.guest{
                 display: block;
-                right: -57px;
+                right: 0px;
                 & .content{}
             }
+        }
+        & .open{
+            display: block;
+            position: fixed;
+            top: 100px;
+            background-color: #ddd;
         }
     }
     &.big .bigBox{
         display: flex;
-    }
-    & button{
-        border: none;
-        background-color: transparent;
-        width: 100%;
-        height: 100%;
-        color: ${PALETTE.black};
-        cursor: pointer;
-        transition: 0.3s;
-        &:active{
-            transform: scale(0.95);
-        }
     }
     &.big a{
         width: 48px;
