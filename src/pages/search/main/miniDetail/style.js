@@ -30,29 +30,32 @@ const S = {};
         grid-template-columns: 2fr 1fr 1fr;
         grid-template-rows: repeat(2, auto);
         height: auto;
-        gap: 2px;
+        gap: 4px;
         
         /* 이미지 감싸는 컨테이너 */
         & > div {
             border-radius: 20px;
             overflow: hidden;
             aspect-ratio: 5/4;
-
+            
             /* 이미지 */
             & > img {
                 width: 100%;
                 height: 100%;
                 object-fit: cover;
             }
-
+            
         }
-
+        
         /* 첫번째 이미지 디자인 */
         .gridItem-1 {
             grid-column: 1/2;
             grid-row: 1/3;
             gap: 0px;
+            aspect-ratio: inherit;
         }
+
+        
 
     `;
 
