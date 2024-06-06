@@ -53,7 +53,7 @@ const S = {};
         position: fixed;
         background-color: white;
         width: 100%;
-        height: 78px;
+        height: 80px;
         user-select: none;
         z-index: 10;
 
@@ -75,7 +75,7 @@ const S = {};
 
     // 네비게이션바 사이드 안쪽여백 컨테이너
     S.NavLeftRightPadding = styled.div`
-        padding: 0 50px;
+        padding: 0 30px;
         display: flex;
         justify-content: space-between;
         align-items: center;
@@ -183,6 +183,7 @@ const S = {};
             position: absolute;
             background-color: ${theme.PALETTE.yellow};
             top: 24px;
+            border-radius: 8px;
         }
 
         /* 카테고리 클릭 되었을 때 */
@@ -197,6 +198,7 @@ const S = {};
                 position: absolute;
                 background-color: ${theme.PALETTE.yellow};
                 top: 24px;
+                border-radius: 8px;
             }
         }
     `;

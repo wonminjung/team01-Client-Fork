@@ -70,7 +70,7 @@ const S = {};
     `;
 
     S.SideMarginWrapper = styled.div`
-        margin: 0 24px;
+        margin: 0 30px;
     `;
 
     // 숙박 총계

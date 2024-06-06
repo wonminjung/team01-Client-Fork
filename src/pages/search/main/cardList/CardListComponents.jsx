@@ -18,19 +18,20 @@ const CardListComponents = ({cardList}) => {
         modules: [Navigation, Pagination],
     };
 
-    const priceAsString = Number(price).toLocaleString();
+    const priceAsString = price.toLocaleString();
 
 
     return (
-        <S.Link to={linkUri}>
+        // <S.Link to={linkUri}> // 누를 때마다 이동되서 임시로 주석!
+        <S.Link to="#">
             <S.CardListComponentsContainer>
                 <S.Swiper {...swiperOptions}>
                     {
-                        imgUrl.map((img, i) => 
+                        imgUrl.map((img, i) => (
                             <S.SwiperSlide key={i}>
                                 <img src={img} alt="숙소 이미지"/>
                             </S.SwiperSlide>
-                        )
+                        ))
                     }
                 </S.Swiper>
                 
