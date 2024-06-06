@@ -7,6 +7,8 @@ import 'swiper/css/navigation';
 import { Navigation } from 'swiper/modules';
 import FilterBox from './FilterBox';
 import { useNavigate, useSearchParams } from 'react-router-dom';
+import FilterModal from './FilterModal';
+import { useState } from 'react';
 
 export default function Category(){
   const category = [
@@ -112,12 +114,16 @@ export default function Category(){
       tag: "스키"
     }
   ]
-  const [searchParams, setSearchParams] = useSearchParams('?cate=coolPool');
+  const [searchParams,] = useSearchParams('?cate=coolPool');
   const getKey = searchParams.get('cate');
   const navigate = useNavigate();
   const setCur = category.filter((cate)=>cate.cate === getKey)[0].id - 1;
   const selectSlide = (nav) => {
     navigate(`/?cate=${nav}`);
+  }
+  const [modalOpen,setModalOpen] = useState(false);
+  const modalOnOff = () => {
+      setModalOpen(modalOpen? false : true);
   }
   return (
     <>
@@ -142,8 +148,8 @@ export default function Category(){
           </SwiperSlide>
         )}
       </Swiper>
-      <FilterBox />
+      <FilterBox modalOnOff={modalOnOff}/>
+      <FilterModal modalOpen={modalOpen} modalOnOff={modalOnOff}/>
     </>
-    
   );
 };

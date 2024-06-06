@@ -4,13 +4,15 @@ import S from './style';
 import { FontAwesomeIcon } from '@fortawesome/react-fontawesome';
 import { faSliders } from '@fortawesome/free-solid-svg-icons';
 
-const FilterBox = () => {
+const FilterBox = ({modalOnOff}) => {
     return (
-        <S.CategoryFilter className='filterBox'>
-            <BasicButton>
-                <FontAwesomeIcon icon={faSliders} />필터
-            </BasicButton>
-        </S.CategoryFilter>
+        <>
+            <S.CategoryFilter className='filterBox'>
+                <BasicButton onClick={modalOnOff}>
+                    <FontAwesomeIcon icon={faSliders} />필터
+                </BasicButton>
+            </S.CategoryFilter>
+        </>
     );
 };
 

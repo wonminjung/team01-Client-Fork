@@ -8,7 +8,7 @@ const PopupBox = React.forwardRef(({modalIsOpen,setModalIsOpen,setInputValue},in
         inputRef.current.value = e.target.innerText;
     }
     return (
-        <div className={`popup location`} style={{display: `${modalIsOpen? "block":"none"}`}}>
+        <div className={`popup location`} style={{display: modalIsOpen? "block":"none"}}>
             <div className="content">
                 {travelList.map((list,i)=>
                     <div key={i}><span onClick={travelTo}>{list}</span></div>

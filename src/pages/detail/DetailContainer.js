@@ -9,9 +9,11 @@ import RightContentBox from './RightContentBox';
 import DetailGradeBox from './DetailGradeBox';
 import DetailCommentBox from './DetailCommentBox';
 import DetailMapBox from './DetailMapBox';
+import ScrollEvent from '../layout/ScrollEvent';
 
 const DetailContainer = () => {
     ResetHeader();
+    ScrollEvent();
     const contentData = [
         {
             userId : "example1",
@@ -709,7 +711,7 @@ const DetailContainer = () => {
             phone : "010-1111-1111",
         }
     ]
-    const [searchParams,setSerchParams] = useSearchParams();
+    const [searchParams,] = useSearchParams();
     const contentId = searchParams.get('content');
     const content = contentData.filter((data)=> data.id === contentId)[0];
     const user = userData.filter((data)=> content.userId === data.userId)[0];

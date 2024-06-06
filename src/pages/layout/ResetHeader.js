@@ -6,7 +6,7 @@ const ResetHeader = () => {
         const header = document.querySelector("header");
         const search = document.querySelector("#searchBox");
         header.style.position = "sticky";
-        search.classList.remove("big","down");
+        search.classList.remove("big","down","ldown");
     })
     return ;
 };

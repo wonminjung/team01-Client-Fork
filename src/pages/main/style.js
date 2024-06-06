@@ -83,6 +83,7 @@ S.CategoryContainer = styled.div`
     display: flex;
     justify-content: center;
     align-items: center;
+    position: relative;
     /* 카테고리 슬라이드 */
     & .swiper-slide{
         /* 카테고리 카드 */
@@ -164,6 +165,149 @@ S.CategoryContainer = styled.div`
     }
     & .swiper-button-prev.swiper-button-disabled, .swiper-button-next.swiper-button-disabled{
         opacity: 0;
+    }
+    & .filterBackground{
+        display: none;
+        position: fixed;
+        width: 100%;
+        height: 100vh;
+        background-color: rgba(0,0,0,0.5);
+        z-index: 1000;
+        top: 0%;
+        left: 0;
+        &.active{
+            display: block;
+        }
+    }
+    & .filterContent{
+        display: none;
+        position: fixed;
+        top: 50%;
+        left: 50%;
+        transform: translate(-50%, -50%);
+        width: 500px;
+        max-height: calc(100vh - 300px);
+        z-index: 1000;
+        overflow: hidden;
+        background-color: #fff;
+        border-radius: 20px;
+        box-shadow: 0 6px 10px rgba(0,0,0,0.15);
+        &.active{
+            display: block;
+        }
+        & .topBox{
+            border-bottom: 1px solid ${PALETTE.gray[200]};
+            position: relative;
+            padding: 20px 0;
+            & .closeFilterBtn{
+                position: absolute;
+                top: 0;
+                left: 0;
+                border: none;
+                background-color: transparent;
+                padding: 20px;
+                font-size: 16px;
+                color: ${PALETTE.black};
+                cursor: pointer;
+            }
+            & .titleBox{
+                text-align: center;
+                & h6{
+                    color: ${PALETTE.black};
+                    cursor: default;
+                }
+            }
+        }
+        & .filterListBox{
+            padding: 20px 15px 15px;
+            & .priceFilter{
+                display: flex;
+                align-items: center;
+                justify-content: center;
+                flex-direction: column;
+                & h6{
+                    width: 100%;
+                    font-size: 20px;
+                    font-weight: bold;
+                    margin-bottom: 30px;
+                }
+                & .range-slider{
+                    height: 5px;
+                    width: 400px;
+                }
+                & .range-slider .range-slider__thumb{
+                    width: 20px;
+                    height: 20px;
+                }
+                & .range-slider-yellow {
+                    background: url("data:image/svg+xml,%3Csvg width='30' height='30' viewBox='0 0 40 40' xmlns='http://www.w3.org/2000/svg'%3E%3Cg fill='%ffff' fill-rule='evenodd'%3E%3Cpath d='M0 40L40 0H20L0 20M40 40V20L20 40'/%3E%3C/g%3E%3C/svg%3E")#ddd;
+                }
+                & .range-slider-yellow .range-slider__range {
+                    background: #ffbf00;
+                    transition: height 0.3s;
+                }
+                & .range-slider-yellow .range-slider__thumb {
+                    background: #faa307;
+                    transition: transform 0.3s;
+                }
+                & .range-slider-yellow .range-slider__thumb[data-active] {
+                    transform: translate(-50%, -50%) scale(1.1);
+                }
+                & .range-slider-yellow .range-slider__range[data-active] {
+                    height: 5px;
+                }
+                & .priceText{
+                    padding-top: 30px;
+                    display: flex;
+                    width: 400px;
+                    justify-content: space-between;
+                    align-items: center;
+                    & input{
+                        width: 140px;
+                        border: none;
+                        outline: none;
+                        font-size: 16px;
+                        border-bottom: 1px solid ${PALETTE.gray[200]};
+                        padding: 0 0 5px 30px;
+                        color: ${PALETTE.black};
+                        font-weight: bold;
+                        position: relative;
+                    }
+                }
+            }
+            & .roomFilter{}
+        }
+        & .bottomBox{
+            display: flex;
+            justify-content: space-between;
+            align-items: center;
+            border-top: 1px solid ${PALETTE.gray[200]};
+            &>div{
+                & button{
+                    padding: 20px 20px;
+                    color: ${PALETTE.black}
+                }
+            }
+            & .filterRemoveBox{
+                & button{
+                    border: none;
+                    background-color: transparent;
+                    cursor: pointer;
+                }
+            }
+            & .filterSubmitBox{
+                padding-right: 6px;
+                & button{
+                    padding: 12px 20px;
+                    height: inherit;
+                    width: inherit;
+                    border-radius: 15px;
+                    &:hover{
+                        color: #fff;
+                    }
+                }
+            }
+        }
     }
 `
 S.CategoryFilter = styled.div`
