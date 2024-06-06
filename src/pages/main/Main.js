@@ -10,30 +10,36 @@ const Main = () => {
         // 선언문
         const header = document.querySelector("header");
         const search = document.querySelector("#searchBox");
-
-        // 스크롤 이벤트
+        
+        // 스크롤 이벤트시
         const scrollEvent = () => {
             let offsetTop = document.documentElement.scrollTop;
             // offset 400 이상일때 검색바 위로 작게붙이기
             if(offsetTop>400){
                 header.style.position = "sticky";
-                search.classList.remove("big","down");
+                search.classList.remove("big","down","ldown");
             }else{
                 header.style.position = "relative";
                 search.classList.add("big","down");
             }
         }
 
-        // 메인 헤더 디자인 변경
-        header.style.position = "relative";
-        search.classList.add("big","down");
+        // 메인 진입시 헤더 디자인 변경
+        let offsetTop = document.documentElement.scrollTop;
+        if(offsetTop>400){
+            header.style.position = "sticky";
+            search.classList.remove("big","down","ldown");
+        }else{
+            header.style.position = "relative";
+            search.classList.remove("ldown");
+            search.classList.add("big","down");
+        }
 
         // 스크롤 이벤트
         window.addEventListener("scroll",scrollEvent);
         return ()=>{
             window.removeEventListener("scroll",scrollEvent);
         }
-        
     },[])
     
     return (
