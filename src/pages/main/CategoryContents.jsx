@@ -4,7 +4,7 @@ import Content from './ContentSlider';
 import S from './style';
 
 const CategoryContents = () => {
-    const [searchParams, setSearchParams] = useSearchParams('?cate=coolPool');
+    const [searchParams,] = useSearchParams('?cate=coolPool');
     const getKey = searchParams.get("cate");
     const contentData = [
         {
