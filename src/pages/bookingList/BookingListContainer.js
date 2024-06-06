@@ -3,9 +3,17 @@ import S from './style'
 import BookingItem from './BookingItem';
 import NotBooking from './NotBooking';
 import BookingDetail from './BookingDetail';
+import ResetHeader from '../layout/ResetHeader';
+import ScrollEvent from '../layout/ScrollEvent';
 
 // 예약한 숙소리스트
 const BookingListContainer = () => {
+    ResetHeader();
+    ScrollEvent();
+     // RemoveHeader();
+
+
+
     // 사진배너 데이터들
     const itemData = [
         {
