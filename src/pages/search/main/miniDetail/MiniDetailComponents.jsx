@@ -17,12 +17,32 @@ const MiniDetailComponents = () => {
         title : "위드독 독채 풀빌라",
         address : "충남/태안군",
         dayPrice : "150000",
-        roomData : {
-            maxUser : 6,
-            bedroom : 2,
-            bed : 2,
-            bathroom : 2
-        },
+        roomData : [
+            {
+                iconUrl: "./images/pages/search/main/miniDetail/overview/user.svg",
+                count: 6,
+                name: "최대 인원",
+                cname: "명",
+            },
+            {
+                iconUrl: "./images/pages/search/main/miniDetail/overview/house.svg",
+                count: 2,
+                name: "침실",
+                cname: "개",
+            },
+            {
+                iconUrl: "./images/pages/search/main/miniDetail/overview/bed-single.svg",
+                count: 2,
+                name: "침대",
+                cname: "개",
+            },
+            {
+                iconUrl: "./images/pages/search/main/miniDetail/overview/bath.svg",
+                count: 2,
+                name: "욕실",
+                cname: "개",
+            },
+        ],
         introduction: `
         서울 중심부에 위치한 럭셔리 듀플렉스 펜트하우스에 오신 것을 환영합니다.<br><br>
 
@@ -134,22 +154,30 @@ const MiniDetailComponents = () => {
                 </S.ImageGridContainer>
 
                 <S.OverviewContainer>
-                    <S.OverviewSection>
-                        <S.OverviewTitle>
+                    <S.SectionContainer>
+                        <S.SectionTitle>
                             {contentData.title} 전체
-                        </S.OverviewTitle>
+                        </S.SectionTitle>
                         <S.OverviewList>
-                            <li>최대 인원 {contentData.roomData.maxUser}명</li>
-                            <li>침실 {contentData.roomData.bedroom}개</li>
-                            <li>침대 {contentData.roomData.bed}개</li>
-                            <li>욕실 {contentData.roomData.bathroom}개</li>
+                            {
+                                contentData.roomData.map((data, i) => (
+                                    <li key={i}>
+                                        <span>
+                                            <img src={data.iconUrl} alt="이미지" />
+                                        </span>
+                                        <span>
+                                            {`${data.name} ${data.count}${data.cname}`}
+                                        </span>
+                                    </li>
+                                ))
+                            }
                         </S.OverviewList>
-                    </S.OverviewSection>
+                    </S.SectionContainer>
 
-                    <S.OverviewSection>
-                        <S.OverviewTitle>
+                    <S.SectionContainer>
+                        <S.SectionTitle>
                             숙소 설명
-                        </S.OverviewTitle>
+                        </S.SectionTitle>
                         <S.OverviewIntroductionContainer
                             className={isMoreCheck ? "overviewChecked" : ""}
                         >
@@ -161,18 +189,18 @@ const MiniDetailComponents = () => {
                         >
                             {isMoreCheck ? "간략히" : "더보기"}
                         </S.OverviewMoreButton>
-                    </S.OverviewSection>
+                    </S.SectionContainer>
                     
-                    <S.OverviewSection>
-                        <S.OverviewTitle>
+                    <S.SectionContainer>
+                        <S.SectionTitle>
                             숙소 편의시설
-                        </S.OverviewTitle>
+                        </S.SectionTitle>
                         <S.OverviewAmenities>
                             {
                                 contentData.amenities.map((data, i) => (
                                     <li key={i}>
                                         <span>
-                                            <img src={data.iconUrl} alt="" />
+                                            <img src={data.iconUrl} alt="이미지" />
                                         </span>
                                         <span>
                                             {data.name}
@@ -181,7 +209,7 @@ const MiniDetailComponents = () => {
                                 ))
                             }
                         </S.OverviewAmenities>
-                    </S.OverviewSection>
+                    </S.SectionContainer>
                 </S.OverviewContainer>
             </S.MarginSideContainer>
         </S.MiniDetailContainer>

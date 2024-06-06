@@ -74,46 +74,45 @@ const S = {};
         padding: 32px 0;
         position: relative;
     `;
-
-    // 숙소명전체? 개요제목?
-    S.OverviewTitle = styled.div`
-        font-size: 16px;
-        margin-bottom: 12px;
-    `;
-
-    S.OverviewSection = styled.div`
+    
+    S.SectionContainer = styled.div`
         margin-bottom: 24px;
     `;
 
-    const overviewIconStyle = css`
-        margin-right: 7px;
-        display: inline-block;
-        height: 15px;
-        vertical-align: bottom;
+    // 미니디테일 각 섹션 제목?
+    S.SectionTitle = styled.div`
+        font-size: 16px;
+        margin-bottom: 15px;
     `;
+
     // 침실, 화장실, 침대 몇개인지 리스트
     S.OverviewList = styled.ul`
-
+        display: flex;
+        flex-direction: column;
+        row-gap: 4px;
+        
         & > li {
             font-size: 14px;
             margin-bottom: 8px;
             color: ${theme.PALETTE.gray[300]};
+            display: flex;
+            margin-bottom: 8px;
 
-            &:nth-of-type(1)::before {
-                content: url("./images/pages/search/main/miniDetail/overview/user.svg");
-                ${overviewIconStyle};
-            }
-            &:nth-of-type(2)::before {
-                content: url("./images/pages/search/main/miniDetail/overview/house.svg");
-                ${overviewIconStyle};
-            }
-            &:nth-of-type(3)::before {
-                content: url("./images/pages/search/main/miniDetail/overview/bed-single.svg");
-                ${overviewIconStyle};
-            }
-            &:nth-of-type(4)::before {
-                content: url("./images/pages/search/main/miniDetail/overview/bath.svg");
-                ${overviewIconStyle};
+            & > span {
+                font-size: 14px;
+                color: ${theme.PALETTE.gray[300]};
+                display: flex;
+                
+                &:first-child {
+                    width: 15px;
+                    height: 15px;
+                    margin-right: 7px;
+                }
+
+                & > img {
+                    object-fit: cover;
+                }
+                
             }
         }
 
@@ -122,7 +121,6 @@ const S = {};
     // 숙소 설명 컨테이너
     S.OverviewIntroductionContainer = styled.div`
         height: 100px;
-        position: relative;
         overflow: hidden;
         
         /* 더보기 버튼 상태 변경시 */
@@ -136,6 +134,7 @@ const S = {};
     S.OverviewIntorduction = styled.div`
         font-size: 14px;
         height: 100%;
+        margin-bottom: 12px;
     `;
 
     // 설명 더보기 버튼
@@ -147,31 +146,28 @@ const S = {};
     S.OverviewAmenities = styled.ul`
         display: flex;
         flex-wrap: wrap;
-        justify-content: space-between;
-        
+        row-gap: 12px;
         
         & > li {
             display: flex;
-            vertical-align: bottom;
             margin-bottom: 8px;
             flex: 50%;
 
             & > span {
                 font-size: 14px;
                 color: ${theme.PALETTE.gray[300]};
-                height: 100%;
-
-                & > img {
-                    width: 100%;
-                    height: 100%;                    
-                    object-fit: cover;
-                }
+                display: flex;
                 
                 &:first-child {
                     width: 15px;
                     height: 15px;
                     margin-right: 7px;
                 }
+
+                & > img {
+                    object-fit: cover;
+                }
+                
             }
         }
     `;
