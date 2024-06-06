@@ -1,3 +1,6 @@
+// 🫠 되도록 const와 let 사용하고, 기능 추가시 kakao앞에 window를 꼭 붙여 사용하셔야 합니닷!
+// APP_KEY 공유 금지 부탁드려용. NO MONEY.🥲
+
 import React, { useEffect, useState } from 'react';
 import S from './style';
 
