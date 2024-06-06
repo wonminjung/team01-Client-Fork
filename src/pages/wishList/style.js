@@ -6,22 +6,6 @@ import { flexCenterColumn } from "../../global/common";
 const S = {};
 const PALETTE = theme.PALETTE;
 
-
-/* 하트버튼 애니메이션 */
-const sparkle = keyframes`
-    0%, 100% {
-        transform: scale(1);
-        opacity: 1;
-    }
-    50% {
-        transform: scale(1.2);
-        opacity: 0.8;
-    }
-`;
-
-//💥문제 : main페이지에서 wishList 검색해서 넘어갈때, 이상한 화면 지나감
-
-/* 위시리스트 전체 */
 S.WishListContainer = styled.div`
     height: 200vh; //1vh = 1% of viewport height, vw
     position: relative;
@@ -35,7 +19,6 @@ S.PageTitle = styled.h1`
     top: 1px; /* 위에서 50px */
     left: 60px; /* 왼쪽에서 50px */
 `
-
 
 /* 숙소카드 1개 */
 /* 위시리스트 flex-container */
@@ -70,16 +53,6 @@ S.ContentBox = styled.div`
         }
         @media(min-width: 1900px){
             width: calc(100% / 6);
-        }
-        // 하트버튼(컴포넌트로 만들 예정/CSS도 손보기)
-        & .heart{
-            position: absolute;
-            top : 18px;
-            right: 25px;
-            color: ${PALETTE.yellow};
-            width: 25px;
-            height : 25px;
-            animation: ${sparkle} 1s infinite; // 애니메이션 적용
         }
 
         & a{ // 링크로 감싸준 부분

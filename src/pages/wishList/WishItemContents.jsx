@@ -3,7 +3,8 @@ import { FontAwesomeIcon } from '@fortawesome/react-fontawesome';
 import React, { useState } from 'react';
 import { Link } from 'react-router-dom';
 import S from './style';
-import HeartButton from './HeartButton';
+import HeartButton from '../../components/heartbutton/HeartButton';
+
 
 const WishItemContents = () => {
     // contentData 상태 관리 및 업데이트
@@ -121,6 +122,12 @@ const WishItemContents = () => {
     // contetData배열을 순회하면서 클릭한 item을 제외한 아이템으로 구성된 새로운 배열 반환
             setContentData(contentData.filter(item => item.id !== id));
     }
+
+    const handleRemoveItem = ({onRemove}) => {
+        if(window.confirm("이 아이템을 위시리스트에서 제거하시겠습니까?")){
+            onRemove();
+        }
+    }
     
 
     return (
@@ -129,7 +136,9 @@ const WishItemContents = () => {
             {contentData.length > 0 ? (
                 contentData.map((data) =>
                     <div className="content" key={data.id}>
-                        <HeartButton onRemove={()=>removeItem(data.id)}/>
+                        <HeartButton 
+                            onRemove={()=>removeItem(data.id)} 
+                            onClick={handleRemoveItem}/>
                         <Link to={'/detail'}>
                             {/* 숙소 이미지 */}
                             <div className="imgBox">
