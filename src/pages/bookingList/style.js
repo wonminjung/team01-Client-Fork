@@ -225,7 +225,7 @@ S.bookingDetailWrapper = styled.div`
     }
     
     & .infoBox{
-        width: 50%;
+        width: 100%;
         display: flex;
 
         & .leftBox{

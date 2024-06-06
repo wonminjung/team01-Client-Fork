@@ -16,10 +16,15 @@ const S = {};
     `;
 
     /* 하트버튼 디자인 */
-    S.HeartBtn = styled.div`
+    S.HeartBtn = styled.button`
+        border: none;
+        outline: none;
+        background-color: inherit ;
+        cursor: pointer;
         & .heart{
+            cursor: pointer;
             position: absolute;
-            top : 18px;
+            top : 34px;
             right: 25px;
             color: ${theme.PALETTE.yellow};
             width: 25px;

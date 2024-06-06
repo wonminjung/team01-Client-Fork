@@ -117,17 +117,19 @@ const WishItemContents = () => {
     ]);
    
 
-    // contentData데이터 삭제 함수
+    // contentData 데이터삭제 함수
     const removeItem = (id) => {
-    // contetData배열을 순회하면서 클릭한 item을 제외한 아이템으로 구성된 새로운 배열 반환
-            setContentData(contentData.filter(item => item.id !== id));
-    }
+        // contentData 배열을 순회하면서 클릭한 item을 제외한 아이템으로 구성된 새로운 배열 반환
+        setContentData(contentData.filter(item => item.id !== id));
+    };
 
-    const handleRemoveItem = ({onRemove}) => {
-        if(window.confirm("이 아이템을 위시리스트에서 제거하시겠습니까?")){
-            onRemove();
+    // 클릭 이벤트 
+    const handleRemoveItem = (id) => {
+        if (window.confirm("이 아이템을 위시리스트에서 제거하시겠습니까?")) {
+            removeItem(id);
         }
-    }
+    };
+
     
 
     return (
@@ -136,9 +138,7 @@ const WishItemContents = () => {
             {contentData.length > 0 ? (
                 contentData.map((data) =>
                     <div className="content" key={data.id}>
-                        <HeartButton 
-                            onRemove={()=>removeItem(data.id)} 
-                            onClick={handleRemoveItem}/>
+                        <HeartButton onClick={() => handleRemoveItem(data.id)}/>
                         <Link to={'/detail'}>
                             {/* 숙소 이미지 */}
                             <div className="imgBox">
