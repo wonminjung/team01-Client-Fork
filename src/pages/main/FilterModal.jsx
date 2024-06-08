@@ -642,8 +642,8 @@ const FilterModal = ({modalOpen,modalOnOff}) => {
     }
     const filterd = contentData.filter((content) => // 필터를 걸친 데이터
         content.cate===getKey // 카테고리 조건
-        && content.dayPrice >= val0Ref.current.value // 최소가격 조건
-        && content.dayPrice <= val1Ref.current.value // 최대가격 조건
+        && content.dayPrice >= value[0] // 최소가격 조건
+        && content.dayPrice <= value[1] // 최대가격 조건
         && content.roomData.maxUser >= maxUser // 최대인원 조건
         && content.roomData.bedroom >= bedroom // 최대침실 조건
         && content.roomData.bed >= bed // 최대침대 조건
