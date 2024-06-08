@@ -220,16 +220,26 @@ S.CategoryContainer = styled.div`
         }
         & .filterListBox{
             padding: 20px 15px 15px;
+            height: calc(100vh - 414px);
+            overflow-y: scroll;
+            &::-webkit-scrollbar{
+                width: 6px;
+            }
+            &::-webkit-scrollbar-thumb{
+                background: ${PALETTE.yellow};
+                border-radius: 3px;
+            }
             & .priceFilter{
                 display: flex;
                 align-items: center;
                 justify-content: center;
                 flex-direction: column;
+                padding-bottom: 35px;
                 & h6{
                     width: 100%;
                     font-size: 20px;
                     font-weight: bold;
-                    margin-bottom: 30px;
+                    margin-bottom: 40px;
                 }
                 & .range-slider{
                     height: 5px;
@@ -262,20 +272,100 @@ S.CategoryContainer = styled.div`
                     width: 400px;
                     justify-content: space-between;
                     align-items: center;
+                    &>div{
+                        position: relative;
+                        display: flex;
+                        flex-direction: column;
+                        &::before{
+                            content: '￦';
+                            position: absolute;
+                            left: 5px;
+                            top: 24px;
+                            z-index: 1;
+                            font-size: 14px;
+                            color: ${PALETTE.gray[300]};
+                        }
+                        & span{
+                            font-size: 14px;
+                            display: inline-block;
+                            height: 22px;
+                        }
+                    }
                     & input{
                         width: 140px;
                         border: none;
                         outline: none;
                         font-size: 16px;
                         border-bottom: 1px solid ${PALETTE.gray[200]};
-                        padding: 0 0 5px 30px;
+                        padding: 0 0 5px 25px;
+                        letter-spacing: 1px;
                         color: ${PALETTE.black};
                         font-weight: bold;
                         position: relative;
+                        color: ${PALETTE.yellow};
                     }
                 }
             }
-            & .roomFilter{}
+            & .roomFilter{
+                & h6{
+                    width: 100%;
+                    font-size: 20px;
+                    font-weight: bold;
+                    margin-bottom: 30px;
+                }
+                & .filterList{
+                    & ul{
+                        & li{
+                            margin-bottom: 20px;
+                            & p{
+                                display: flex;
+                                align-items: center;
+                                margin-bottom: 10px;
+                                color: ${PALETTE.black};
+                                & svg{
+                                    margin-right: 5px;
+                                    font-size: 16px;
+                                    & path{
+                                        fill: ${PALETTE.yellow}
+                                    }
+                                }
+                            }
+                            & .numberBtnBox{
+                                display: flex;
+                                justify-content: space-between;
+                                align-items: center;
+                                width: 100%;
+                                & input[type=radio]{
+                                    appearance: none;
+                                    display: flex;
+                                    justify-content: center;
+                                    align-items: center;
+                                    background-color: #fff;
+                                    border: 1px solid ${PALETTE.gray[200]};
+                                    padding: 10px 0;
+                                    width: 60px;
+                                    border-radius: 8px;
+                                    cursor: pointer;
+                                    font-size: 14px;
+                                    transition: 0.2s;
+                                    &::before{
+                                        content: attr(label);
+                                        color: ${PALETTE.gray[300]};
+                                        transition: 0.2s;
+                                    }
+                                }
+                                & input[type=radio]:checked{
+                                    border: 1px solid ${PALETTE.yellow};
+                                    background-color: ${PALETTE.yellow};
+                                    &::before{
+                                        color: #fff;
+                                    }
+                                }
+                            }
+                        }
+                    }
+                }
+            }
         }
         & .bottomBox{
             display: flex;

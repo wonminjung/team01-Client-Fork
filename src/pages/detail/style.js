@@ -617,7 +617,7 @@ S.DetailMapBox = styled.div`
         color: ${PALETTE.gray[300]};
         margin-bottom: 25px;
     }
-    & #Map{
+    & #map{
         width: 100%;
         height: 460px;
         border-radius: 20px;

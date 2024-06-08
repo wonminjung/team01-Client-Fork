@@ -121,9 +121,24 @@ export default function Category(){
   const selectSlide = (nav) => {
     navigate(`/?cate=${nav}`);
   }
+  let scrollY = "";
   const [modalOpen,setModalOpen] = useState(false);
   const modalOnOff = () => {
       setModalOpen(modalOpen? false : true);
+      if(!modalOpen){
+        scrollY = window.scrollY;
+        document.body.style.position = "fixed";
+        document.body.style.top = "-"+scrollY+"px";
+        document.body.style.overflowY = "scroll";
+        document.body.style.width = "100%";
+      }else{
+        let offset = document.body.style.top;
+        document.body.style.position = "unset";
+        document.body.style.top = "unset";
+        document.body.style.overflowY = "unset";
+        document.body.style.width = "unset";
+        window.scrollTo(0, offset.slice(0,-2) * -1);
+      }
   }
   return (
     <>
