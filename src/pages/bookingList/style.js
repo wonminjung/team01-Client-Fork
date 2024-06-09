@@ -112,7 +112,9 @@ S.NotBookingWrapper = styled.div`
 
 `
 /* BookingItem */
-S.BookingItemWrapper = styled.div`
+S.BookingItemWrapper = styled.button`
+        cursor: pointer;
+        text-align: left;
         display: flex; // 가로로 배치 예정이라 디폴트 row 생략
         justify-content: flex-start;
         align-items: center;
@@ -123,9 +125,11 @@ S.BookingItemWrapper = styled.div`
             isClicked ? 'none' : `1px solid ${PALETTE.yellow}`}; 
         width: 100%;
         height: 280px;
-        transition: 0.3s;
-        // animation
+        transition: 0.4s;
         border-radius: 40px;
+        &.active, .accordion:hover{
+            background-color: #ccc;
+        }
         & .textBox{
             width: 486px;
             padding: 40px;
@@ -156,6 +160,14 @@ S.BookingItemWrapper = styled.div`
 
         }
 
+`
+
+S.panel = styled.div`
+    padding: 0 18px;
+    background-color: white;
+    max-height: 0;
+    overflow: hidden;
+    transition: max-height 0.2s ease-out;
 `
 
 /* 예약 상세 내역 (bookingDetail) */

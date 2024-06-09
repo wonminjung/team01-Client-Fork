@@ -5,12 +5,12 @@ import S from './style';
 import KakaoMap from '../../components/kakaomap/KakaoMap.jsx';
 
 
-const BookingDetail = () => {
+const BookingDetail = ({item}) => {
     
     const[isHovered, setIsHovered] = useState(false);
 
     return (
-    <S.bookingDetailWrapper>
+    <S.bookingDetailWrapper >
         {/* 좌측 지도api */}
         <div className="mapBox">
                 <div className="howToGo">
@@ -22,7 +22,7 @@ const BookingDetail = () => {
                             찾아가는 방법
                         </h4>
                         <h5 className="detailAddress">
-                            주소 : 제주 제주시 조천읍 선흘남4길 31
+                            주소 : {item.detailAddress}
                         </h5>
                     </div>
                 </div>
@@ -45,15 +45,15 @@ const BookingDetail = () => {
                         <div className='data'>
                             <div className='checkInBox'>
                                 <h5 className='checkIn'>체크인</h5>
-                                <h5 className='checkInDate'>5월 19일 오후 3:00</h5>
+                                <h5 className='checkInDate'>{item.checkInDate}  {item.checkInTime}</h5>
                             </div>
                             <div className='checkOutBox'>
                                 <h5 className='CheckOut'>체크아웃</h5>
-                                <h5 className='checkOutDate'>5월 21일 오전 11:00</h5>
+                                <h5 className='checkOutDate'>{item.checkOutDate}  {item.checkOutTime}</h5>
                             </div>
                             <div className='headCountBox'>
                                 <h5 className='headCount'>인원</h5>
-                                <h5 className='headContNum'>게스트 2명, 유아 1명</h5>
+                                <h5 className='headContNum'>게스트 {item.guests}명, 유아 {item.infants}명</h5>
                             </div>
                         </div>
                     </div>

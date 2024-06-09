@@ -1,27 +1,19 @@
 import React from 'react';
 import S from './style';
 
-const BookingItem = ({isClicked}) => {
+const BookingItem = ({item, onClick}) => {
     return (
-        <S.BookingItemWrapper>
+        <S.BookingItemWrapper className='bookingItem' onClick={onClick}>
             <div className="textBox">
                 <div className="text">
-                    <h3 className="title">
-                        노을빛을 품은 감성 숙소, 선셋티아
-                    </h3>
-                    <p className="schedule">
-                        2024년 5월 19일 ~ 2024년 5월 20일
-                    </p>
-                    <p className="briefAddress">
-                        제주시, 제주도, 한국
-                    </p>
-                    <p className="bookingCode">
-                        예약번호 : HMZXMWA5J2
-                    </p>
+                    <div className="title">{item.title}</div>
+                    <div className="schedule">{item.schedule}</div>
+                    <div className="briefAddress">{item.address}</div>
+                    <div className="bookingCode"> 예약번호 : {item.reservationNum}</div>
                 </div>
             </div>
             <div className="imgBox">
-                <img src="./images/pages/bookingList/room1.gif"/>
+                <img src={item.img} alt="숙소 이미지"/>
             </div>
         </S.BookingItemWrapper>
     );
