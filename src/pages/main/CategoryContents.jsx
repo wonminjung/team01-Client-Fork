@@ -608,7 +608,7 @@ const CategoryContents = () => {
                 zipcode : "92998-3874",
             },
             phone : "010-1234-1234",
-            wishList : [1,2,3]
+            wishList : ["1","2","3"]
         },
         {
             id : 2,
@@ -624,7 +624,7 @@ const CategoryContents = () => {
                 zipcode : "92998-3874",
             },
             phone : "010-4321-4321",
-            wishList : [3,6]
+            wishList : ["3","6"]
         },
         {
             id : 3,
@@ -640,11 +640,13 @@ const CategoryContents = () => {
                 zipcode : "92998-3874",
             },
             phone : "010-1111-1111",
-            wishList : [2,3,5]
+            wishList : ["2","3","5"]
         }
     ]
     const [loginState] = useState(true); // 로그인상태
+    console.log(`로그인상태 : ${loginState}`)
     const loginUser = 1; // 로그인유저
+    console.log(`로그인유저 : ${loginUser}`)
     const [searchParams] = useSearchParams('?cate=coolPool&lPrice=0&gPrice=1000000&maxUser=0&bedroom=0&bed=0&bathroom=0');
     const getCate = searchParams.get("cate");
     const getPrice = [searchParams.get("lPrice"),searchParams.get("gPrice")];
@@ -679,7 +681,7 @@ const CategoryContents = () => {
                             <div className="linkBox">예약하기</div>
                         </div>
                     </Link>
-                    <EmptyHeartButton userData={userData} loginUser={loginUser} loginState={loginState} i={i}/>
+                    <EmptyHeartButton userData={userData} loginUser={loginUser} loginState={loginState} roomid={data.id}/>
                 </div>
             )}
         </S.CategoryContentBox>
