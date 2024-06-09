@@ -4,7 +4,7 @@ import React, { useRef, useState } from 'react';
 import BasicButton from '../../components/button/BasicButton';
 import RangeSlider from "react-range-slider-input";
 import "react-range-slider-input/dist/style.css";
-import { useNavigate, useSearchParams } from 'react-router-dom';
+import { createSearchParams, useNavigate, useSearchParams } from 'react-router-dom';
 
 const FilterModal = ({modalOpen,modalOnOff}) => {
     const contentData = [
@@ -603,7 +603,7 @@ const FilterModal = ({modalOpen,modalOnOff}) => {
     const getBedroom = searchParams.get("bedroom"); // 침실 params 가져오기
     const getBed = searchParams.get("bed"); // 침대 params 가져오기
     const getBathroom = searchParams.get("bathroom"); // 욕실 params 가져오기
-    const [value, setValue] = useState([getPrice[0]? getPrice[0]: 10000, getPrice[1]? getPrice[1]: 100000]); // 가격범위 초기세팅을 params로 세팅
+    const [value, setValue] = useState([getPrice[0]? getPrice[0]: 10000, getPrice[1]? getPrice[1]: 1000000]); // 가격범위 초기세팅을 params로 세팅
     const [maxUser, setMaxUser] = useState(getMaxUser); // 최대인원 초기세팅을 params로 세팅
     const [bedroom, setBedroom] = useState(getBedroom); // 침실 초기세팅을 params로 세팅
     const [bed, setBed] = useState(getBed); // 침대 초기세팅을 params로 세팅
@@ -650,7 +650,11 @@ const FilterModal = ({modalOpen,modalOnOff}) => {
         && content.roomData.bathroom >= bathroom // 최대욕실 조건
     );
     const viewFiltered = () => {
-        navigate(`/?cate=${getKey}&lPrice=${value[0]}&gPrice=${value[1]}&maxUser=${maxUser}&bedroom=${bedroom}&bed=${bed}&bathroom=${bathroom}`);
+        const params = {cate: getKey, lPrice: value[0], gPrice: value[1], maxUser: maxUser, bedroom: bedroom, bed: bed, bathroom: bathroom}
+        navigate({
+            pathname: '/',
+            search: `?${createSearchParams(params)}`
+        })
         modalOnOff();
     }
     return (

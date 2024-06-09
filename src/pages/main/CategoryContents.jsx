@@ -1,7 +1,8 @@
-import React from 'react';
+import React, { useState } from 'react';
 import { Link, useSearchParams } from 'react-router-dom';
 import Content from './ContentSlider';
 import S from './style';
+import EmptyHeartButton from './EmptyHeartButton';
 
 const CategoryContents = () => {
     const contentData = [
@@ -592,6 +593,58 @@ const CategoryContents = () => {
             cleanVat : 50000,
         }
     ]
+    const userData = [
+        {
+            id : 1,
+            userId : "hyeona023",
+            password : "1234",
+            name : "현아",
+            profileImg : "./images/pages/detail/user/1/thumb.jpg",
+            email : "hyeona@gmail.com",
+            address : {
+                city : "Kulas Light",
+                street : "Gwenborough",
+                suit : "Apt. 556",
+                zipcode : "92998-3874",
+            },
+            phone : "010-1234-1234",
+            wishList : [1,2,3]
+        },
+        {
+            id : 2,
+            userId : "example1",
+            password : "1234",
+            name : "닉네임1",
+            profileImg : "./images/pages/detail/user/2/thumb.jpg",
+            email : "example1@gmail.com",
+            address : {
+                city : "Kulas Light",
+                street : "Gwenborough",
+                suit : "Apt. 556",
+                zipcode : "92998-3874",
+            },
+            phone : "010-4321-4321",
+            wishList : [3,6]
+        },
+        {
+            id : 3,
+            userId : "example2",
+            password : "1234",
+            name : "닉네임2",
+            profileImg : "./images/pages/detail/user/3/thumb.jpg",
+            email : "example2@gmail.com",
+            address : {
+                city : "Kulas Light",
+                street : "Gwenborough",
+                suit : "Apt. 556",
+                zipcode : "92998-3874",
+            },
+            phone : "010-1111-1111",
+            wishList : [2,3,5]
+        }
+    ]
+    const [loginState] = useState(true); // 로그인상태
+    const loginUser = 1; // 로그인유저
     const [searchParams] = useSearchParams('?cate=coolPool&lPrice=0&gPrice=1000000&maxUser=0&bedroom=0&bed=0&bathroom=0');
     const getCate = searchParams.get("cate");
     const getPrice = [searchParams.get("lPrice"),searchParams.get("gPrice")];
@@ -626,6 +679,7 @@ const CategoryContents = () => {
                             <div className="linkBox">예약하기</div>
                         </div>
                     </Link>
+                    <EmptyHeartButton userData={userData} loginUser={loginUser} loginState={loginState} i={i}/>
                 </div>
             )}
         </S.CategoryContentBox>

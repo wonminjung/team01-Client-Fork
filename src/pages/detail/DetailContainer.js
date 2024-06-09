@@ -679,6 +679,7 @@ const DetailContainer = () => {
                 zipcode : "92998-3874",
             },
             phone : "010-1234-1234",
+            wishList : [1,2,3]
         },
         {
             id : 2,
@@ -694,6 +695,7 @@ const DetailContainer = () => {
                 zipcode : "92998-3874",
             },
             phone : "010-4321-4321",
+            wishList : [3,6]
         },
         {
             id : 3,
@@ -709,6 +711,7 @@ const DetailContainer = () => {
                 zipcode : "92998-3874",
             },
             phone : "010-1111-1111",
+            wishList : [2,3,5]
         }
     ]
     const [searchParams,] = useSearchParams();

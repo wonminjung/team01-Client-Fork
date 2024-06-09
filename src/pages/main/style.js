@@ -418,6 +418,7 @@ S.CategoryContentBox = styled.div`
         width: 50%;
         padding: 10px;
         transition: 0.3s;
+        position: relative;
         &:hover{
             transform: scale(1.02);
         }
@@ -524,6 +525,30 @@ S.CategoryContentBox = styled.div`
                     font-size: 12px;
                     font-weight: bold;
                 }
+            }
+        }
+        & .emptyHeartBtn{
+            position: absolute;
+            top: 34px;
+            right: 34px;
+            z-index: 1;
+            color: #fff;
+            filter: drop-shadow(0px 0px 3px #F2AC29);
+            background-color: transparent;
+            border: 0;
+            width: 25px;
+            height: 25px;
+            cursor: pointer;
+            & svg{
+                font-size: 25px;
+            }
+        }
+        &>div{
+            & button{
+                position: absolute;
+                top: 0;
+                right: 10px;
+                z-index: 1;
             }
         }
     }
