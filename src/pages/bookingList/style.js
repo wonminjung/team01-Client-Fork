@@ -114,6 +114,10 @@ S.NotBookingWrapper = styled.div`
 /* BookingItem */
 S.BookingItemWrapper = styled.button`
         cursor: pointer;
+        transition: 0.3s; // hover되면 0.3초동안 커짐
+        &:hover{//커서 이미지 위에 올리면 1.02배 커짐
+            transform: scale(1.04);
+        }
         text-align: left;
         display: flex; // 가로로 배치 예정이라 디폴트 row 생략
         justify-content: flex-start;

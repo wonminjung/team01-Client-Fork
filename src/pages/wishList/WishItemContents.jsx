@@ -4,11 +4,16 @@ import React, { useState } from 'react';
 import { Link } from 'react-router-dom';
 import S from './style';
 import HeartButton from '../../components/heartbutton/HeartButton';
+import Modal from './modal/Modal';
 
 
 const WishItemContents = () => {
-    // contentData 상태 관리 및 업데이트
+    // 모달 안보이는게 기본값
+    const [showModal, setShowModal] = useState(false);
+    // 삭제하기 위해 하트버튼 누른 아이템의 상태
+    const [selectedItemId, setSelectedItemId] = useState(null);
 
+    // 컨텐츠 데이터 
     const [contentData, setContentData] = useState([
         {
             id : "1",
@@ -116,47 +121,49 @@ const WishItemContents = () => {
         }
     ]);
    
-
-    // contentData 데이터삭제 함수
+    
     const removeItem = (id) => {
-        // contentData 배열을 순회하면서 클릭한 item을 제외한 아이템으로 구성된 새로운 배열 반환
         setContentData(contentData.filter(item => item.id !== id));
     };
 
-    // 클릭 이벤트 
     const handleRemoveItem = (id) => {
-        if (window.confirm("이 아이템을 위시리스트에서 제거하시겠습니까?")) {
-            removeItem(id);
-        }
+        setSelectedItemId(id);
+        setShowModal(true);
     };
 
-    
+    const handleConfirmRemove = () => {
+        removeItem(selectedItemId);
+        setShowModal(false);
+    };
+
+    const handleCancelRemove = () => {
+        setShowModal(false);
+    };
+
+
 
     return (
-
         <S.ContentBox>
             {contentData.length > 0 ? (
                 contentData.map((data) =>
                     <div className="content" key={data.id}>
                         <HeartButton onClick={() => handleRemoveItem(data.id)}/>
                         <Link to={'/detail'}>
-                            {/* 숙소 이미지 */}
                             <div className="imgBox">
                                 <img src={data.img} />
                             </div>
-                            {/* 숙소이름 및 가격 안내부분 */}
                             <div className="textBox">
                                 <div className="titleBox">
                                     <h6>{data.title}</h6>
                                 </div>
-                            <div className="addressAndPriceBox">
-                                <span className="address">{data.address}</span>
-                                <span className="price">{data.dayPrice}</span>
+                                <div className="addressAndPriceBox">
+                                    <span className="address">{data.address}</span>
+                                    <span className="price">{data.dayPrice}</span>
+                                </div>
+                                <div className="ResevateButton">예약하기</div>
                             </div>
-                            <div className="ResevateButton">예약하기</div>
-                        </div>
-                    </Link>
-                </div>
+                        </Link>
+                    </div>
                 )
             ) : (
                 <div className="emptyState">
@@ -166,7 +173,13 @@ const WishItemContents = () => {
                     <button>닫기</button>
                 </div>
             )}
-
+            {showModal && (
+                <Modal
+                    message="위시리스트에서 제거하시겠습니까?"
+                    onConfirm={handleConfirmRemove}
+                    onCancel={handleCancelRemove}
+                />
+            )}
         </S.ContentBox>
     );
 };

@@ -15,9 +15,8 @@ S.PageTitle = styled.h1`
     color : ${theme.PALETTE.black};
     font-size: 28px;
     font-weight: bold;
-    position: absolute; /* 절대 위치 지정 */
-    top: 1px; /* 위에서 50px */
-    left: 60px; /* 왼쪽에서 50px */
+    margin-top: 40px;
+    margin-left: 60px;
 `
 
 /* 숙소카드 1개 */
