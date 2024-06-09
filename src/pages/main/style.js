@@ -1,11 +1,10 @@
 import { styled } from 'styled-components';
 import theme from '../../global/theme';
-
 const S = {}
 const PALETTE = theme.PALETTE;
 
 S.MainContainer = styled.div`
-    height: 200vh;
+    position: relative;
     /* 배너 스타일 */
     & .bannerContainer{
         /* 슬라이드 스타일 */
@@ -15,6 +14,7 @@ S.MainContainer = styled.div`
             display: flex;
             justify-content: center;
             align-items: center;
+            filter: brightness(0.65);
             & img{
                 width: 100%;
                 user-select: none;
@@ -74,6 +74,101 @@ S.MainContainer = styled.div`
             stroke-dashoffset: calc(125.6px * (1 - var(--progress)));
             stroke-dasharray: 125.6;
             transform: rotate(-90deg);
+        }
+    }
+`
+S.TextBannerBox = styled.div`
+    @import url('https://fonts.googleapis.com/css2?family=Cinzel:wght@400..900&display=swap');
+    position: absolute;
+    top: 0;
+    left: 0;
+    z-index: 1;
+    width: 100%;
+    & div:first-child{
+        position: absolute;
+        left: 50%;
+        transform: translate(-50%, 155px);
+        width: 700px;
+        overflow: hidden;
+        height: 100px;
+        text-align: center;
+        & span{
+            font-family: "Cinzel", serif !important;
+            font-size: 80px;
+            color: #fff;
+            font-weight: 600;
+            text-shadow: 0 0 20px rgba(255, 255, 255, 0.5);
+            transform: translateY(100px);
+            position: relative;
+            display: inline-block;
+            animation-name: headlineAnimation;
+            animation-duration: 1.5s;
+            animation-delay: 1.5s;
+            animation-fill-mode: forwards;
+        }
+    }
+    & hr{
+        width: 0%;
+        height: 1px;
+        display: block;
+        border: none;
+        background-color: #fff;
+        position: absolute;
+        left: 50%;
+        transform: translate(-50%, 255px);
+        box-shadow: 0 0 10px rgba(255, 255, 255, 0.5);
+        animation-name: hrAnimation;
+        animation-duration: 1s;
+        animation-delay: 0.5s;
+        animation-fill-mode: forwards;
+    }
+    & div:last-child{
+        position: absolute;
+        left: 50%;
+        transform: translate(-50%, 256px);
+        width: max-content;
+        overflow: hidden;
+        height: 35px;
+        & p{
+            font-family: "Cinzel", serif !important;
+            font-size: 10px;
+            letter-spacing: 22px;
+            font-weight: 600;
+            text-transform: uppercase;
+            text-shadow: 0 0 5px rgba(255, 255, 255, 0.5);
+            color: #fff;
+            transform: translateY(-12px);
+            animation-name: pAnimation;
+            animation-duration: 1.5s;
+            animation-delay: 1.5s;
+            animation-fill-mode: forwards;
+            & span{
+                letter-spacing: 0;
+            }
+        }
+    }
+    @keyframes headlineAnimation{
+        0%{
+            transform: translateY(100px);
+        }
+        100%{
+            transform: translateY(0);
+        }
+    }
+    @keyframes hrAnimation{
+        0%{
+            width: 0%;
+        }
+        100%{
+            width: 60%;
+        }
+    }
+    @keyframes pAnimation{
+        0%{
+            transform: translateY(-12px);
+        }
+        100%{
+            transform: translateY(22px);
         }
     }
 `
@@ -414,6 +509,7 @@ S.CategoryContentBox = styled.div`
     justify-content: flex-start;
     align-items: flex-start;
     flex-wrap: wrap;
+    min-height: 720px;
     & .content{
         width: 50%;
         padding: 10px;
