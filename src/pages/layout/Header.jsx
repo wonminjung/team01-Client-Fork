@@ -8,7 +8,7 @@ const Header = () => {
     return (
         <S.Header>
             <Link to={"/"}>
-                <S.Logo>Logo</S.Logo>
+                <S.Logo><img src='./images/pages/layout/logo.svg' alt='eggbnb'/></S.Logo>
             </Link>
             <SearchBox />
             <UserMenu />

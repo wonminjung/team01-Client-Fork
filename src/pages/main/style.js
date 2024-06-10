@@ -1,11 +1,10 @@
 import { styled } from 'styled-components';
 import theme from '../../global/theme';
-
 const S = {}
 const PALETTE = theme.PALETTE;
 
 S.MainContainer = styled.div`
-    height: 200vh;
+    position: relative;
     /* 배너 스타일 */
     & .bannerContainer{
         /* 슬라이드 스타일 */
@@ -15,6 +14,7 @@ S.MainContainer = styled.div`
             display: flex;
             justify-content: center;
             align-items: center;
+            filter: brightness(0.65);
             & img{
                 width: 100%;
                 user-select: none;
@@ -74,6 +74,101 @@ S.MainContainer = styled.div`
             stroke-dashoffset: calc(125.6px * (1 - var(--progress)));
             stroke-dasharray: 125.6;
             transform: rotate(-90deg);
+        }
+    }
+`
+S.TextBannerBox = styled.div`
+    @import url('https://fonts.googleapis.com/css2?family=Cinzel:wght@400..900&display=swap');
+    position: absolute;
+    top: 0;
+    left: 0;
+    z-index: 1;
+    width: 100%;
+    & div:first-child{
+        position: absolute;
+        left: 50%;
+        transform: translate(-50%, 155px);
+        width: 700px;
+        overflow: hidden;
+        height: 100px;
+        text-align: center;
+        & span{
+            font-family: "Cinzel", serif !important;
+            font-size: 80px;
+            color: #fff;
+            font-weight: 600;
+            text-shadow: 0 0 20px rgba(255, 255, 255, 0.5);
+            transform: translateY(100px);
+            position: relative;
+            display: inline-block;
+            animation-name: headlineAnimation;
+            animation-duration: 1.5s;
+            animation-delay: 1.5s;
+            animation-fill-mode: forwards;
+        }
+    }
+    & hr{
+        width: 0%;
+        height: 1px;
+        display: block;
+        border: none;
+        background-color: #fff;
+        position: absolute;
+        left: 50%;
+        transform: translate(-50%, 255px);
+        box-shadow: 0 0 10px rgba(255, 255, 255, 0.5);
+        animation-name: hrAnimation;
+        animation-duration: 1s;
+        animation-delay: 0.5s;
+        animation-fill-mode: forwards;
+    }
+    & div:last-child{
+        position: absolute;
+        left: 50%;
+        transform: translate(-50%, 256px);
+        width: max-content;
+        overflow: hidden;
+        height: 35px;
+        & p{
+            font-family: "Cinzel", serif !important;
+            font-size: 10px;
+            letter-spacing: 22px;
+            font-weight: 600;
+            text-transform: uppercase;
+            text-shadow: 0 0 5px rgba(255, 255, 255, 0.5);
+            color: #fff;
+            transform: translateY(-12px);
+            animation-name: pAnimation;
+            animation-duration: 1.5s;
+            animation-delay: 1.5s;
+            animation-fill-mode: forwards;
+            & span{
+                letter-spacing: 0;
+            }
+        }
+    }
+    @keyframes headlineAnimation{
+        0%{
+            transform: translateY(100px);
+        }
+        100%{
+            transform: translateY(0);
+        }
+    }
+    @keyframes hrAnimation{
+        0%{
+            width: 0%;
+        }
+        100%{
+            width: 60%;
+        }
+    }
+    @keyframes pAnimation{
+        0%{
+            transform: translateY(-12px);
+        }
+        100%{
+            transform: translateY(22px);
         }
     }
 `
@@ -220,16 +315,26 @@ S.CategoryContainer = styled.div`
         }
         & .filterListBox{
             padding: 20px 15px 15px;
+            height: calc(100vh - 414px);
+            overflow-y: scroll;
+            &::-webkit-scrollbar{
+                width: 6px;
+            }
+            &::-webkit-scrollbar-thumb{
+                background: ${PALETTE.yellow};
+                border-radius: 3px;
+            }
             & .priceFilter{
                 display: flex;
                 align-items: center;
                 justify-content: center;
                 flex-direction: column;
+                padding-bottom: 35px;
                 & h6{
                     width: 100%;
                     font-size: 20px;
                     font-weight: bold;
-                    margin-bottom: 30px;
+                    margin-bottom: 40px;
                 }
                 & .range-slider{
                     height: 5px;
@@ -262,20 +367,100 @@ S.CategoryContainer = styled.div`
                     width: 400px;
                     justify-content: space-between;
                     align-items: center;
+                    &>div{
+                        position: relative;
+                        display: flex;
+                        flex-direction: column;
+                        &::before{
+                            content: '￦';
+                            position: absolute;
+                            left: 5px;
+                            top: 24px;
+                            z-index: 1;
+                            font-size: 14px;
+                            color: ${PALETTE.gray[300]};
+                        }
+                        & span{
+                            font-size: 14px;
+                            display: inline-block;
+                            height: 22px;
+                        }
+                    }
                     & input{
                         width: 140px;
                         border: none;
                         outline: none;
                         font-size: 16px;
                         border-bottom: 1px solid ${PALETTE.gray[200]};
-                        padding: 0 0 5px 30px;
+                        padding: 0 0 5px 25px;
+                        letter-spacing: 1px;
                         color: ${PALETTE.black};
                         font-weight: bold;
                         position: relative;
+                        color: ${PALETTE.yellow};
                     }
                 }
             }
-            & .roomFilter{}
+            & .roomFilter{
+                & h6{
+                    width: 100%;
+                    font-size: 20px;
+                    font-weight: bold;
+                    margin-bottom: 30px;
+                }
+                & .filterList{
+                    & ul{
+                        & li{
+                            margin-bottom: 20px;
+                            & p{
+                                display: flex;
+                                align-items: center;
+                                margin-bottom: 10px;
+                                color: ${PALETTE.black};
+                                & svg{
+                                    margin-right: 5px;
+                                    font-size: 16px;
+                                    & path{
+                                        fill: ${PALETTE.yellow}
+                                    }
+                                }
+                            }
+                            & .numberBtnBox{
+                                display: flex;
+                                justify-content: space-between;
+                                align-items: center;
+                                width: 100%;
+                                & input[type=radio]{
+                                    appearance: none;
+                                    display: flex;
+                                    justify-content: center;
+                                    align-items: center;
+                                    background-color: #fff;
+                                    border: 1px solid ${PALETTE.gray[200]};
+                                    padding: 10px 0;
+                                    width: 60px;
+                                    border-radius: 8px;
+                                    cursor: pointer;
+                                    font-size: 14px;
+                                    transition: 0.2s;
+                                    &::before{
+                                        content: attr(label);
+                                        color: ${PALETTE.gray[300]};
+                                        transition: 0.2s;
+                                    }
+                                }
+                                & input[type=radio]:checked{
+                                    border: 1px solid ${PALETTE.yellow};
+                                    background-color: ${PALETTE.yellow};
+                                    &::before{
+                                        color: #fff;
+                                    }
+                                }
+                            }
+                        }
+                    }
+                }
+            }
         }
         & .bottomBox{
             display: flex;
@@ -324,10 +509,12 @@ S.CategoryContentBox = styled.div`
     justify-content: flex-start;
     align-items: flex-start;
     flex-wrap: wrap;
+    min-height: 720px;
     & .content{
         width: 50%;
         padding: 10px;
         transition: 0.3s;
+        position: relative;
         &:hover{
             transform: scale(1.02);
         }
@@ -434,6 +621,30 @@ S.CategoryContentBox = styled.div`
                     font-size: 12px;
                     font-weight: bold;
                 }
+            }
+        }
+        & .emptyHeartBtn{
+            position: absolute;
+            top: 34px;
+            right: 34px;
+            z-index: 1;
+            color: #fff;
+            filter: drop-shadow(0px 0px 3px #F2AC29);
+            background-color: transparent;
+            border: 0;
+            width: 25px;
+            height: 25px;
+            cursor: pointer;
+            & svg{
+                font-size: 25px;
+            }
+        }
+        &>div{
+            & button{
+                position: absolute;
+                top: 0;
+                right: 10px;
+                z-index: 1;
             }
         }
     }
