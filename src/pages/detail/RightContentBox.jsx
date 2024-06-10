@@ -2,8 +2,9 @@ import React from 'react';
 import S from './style';
 import BasicButton from '../../components/button/BasicButton';
 import { useNavigate } from 'react-router-dom';
+import PopupBox2 from './PopupBox2';
 
-const RightContentBox = ({dayPrice, cleanVat}) => {
+const RightContentBox = ({id,dayPrice,cleanVat}) => {
     const restDay = 2;
     const sub = Math.round((dayPrice * restDay) + cleanVat);
     const serviceVat = sub * 0.1;
@@ -14,9 +15,10 @@ const RightContentBox = ({dayPrice, cleanVat}) => {
         return result;
     }
     const reserveBtn = () => {
-        navigate(`/reservation?dayPrice=${dayPrice}&total=${total}`);
+        navigate(`/reservation?content=${id}&sdate=2024.06.11&edate=2024.06.13&guest=2&child=1`);
     }
     return (
+        <>
         <S.RightBox>
             <div className="rightBox">
                 <div className="dayPriceBox">
@@ -52,6 +54,8 @@ const RightContentBox = ({dayPrice, cleanVat}) => {
                 <BasicButton className="reserveBtn" onClick={reserveBtn}>예약하기</BasicButton>
             </div>
         </S.RightBox>
+        <PopupBox2 />
+        </>
     );
 };
 

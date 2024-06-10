@@ -48,6 +48,146 @@ S.DetailWrapper = styled.div`
             border-radius: 20px;
         }
     }
+    & .reviewContainer{
+        display: none;
+        width: 100%;
+        position: fixed;
+        top: 0;
+        left: 0;
+        height: 100vh;
+        z-index: 1000;
+        & .reviewBackground{
+            position: absolute;
+            width: 100%;
+            height: 100%;
+            top: 0;
+            left: 0;
+            background: rgba(0, 0, 0, 0.5);
+        }
+        & .reviewBox{
+            position: absolute;
+            width: 80%;
+            top: 50%;
+            left: 50%;
+            transform: translate(-50%, -50%);
+            max-width: 800px;
+            height: calc(100vh - 200px);
+            background-color: #fff;
+            border-radius: 20px;
+            & .reviewTop{
+                text-align: center;
+                position: relative;
+                border-bottom: 1px solid ${PALETTE.gray[200]};
+                & button{
+                    position: absolute;
+                    top: 0;
+                    left: 0;
+                    width: 60px;
+                    height: 60px;
+                    border: none;
+                    background-color: transparent;
+                    cursor: pointer;
+                    & svg{
+                        font-size: 20px;
+                    }
+                }
+                & h6{
+                    font-size: 20px;
+                    font-weight: bold;
+                    height: 60px;
+                    display: flex;
+                    justify-content: center;
+                    align-items: center;
+                    margin: 0;
+                }
+            }
+            & .reviewContent{
+                display: flex;
+                height: calc(100% - 61px);
+                & .contentLeft{
+                    width: 300px;
+                    display: flex;
+                    flex-direction: column;
+                    padding: 30px;
+                    overflow-y: scroll;
+                    & .reviewAvrStarBox{
+                        font-size: 60px;
+                        font-weight: bold;
+                        text-align: center;
+                        padding: 15px 0 40px 0;
+                    }
+                    & div:last-child{
+                        padding: 0;
+                        border: 0;
+                        &>ul{
+                            display: flex;
+                            flex-direction: column;
+                            & li{
+                                width: 100%;
+                                border-bottom: 1px solid ${PALETTE.gray[200]};
+                                padding: 10px 0;
+                                &:first-of-type{
+                                    border: none;
+                                    margin-bottom: 20px;
+                                    &>div{
+                                        height: 122px;
+                                        flex-direction: column;
+                                        align-items: flex-start;
+                                        justify-content: space-between;
+                                    }
+                                    & p{
+                                        order: unset;
+                                        padding: 0;
+                                    }
+                                }
+                                &:last-of-type{
+                                    border: 0;
+                                }
+                                &::after{
+                                    display: none;
+                                }
+                                &>div{
+                                    height: inherit;
+                                    flex-direction: row;
+                                    align-items: center;
+                                    justify-content: flex-start;
+                                    & p{
+                                        order: 1;
+                                        width: calc(100% - 64px);
+                                        padding-left: 10px;
+                                    }
+                                    & h3{
+                                        order: 2;
+                                        font-size: 18px;
+                                        width: 40px;
+                                        text-align: right;
+                                    }
+                                    & img{
+                                        order: 0;
+                                        width: 24px;
+                                    }
+                                    & p{
+                                        font-weight: bold;
+                                    }
+                                    & .barContainer{
+                                        width: calc(100% - 15px);
+                                    }
+                                    &>div{
+                                        padding: 0;
+                                    }
+                                }
+                            }
+                        }
+                    }
+                }
+                & .contentRight{
+                    width: calc(100% - 300px);
+                    height: 100%;
+                    overflow-y: scroll;
+                }
+            }
+        }
+    }
 `
 /* 디테일 상세박스 디자인 */
 S.DetailContentBox = styled.div`

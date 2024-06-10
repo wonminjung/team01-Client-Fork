@@ -25,7 +25,7 @@ const UserMenu = () => {
         <S.UserMenu ref={menuRef} onClick={setUserMenu}>
             <div><FontAwesomeIcon icon={faBars} /></div>
             <div><FontAwesomeIcon icon={faCircleUser} /></div>
-            <PopupBox4 menuState={menuState} setMenuState={setMenuState} ref={menuListRef}/>
+            <PopupBox4 menuState={menuState} ref={menuListRef}/>
         </S.UserMenu>
     );
 };
