@@ -3,6 +3,7 @@ import S from './style';
 import Banner from './MainBanner';
 import Category from './CategorySlider';
 import CategoryContents from './CategoryContents';
+import TextBanner from './TextBanner';
 
 const Main = () => {
     
@@ -45,6 +46,7 @@ const Main = () => {
     return (
         <S.MainContainer>
             <Banner />
+            <TextBanner />
             <S.CategoryContainer>
                 <Category />
             </S.CategoryContainer>
