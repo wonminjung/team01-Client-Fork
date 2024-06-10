@@ -6,7 +6,9 @@ import 'swiper/css/navigation';
 
 import { Navigation } from 'swiper/modules';
 import FilterBox from './FilterBox';
-import { useNavigate, useSearchParams } from 'react-router-dom';
+import { createSearchParams, useNavigate, useSearchParams } from 'react-router-dom';
+import FilterModal from './FilterModal';
+import { useState } from 'react';
 
 export default function Category(){
   const category = [
@@ -112,12 +114,41 @@ export default function Category(){
       tag: "스키"
     }
   ]
-  const [searchParams, setSearchParams] = useSearchParams('?cate=coolPool');
-  const getKey = searchParams.get('cate');
+  const [searchParams] = useSearchParams('?cate=coolPool&lPrice=0&gPrice=1000000&maxUser=0&bedroom=0&bed=0&bathroom=0');
+  const getKey = searchParams.get('cate'); // 카테고리 params 가져오기
+  const getPrice = [searchParams.get("lPrice"),searchParams.get("gPrice")]; // 가격범위 params 가져오기
+  const getMaxUser = searchParams.get("maxUser"); // 최대인원 params 가져오기
+  const getBedroom = searchParams.get("bedroom"); // 침실 params 가져오기
+  const getBed = searchParams.get("bed"); // 침대 params 가져오기
+  const getBathroom = searchParams.get("bathroom"); // 욕실 params 가져오기
   const navigate = useNavigate();
   const setCur = category.filter((cate)=>cate.cate === getKey)[0].id - 1;
   const selectSlide = (nav) => {
-    navigate(`/?cate=${nav}`);
+    // 카테고리만 변경하고 필터값은 바꾸지않음
+    const params = {cate : nav, lPrice : getPrice[0], gPrice: getPrice[1], maxUser: getMaxUser, bedroom: getBedroom, bed: getBed, bathroom: getBathroom}
+    navigate({
+      pathname : '/',
+      search : `?${createSearchParams(params)}`
+    })
+  }
+  let scrollY = "";
+  const [modalOpen,setModalOpen] = useState(false);
+  const modalOnOff = () => {
+      setModalOpen(modalOpen? false : true);
+      if(!modalOpen){
+        scrollY = window.scrollY;
+        document.body.style.position = "fixed";
+        document.body.style.top = "-"+scrollY+"px";
+        document.body.style.overflowY = "scroll";
+        document.body.style.width = "100%";
+      }else{
+        let offset = document.body.style.top;
+        document.body.style.position = "unset";
+        document.body.style.top = "unset";
+        document.body.style.overflowY = "unset";
+        document.body.style.width = "unset";
+        window.scrollTo(0, offset.slice(0,-2) * -1);
+      }
   }
   return (
     <>
@@ -142,8 +173,8 @@ export default function Category(){
           </SwiperSlide>
         )}
       </Swiper>
-      <FilterBox />
+      <FilterBox modalOnOff={modalOnOff}/>
+      <FilterModal modalOpen={modalOpen} modalOnOff={modalOnOff}/>
     </>
-    
   );
 };

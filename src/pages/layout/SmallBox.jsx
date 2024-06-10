@@ -2,20 +2,19 @@ import React from 'react';
 import S from './style';
 import { FontAwesomeIcon } from '@fortawesome/react-fontawesome';
 import { faMagnifyingGlass } from '@fortawesome/free-solid-svg-icons';
-import { Link } from 'react-router-dom';
 
-const SmallBox = () => {
+const SmallBox = ({smallSearchClickEvent}) => {
     return (
         <div className="smallBox">
-            <div><button>장소선택</button></div>
+            <div><button type='button' onClick={smallSearchClickEvent}>장소선택</button></div>
             <span></span>
-            <div><button>날짜선택</button></div>
+            <div><button type='button' onClick={smallSearchClickEvent}>날짜선택</button></div>
             <span></span>
-            <div><button>게스트 추가</button></div>
+            <div><button type='button' onClick={smallSearchClickEvent}>게스트 추가</button></div>
             <S.SearchBtn>
-                <Link to={"/search"}>
+                <div className='searchBtn' onClick={smallSearchClickEvent}>
                     <FontAwesomeIcon icon={faMagnifyingGlass} />
-                </Link>
+                </div>
             </S.SearchBtn>
         </div>
     );
