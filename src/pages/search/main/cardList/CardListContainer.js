@@ -702,7 +702,7 @@ const CardListContainer = () => {
 
                 <S.CardListsWrapper>
                     {
-                        cardLists.map((cardList, i) => (
+                        cardLists && cardLists.map((cardList, i) => (
                             <CardListComponents key={i} cardList={cardList}/>
                         ))
                     }

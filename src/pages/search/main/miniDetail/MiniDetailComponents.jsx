@@ -129,8 +129,6 @@ const MiniDetailComponents = () => {
         ]
     };
 
-
-
     const [ isMoreCheck, setMoreCheck ] = useState(false);
     const moreCheckHandle = () => {
         setMoreCheck(!isMoreCheck);
@@ -156,11 +154,11 @@ const MiniDetailComponents = () => {
                 <S.OverviewContainer>
                     <S.SectionContainer>
                         <S.SectionTitle>
-                            {contentData.title} 전체
+                            {contentData && contentData.title} 전체
                         </S.SectionTitle>
                         <S.OverviewList>
                             {
-                                contentData.roomData.map((data, i) => (
+                                contentData && contentData.roomData.map((data, i) => (
                                     <li key={i}>
                                         <span>
                                             <img src={data.iconUrl} alt="이미지" />
@@ -197,7 +195,7 @@ const MiniDetailComponents = () => {
                         </S.SectionTitle>
                         <S.OverviewAmenities>
                             {
-                                contentData.amenities.map((data, i) => (
+                                contentData && contentData.amenities.map((data, i) => (
                                     <li key={i}>
                                         <span>
                                             <img src={data.iconUrl} alt="이미지" />
