@@ -151,7 +151,7 @@ S.SearchWrapper = styled.div`
                 width: 141px;
                 position: relative;
             }
-            &.guestBox{
+            &.guestsBox{
                 width: 226px;
                 position: relative;
             }
@@ -247,7 +247,7 @@ S.SearchWrapper = styled.div`
                     }
                 }
             }
-            &.guest{
+            &.guests{
                 display: block;
                 right: 0px;
                 & .content{

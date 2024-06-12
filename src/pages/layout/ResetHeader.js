@@ -7,6 +7,7 @@ const ResetHeader = () => {
         const search = document.querySelector("#searchBox");
         header.style.position = "sticky";
         search.classList.remove("big","down","ldown");
+        window.scrollTo({ top: 0, behavior: "instant" });
     })
     return ;
 };

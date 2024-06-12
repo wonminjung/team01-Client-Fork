@@ -1,9 +1,9 @@
 import { faXmark } from '@fortawesome/free-solid-svg-icons';
 import { FontAwesomeIcon } from '@fortawesome/react-fontawesome';
-import React from 'react';
+import React, { useState } from 'react';
 import DetailGradeBox from './DetailGradeBox';
 
-const PopupBox1 = ({content,commentData,popup1State,setpopup1State}) => {
+const PopupBox1 = ({content,commentData,allUserData,popup1State,setpopup1State}) => {
     const starAvr = () => {
         let number = 0;
         for(let i = 0; i < commentData.length; i++){
@@ -21,6 +21,16 @@ const PopupBox1 = ({content,commentData,popup1State,setpopup1State}) => {
         document.body.style.width = "unset";
         window.scrollTo(0, offset.slice(0,-2) * -1);
     }
+    const [sortText, setSortText] = useState("최신순")
+    const [sortBoxState, setSortBoxState] = useState(false);
+    const openSort = () => {
+        setSortBoxState(sortBoxState? false:true);
+    }
+    const setSort = (e) => {
+        const text = e.target.innerText
+        setSortText(text)
+        setSortBoxState(false);
+    }
     return (
         <div className='reviewContainer' style={{display : popup1State? "block":"none"}}>
             <div className="reviewBackground" onClick={closePopup1}></div>
@@ -34,7 +44,44 @@ const PopupBox1 = ({content,commentData,popup1State,setpopup1State}) => {
                         <div className="reviewAvrStarBox">{commentData.length === 0? 0 : starAvr()}</div>
                         <DetailGradeBox comment={commentData}/>
                     </div>
-                    <div className="contentRight"></div>
+                    <div className="contentRight">
+                        <div className="rightTop">
+                            <h6>후기 : {commentData.length}개</h6>
+                            <button type='button' className={`sortBtn ${sortBoxState? "active": ""}`} onClick={openSort}>{sortText}</button>
+                            <div className='sortBox' style={{display : sortBoxState? "block":"none"}}>
+                                <ul>
+                                    <li><button type='button' onClick={setSort}>최신순</button></li>
+                                    <li><button type='button' onClick={setSort}>평점높은순</button></li>
+                                    <li><button type='button' onClick={setSort}>평점낮은순</button></li>
+                                </ul>
+                            </div>
+                        </div>
+                        <div className="rightContent">
+                            {commentData.sort((a,b)=>
+                                // 최신순 정렬
+                                sortText==="최신순"? new Date(b.date) - new Date(a.date):
+                                // 평점높은순 정렬
+                                sortText === "평점높은순"? b.star - a.star:
+                                // 평점낮은순 정렬
+                                a.star - b.star
+                            ).map((comment,i)=>
+                                <div className="userComment" key={i}>
+                                    <div className="commentTop">
+                                        <div className="commentTL">
+                                            <div className="userProfileImg"><img src={allUserData.filter((user)=>user.userId===comment.userId)[0].profileImg} alt={`userProfileImg${i+1}`} /></div>
+                                            <div className="userId">{comment.userId}</div>
+                                        </div>
+                                        <div className="commentTR">
+                                            <span className='starBox'>
+                                                <span className="star" style={{width: `${comment.star * 20}` + "%"}}></span>
+                                            </span>
+                                        </div>
+                                    </div>
+                                    <div className="commentBody">{comment.body}</div>
+                                </div>
+                            )}
+                        </div>
+                    </div>
                 </div>
             </div>
         </div>

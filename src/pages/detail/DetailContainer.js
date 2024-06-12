@@ -11,7 +11,6 @@ import DetailCommentBox from './DetailCommentBox';
 import DetailMapBox from './DetailMapBox';
 import ScrollEvent from '../layout/ScrollEvent';
 import PopupBox1 from './PopupBox1';
-import PopupBox3 from './PopupBox3';
 
 const DetailContainer = () => {
     ResetHeader();
@@ -618,7 +617,7 @@ const DetailContainer = () => {
                 location : 4.5,
                 priceSatis : 4.5,
             },
-            date : "2024-06-03 16:17:12",
+            date : "2024-06-01 16:17:12",
         },
         {
             id : 2,
@@ -735,8 +734,7 @@ const DetailContainer = () => {
                 <DetailGradeBox comment={comment}/>
                 <DetailCommentBox commentData={comment} userData={user} allUserData={userData} setpopup1State={setpopup1State}/>
                 <DetailMapBox address={content.address}/>
-                <PopupBox1 content={content} commentData={comment} popup1State={popup1State} setpopup1State={setpopup1State}/>
-                <PopupBox3 />
+                <PopupBox1 content={content} commentData={comment} allUserData={userData} popup1State={popup1State} setpopup1State={setpopup1State}/>
             </S.DetailWrapper>
         </S.DetailContainer>
     );

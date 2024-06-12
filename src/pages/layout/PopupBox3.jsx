@@ -2,17 +2,17 @@ import React from 'react';
 import { FontAwesomeIcon } from '@fortawesome/react-fontawesome';
 import { faMinus, faPlus } from '@fortawesome/free-solid-svg-icons';
 
-const PopupBox3 = ({modal3IsOpen,guestState,setGuestState,childState,setChildState}) => {
+const PopupBox3 = ({modal3IsOpen,guestsState,setguestsState,infantsState,setInfantsState}) => {
     const setTwo = () =>{
-        setGuestState(0)
-        setChildState(0)
+        setguestsState(0)
+        setInfantsState(0)
     }
-    const guestMinus = () => {guestState<2? setTwo() : setGuestState(guestState - 1)};
-    const guestPlus = () => {setGuestState(guestState + 1)};
-    const childMinus = () => {childState<1? setChildState(0) : setChildState(childState - 1)};
-    const childPlus = () => {guestState<1? setChildState(0) : setChildState(childState + 1)};
+    const guestsMinus = () => {guestsState<2? setTwo() : setguestsState(guestsState - 1)};
+    const guestsPlus = () => {setguestsState(guestsState + 1)};
+    const infantsMinus = () => {infantsState<1? setInfantsState(0) : setInfantsState(infantsState - 1)};
+    const infantsPlus = () => {guestsState<1? setInfantsState(0) : setInfantsState(infantsState + 1)};
     return (
-        <div className={`popup guest`} style={{display: modal3IsOpen? "block":"none"}}>
+        <div className={`popup guests`} style={{display: modal3IsOpen? "block":"none"}}>
             <div className="content">
                 <ul>
                     <li>
@@ -21,9 +21,9 @@ const PopupBox3 = ({modal3IsOpen,guestState,setGuestState,childState,setChildSta
                             <p>2세 이상</p>
                         </div>
                         <div>
-                            <button type='button' onClick={guestMinus}><FontAwesomeIcon icon={faMinus} /></button>
-                            <span>{guestState}</span>
-                            <button type='button' onClick={guestPlus}><FontAwesomeIcon icon={faPlus} /></button>
+                            <button type='button' onClick={guestsMinus}><FontAwesomeIcon icon={faMinus} /></button>
+                            <span>{guestsState}</span>
+                            <button type='button' onClick={guestsPlus}><FontAwesomeIcon icon={faPlus} /></button>
                         </div>
                     </li>
                     <hr />
@@ -33,9 +33,9 @@ const PopupBox3 = ({modal3IsOpen,guestState,setGuestState,childState,setChildSta
                             <p>2세 미만</p>
                         </div>
                         <div>
-                            <button type='button' onClick={childMinus}><FontAwesomeIcon icon={faMinus} /></button>
-                            <span>{childState}</span>
-                            <button type='button' onClick={childPlus}><FontAwesomeIcon icon={faPlus} /></button>
+                            <button type='button' onClick={infantsMinus}><FontAwesomeIcon icon={faMinus} /></button>
+                            <span>{infantsState}</span>
+                            <button type='button' onClick={infantsPlus}><FontAwesomeIcon icon={faPlus} /></button>
                         </div>
                     </li>
                 </ul>

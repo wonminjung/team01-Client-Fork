@@ -25,11 +25,13 @@ const PopupBox2 = ({modal2IsOpen,setStartDateState,setEndDateState}) => {
         console.log(diff);
         setState([item.selection]);
         setStartDateState(
+            // moment(startday,"YYYY.MM.DD")
             startday.getFullYear() + "." + 
             (startday.getMonth()+1 <9? "0" + (startday.getMonth()+1): (startday.getMonth() + 1) ) + "." +
             (startday.getDate() < 9? "0" + (startday.getDate()) : (startday.getDate()))
         );
         setEndDateState(
+            // moment(endday,"YYYY.MM.DD")
             endday.getFullYear() + "." + 
             (endday.getMonth()+1 <9? "0" + (endday.getMonth()+1): (endday.getMonth() + 1) ) + "." +
             (endday.getDate() < 9? "0" + (endday.getDate()) : (endday.getDate()))
