@@ -666,7 +666,7 @@ const CategoryContents = () => {
             && data.roomData.bathroom >= getBathroom // 최대욕실 조건
             ).map((data,i)=>
                 <div key={i} className="content">
-                    <Link to={`/detail?content=${data.id}`}>
+                    <Link to={`/detail?roomId=${data.id}`}>
                         <div className="imgBox">
                             <Content img={data.img}/>
                         </div>

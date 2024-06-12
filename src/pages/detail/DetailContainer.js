@@ -716,7 +716,7 @@ const DetailContainer = () => {
         }
     ]
     const [searchParams,] = useSearchParams();
-    const contentId = searchParams.get('content');
+    const contentId = searchParams.get('roomId');
     const content = contentData.filter((data)=> data.id === contentId)[0];
     const user = userData.filter((data)=> content.userId === data.userId)[0];
     const comment = commentData.filter((data)=> data.contentId == content.id);
