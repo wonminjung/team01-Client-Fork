@@ -1,4 +1,4 @@
-import React from 'react';
+import React, { useState } from 'react';
 import ResetHeader from '../layout/ResetHeader';
 import S from './style';
 import { useSearchParams } from 'react-router-dom';
@@ -10,6 +10,7 @@ import DetailGradeBox from './DetailGradeBox';
 import DetailCommentBox from './DetailCommentBox';
 import DetailMapBox from './DetailMapBox';
 import ScrollEvent from '../layout/ScrollEvent';
+import PopupBox1 from './PopupBox1';
 
 const DetailContainer = () => {
     ResetHeader();
@@ -519,10 +520,10 @@ const DetailContainer = () => {
             address : "춘천/서면",
             dayPrice : 250000,
             roomData : {
-                maxUser : 6,
-                bedroom : 2,
-                bed : 2,
-                bathroom : 2
+                maxUser : 2,
+                bedroom : 4,
+                bed : 3,
+                bathroom : 4
             },
             description : "예약 전 숙소 이용 안내 및 이용 수칙을 반드시 읽어주세요.\n\n'일상에서 벗어난 단 하루, 나만의 은신처에서 온전한 휴식을…'\n\n'호젓한 은신처'를 의미하는 '호은'.\n\n양평의 한적한 시골마을에 위치한 자연친화적 독채 스테이입니다.\n\n거실의 커다란 통창은 아름다운 자연 경관을 한폭의 그림처럼 담아 냅니다. 통창 앞으로는 온 가족이 둘러앉을 수 있는 넉넉한 ",
             convenience : [
@@ -616,7 +617,7 @@ const DetailContainer = () => {
                 location : 4.5,
                 priceSatis : 4.5,
             },
-            date : "2024-06-03 16:17:12",
+            date : "2024-06-01 16:17:12",
         },
         {
             id : 2,
@@ -679,6 +680,7 @@ const DetailContainer = () => {
                 zipcode : "92998-3874",
             },
             phone : "010-1234-1234",
+            wishList : [1,2,3]
         },
         {
             id : 2,
@@ -694,6 +696,7 @@ const DetailContainer = () => {
                 zipcode : "92998-3874",
             },
             phone : "010-4321-4321",
+            wishList : [3,6]
         },
         {
             id : 3,
@@ -709,27 +712,29 @@ const DetailContainer = () => {
                 zipcode : "92998-3874",
             },
             phone : "010-1111-1111",
+            wishList : [2,3,5]
         }
     ]
     const [searchParams,] = useSearchParams();
-    const contentId = searchParams.get('content');
+    const contentId = searchParams.get('roomId');
     const content = contentData.filter((data)=> data.id === contentId)[0];
     const user = userData.filter((data)=> content.userId === data.userId)[0];
     const comment = commentData.filter((data)=> data.contentId == content.id);
-    const {img,title,dayPrice,cleanVat} = content;
-    
+    const {id,img,title,dayPrice,cleanVat} = content;
+    const [popup1State, setpopup1State] = useState(false);
     return (
         <S.DetailContainer>
             <S.DetailWrapper>
                 <TitleBox title={title}/>
                 <ImageSlide img={img}/>
                 <S.DetailContentBox>
-                    <LeftContentBox contentData={content} hostData={user} commentData={comment}/>
-                    <RightContentBox dayPrice={dayPrice} cleanVat={cleanVat}/>
+                    <LeftContentBox contentData={content} hostData={user} commentData={comment} setpopup1State={setpopup1State}/>
+                    <RightContentBox id={id} dayPrice={dayPrice} cleanVat={cleanVat}/>
                 </S.DetailContentBox>
                 <DetailGradeBox comment={comment}/>
-                <DetailCommentBox commentData={comment} userData={user} allUserData={userData}/>
+                <DetailCommentBox commentData={comment} userData={user} allUserData={userData} setpopup1State={setpopup1State}/>
                 <DetailMapBox address={content.address}/>
+                <PopupBox1 content={content} commentData={comment} allUserData={userData} popup1State={popup1State} setpopup1State={setpopup1State}/>
             </S.DetailWrapper>
         </S.DetailContainer>
     );

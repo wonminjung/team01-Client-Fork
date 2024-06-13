@@ -3,6 +3,7 @@ import S from './style';
 import Banner from './MainBanner';
 import Category from './CategorySlider';
 import CategoryContents from './CategoryContents';
+import TextBanner from './TextBanner';
 
 const Main = () => {
     
@@ -34,7 +35,9 @@ const Main = () => {
             search.classList.remove("ldown");
             search.classList.add("big","down");
         }
-
+        // 메인 진입시 스크롤 맨 위로 이동
+        window.scrollTo({ top: 0, behavior: "instant" });
+        
         // 스크롤 이벤트
         window.addEventListener("scroll",scrollEvent);
         return ()=>{
@@ -45,6 +48,7 @@ const Main = () => {
     return (
         <S.MainContainer>
             <Banner />
+            <TextBanner />
             <S.CategoryContainer>
                 <Category />
             </S.CategoryContainer>

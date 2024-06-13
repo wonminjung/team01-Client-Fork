@@ -2,9 +2,15 @@ import React from 'react';
 import S from './style';
 import BasicButton from '../../components/button/BasicButton';
 
-const DetailCommentBox = ({commentData,userData,allUserData}) => {
+const DetailCommentBox = ({commentData,allUserData,setpopup1State}) => {
     const allCommentAction = () => {
-        console.log("Click");
+        setpopup1State(true);
+        let scrollY = "";
+        scrollY = window.scrollY;
+        document.body.style.position = "fixed";
+        document.body.style.top = "-"+scrollY+"px";
+        document.body.style.overflowY = "scroll";
+        document.body.style.width = "100%";
     }
     return (
         <S.DetailCommentBox>
