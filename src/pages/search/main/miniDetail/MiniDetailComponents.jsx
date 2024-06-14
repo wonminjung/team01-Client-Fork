@@ -1,6 +1,7 @@
 import React, { useState } from 'react';
 
 import S from './style';
+import KakaoMap from '../../../../components/kakaomap/KakaoMap';
 
 const MiniDetailComponents = () => {
 
@@ -15,7 +16,7 @@ const MiniDetailComponents = () => {
             "./images/pages/search/main/cardList/_1_/eff0a5bc-914a-44bf-b127-cdcf70462d25.jpg", 
         ],
         title : "위드독 독채 풀빌라",
-        address : "충남/태안군",
+        address : "서울 희우정로46",
         dayPrice : "150000",
         roomData : [
             {
@@ -208,6 +209,11 @@ const MiniDetailComponents = () => {
                             }
                         </S.OverviewAmenities>
                     </S.SectionContainer>
+
+                    <S.SectionContainer>
+                        <KakaoMap props={contentData.address}/>
+                    </S.SectionContainer>
+
                 </S.OverviewContainer>
             </S.MarginSideContainer>
         </S.MiniDetailContainer>

@@ -10,13 +10,12 @@ const S = {};
         height: calc(100vh - 180px);
         overflow-y: scroll;
         scrollbar-width: none;
-        
     `;
 
     // 사이드에 margin
     S.MarginSideContainer = styled.div`
         margin: 0 30px;
-        overflow: hidden;        
+        overflow: hidden;
     `;
 
     // 숙소 제목
