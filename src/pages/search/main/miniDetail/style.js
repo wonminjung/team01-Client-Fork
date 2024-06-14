@@ -1,6 +1,7 @@
 import styled, { css } from 'styled-components';
 import theme from '../../../../global/theme';
 import BasicButton from '../../../../components/button/BasicButton';
+import KakaoMap from '../../../../components/kakaomap/KakaoMap';
 
 const S = {};
 
@@ -41,7 +42,6 @@ const S = {};
         & > div {
             border-radius: 20px;
             overflow: hidden;
-            aspect-ratio: 5/4;
             
             &:hover {
                 filter: brightness(0.85);
@@ -53,6 +53,7 @@ const S = {};
                 width: 100%;
                 height: 100%;
                 object-fit: cover;
+                aspect-ratio: 5/4;
             }
             
         }
@@ -61,9 +62,7 @@ const S = {};
         .gridItem-1 {
             grid-column: 1/2;
             grid-row: 1/3;
-            aspect-ratio: inherit;
         }
-
 
     `;
 
@@ -169,6 +168,10 @@ const S = {};
                 
             }
         }
+    `;
+
+    S.MapContainer = styled.div`
+        height: 320px;
     `;
 
 

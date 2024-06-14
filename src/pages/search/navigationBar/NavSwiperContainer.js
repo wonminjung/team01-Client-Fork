@@ -17,7 +17,16 @@ import S from './style';
 
 const NavSwiperContainer = () => {
 
+   // 카테고리 선택 상태
    const [ isNavActivate, setNavActivate ] = useState(0);
+   
+   // 필터버튼 클릭 상태
+   const [ isFilterActivate, setFilterActivate ] = useState(false);
+   // 필터 클릭 함수
+   const handlFilterStatus = () => {
+      console.log(isFilterActivate);
+      setFilterActivate(!isFilterActivate);
+   };
 
    const category = [
       {
@@ -137,10 +146,15 @@ const NavSwiperContainer = () => {
                }
             </S.Swiper>
 
-            <S.FilterButton>
+            <S.FilterButton 
+               className={ isFilterActivate ? "filterOn" : "" }
+               onClick={handlFilterStatus}
+            >
                <FontAwesomeIcon icon={faSliders}/>
                <div>필터</div>
+               <div className={"filterBg"}></div>
             </S.FilterButton>
+
          </S.NavLeftRightPadding>
       </S.NavBfAfContainer>
    );

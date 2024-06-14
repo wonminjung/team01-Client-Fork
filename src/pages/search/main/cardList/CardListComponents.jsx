@@ -8,8 +8,10 @@ import 'swiper/css/pagination';
 
 import { Navigation, Pagination } from 'swiper/modules';
 
-const CardListComponents = ({cardList}) => {
-    const { title, address, imgUrl, price, linkUri } = cardList;
+const CardListComponents = ({ cardList, handleClickEvent, index }) => { 
+    const { title, address, img, dayPrice } = cardList;
+
+    const [ firstAddr, secondAddr ] = address.split(" ");
 
     const swiperOptions = {
         pagination: { dynamicBullets: true },
@@ -18,16 +20,15 @@ const CardListComponents = ({cardList}) => {
         modules: [Navigation, Pagination],
     };
 
-    const priceAsString = price.toLocaleString();
-
-
+    const priceAsString = dayPrice.toLocaleString();
+    
     return (
         // <S.Link to={linkUri}> // 누를 때마다 이동되서 임시로 주석!
-        <S.Link to="#">
+        <S.Link to="#" onClick={() => handleClickEvent(index)}>
             <S.CardListComponentsContainer>
                 <S.Swiper {...swiperOptions}>
                     {
-                        imgUrl.map((img, i) => (
+                        img.map((img, i) => (
                             <S.SwiperSlide key={i}>
                                 <img src={img} alt="숙소 이미지"/>
                             </S.SwiperSlide>
@@ -40,13 +41,15 @@ const CardListComponents = ({cardList}) => {
                         {title}
                     </h6>
                     <S.AddrPrice>
-                        <div>{address.first_addr}/{address.second_addr}</div>
+                        <div>{firstAddr}/{secondAddr}</div>
                         <div>￦{priceAsString}</div>
                     </S.AddrPrice>
                     <S.Reservation>
                         예약하기
                     </S.Reservation>
                 </S.DescriptionSection>
+
+                
             </S.CardListComponentsContainer>
         </S.Link>
     );

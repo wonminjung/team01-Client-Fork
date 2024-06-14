@@ -176,7 +176,7 @@ const S = {};
 
     // 카드리스트 내 이미지 감싸는 컴포넌트
     S.SwiperSlide = styled(SwiperSlide)`
-        aspect-ratio: 5/3;
+        aspect-ratio: 6/4;
         display: flex;
 
         /* 카드리스트 내 이미지 디자인 */
@@ -195,7 +195,7 @@ const S = {};
         &>h6 {
             font-weight: ${theme.FONT_WEIGHT.bold};
             margin-bottom: 13px;
-            font-size: 20px;
+            font-size: 18px;
         }
     `;
 
