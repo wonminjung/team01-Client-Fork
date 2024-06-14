@@ -1,6 +1,5 @@
 import { Swiper, SwiperSlide } from 'swiper/react';
 
-// Import Swiper styles
 import 'swiper/css';
 import 'swiper/css/navigation';
 
@@ -159,6 +158,26 @@ export default function Category(){
         slidesPerGroup={14}
         slidesPerView={14}
         allowTouchMove={false}
+        breakpoints={{
+          500 : {
+            slidesPerView : 5
+          },
+          700 : {
+            slidesPerView : 8
+          },
+          900 : {
+            slidesPerView : 10
+          },
+          1000 : {
+            slidesPerView : 12
+          },
+          1200 : {
+            slidesPerView : 14
+          },
+          1500 : {
+            slidesPerView : 16
+          }
+        }}
       >
         {category.map((cate,i)=>
           <SwiperSlide key={i}>

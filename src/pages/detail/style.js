@@ -48,6 +48,277 @@ S.DetailWrapper = styled.div`
             border-radius: 20px;
         }
     }
+    & .reviewContainer{
+        display: none;
+        width: 100%;
+        position: fixed;
+        top: 0;
+        left: 0;
+        height: 100vh;
+        z-index: 1000;
+        & .reviewBackground{
+            position: absolute;
+            width: 100%;
+            height: 100%;
+            top: 0;
+            left: 0;
+            background: rgba(0, 0, 0, 0.5);
+        }
+        & .reviewBox{
+            position: absolute;
+            width: 80%;
+            top: 50%;
+            left: 50%;
+            transform: translate(-50%, -50%);
+            max-width: 800px;
+            height: calc(100vh - 200px);
+            background-color: #fff;
+            border-radius: 20px;
+            & .reviewTop{
+                text-align: center;
+                position: relative;
+                border-bottom: 1px solid ${PALETTE.gray[200]};
+                & button{
+                    position: absolute;
+                    top: 0;
+                    left: 0;
+                    width: 60px;
+                    height: 60px;
+                    border: none;
+                    background-color: transparent;
+                    cursor: pointer;
+                    & svg{
+                        font-size: 20px;
+                    }
+                }
+                & h6{
+                    font-size: 20px;
+                    font-weight: bold;
+                    height: 60px;
+                    display: flex;
+                    justify-content: center;
+                    align-items: center;
+                    margin: 0;
+                }
+            }
+            & .reviewContent{
+                display: flex;
+                height: calc(100% - 61px);
+                & .contentLeft{
+                    width: 300px;
+                    display: flex;
+                    flex-direction: column;
+                    padding: 30px;
+                    overflow-y: scroll;
+                    &::-webkit-scrollbar{
+                        width: 6px;
+                    }
+                    &::-webkit-scrollbar-thumb{
+                        background: ${PALETTE.yellow};
+                        border-radius: 3px;
+                    }
+                    & .reviewAvrStarBox{
+                        font-size: 60px;
+                        font-weight: bold;
+                        text-align: center;
+                        padding: 15px 0 40px 0;
+                    }
+                    & div:last-child{
+                        padding: 0;
+                        border: 0;
+                        &>ul{
+                            display: flex;
+                            flex-direction: column;
+                            & li{
+                                width: 100%;
+                                border-bottom: 1px solid ${PALETTE.gray[200]};
+                                padding: 10px 0;
+                                &:first-of-type{
+                                    border: none;
+                                    margin-bottom: 20px;
+                                    &>div{
+                                        height: 122px;
+                                        flex-direction: column;
+                                        align-items: flex-start;
+                                        justify-content: space-between;
+                                    }
+                                    & p{
+                                        order: unset;
+                                        padding: 0;
+                                    }
+                                }
+                                &:last-of-type{
+                                    border: 0;
+                                }
+                                &::after{
+                                    display: none;
+                                }
+                                &>div{
+                                    height: inherit;
+                                    flex-direction: row;
+                                    align-items: center;
+                                    justify-content: flex-start;
+                                    & p{
+                                        order: 1;
+                                        width: calc(100% - 64px);
+                                        padding-left: 10px;
+                                    }
+                                    & h3{
+                                        order: 2;
+                                        font-size: 18px;
+                                        width: 40px;
+                                        text-align: right;
+                                    }
+                                    & img{
+                                        order: 0;
+                                        width: 24px;
+                                    }
+                                    & p{
+                                        font-weight: bold;
+                                    }
+                                    & .barContainer{
+                                        width: calc(100% - 15px);
+                                    }
+                                    &>div{
+                                        padding: 0;
+                                    }
+                                }
+                            }
+                        }
+                    }
+                }
+                & .contentRight{
+                    width: calc(100% - 300px);
+                    height: 100%;
+                    overflow-y: scroll;
+                    &::-webkit-scrollbar{
+                        width: 6px;
+                    }
+                    &::-webkit-scrollbar-thumb{
+                        background: ${PALETTE.yellow};
+                        border-radius: 3px;
+                    }
+                    & .rightTop{
+                        display: flex;
+                        justify-content: space-between;
+                        align-items: center;
+                        background-color: #fff;
+                        padding: 30px;
+                        position: -webkit-sticky;
+                        position: sticky;
+                        top: 0;
+                        z-index: 1;
+                        & h6{
+                            font-size: 20px;
+                            font-weight: bold;
+                            color: ${PALETTE.black};
+                        }
+                        & button{
+                            border: 0;
+                            background-color: transparent;
+                            outline: none;
+                        }
+                        & .sortBtn{
+                            border: 1px solid ${PALETTE.gray[200]};
+                            color: ${PALETTE.black};
+                            border-radius: 20px;
+                            padding: 10px 20px;
+                            cursor: pointer;
+                            transition: border-color 0.3s;
+                            &.active{
+                                border-color: ${PALETTE.yellow};
+                            }
+                        }
+                        & .sortBox{
+                            position: absolute;
+                            top: 80px;
+                            right: 30px;
+                            z-index: 1;
+                            & ul{
+                                display: flex;
+                                flex-direction: column;
+                                box-shadow: 0 6px 10px rgba(0,0,0,0.15);
+                                border-radius: 20px;
+                                overflow: hidden;
+                                & li{
+                                    background-color: #fff;
+                                    & button{
+                                        width: 120px;
+                                        padding: 15px 20px;
+                                        text-align: left;
+                                        cursor: pointer;
+                                        transition: 0.3s;
+                                        border-radius: 20px;
+                                        &:hover{
+                                            background-color: ${PALETTE.yellow};
+                                            color: #fff;
+                                        }
+                                    }
+                                }
+                            }
+                        }
+                    }
+                    & .rightContent{
+                        padding: 0 30px;
+                        & .userComment{
+                            padding: 20px 0;
+                            & .commentTop{
+                                display: flex;
+                                justify-content: space-between;
+                                align-items: center;
+                                margin-bottom: 10px;
+                                & .commentTL{
+                                    display: flex;
+                                    align-items: center;
+                                    & .userProfileImg{
+                                        width: 40px;
+                                        height: 40px;
+                                        border-radius: 50%;
+                                        display: flex;
+                                        justify-content: center;
+                                        align-items: center;
+                                        overflow: hidden;
+                                        & img{
+                                            object-fit: cover;
+                                            width: 100%;
+                                            height: inherit;
+                                        }
+                                    }
+                                    & .userId{
+                                        padding-left: 10px;
+                                        font-weight: bold;
+                                        font-size: 16px;
+                                        color: ${PALETTE.black};
+                                    }
+                                }
+                                & .commentTR{
+                                    & .starBox{
+                                        display: inline-block;
+                                        width: 65px;
+                                        aspect-ratio: 5 / 1;
+                                        position: relative;
+                                        clip-path: polygon(0 34%, 7% 34%, 10% 0, 13% 34%, 27% 34%, 30% 0, 33% 34%, 47% 34%, 50% 0, 53% 34%, 67% 34%, 70% 0, 73% 34%, 87% 34%, 90% 0, 93% 34%, 100% 34%, 95% 63%, 97% 100%, 90% 78%, 83% 100%, 85% 63%, 80% 34%, 75% 63%, 77% 100%, 70% 78%, 63% 100%, 65% 63%, 60% 34%, 55% 63%, 57% 100%, 50% 78%, 43% 100%, 45% 63%, 40% 34%, 35% 63%, 37% 100%, 30% 78%, 23% 100%, 25% 63%, 20% 34%, 15% 63%, 17% 100%, 10% 78%, 3% 100%, 5% 63%);
+                                        background-color: ${PALETTE.gray[200]};
+                                        & .star{
+                                            display: block;
+                                            background-color: ${PALETTE.yellow};
+                                            width: 0%;
+                                            height: 100%;
+                                        }
+                                    }
+                                }
+                            }
+                            & .commentBody{
+                                white-space: pre-line;
+                                font-size: 14px;
+                                line-height: 18px;
+                            }
+                        }
+                    }
+                }
+            }
+        }
+    }
 `
 /* 디테일 상세박스 디자인 */
 S.DetailContentBox = styled.div`
@@ -430,8 +701,6 @@ S.RightBox = styled.div`
                     & span{
                         font-size: 12px;
                         color: ${PALETTE.black};
-                        &:first-of-type{}
-                        &:last-of-type{}
                     }
                     &.total{
                         font-weight: bold;
@@ -450,6 +719,80 @@ S.RightBox = styled.div`
         }
         & .reserveBtn{
             width: 100%;
+        }
+        & .checkInOutContainer{
+            position: absolute;
+            top: 140px;
+            right: 30px;
+            border-radius: 20px;
+            box-shadow: 0 6px 10px rgba(0,0,0,0.15);
+            overflow: hidden;
+        }
+        & .guestsPopupBox{
+            position: absolute;
+            top: 185px;
+            right: 30px;
+            box-shadow: 0 6px 10px rgba(0, 0, 0, 0.15);
+            border-radius: 20px;
+            width: 300px;
+            height: fit-content;
+            padding: 15px;
+            cursor: default;
+            background-color: #fff;
+            & .content{
+                padding: 15px 15px 5px;
+                font-weight: 600;
+                font-size: 12px;
+                margin-bottom: 4px;
+                width: 100%;
+                & li{
+                    display: flex;
+                    justify-content: space-between;
+                    align-items: flex-start;
+                    & div:first-child{
+                        & h6{
+                            font-size: 16px;
+                            margin-bottom: 5px;
+                        }
+                        & p{
+                            font-size: 12px;
+                            color: ${PALETTE.gray[300]};
+                            font-weight: 400;
+                        }
+                    }
+                    & div:last-child{
+                        display: flex;
+                        align-items: center;
+                        & button{
+                            border: 1px solid ${PALETTE.gray[300]};
+                            border-radius: 50%;
+                            color: ${PALETTE.gray[300]};
+                            width: 20px;
+                            height: 20px;
+                            font-size: 16px;
+                            display: flex;
+                            justify-content: center;
+                            align-items: center;
+                            background-color: #fff;
+                            cursor: pointer;
+                            &:hover{
+                                border-color: ${PALETTE.yellow};
+                                color: ${PALETTE.yellow};
+                            }
+                        }
+                        & span{
+                            font-size: 16px;
+                            color: ${PALETTE.black};
+                            margin: 0 17px;
+                        }
+                    }
+                }
+                & hr{
+                    border: 0;
+                    border-bottom: 1px solid ${PALETTE.gray[200]};
+                    margin: 12px 0;
+                }
+            }
         }
     }
 `

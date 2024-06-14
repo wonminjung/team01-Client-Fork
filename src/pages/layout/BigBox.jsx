@@ -18,8 +18,8 @@ const BigBox = React.forwardRef((_,ref) => {
     const [modal3IsOpen, setModal3IsOpen] = useState(false);
     const [startDateState, setStartDateState] = useState("날짜 추가");
     const [endDateState, setEndDateState] = useState("날짜 추가");
-    const [guestState,setGuestState] = useState(0);
-    const [childState,setChildState] = useState(0);
+    const [guestsState,setguestsState] = useState(0);
+    const [infantsState,setInfantsState] = useState(0);
     const clickSearch = () => {
         setModalIsOpen(false)
         setModal2IsOpen(false)
@@ -28,7 +28,7 @@ const BigBox = React.forwardRef((_,ref) => {
     const navigate = useNavigate();
     const searchSubmit = (e) => {
         e.preventDefault()
-        navigate(`/search?${inputValue===""? "": `val=${inputValue}`}${startDateState==="날짜 추가"? "":`&sdate=${startDateState}&edate=${endDateState}`}${guestState<1? "":`&guest=${guestState}&child=${childState}`}`)
+        navigate(`/search?${inputValue===""? "": `val=${inputValue}`}${startDateState==="날짜 추가"? "":`&sdate=${startDateState}&edate=${endDateState}`}${guestsState<1? "":`&guests=${guestsState}&infants=${infantsState}`}`)
     }
     useEffect(() => {
         const handleOutsideClose = (e) => {
@@ -58,15 +58,15 @@ const BigBox = React.forwardRef((_,ref) => {
                     <div>{endDateState}</div>
                 </div>
                 <span></span>
-                <div className='guestBox' onClick={()=>{setModalIsOpen(false);setModal2IsOpen(false);setModal3IsOpen(true);}}>
+                <div className='guestsBox' onClick={()=>{setModalIsOpen(false);setModal2IsOpen(false);setModal3IsOpen(true);}}>
                     <div>여행자</div>
-                    <div>{guestState>0? `게스트 : ${guestState}명${childState>0? `, 유아 : ${childState}명`: ""}`: "게스트 추가"}</div>
+                    <div>{guestsState>0? `게스트 : ${guestsState}명${infantsState>0? `, 유아 : ${infantsState}명`: ""}`: "게스트 추가"}</div>
                 </div>
                 <PopupBox setModalIsOpen={setModalIsOpen} setInputValue={setInputValue} ref={inputRef} modalIsOpen={modalIsOpen}/>
                 <PopupBox2 modal2IsOpen={modal2IsOpen} setStartDateState={setStartDateState} setEndDateState={setEndDateState}/>
-                <PopupBox3 modal3IsOpen={modal3IsOpen} guestState={guestState} setGuestState={setGuestState} childState={childState} setChildState={setChildState}/>
+                <PopupBox3 modal3IsOpen={modal3IsOpen} guestsState={guestsState} setguestsState={setguestsState} infantsState={infantsState} setInfantsState={setInfantsState}/>
                 <S.SearchBtn>
-                    <Link className='searchBtn' onClick={clickSearch} to={`/search?${inputValue===""? "": `val=${inputValue}`}${startDateState==="날짜 추가"? "":`&sdate=${startDateState}&edate=${endDateState}`}${guestState<1? "":`&guest=${guestState}&child=${childState}`}`}>
+                    <Link className='searchBtn' onClick={clickSearch} to={`/search?${inputValue===""? "": `val=${inputValue}`}${startDateState==="날짜 추가"? "":`&sdate=${startDateState}&edate=${endDateState}`}${guestsState<1? "":`&guests=${guestsState}&infants=${infantsState}`}`}>
                         <FontAwesomeIcon icon={faMagnifyingGlass} />
                     </Link>
                 </S.SearchBtn>
