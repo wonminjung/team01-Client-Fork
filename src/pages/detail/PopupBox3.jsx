@@ -1,18 +1,14 @@
-import React from 'react';
-import { FontAwesomeIcon } from '@fortawesome/react-fontawesome';
 import { faMinus, faPlus } from '@fortawesome/free-solid-svg-icons';
+import { FontAwesomeIcon } from '@fortawesome/react-fontawesome';
+import React from 'react';
 
-const PopupBox3 = ({modal3IsOpen,guestsState,setguestsState,infantsState,setInfantsState}) => {
-    const setTwo = () =>{
-        setguestsState(0)
-        setInfantsState(0)
-    }
-    const guestsMinus = () => {guestsState<2? setTwo() : setguestsState(guestsState - 1)};
+const PopupBox3 = ({popup2State,guestsState,setguestsState,infantsState,setInfantsState}) => {
+    const guestsMinus = () => {guestsState<2? setguestsState(1) : setguestsState(guestsState - 1)};
     const guestsPlus = () => {setguestsState(guestsState + 1)};
     const infantsMinus = () => {infantsState<1? setInfantsState(0) : setInfantsState(infantsState - 1)};
     const infantsPlus = () => {guestsState<1? setInfantsState(0) : setInfantsState(infantsState + 1)};
     return (
-        <div className={`popup guests`} style={{display: modal3IsOpen? "block":"none"}}>
+        <div className='guestsPopupBox' style={{display : popup2State? "block":"none"}}>
             <div className="content">
                 <ul>
                     <li>

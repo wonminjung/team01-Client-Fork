@@ -35,7 +35,9 @@ const Main = () => {
             search.classList.remove("ldown");
             search.classList.add("big","down");
         }
-
+        // 메인 진입시 스크롤 맨 위로 이동
+        window.scrollTo({ top: 0, behavior: "instant" });
+        
         // 스크롤 이벤트
         window.addEventListener("scroll",scrollEvent);
         return ()=>{

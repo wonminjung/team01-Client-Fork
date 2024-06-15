@@ -31,10 +31,12 @@ S.Logo = styled.span`
     color: ${PALETTE.yellow};
 `
 S.SearchWrapper = styled.div`
-    position: relative;
+    position: absolute;
     border: 1px solid ${PALETTE.yellow};
     border-radius: 40px;
     height: 48px;
+    left: 50%;
+    transform: translate(-50%, 27px);
     background-color: white;
     top: 0;
     transition: top 0.3s;
@@ -149,7 +151,7 @@ S.SearchWrapper = styled.div`
                 width: 141px;
                 position: relative;
             }
-            &.guestBox{
+            &.guestsBox{
                 width: 226px;
                 position: relative;
             }
@@ -245,7 +247,7 @@ S.SearchWrapper = styled.div`
                     }
                 }
             }
-            &.guest{
+            &.guests{
                 display: block;
                 right: 0px;
                 & .content{
@@ -281,6 +283,7 @@ S.SearchWrapper = styled.div`
                                         justify-content: center;
                                         align-items: center;
                                         background-color: #fff;
+                                        cursor: pointer;
                                         &:hover{
                                             border-color: ${PALETTE.yellow};
                                             color: ${PALETTE.yellow};

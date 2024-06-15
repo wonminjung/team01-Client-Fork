@@ -1,7 +1,7 @@
 import React, { useState } from 'react';
 import { Link, useNavigate } from 'react-router-dom';
 
-const PopupBox4 = React.forwardRef(({menuState,setMenuState},ref) => {
+const PopupBox4 = React.forwardRef(({menuState},ref) => {
     const [loginState,setLoginState] = useState(true);
     const navigate = useNavigate();
     const onClickOut = (e) => {
