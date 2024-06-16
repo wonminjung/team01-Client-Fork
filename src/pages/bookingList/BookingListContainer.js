@@ -53,6 +53,17 @@ const BookingListContainer = () => {
             infants : 1,
             hostPhoneNum : "010-1234-5678",
             hostName : "Sunsetia", 
+            howToCheck1 : (
+                <>
+                    <p>도어락 셀프 체크인</p>
+                    <p>(비밀번호는 호스트가 문자로 전달)</p>
+                </>
+            )
+            ,
+            howToCheck2 : `건물 내 무료 주차`,
+            dayPrice: 250000,
+            stayPeriod : 2
+            
 
             
         },
@@ -65,6 +76,26 @@ const BookingListContainer = () => {
             reservationNum: "HMZXMWA5J3",
 
             detailAddress : "제주특별자치도 제주시 특별자치도, 구좌읍 월정1길 54-15 KR",
+            checkInDate : "5월 19일",
+            checkInTime : "오후 3:00",
+            checkOutDate : "5월 21일",
+            checkOutTime : "오전 11:00",
+            guests : 2,
+            infants : 1,
+            hostPhoneNum : "010-1234-5678",
+            hostName : "Sunsetia", 
+            howToCheck1 : (
+                <>
+                    <p>도어락 셀프 체크인</p>
+                    <p>(비밀번호는 호스트가 문자로 전달)</p>
+                </>
+            )
+            ,
+            howToCheck2 : `건물 내 무료 주차`,
+            dayPrice: 350000,
+            stayPeriod : 2
+            
+
         },
         {
             id: "3",
@@ -75,6 +106,26 @@ const BookingListContainer = () => {
             reservationNum: "HMZXMWA5J2",
 
             detailAddress : "제주특별자치도 제주시 특별자치도, 구좌읍 월정1길 54-15 KR",
+            checkInDate : "5월 19일",
+            checkInTime : "오후 3:00",
+            checkOutDate : "5월 21일",
+            checkOutTime : "오전 11:00",
+            guests : 2,
+            infants : 1,
+            hostPhoneNum : "010-1234-5678",
+            hostName : "Sunsetia", 
+            howToCheck1 : (
+                <>
+                    <p>도어락 셀프 체크인</p>
+                    <p>(비밀번호는 호스트가 문자로 전달)</p>
+                </>
+            )
+            ,
+            howToCheck2 : `건물 내 무료 주차`,
+            dayPrice: 500000,
+            stayPeriod : 2
+            
+
         }
     ];
 

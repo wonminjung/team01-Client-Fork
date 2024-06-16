@@ -367,6 +367,9 @@ S.bookingDetailWrapper = styled.div`
                         & .tipOne{
                             color : ${PALETTE.gray[300]};
                             margin-bottom: 10px;
+                            & p{
+                                font-size: 18px;
+                            }
                         }
                         & .tipTwo{
                             color : ${PALETTE.gray[300]};
@@ -458,7 +461,7 @@ S.bookingDetailWrapper = styled.div`
         & .navToDetailPage{
             position: absolute;
             top: 350px;
-            left: 30px;
+            left: -1px;
             & button{
                 width: 200px;
                 position: relative;

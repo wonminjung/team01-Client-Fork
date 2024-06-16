@@ -32,6 +32,7 @@ const BookingDetail = ({item, isActive, index}) => {
                     <img src="./images/pages/bookingList/copy.svg" alt="copy"/>
                     <h5>주소 복사</h5>
                 </button>
+                {/* ⭐카카오맵api 여러개 기능 구현 안됨 해결해야함! */}
                     <KakaoMap props={item.detailAddress} propsNum={index}/>
             </div>
         {/* 우측 예약 상세 내역*/}
@@ -67,7 +68,7 @@ const BookingDetail = ({item, isActive, index}) => {
                             <h3>호스트 연락처</h3>
                         </div>
                         <div className='data'>
-                            <h5>Sunsetia | 010-1234-5678</h5>
+                            <h5>{`${item.hostName} | ${item.hostPhoneNum}`}</h5>
                         </div>
                 </div>
                 {/* 체크인 방법 */}
@@ -79,11 +80,10 @@ const BookingDetail = ({item, isActive, index}) => {
                         <div className='data'>
                             <ul className='tipList'>
                                 <li className='tipOne'>
-                                    도어락 셀프 체크인<br></br>
-                                    (비밀번호는 호스트가 문자로 전달)
+                                {item.howToCheck1}
                                 </li>
                                 <li className='tipTwo'>
-                                    건물 내 무료 주차
+                                  {item.howToCheck2}
                                 </li>
                             </ul>
                         </div>
@@ -99,16 +99,16 @@ const BookingDetail = ({item, isActive, index}) => {
                     </div>
                     <div className='data'>
                         <div className='calc'>
-                            ₩250,000 x 2박
+                            {`₩${item.dayPrice} x ${item.stayPeriod}박 `}
                         </div>
                         {/* 구분선 */}
                         <div className='divisionLine'></div>
                         <div className='sum'>
-                            = ₩500,000
+                            = ₩{item.dayPrice * item.stayPeriod}
                         </div>
                     </div>   
                 </div>
-                {/* 환불 정책 */}
+                {/* 환불 정책(고정) */}
                 <div className='refundPolicyWrapper'>
                     <div className='title'> 
                         <img src="./images/pages/bookingList/refund.svg" alt="refund"/>
@@ -130,7 +130,7 @@ const BookingDetail = ({item, isActive, index}) => {
                                         >
 
                                 {isHovered ? (
-
+                                        // ⭐추후 해당 객실의 id로 detail 페이지를 연결해줘야 함!
                                          <div>
                                              <Link to={'/detail'} className='whiteFont'>숙소 페이지로 이동</Link> 
                                              <img className='whiteIcon' src="./images/pages/bookingList/home.svg" alt="home"/>
