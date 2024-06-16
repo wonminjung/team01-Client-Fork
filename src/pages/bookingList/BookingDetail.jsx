@@ -1,16 +1,18 @@
 import React, { useState } from 'react';
-import { Link } from 'react-router-dom';
+import { Link, Navigate, useNavigate } from 'react-router-dom';
 import BasicButton from '../../components/button/BasicButton';
 import S from './style';
 import KakaoMap from '../../components/kakaomap/KakaoMap.jsx';
 
 
-const BookingDetail = ({item}) => {
+const BookingDetail = ({item, isActive, index}) => {
     
     const[isHovered, setIsHovered] = useState(false);
 
+    const navigate = useNavigate();
+
     return (
-    <S.bookingDetailWrapper >
+    <S.bookingDetailWrapper className={isActive ? 'active' : ''} >
         {/* 좌측 지도api */}
         <div className="mapBox">
                 <div className="howToGo">
@@ -30,7 +32,7 @@ const BookingDetail = ({item}) => {
                     <img src="./images/pages/bookingList/copy.svg" alt="copy"/>
                     <h5>주소 복사</h5>
                 </button>
-                    <KakaoMap props={"제주 제주시 조천읍 선흘남4길 31"}/>
+                    <KakaoMap props={item.detailAddress} propsNum={index}/>
             </div>
         {/* 우측 예약 상세 내역*/}
         <div className="infoBox">
@@ -124,6 +126,7 @@ const BookingDetail = ({item}) => {
                 <div className="navToDetailPage">
                         <BasicButton  onMouseEnter={() => setIsHovered(true)}
                                         onMouseLeave={() => setIsHovered(false)}
+                                        onClick={() => navigate('/')}
                                         >
 
                                 {isHovered ? (

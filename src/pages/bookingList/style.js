@@ -6,17 +6,6 @@ import { flexCenterColumn } from "../../global/common";
 const S = {};
 const PALETTE = theme.PALETTE;
 
-/* swiper */
-S.SwiperWrapper = styled.div`
-    & .swiper-slide{
-        height : 100px;
-        background-color: gray;
-    }
-    & .swiper-button-prev::after, .swiper-button-next::after{
-        color : black;
-        font-size: 15px;
-    }
-` 
 /* 전체 페이지 */
 S.BookingListContainer = styled.div`
     height: 200vh;
@@ -28,7 +17,7 @@ S.BookingListContainer = styled.div`
         margin: 0 auto; //좌우 자동
     }
 `
-/* 페이지 제목 : 여행 - 예정되 예약 */
+/* 페이지 제목 : 여행 - 예정된 예약 */
 S.TitleWrapper = styled.div`
     margin-bottom: 60px;
     margin-left : 100px;
@@ -122,18 +111,25 @@ S.BookingItemWrapper = styled.button`
         display: flex; // 가로로 배치 예정이라 디폴트 row 생략
         justify-content: flex-start;
         align-items: center;
-        border-radius: 20px;
         overflow: hidden;
         border: 1px solid ${PALETTE.gray[200]};
-        border: ${({ isClicked }) =>
-            isClicked ? 'none' : `1px solid ${PALETTE.yellow}`}; 
         width: 100%;
         height: 280px;
         transition: 0.4s;
         border-radius: 40px;
-        &.active, .accordion:hover{
-            background-color: #ccc;
+        background-color: white;
+
+        &:hover {
+        /* 호버 상태일 때 border 색상 */
+        border-color: ${PALETTE.yellow};
         }
+        /* 아이템이 활성화된 경우의 스타일 */
+        &.active {
+            /* 클릭된 아이템의 border 색상 */
+            border-color: ${PALETTE.yellow}; 
+           
+        }
+
         & .textBox{
             width: 486px;
             padding: 40px;
@@ -165,13 +161,13 @@ S.BookingItemWrapper = styled.button`
         }
 
 `
-
+/* panel부분  */ 
 S.panel = styled.div`
-    padding: 0 18px;
+    margin: 10px 0px;
     background-color: white;
     max-height: 0;
     overflow: hidden;
-    transition: max-height 0.2s ease-out;
+    transition: max-height 0.3s ease-out;
 `
 
 /* 예약 상세 내역 (bookingDetail) */
@@ -180,10 +176,14 @@ S.bookingDetailWrapper = styled.div`
     justify-content: flex-start;
     align-items: center; //확인하기
     border : 1px solid ${PALETTE.gray[200]};
-    border-radius: 20px;
+    border-radius: 40px;
     overflow: hidden;
     width: 100%;
     height: 500px;
+
+    &.active{
+        border-color:  ${PALETTE.yellow};
+    }
     & .mapBox{
             width: 50%;
             height: 100%;
@@ -229,15 +229,6 @@ S.bookingDetailWrapper = styled.div`
                     margin-left : 3px;
                 }
             }
-
-        /* & .map{
-             height: 100%; 
- 
-            & #map{
-            border : 1px solid ${PALETTE.gray[200]};
-            width: 80%;
-            height: 80%; 
-        } } */
     }
     
     & .infoBox{
@@ -259,7 +250,7 @@ S.bookingDetailWrapper = styled.div`
                 justify-content: center;
                 display: flex;
                 flex-direction: column;
-                align-items: center;// 수평 가운데 정렬
+                align-items: flex-start;// 수평 가운데 정렬
                 justify-content: center;// 수직 가운데 정렬
                 & .title{
                     display: flex;
@@ -321,7 +312,7 @@ S.bookingDetailWrapper = styled.div`
                     justify-content: center;
                     display: flex;
                     flex-direction: column;
-                    align-items: center;// 수평 가운데 정렬
+                    align-items: flex-start;// 수평 가운데 정렬
                     justify-content: center;// 수직 가운데 정렬
                     & .title{
                         display: flex;
@@ -348,10 +339,9 @@ S.bookingDetailWrapper = styled.div`
                 width: 80%;
                 height: 130px;
                 /* border: 1px solid #73AD21; */
-                justify-content: center;
                 display: flex;
                 flex-direction: column;
-                align-items: center;// 수평 가운데 정렬
+                align-items: flex-start;// 수평 가운데 정렬
                 justify-content: center;// 수직 가운데 정렬
                 & .title{
                     display: flex;
@@ -361,6 +351,8 @@ S.bookingDetailWrapper = styled.div`
                     margin-right:50px;
                     & img{
                         height: 38px;
+                        position: relative;
+                        left: -10px;
                     }
                     & h3{
                         font-size: 18px;
@@ -370,6 +362,7 @@ S.bookingDetailWrapper = styled.div`
                 }
                 & .data{
                     & .tipList{
+                        padding-left: 20px;
                         list-style-type : disc;
                         & .tipOne{
                             color : ${PALETTE.gray[300]};
@@ -399,7 +392,7 @@ S.bookingDetailWrapper = styled.div`
                 justify-content: center;
                 display: flex;
                 flex-direction: column;
-                align-items: center;// 수평 가운데 정렬
+                align-items: flex-start;// 수평 가운데 정렬
                 justify-content: center;// 수직 가운데 정렬
                 & .title{
                     display: flex;
@@ -439,7 +432,7 @@ S.bookingDetailWrapper = styled.div`
             justify-content: center;
             display: flex;
             flex-direction: column;
-            align-items: center;// 수평 가운데 정렬
+            align-items: flex-start;// 수평 가운데 정렬
             justify-content: center;// 수직 가운데 정렬
             & .title{
                 display: flex;

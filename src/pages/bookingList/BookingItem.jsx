@@ -1,10 +1,10 @@
 import React from 'react';
 import S from './style';
 
-const BookingItem = ({item, onClick}) => {
+const BookingItem = ({item, onClick, isActive }) => {
     return (
-        <S.BookingItemWrapper className='bookingItem' onClick={onClick}>
-            <div className="textBox">
+        <S.BookingItemWrapper  className={isActive ? 'active' : ''} onClick={onClick}>
+            <div className="textBox" >
                 <div className="text">
                     <div className="title">{item.title}</div>
                     <div className="schedule">{item.schedule}</div>

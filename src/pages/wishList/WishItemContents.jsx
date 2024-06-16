@@ -10,7 +10,10 @@ import Modal from './modal/Modal';
 const WishItemContents = () => {
     // 모달 안보이는게 기본값
     const [showModal, setShowModal] = useState(false);
+
     // 삭제하기 위해 하트버튼 누른 아이템의 상태
+    //⭐현재 삭제하기 위해 하트버튼 눌러도, 새로고침하면 위시리스트가 초기화 됨.
+    //⭐추후 서버에 user데이터>wish데이터>accommodations데이터>roomId를 삭제하는 로직 짜야 함.
     const [selectedItemId, setSelectedItemId] = useState(null);
 
     // 컨텐츠 데이터 
@@ -160,7 +163,7 @@ const WishItemContents = () => {
                                     <span className="address">{data.address}</span>
                                     <span className="price">{data.dayPrice}</span>
                                 </div>
-                                <div className="ResevateButton">예약하기</div>
+                                <div className="ReservateButton">예약하기</div>
                             </div>
                         </Link>
                     </div>
@@ -169,7 +172,7 @@ const WishItemContents = () => {
                 <div className="emptyState">
                     <p>위시리스트에 추가된 숙소가 없습니다.</p>
                     <p>검색 중에 발견한 숙소를 위시리스트에 저장하려면 하트 아이콘을 클릭하세요!💛</p>
-                    <Link to={'/detail'}>구경하러 가기</Link>
+                    <Link to={'/'}>구경하러 가기</Link>
                     <button>닫기</button>
                 </div>
             )}
