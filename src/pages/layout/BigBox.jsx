@@ -66,7 +66,7 @@ const BigBox = React.forwardRef((_,ref) => {
                 <PopupBox2 modal2IsOpen={modal2IsOpen} setStartDateState={setStartDateState} setEndDateState={setEndDateState}/>
                 <PopupBox3 modal3IsOpen={modal3IsOpen} guestsState={guestsState} setguestsState={setguestsState} infantsState={infantsState} setInfantsState={setInfantsState}/>
                 <S.SearchBtn>
-                    <Link className='searchBtn' onClick={clickSearch} to={`/search?cate=serchResult${inputValue===""? "": `&val=${inputValue}`}${startDateState==="날짜 추가"? "":`&sdate=${startDateState}&edate=${endDateState}`}${guestsState<1? "":`&guests=${guestsState}&infants=${infantsState}`}`}>
+                    <Link className='searchBtn' onClick={clickSearch} to={`/search?cate=searchResult${inputValue===""? "": `&val=${inputValue}`}${startDateState==="날짜 추가"? "":`&sdate=${startDateState}&edate=${endDateState}`}${guestsState<1? "":`&guests=${guestsState}&infants=${infantsState}`}`}>
                         <FontAwesomeIcon icon={faMagnifyingGlass} />
                     </Link>
                 </S.SearchBtn>
