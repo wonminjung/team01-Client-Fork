@@ -14,7 +14,7 @@ const CardListContainer = (props) => {
         <S.CardListContainer>
             <S.SideMarginWrapper>
                 <S.AccommodationTotal>
-                    <h6>숙소 {contentData.length}개 이상</h6>
+                    <h6>숙소 {contentData && contentData.length}개 이상</h6>
                 </S.AccommodationTotal>
 
                 <S.CardListsWrapper>
@@ -25,7 +25,9 @@ const CardListContainer = (props) => {
                     }
                 </S.CardListsWrapper>
 
-                <NavigatePageComponents />
+                {
+                    contentData.length > 18 ? <NavigatePageComponents /> : <></>
+                }
             </S.SideMarginWrapper>
         </S.CardListContainer>
     );

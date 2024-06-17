@@ -87,21 +87,6 @@ const S = {};
         justify-content: space-evenly;
         border-radius: 14px;
 
-        & > .filterOn {
-            & > .filterBg {
-                /* display: contents; */
-            }
-        }
-
-        & > .filterBg {
-            width: 100vw;
-            height: 100vw;
-            display: none;
-            background-color: rgb(0, 0, 0, 0.5);
-            position: fixed;
-            z-index: 1500;
-            inset: 0;
-        }
     `;
 
     /* Swiper 라이브러리 태그 import 해서 디자인 */
