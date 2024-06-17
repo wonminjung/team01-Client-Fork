@@ -648,5 +648,23 @@ S.CategoryContentBox = styled.div`
             }
         }
     }
+    & .filtered0{
+        width: 100%;
+        min-height: 720px;
+        display: flex;
+        flex-direction: column;
+        justify-content: center;
+        align-items: center;
+        & svg{
+            font-size: 40px;
+            margin-bottom: 30px;
+            & path{
+                color: ${PALETTE.gray[200]};
+            }
+        }
+        & h6{
+            color: ${PALETTE.gray[200]};
+        }
+    }
 `
 export default S;
