@@ -3,6 +3,8 @@ import { Link, useSearchParams } from 'react-router-dom';
 import Content from './ContentSlider';
 import S from './style';
 import EmptyHeartButton from './EmptyHeartButton';
+import { FontAwesomeIcon } from '@fortawesome/react-fontawesome';
+import { faSearch } from '@fortawesome/free-solid-svg-icons';
 
 const CategoryContents = () => {
     const contentData = [
@@ -654,17 +656,20 @@ const CategoryContents = () => {
     const getBedroom = searchParams.get("bedroom");
     const getBed = searchParams.get("bed");
     const getBathroom = searchParams.get("bathroom");
+    const filtered = contentData.filter((data)=>
+    data.cate === getCate // 카테고리 조건
+    && data.dayPrice >= getPrice[0] // 최소가격 조건
+    && data.dayPrice <= getPrice[1] // 최대가격 조건
+    && data.roomData.maxUser >= getMaxUser // 최대인원 조건
+    && data.roomData.bedroom >= getBedroom // 최대침실 조건
+    && data.roomData.bed >= getBed // 최대침대 조건
+    && data.roomData.bathroom >= getBathroom // 최대욕실 조건
+    );
     return (
         <S.CategoryContentBox>
-            {contentData.filter((data)=>
-            data.cate === getCate // 카테고리 조건
-            && data.dayPrice >= getPrice[0] // 최소가격 조건
-            && data.dayPrice <= getPrice[1] // 최대가격 조건
-            && data.roomData.maxUser >= getMaxUser // 최대인원 조건
-            && data.roomData.bedroom >= getBedroom // 최대침실 조건
-            && data.roomData.bed >= getBed // 최대침대 조건
-            && data.roomData.bathroom >= getBathroom // 최대욕실 조건
-            ).map((data,i)=>
+            {
+            filtered.length > 0?
+            filtered.map((data,i)=>
                 <div key={i} className="content">
                     <Link to={`/detail?roomId=${data.id}`}>
                         <div className="imgBox">
@@ -683,7 +688,13 @@ const CategoryContents = () => {
                     </Link>
                     <EmptyHeartButton userData={userData} loginUser={loginUser} loginState={loginState} roomid={data.id}/>
                 </div>
-            )}
+            )
+            :
+            <div className='filtered0'>
+                <FontAwesomeIcon icon={faSearch}/>
+                <h6>검색된 정보가 없습니다</h6>
+            </div>
+            }
         </S.CategoryContentBox>
     );
 };
