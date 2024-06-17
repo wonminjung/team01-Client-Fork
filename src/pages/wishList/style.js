@@ -9,15 +9,66 @@ const PALETTE = theme.PALETTE;
 S.WishListContainer = styled.div`
     height: 200vh; //1vh = 1% of viewport height, vw
     position: relative;
+        & .modalDecorate{
+            display: flex;
+            flex-direction: column;
+            align-items: center;
+            justify-content: center;
+            text-align: center;
+            position: relative;
+            & .closeButton{
+                position: absolute;
+                top: -10px;
+                left: 20px;
+                font-weight: bold;
+                color : ${theme.PALETTE.yellow};
+            }
+            & .modalBody{
+                margin-top: 30px;
+                margin-bottom: 20px;
+                    & img {
+                    width : 200px;
+                    align-items: center;
+                    margin-bottom: 30px;
+                    }
+                    & h2 {
+                        font-size: 15px;
+                        font-weight: bold;
+                        margin-bottom: 20px;
+                    }
+                    & h3{
+                        font-size: 15px;
+                        margin-bottom: 10px;
+                    }
+            }
+            & .searchButton{
+                background-color: ${theme.PALETTE.yellow};
+                color: white;
+                width: 145px;
+                height: 30px;
+                padding: 0 3px;
+                border: 1px solid;
+                border-radius: 50px;
+                cursor: pointer;
+                transition: 0.3s;
+
+                &:hover {
+                    color : ${theme.PALETTE.yellow};
+                    background-color: white;
+                }
+                
+            }
+        }
+
 `
+
 
 S.PageTitle = styled.h1`
     color : ${theme.PALETTE.black};
     font-size: 28px;
     font-weight: bold;
-    position: absolute; /* 절대 위치 지정 */
-    top: 1px; /* 위에서 50px */
-    left: 60px; /* 왼쪽에서 50px */
+    margin-top: 40px;
+    margin-left: 60px;
 `
 
 /* 숙소카드 1개 */
@@ -88,7 +139,7 @@ S.ContentBox = styled.div`
                         margin-left: 10px;
                     }
                 }
-            & .ResevateButton{
+            & .ReservateButton{
                 font-size: 12px;
                 font-weight: bold;
                 color: ${PALETTE.black};
