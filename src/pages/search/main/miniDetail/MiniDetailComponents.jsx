@@ -2,6 +2,8 @@ import React, { useEffect, useState } from 'react';
 
 import S from './style';
 import KakaoMap from '../../../../components/kakaomap/KakaoMap';
+import BasicButton from '../../../../components/button/BasicButton';
+import { Link } from 'react-router-dom';
 
 const MiniDetailComponents = ({ contentData, clickCardListIndex }) => {
     // console.log(contentData, clickCardListIndex);
@@ -20,9 +22,14 @@ const MiniDetailComponents = ({ contentData, clickCardListIndex }) => {
     return (
         <S.MiniDetailContainer>
             <S.MarginSideContainer>
-                <S.Title>
+                <S.HeaderContainer>
                     <div>{title && title}</div>
-                </S.Title>
+                    <Link to="/detail?roomId=1">
+                        <BasicButton>
+                                상세보기
+                        </BasicButton>
+                    </Link>
+                </S.HeaderContainer>
 
                 <S.ImageGridContainer>
                     {

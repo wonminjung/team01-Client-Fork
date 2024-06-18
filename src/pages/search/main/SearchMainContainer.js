@@ -3,6 +3,8 @@ import CardListContainer from './cardList/CardListContainer';
 import MiniDetailComponents from './miniDetail/MiniDetailComponents';
 import S from './style';
 import { useSearchParams } from 'react-router-dom';
+import { FontAwesomeIcon } from '@fortawesome/react-fontawesome';
+import { faSearch } from '@fortawesome/free-solid-svg-icons';
 
 const SearchMainContainer = () => {
 
@@ -1233,7 +1235,10 @@ const SearchMainContainer = () => {
             )
             :
             (
-                <div>검색 결과가 없습니다.</div>
+                <S.NoSearchResult>
+                    <FontAwesomeIcon icon={faSearch} />
+                    <h6>검색 결과가 없습니다.</h6>
+                </S.NoSearchResult>
             )
         }
         </S.SearchMainContainer>
