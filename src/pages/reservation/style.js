@@ -7,21 +7,28 @@ S.ReservationContainer = styled.div`
     padding: 50px 50px 50px;
     & h1 {
         font-size: 50px;
-        padding: 0 50px 50px;
+        margin-bottom: 50px;
     }
     & h2 {
         font-size: 32px;
-        padding: 0 50px 50px;
+        margin-bottom: 50px;
     }
     & h3 {
         font-size: 22px;
-        padding: 0 50px 30px;
+        margin-bottom: 50px;
     }
     & h4 {
-        display: inline-block;
-        width: 500px;
         font-size: 16px;
-        padding: 0 50px 50px;
+        margin-bottom: 10px;
+    }
+    & h4Strong {
+        font-size: 16px;
+        margin-bottom: 10px;
+        font-weight: 600; 
+    }
+    & h5 {
+        font-size: 12px;
+        margin-bottom: 10px;
     }
     & div {
         position: relative;
@@ -78,21 +85,32 @@ S.CategoryBox = styled.div`
         list-style: disc
     }
     & strong {
-        display: inline-block;
+        display: inline;
         font-weight: bold;
+        width: 100%;
     }
     & underline {
         text-decoration: underline;
+        width: 100%;
     }
 `
 S.CategoryBorder = styled.div`
     width: 100%;
     height: 0px;
     border-bottom: 1px solid ${theme.PALETTE.gray[200]};
-    margin: 0 50px 30px;
+    margin: 30px 0;
 `
 S.ChargeButton = styled.div`
-
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    width: 160px;
+    height: 50px;
+    background-color: ${theme.PALETTE.orange};
+    color: #fff;
+    border-radius: 20px;
+    font-size: 20px;
+    font-weight: 500;
 `
 
 export default S;

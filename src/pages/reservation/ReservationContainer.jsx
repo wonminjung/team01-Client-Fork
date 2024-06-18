@@ -16,7 +16,6 @@ const ReservationContainer = () => {
                 <LeftSide />
                 <RightSide />
             </div>
-            <S.ChargeButton />
         </S.ReservationContainer>
     );
 };
