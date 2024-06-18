@@ -2,15 +2,16 @@ import React, { useState } from 'react';
 import CardListContainer from './cardList/CardListContainer';
 import MiniDetailComponents from './miniDetail/MiniDetailComponents';
 import S from './style';
+import { useSearchParams } from 'react-router-dom';
 
 const SearchMainContainer = () => {
 
 
-
+    
     const contentData = [
         {
             id : "1",
-            cate : "coolPool",
+            cate : "nearBeach",
             img : [
                 "./images/pages/search/main/cardList/_1_/0db6f10e-48a0-47f2-8bce-ba9bcf28fa88.jpg", 
                 "./images/pages/search/main/cardList/_1_/0deb9b66-26e5-488e-8e6f-ce23fedf780a.jpg", 
@@ -44,110 +45,88 @@ const SearchMainContainer = () => {
                 "./images/pages/search/main/cardList/_1_/fde94a0c-2ba0-4a22-92a8-9bcae9f3042b.jpg", 
             ],
             title : "서울의 집",
-            address : "서울 종로3가역",
+            address : "서울특별시 종로3가역",
             dayPrice : 1123123,
-            roomData : [
-                {
-                    iconUrl: "./images/pages/search/main/miniDetail/overview/user.svg",
-                    count: 6,
-                },
-                {
-                    iconUrl: "./images/pages/search/main/miniDetail/overview/house.svg",
-                    count: 2,
-                },
-                {
-                    iconUrl: "./images/pages/search/main/miniDetail/overview/bed-single.svg",
-                    count: 2,
-                },
-                {
-                    iconUrl: "./images/pages/search/main/miniDetail/overview/bath.svg",
-                    count: 2,
-                },
-            ],
-            introduction: `
-            서울 중심부에 위치한 럭셔리 듀플렉스 펜트하우스에 오신 것을 환영합니다.<br><br>
+            roomData : {
+                maxUser : 5,
+                bedroom : 4,
+                bed : 3,
+                bathroom : 4,
+            },
+            description: `
+            서울 중심부에 위치한 럭셔리 듀플렉스 펜트하우스에 오신 것을 환영합니다.  
 
-            저희 숙소는 8미터 높이의 천장과 멋진 전망을 즐길 수 있는 넓은 창문을 갖추고 있습니다.<br><br>
+            저희 숙소는 8미터 높이의 천장과 멋진 전망을 즐길 수 있는 넓은 창문을 갖추고 있습니다.  
             
-            ⬇️ 자세한 내용을 보려면 클릭하세요. ⬇️<br>
-            다음 정보를 참고하시기 바랍니다.<br><br>
+            ⬇️ 자세한 내용을 보려면 클릭하세요. ⬇️ 
+            다음 정보를 참고하시기 바랍니다.  
 
-            숙소<br>
-            서울의 중심, 프라임 로케이션에 위치한 멋진 펜트하우스 로프트!<br><br>
+            숙소 
+            서울의 중심, 프라임 로케이션에 위치한 멋진 펜트하우스 로프트!  
             
-            이 펜트하우스 로프트는 마포역에서 불과 200미터 거리에 있으며 버스 정류장에서 도보로 1분 거리에 있어 거의 모든 곳으로 쉽게 이동할 수 있습니다.<br><br>
+            이 펜트하우스 로프트는 마포역에서 불과 200미터 거리에 있으며 버스 정류장에서 도보로 1분 거리에 있어 거의 모든 곳으로 쉽게 이동할 수 있습니다.  
             
-            높이 솟은 높은 천장과 넓은 공간으로 서울에서 가장 인기 있는 동네 3곳인 홍대, 명동, 이태원에 쉽게 접근할 수 있어 서울 최고의 위치 중 하나입니다.<br><br>
+            높이 솟은 높은 천장과 넓은 공간으로 서울에서 가장 인기 있는 동네 3곳인 홍대, 명동, 이태원에 쉽게 접근할 수 있어 서울 최고의 위치 중 하나입니다.  
             
-            ✔️세련되고 새롭게 리모델링된 듀플렉스 펜트하우스 로프트에는 2층의 마스터 베드룸, 추가 침대, 주방, 욕실 2개가 있는 고급스러운 거실 공간이 있습니다. 서울 최고의 위치에서 고급스러움과 편안함의 절정을 경험하세요.<br><br>
+            ✔️세련되고 새롭게 리모델링된 듀플렉스 펜트하우스 로프트에는 2층의 마스터 베드룸, 추가 침대, 주방, 욕실 2개가 있는 고급스러운 거실 공간이 있습니다. 서울 최고의 위치에서 고급스러움과 편안함의 절정을 경험하세요.  
             
-            도시의 활기찬 중심지에서 고급 숙소를 찾고 계신 분들에게✔️ 안성맞춤입니다.<br><br>
+            도시의 활기찬 중심지에서 고급 숙소를 찾고 계신 분들에게✔️ 안성맞춤입니다.  
             
-            ✔️ 전문 청소 서비스를 통해 깨끗한 객실을 유지하고 편안한 호텔 침구를 제공합니다.<br><br>
+            ✔️ 전문 청소 서비스를 통해 깨끗한 객실을 유지하고 편안한 호텔 침구를 제공합니다.  
             
-            * 파티는 불가하며, 밤 9시 이후에는 시끄러운 음악이 금지됩니다.<br><br>
+            * 파티는 불가하며, 밤 9시 이후에는 시끄러운 음악이 금지됩니다.  
             
-            - 넓은 창문을 통한 스카이라인 전망<br>
-            - 초고속 인터넷/와이파이<br>
-            - 47인치 휴대용 TV<br>
-            - 모든 침실과 바닥에 에어컨<br>
-            - 스마트 주방용품은 모두 휴대전화를 통해 제어할 수 있습니다.<br>
-            - 원격 제어 커튼<br>
-            기타 사항:<br>
-            밤 10시 이후에는 특히 조용해 주세요. 이웃의 소음으로 인한 불만은 호스트의 퇴실 요청으로 이어질 수 있습니다.<br><br>
+            - 넓은 창문을 통한 스카이라인 전망 
+            - 초고속 인터넷/와이파이 
+            - 47인치 휴대용 TV 
+            - 모든 침실과 바닥에 에어컨 
+            - 스마트 주방용품은 모두 휴대전화를 통해 제어할 수 있습니다. 
+            - 원격 제어 커튼 
+            기타 사항: 
+            밤 10시 이후에는 특히 조용해 주세요. 이웃의 소음으로 인한 불만은 호스트의 퇴실 요청으로 이어질 수 있습니다.  
             
-            근처 교통<br>
-            마포역: 도보 3분<br>
-            버스 정류장 근처: 도보 1분<br><br>
+            근처 교통 
+            마포역: 도보 3분 
+            버스 정류장 근처: 도보 1분  
             
-            인천공항철도<br>
-            1) 공항버스 (6701) - 45분<br>
-            2) 지하철 (AREX, 공덕) - 40분<br><br>
+            인천공항철도 
+            1) 공항버스 (6701) - 45분 
+            2) 지하철 (AREX, 공덕) - 40분  
             
-            홍대:<br>
-            버스 - 15분 (7016, 7613 등)<br><br>
+            홍대: 
+            버스 - 15분 (7016, 7613 등)  
             
-            명동:<br>
-            버스 - 20분 (463, 604, 261 등)<br>
-            : 지하철 - 이태원 25분<br>
-            지하철 - 강남 15분<br>
-            지하철 - 30분<br><br>
+            명동: 
+            버스 - 20분 (463, 604, 261 등) 
+            : 지하철 - 이태원 25분 
+            지하철 - 강남 15분 
+            지하철 - 30분  
             
-            다른 관광지로 가는 교통편에 대해 궁금한 점이 있으시면 언제든 문의주세요!<br><br>
+            다른 관광지로 가는 교통편에 대해 궁금한 점이 있으시면 언제든 문의주세요!  
 
-            게스트 이용 가능 공간/시설<br>
-            * 수영장, 피트니스센터, 사우나는 2인만 이용가능하오니 참고부탁드립니다. 그리고 숙박 요금에 포함되지 않은 호스트가 제공하는 무료 서비스이므로 호텔 정책에 따라 이용이 불가능할 수 있습니다.<br><br>
+            게스트 이용 가능 공간/시설 
+            * 수영장, 피트니스센터, 사우나는 2인만 이용가능하오니 참고부탁드립니다. 그리고 숙박 요금에 포함되지 않은 호스트가 제공하는 무료 서비스이므로 호텔 정책에 따라 이용이 불가능할 수 있습니다.  
 
-            기타 주의사항<br>
-            객실 내 모든 종류의 흡연은 엄격히 금지되어 있습니다! 🚭<br>
-            위반자는 퇴실을 요구할 수 있으며 벌금이 부과될 수 있습니다.<br><br><br>
+            기타 주의사항 
+            객실 내 모든 종류의 흡연은 엄격히 금지되어 있습니다! 🚭 
+            위반자는 퇴실을 요구할 수 있으며 벌금이 부과될 수 있습니다.   
             `,
-            amenities: [
-                {
-                    iconUrl: "./images/pages/search/main/miniDetail/amenities/image.svg", 
-                    name: "계곡 전망"
-                },
-                {
-                    iconUrl: "./images/pages/search/main/miniDetail/amenities/image.svg", 
-                    name: "산 전망"
-                },
-                {
-                    iconUrl: "./images/pages/search/main/miniDetail/amenities/wifi-full.svg", 
-                    name: "무선 인터넷"
-                },
-                {
-                    iconUrl: "./images/pages/search/main/miniDetail/amenities/tv.svg", 
-                    name: "45인치 HDTV + 프리미엄 케이블 TV"
-                },
-                {
-                    iconUrl: "./images/pages/search/main/miniDetail/amenities/car.svg", 
-                    name: "건물 내 무료 주차"
-                },
-                {
-                    iconUrl: "./images/pages/search/main/miniDetail/amenities/pool.svg",
-                    name: "전용 야외 수영장 - 연중 언제든 예약 가능, 특정 시간대만 이용 가능, 수영장 덮개, 온수"
-                },
-            ]
+            convenience : [
+                {con : "계곡 전망"},
+                {con : "산 전망"},
+                {con : "무선 인터넷"},
+                {con : "45인치 HDTV + 프리미엄 케이블 TV"},
+                {con : "건물 내 무료 주차"},
+                {con : "전용 야외 수영장 - 연중 언제든 예약가능,\n특정 시간대만 이용 가능, 수영장 덮개, 온수"},
+            ],
+            convenienceIcon : [
+                {icon : "picture"},
+                {icon : "picture"},
+                {icon : "wifi"},
+                {icon : "tv"},
+                {icon : "car"},
+                {icon : "pool"},
+            ],
         },
         {
             id : "2",
@@ -187,108 +166,86 @@ const SearchMainContainer = () => {
             title : "부산의 집",
             address : "부산 해운대",
             dayPrice : 900,
-            roomData : [
-                {
-                    iconUrl: "./images/pages/search/main/miniDetail/overview/user.svg",
-                    count: 2,
-                },
-                {
-                    iconUrl: "./images/pages/search/main/miniDetail/overview/house.svg",
-                    count: 1,
-                },
-                {
-                    iconUrl: "./images/pages/search/main/miniDetail/overview/bed-single.svg",
-                    count: 1,
-                },
-                {
-                    iconUrl: "./images/pages/search/main/miniDetail/overview/bath.svg",
-                    count: 1,
-                },
-            ],
-            introduction: `
-            서울 중심부에 위치한 럭셔리 듀플렉스 펜트하우스에 오신 것을 환영합니다.<br><br>
+            roomData : {
+                maxUser : 3,
+                bedroom : 4,
+                bed : 3,
+                bathroom : 4,
+            },
+            description: `
+            서울 중심부에 위치한 럭셔리 듀플렉스 펜트하우스에 오신 것을 환영합니다.  
 
-            저희 숙소는 8미터 높이의 천장과 멋진 전망을 즐길 수 있는 넓은 창문을 갖추고 있습니다.<br><br>
+            저희 숙소는 8미터 높이의 천장과 멋진 전망을 즐길 수 있는 넓은 창문을 갖추고 있습니다.  
             
-            ⬇️ 자세한 내용을 보려면 클릭하세요. ⬇️<br>
-            다음 정보를 참고하시기 바랍니다.<br><br>
+            ⬇️ 자세한 내용을 보려면 클릭하세요. ⬇️ 
+            다음 정보를 참고하시기 바랍니다.  
 
-            숙소<br>
-            서울의 중심, 프라임 로케이션에 위치한 멋진 펜트하우스 로프트!<br><br>
+            숙소 
+            서울의 중심, 프라임 로케이션에 위치한 멋진 펜트하우스 로프트!  
             
-            이 펜트하우스 로프트는 마포역에서 불과 200미터 거리에 있으며 버스 정류장에서 도보로 1분 거리에 있어 거의 모든 곳으로 쉽게 이동할 수 있습니다.<br><br>
+            이 펜트하우스 로프트는 마포역에서 불과 200미터 거리에 있으며 버스 정류장에서 도보로 1분 거리에 있어 거의 모든 곳으로 쉽게 이동할 수 있습니다.  
             
-            높이 솟은 높은 천장과 넓은 공간으로 서울에서 가장 인기 있는 동네 3곳인 홍대, 명동, 이태원에 쉽게 접근할 수 있어 서울 최고의 위치 중 하나입니다.<br><br>
+            높이 솟은 높은 천장과 넓은 공간으로 서울에서 가장 인기 있는 동네 3곳인 홍대, 명동, 이태원에 쉽게 접근할 수 있어 서울 최고의 위치 중 하나입니다.  
             
-            ✔️세련되고 새롭게 리모델링된 듀플렉스 펜트하우스 로프트에는 2층의 마스터 베드룸, 추가 침대, 주방, 욕실 2개가 있는 고급스러운 거실 공간이 있습니다. 서울 최고의 위치에서 고급스러움과 편안함의 절정을 경험하세요.<br><br>
+            ✔️세련되고 새롭게 리모델링된 듀플렉스 펜트하우스 로프트에는 2층의 마스터 베드룸, 추가 침대, 주방, 욕실 2개가 있는 고급스러운 거실 공간이 있습니다. 서울 최고의 위치에서 고급스러움과 편안함의 절정을 경험하세요.  
             
-            도시의 활기찬 중심지에서 고급 숙소를 찾고 계신 분들에게✔️ 안성맞춤입니다.<br><br>
+            도시의 활기찬 중심지에서 고급 숙소를 찾고 계신 분들에게✔️ 안성맞춤입니다.  
             
-            ✔️ 전문 청소 서비스를 통해 깨끗한 객실을 유지하고 편안한 호텔 침구를 제공합니다.<br><br>
+            ✔️ 전문 청소 서비스를 통해 깨끗한 객실을 유지하고 편안한 호텔 침구를 제공합니다.  
             
-            * 파티는 불가하며, 밤 9시 이후에는 시끄러운 음악이 금지됩니다.<br><br>
+            * 파티는 불가하며, 밤 9시 이후에는 시끄러운 음악이 금지됩니다.  
             
-            - 넓은 창문을 통한 스카이라인 전망<br>
-            - 초고속 인터넷/와이파이<br>
-            - 47인치 휴대용 TV<br>
-            - 모든 침실과 바닥에 에어컨<br>
-            - 스마트 주방용품은 모두 휴대전화를 통해 제어할 수 있습니다.<br>
-            - 원격 제어 커튼<br>
-            기타 사항:<br>
-            밤 10시 이후에는 특히 조용해 주세요. 이웃의 소음으로 인한 불만은 호스트의 퇴실 요청으로 이어질 수 있습니다.<br><br>
+            - 넓은 창문을 통한 스카이라인 전망 
+            - 초고속 인터넷/와이파이 
+            - 47인치 휴대용 TV 
+            - 모든 침실과 바닥에 에어컨 
+            - 스마트 주방용품은 모두 휴대전화를 통해 제어할 수 있습니다. 
+            - 원격 제어 커튼 
+            기타 사항: 
+            밤 10시 이후에는 특히 조용해 주세요. 이웃의 소음으로 인한 불만은 호스트의 퇴실 요청으로 이어질 수 있습니다.  
             
-            근처 교통<br>
-            마포역: 도보 3분<br>
-            버스 정류장 근처: 도보 1분<br><br>
+            근처 교통 
+            마포역: 도보 3분 
+            버스 정류장 근처: 도보 1분  
             
-            인천공항철도<br>
-            1) 공항버스 (6701) - 45분<br>
-            2) 지하철 (AREX, 공덕) - 40분<br><br>
+            인천공항철도 
+            1) 공항버스 (6701) - 45분 
+            2) 지하철 (AREX, 공덕) - 40분  
             
-            홍대:<br>
-            버스 - 15분 (7016, 7613 등)<br><br>
+            홍대: 
+            버스 - 15분 (7016, 7613 등)  
             
-            명동:<br>
-            버스 - 20분 (463, 604, 261 등)<br>
-            : 지하철 - 이태원 25분<br>
-            지하철 - 강남 15분<br>
-            지하철 - 30분<br><br>
+            명동: 
+            버스 - 20분 (463, 604, 261 등) 
+            : 지하철 - 이태원 25분 
+            지하철 - 강남 15분 
+            지하철 - 30분  
             
-            다른 관광지로 가는 교통편에 대해 궁금한 점이 있으시면 언제든 문의주세요!<br><br>
+            다른 관광지로 가는 교통편에 대해 궁금한 점이 있으시면 언제든 문의주세요!  
 
-            게스트 이용 가능 공간/시설<br>
-            * 수영장, 피트니스센터, 사우나는 2인만 이용가능하오니 참고부탁드립니다. 그리고 숙박 요금에 포함되지 않은 호스트가 제공하는 무료 서비스이므로 호텔 정책에 따라 이용이 불가능할 수 있습니다.<br><br>
+            게스트 이용 가능 공간/시설 
+            * 수영장, 피트니스센터, 사우나는 2인만 이용가능하오니 참고부탁드립니다. 그리고 숙박 요금에 포함되지 않은 호스트가 제공하는 무료 서비스이므로 호텔 정책에 따라 이용이 불가능할 수 있습니다.  
 
-            기타 주의사항<br>
-            객실 내 모든 종류의 흡연은 엄격히 금지되어 있습니다! 🚭<br>
-            위반자는 퇴실을 요구할 수 있으며 벌금이 부과될 수 있습니다.<br><br><br>
+            기타 주의사항 
+            객실 내 모든 종류의 흡연은 엄격히 금지되어 있습니다! 🚭 
+            위반자는 퇴실을 요구할 수 있으며 벌금이 부과될 수 있습니다.   
             `,
-            amenities: [
-                {
-                    iconUrl: "./images/pages/search/main/miniDetail/amenities/image.svg", 
-                    name: "계곡 전망"
-                },
-                {
-                    iconUrl: "./images/pages/search/main/miniDetail/amenities/image.svg", 
-                    name: "산 전망"
-                },
-                {
-                    iconUrl: "./images/pages/search/main/miniDetail/amenities/wifi-full.svg", 
-                    name: "무선 인터넷"
-                },
-                {
-                    iconUrl: "./images/pages/search/main/miniDetail/amenities/tv.svg", 
-                    name: "45인치 HDTV + 프리미엄 케이블 TV"
-                },
-                {
-                    iconUrl: "./images/pages/search/main/miniDetail/amenities/car.svg", 
-                    name: "건물 내 무료 주차"
-                },
-                {
-                    iconUrl: "./images/pages/search/main/miniDetail/amenities/pool.svg",
-                    name: "전용 야외 수영장 - 연중 언제든 예약 가능, 특정 시간대만 이용 가능, 수영장 덮개, 온수"
-                },
-            ]
+            convenience : [
+                {con : "계곡 전망"},
+                {con : "산 전망"},
+                {con : "무선 인터넷"},
+                {con : "45인치 HDTV + 프리미엄 케이블 TV"},
+                {con : "건물 내 무료 주차"},
+                {con : "전용 야외 수영장 - 연중 언제든 예약가능,\n특정 시간대만 이용 가능, 수영장 덮개, 온수"},
+            ],
+            convenienceIcon : [
+                {icon : "picture"},
+                {icon : "picture"},
+                {icon : "wifi"},
+                {icon : "tv"},
+                {icon : "car"},
+                {icon : "pool"},
+            ],
         },
         {
             id : "3",
@@ -327,57 +284,35 @@ const SearchMainContainer = () => {
             title : "서울의 아파트",
             address : "서울 강남구",
             dayPrice : 8000,
-            roomData : [
-                {
-                    iconUrl: "./images/pages/search/main/miniDetail/overview/user.svg",
-                    count: 3,
-                },
-                {
-                    iconUrl: "./images/pages/search/main/miniDetail/overview/house.svg",
-                    count: 1,
-                },
-                {
-                    iconUrl: "./images/pages/search/main/miniDetail/overview/bed-single.svg",
-                    count: 1,
-                },
-                {
-                    iconUrl: "./images/pages/search/main/miniDetail/overview/bath.svg",
-                    count: 1,
-                },
-            ],
-            introduction: `
-            저희 숙소는  “빈대” 걱정 없는 “안심 숙소” 입니다.🙆🏻‍♂️<br><br>안녕하세요.🙂<br>게스트 분들이 안심하고 머물다 가실 수 있도록 “보안”에 있어 철저히 관리하고 있으며, 편안하고 쾌적한 환경에서 머무실 수 있도록 “매일 청소, 침구류 세탁, 소독”을 하고 있습니다.<br><br>
-            -롯데타워가 보이는 강남 고층 시티뷰🌃<br><br>-강남, 신사, 압구정 등 핫플레이스 인접🤖<br><br>-남부터미널/지하철역 도보 3분 🚌<br><br>-주차 가능 🚘<br><br>
-            -1층에 위치한 CU편의점🏪<br><br>-숙소 앞에 위치한 번화가 🍕🍻<br>(카페, 식당, 술집, PC방 1분 이내)<br><br>-Netflix, Disney+, Youtube, Tiving, Watcha, 등 OTT시청 가능 📺<br><br>
-            -free wifi 💻<br><br>-감성 포토존 📸<br><br>🚶🏻도보기준<br>-남부터미널역(3호선) 도보 3분<br>-교대역(2호선) 도보 7분<br>-올리브영/다이소 도보 5분<br><br>🚘차량기준<br>-예술의전당 8분<br>
-            -신사(가로수길) 20분, 압구정 25분<br>-반포한강공원 15분 내외<br><br>
+            roomData : {
+                maxUser : 3,
+                bedroom : 4,
+                bed : 3,
+                bathroom : 4,
+            },
+            description: `
+            저희 숙소는  “빈대” 걱정 없는 “안심 숙소” 입니다.🙆🏻‍♂️  안녕하세요.🙂 게스트 분들이 안심하고 머물다 가실 수 있도록 “보안”에 있어 철저히 관리하고 있으며, 편안하고 쾌적한 환경에서 머무실 수 있도록 “매일 청소, 침구류 세탁, 소독”을 하고 있습니다.  
+            -롯데타워가 보이는 강남 고층 시티뷰🌃  -강남, 신사, 압구정 등 핫플레이스 인접🤖  -남부터미널/지하철역 도보 3분 🚌  -주차 가능 🚘  
+            -1층에 위치한 CU편의점🏪  -숙소 앞에 위치한 번화가 🍕🍻 (카페, 식당, 술집, PC방 1분 이내)  -Netflix, Disney+, Youtube, Tiving, Watcha, 등 OTT시청 가능 📺  
+            -free wifi 💻  -감성 포토존 📸  🚶🏻도보기준 -남부터미널역(3호선) 도보 3분 -교대역(2호선) 도보 7분 -올리브영/다이소 도보 5분  🚘차량기준 -예술의전당 8분 
+            -신사(가로수길) 20분, 압구정 25분 -반포한강공원 15분 내외  
             `,
-            amenities: [
-                {
-                    iconUrl: "./images/pages/search/main/miniDetail/amenities/image.svg", 
-                    name: "계곡 전망"
-                },
-                {
-                    iconUrl: "./images/pages/search/main/miniDetail/amenities/image.svg", 
-                    name: "산 전망"
-                },
-                {
-                    iconUrl: "./images/pages/search/main/miniDetail/amenities/wifi-full.svg", 
-                    name: "무선 인터넷"
-                },
-                {
-                    iconUrl: "./images/pages/search/main/miniDetail/amenities/tv.svg", 
-                    name: "45인치 HDTV + 프리미엄 케이블 TV"
-                },
-                {
-                    iconUrl: "./images/pages/search/main/miniDetail/amenities/car.svg", 
-                    name: "건물 내 무료 주차"
-                },
-                {
-                    iconUrl: "./images/pages/search/main/miniDetail/amenities/pool.svg",
-                    name: "전용 야외 수영장 - 연중 언제든 예약 가능, 특정 시간대만 이용 가능, 수영장 덮개, 온수"
-                },
-            ]
+            convenience : [
+                {con : "계곡 전망"},
+                {con : "산 전망"},
+                {con : "무선 인터넷"},
+                {con : "45인치 HDTV + 프리미엄 케이블 TV"},
+                {con : "건물 내 무료 주차"},
+                {con : "전용 야외 수영장 - 연중 언제든 예약가능,\n특정 시간대만 이용 가능, 수영장 덮개, 온수"},
+            ],
+            convenienceIcon : [
+                {icon : "picture"},
+                {icon : "picture"},
+                {icon : "wifi"},
+                {icon : "tv"},
+                {icon : "car"},
+                {icon : "pool"},
+            ],
         },
         {
             id : "4",
@@ -417,59 +352,37 @@ const SearchMainContainer = () => {
             title : "북촌 한옥독채",
             address : "서울 북촌",
             dayPrice : 70000000,
-            roomData : [
-                {
-                    iconUrl: "./images/pages/search/main/miniDetail/overview/user.svg",
-                    count: 4,
-                },
-                {
-                    iconUrl: "./images/pages/search/main/miniDetail/overview/house.svg",
-                    count: 1,
-                },
-                {
-                    iconUrl: "./images/pages/search/main/miniDetail/overview/bed-single.svg",
-                    count: 1,
-                },
-                {
-                    iconUrl: "./images/pages/search/main/miniDetail/overview/bath.svg",
-                    count: 1,
-                },
-            ],
-            introduction: `
-            소월한옥은 서울시-한옥체험업이 공식 지정된 한옥 숙박 시설로 내국인과 외국인 모두 이용 가능합니다☺️<br><br>
-            💚ㄴㅔ이버에 '소월담' 검색 후 예약하시면<br>더 저렴하게 예약하실 수 있습니다!<br><br>
-            @인스타그램 : sowol_hanok<br><br>편백욕조(히노끼)에서 탁 트인 마당을 바라보며  감성 낙낙함을 느끼실 수 있어요.  <br>
-            온전히 프라이빗한 소월담에서는 북스테이를 해도 좋고, 익숙한 일터를 떠나 워케이션을 해도 좋고, 아무것도 하지않고 오로지 나, 또는 소중한 사람과의 시간에 집중 해도 좋을거에요 : )<br><br>
-            널찍한 마당을 보며 브런치를 먹거나,<br>처마 밑 마루에 걸터앉아 내리는 비 풍경을 보며 차 한잔을 하거나,<br>낮의 새 소리와 저녁 하늘의 별을 보며 반신욕을 즐겨보세요!<br><br>
-            #아티스트베이커리 #런던베이글뮤지엄과 같은 핫한 카페들이 있으며 경복궁, 청와대, 익선동 등의 관광지를 도보로 이용하실 수 있습니다 ☺️<br><br>*기본 인원 : 2인 금액입니다.<br>
+            roomData : {
+                maxUser : 5,
+                bedroom : 4,
+                bed : 3,
+                bathroom : 4,
+            },
+            description: `
+            소월한옥은 서울시-한옥체험업이 공식 지정된 한옥 숙박 시설로 내국인과 외국인 모두 이용 가능합니다☺️  
+            💚ㄴㅔ이버에 '소월담' 검색 후 예약하시면 더 저렴하게 예약하실 수 있습니다!  
+            @인스타그램 : sowol_hanok  편백욕조(히노끼)에서 탁 트인 마당을 바라보며  감성 낙낙함을 느끼실 수 있어요.   
+            온전히 프라이빗한 소월담에서는 북스테이를 해도 좋고, 익숙한 일터를 떠나 워케이션을 해도 좋고, 아무것도 하지않고 오로지 나, 또는 소중한 사람과의 시간에 집중 해도 좋을거에요 : )  
+            널찍한 마당을 보며 브런치를 먹거나, 처마 밑 마루에 걸터앉아 내리는 비 풍경을 보며 차 한잔을 하거나, 낮의 새 소리와 저녁 하늘의 별을 보며 반신욕을 즐겨보세요!  
+            #아티스트베이커리 #런던베이글뮤지엄과 같은 핫한 카페들이 있으며 경복궁, 청와대, 익선동 등의 관광지를 도보로 이용하실 수 있습니다 ☺️  *기본 인원 : 2인 금액입니다. 
             1인 추가 : 7만원(최대 4인까지 가능)
             `,
-            amenities: [
-                {
-                    iconUrl: "./images/pages/search/main/miniDetail/amenities/image.svg", 
-                    name: "계곡 전망"
-                },
-                {
-                    iconUrl: "./images/pages/search/main/miniDetail/amenities/image.svg", 
-                    name: "산 전망"
-                },
-                {
-                    iconUrl: "./images/pages/search/main/miniDetail/amenities/wifi-full.svg", 
-                    name: "무선 인터넷"
-                },
-                {
-                    iconUrl: "./images/pages/search/main/miniDetail/amenities/tv.svg", 
-                    name: "45인치 HDTV + 프리미엄 케이블 TV"
-                },
-                {
-                    iconUrl: "./images/pages/search/main/miniDetail/amenities/car.svg", 
-                    name: "건물 내 무료 주차"
-                },
-                {
-                    iconUrl: "./images/pages/search/main/miniDetail/amenities/pool.svg",
-                    name: "전용 야외 수영장 - 연중 언제든 예약 가능, 특정 시간대만 이용 가능, 수영장 덮개, 온수"
-                },
-            ]
+            convenience : [
+                {con : "계곡 전망"},
+                {con : "산 전망"},
+                {con : "무선 인터넷"},
+                {con : "45인치 HDTV + 프리미엄 케이블 TV"},
+                {con : "건물 내 무료 주차"},
+                {con : "전용 야외 수영장 - 연중 언제든 예약가능,\n특정 시간대만 이용 가능, 수영장 덮개, 온수"},
+            ],
+            convenienceIcon : [
+                {icon : "picture"},
+                {icon : "picture"},
+                {icon : "wifi"},
+                {icon : "tv"},
+                {icon : "car"},
+                {icon : "pool"},
+            ],
         },
         {
             id : "5",
@@ -507,59 +420,37 @@ const SearchMainContainer = () => {
             title : "영등포구의 아파트",
             address : "서울 영등포구",
             dayPrice : 150000,
-            roomData : [
-                {
-                    iconUrl: "./images/pages/search/main/miniDetail/overview/user.svg",
-                    count: 2,
-                },
-                {
-                    iconUrl: "./images/pages/search/main/miniDetail/overview/house.svg",
-                    count: 1,
-                },
-                {
-                    iconUrl: "./images/pages/search/main/miniDetail/overview/bed-single.svg",
-                    count: 1,
-                },
-                {
-                    iconUrl: "./images/pages/search/main/miniDetail/overview/bath.svg",
-                    count: 1,
-                },
-            ],
-            introduction: `
-            9호선 선유도역 인접한 <br>
-            깨끗한 신축의 선유드림_Sunyudream입니다<br><br><br>
-            은은한 달빛처럼 포근한 숙소에서<br>연인과 함께, 친구와 함께, <br>또는 세상에서 가장 소중한 나만을 위해 <br>
-            아름다운 힐링 플레이스를 경험하세요:)<br><br><br>저희 선유드림은<br>푹신하고 포근한 침대에서 42인치 TV로 <br>밤새 넷플릭싱 하기 좋은 최적의 숙소입니다~<br><br><br>
-            바람 좋은 옥상 하늘정원에서 한강을 볼 수도 있고요<br>햇살좋은 날에는 선유도 공원까지 한 걸음에<br>갈 수도 있답니다<br><br><br>내 집보다 더 편하고 포근한 선유드림이<br>
-            고단한 일상에서 단비같은 곳이 될께요<br>게스트분에게 특별한 경험이 되기를 <br>바라는 마음입니다^^<br><br><br>푹신한 라텍스 매트리스와 호텔 침구류에서<br>
-            편안하고 특별한 시간이 되시길 바랍니다<br><br><br>도보10분 이내에 <br>예쁜 브런치카페, 하이볼 맛집,편의점,슈퍼,약국, 다이소 등 <br>다양한 편의 시설이 있습니다
+            roomData : {
+                maxUser : 5,
+                bedroom : 4,
+                bed : 3,
+                bathroom : 4,
+            },
+            description: `
+            9호선 선유도역 인접한  
+            깨끗한 신축의 선유드림_Sunyudream입니다   
+            은은한 달빛처럼 포근한 숙소에서 연인과 함께, 친구와 함께,  또는 세상에서 가장 소중한 나만을 위해  
+            아름다운 힐링 플레이스를 경험하세요:)   저희 선유드림은 푹신하고 포근한 침대에서 42인치 TV로  밤새 넷플릭싱 하기 좋은 최적의 숙소입니다~   
+            바람 좋은 옥상 하늘정원에서 한강을 볼 수도 있고요 햇살좋은 날에는 선유도 공원까지 한 걸음에 갈 수도 있답니다   내 집보다 더 편하고 포근한 선유드림이 
+            고단한 일상에서 단비같은 곳이 될께요 게스트분에게 특별한 경험이 되기를  바라는 마음입니다^^   푹신한 라텍스 매트리스와 호텔 침구류에서 
+            편안하고 특별한 시간이 되시길 바랍니다   도보10분 이내에  예쁜 브런치카페, 하이볼 맛집,편의점,슈퍼,약국, 다이소 등  다양한 편의 시설이 있습니다
             `,
-            amenities: [
-                {
-                    iconUrl: "./images/pages/search/main/miniDetail/amenities/image.svg", 
-                    name: "계곡 전망"
-                },
-                {
-                    iconUrl: "./images/pages/search/main/miniDetail/amenities/image.svg", 
-                    name: "산 전망"
-                },
-                {
-                    iconUrl: "./images/pages/search/main/miniDetail/amenities/wifi-full.svg", 
-                    name: "무선 인터넷"
-                },
-                {
-                    iconUrl: "./images/pages/search/main/miniDetail/amenities/tv.svg", 
-                    name: "45인치 HDTV + 프리미엄 케이블 TV"
-                },
-                {
-                    iconUrl: "./images/pages/search/main/miniDetail/amenities/car.svg", 
-                    name: "건물 내 무료 주차"
-                },
-                {
-                    iconUrl: "./images/pages/search/main/miniDetail/amenities/pool.svg",
-                    name: "전용 야외 수영장 - 연중 언제든 예약 가능, 특정 시간대만 이용 가능, 수영장 덮개, 온수"
-                },
-            ]
+            convenience : [
+                {con : "계곡 전망"},
+                {con : "산 전망"},
+                {con : "무선 인터넷"},
+                {con : "45인치 HDTV + 프리미엄 케이블 TV"},
+                {con : "건물 내 무료 주차"},
+                {con : "전용 야외 수영장 - 연중 언제든 예약가능,\n특정 시간대만 이용 가능, 수영장 덮개, 온수"},
+            ],
+            convenienceIcon : [
+                {icon : "picture"},
+                {icon : "picture"},
+                {icon : "wifi"},
+                {icon : "tv"},
+                {icon : "car"},
+                {icon : "pool"},
+            ],
         },
         {
             id : "6",
@@ -599,59 +490,37 @@ const SearchMainContainer = () => {
             title : "한국 종로의 집",
             address : "서울 종로구",
             dayPrice : 150000,
-            roomData : [
-                {
-                    iconUrl: "./images/pages/search/main/miniDetail/overview/user.svg",
-                    count: 2,
-                },
-                {
-                    iconUrl: "./images/pages/search/main/miniDetail/overview/house.svg",
-                    count: 1,
-                },
-                {
-                    iconUrl: "./images/pages/search/main/miniDetail/overview/bed-single.svg",
-                    count: 1,
-                },
-                {
-                    iconUrl: "./images/pages/search/main/miniDetail/overview/bath.svg",
-                    count: 1,
-                },
-            ],
-            introduction: `
-            아름다운 프리미엄 한옥스테이 '화운' 입니다.<br>
-            북촌 한옥마을 삼청동에 위치하며 지리적 특성에 따라 창으로 북악산과 인왕산이 동시에 보이며 청와대, 삼청동길까지 한 눈에 보이는 대전경뷰를 가지고 있습니다.<br><br><br>
-            - 프라이빗하게 독채 전부를 사용할 수 있습니다.<br>- 야외 실외 자쿠지 이용 가능합니다<br>- 빔프로젝터로 넷플릭스 , TV , 유튜브 시청이 가능합니다.<br>
-            - 조용한 동네로 음주가무 등 파티는 불가능합니다.<br>- 주차 불가합니다 (모두의주차장이나 인근 유료주차장을 이용하셔야합니다)<br>
-            - 숙소에 다칠 수 있는 위험요소가 많아 노키즈존으로 운영되고 있습니다.<br><br><br>- 삼성 비스포크 정수기<br>- 삼성 큐커(전자레인지, 에어프라이어, 토스터, 그릴)<br>
-            - 펠로우 스태그 커피포트<br>- 삼성 비스크보 청소기<br>- 트롬 세탁기<br>- 다이슨 헤어드라이기<br>- 다이슨 선풍기<br>- 이솝 어메니티<br>- 제네바 블루투스 스피커<br>
-            - 핸드드립<br>- 100인치 빔프로젝터<br>- 시몬스 매트리스 + 구스다운이불
+            roomData : {
+                maxUser : 5,
+                bedroom : 4,
+                bed : 3,
+                bathroom : 4,
+            },
+            description: `
+            아름다운 프리미엄 한옥스테이 '화운' 입니다. 
+            북촌 한옥마을 삼청동에 위치하며 지리적 특성에 따라 창으로 북악산과 인왕산이 동시에 보이며 청와대, 삼청동길까지 한 눈에 보이는 대전경뷰를 가지고 있습니다.   
+            - 프라이빗하게 독채 전부를 사용할 수 있습니다. - 야외 실외 자쿠지 이용 가능합니다 - 빔프로젝터로 넷플릭스 , TV , 유튜브 시청이 가능합니다. 
+            - 조용한 동네로 음주가무 등 파티는 불가능합니다. - 주차 불가합니다 (모두의주차장이나 인근 유료주차장을 이용하셔야합니다) 
+            - 숙소에 다칠 수 있는 위험요소가 많아 노키즈존으로 운영되고 있습니다.   - 삼성 비스포크 정수기 - 삼성 큐커(전자레인지, 에어프라이어, 토스터, 그릴) 
+            - 펠로우 스태그 커피포트 - 삼성 비스크보 청소기 - 트롬 세탁기 - 다이슨 헤어드라이기 - 다이슨 선풍기 - 이솝 어메니티 - 제네바 블루투스 스피커 
+            - 핸드드립 - 100인치 빔프로젝터 - 시몬스 매트리스 + 구스다운이불
             `,
-            amenities: [
-                {
-                    iconUrl: "./images/pages/search/main/miniDetail/amenities/image.svg", 
-                    name: "계곡 전망"
-                },
-                {
-                    iconUrl: "./images/pages/search/main/miniDetail/amenities/image.svg", 
-                    name: "산 전망"
-                },
-                {
-                    iconUrl: "./images/pages/search/main/miniDetail/amenities/wifi-full.svg", 
-                    name: "무선 인터넷"
-                },
-                {
-                    iconUrl: "./images/pages/search/main/miniDetail/amenities/tv.svg", 
-                    name: "45인치 HDTV + 프리미엄 케이블 TV"
-                },
-                {
-                    iconUrl: "./images/pages/search/main/miniDetail/amenities/car.svg", 
-                    name: "건물 내 무료 주차"
-                },
-                {
-                    iconUrl: "./images/pages/search/main/miniDetail/amenities/pool.svg",
-                    name: "전용 야외 수영장 - 연중 언제든 예약 가능, 특정 시간대만 이용 가능, 수영장 덮개, 온수"
-                },
-            ]
+            convenience : [
+                {con : "계곡 전망"},
+                {con : "산 전망"},
+                {con : "무선 인터넷"},
+                {con : "45인치 HDTV + 프리미엄 케이블 TV"},
+                {con : "건물 내 무료 주차"},
+                {con : "전용 야외 수영장 - 연중 언제든 예약가능,\n특정 시간대만 이용 가능, 수영장 덮개, 온수"},
+            ],
+            convenienceIcon : [
+                {icon : "picture"},
+                {icon : "picture"},
+                {icon : "wifi"},
+                {icon : "tv"},
+                {icon : "car"},
+                {icon : "pool"},
+            ],
         },
         {
             id : "7",
@@ -683,60 +552,38 @@ const SearchMainContainer = () => {
             title : "송파구 공동 주택",
             address : "서울 송파구",
             dayPrice : 150000364,
-            roomData : [
-                {
-                    iconUrl: "./images/pages/search/main/miniDetail/overview/user.svg",
-                    count: 2,
-                },
-                {
-                    iconUrl: "./images/pages/search/main/miniDetail/overview/house.svg",
-                    count: 1,
-                },
-                {
-                    iconUrl: "./images/pages/search/main/miniDetail/overview/bed-single.svg",
-                    count: 1,
-                },
-                {
-                    iconUrl: "./images/pages/search/main/miniDetail/overview/bath.svg",
-                    count: 1,
-                },
-            ],
-            introduction: `
-            집에 가져온 카페처럼 [서울 더레이크] 에 오신 것을 환영합니다.<br><br>
-            석촌호수와 롯데타워, 롯데월드가 내려다 보이는 나만의 공간에서 여유로운 휴식을 즐겨보세요~<br><br>
-            밤이되어 타워와 롯데월드에 조명이 켜지는 광경을 방안에 지켜보면 정말 멋있답니다~<br><br>
-            바로 앞에 석촌호수가 있어 산책하기에 좋고 건물1층 편의점, 송리단길, 먹자골목을 비롯해 롯데월드타워, 베이글 뮤지엄 등 잠실 주변 맛집들이 많습니다~<br><br>
-            편안한 잠자리를 위해 침구에 특별히 신경을 많이 썼습니다~ 이불도 구스이불이라 가볍고 포근해요~<br><br>
-            예약은 성인 최대 2인까지만 가능하며 뷰멍 때리며 조용히 쉬다가시고픈 분들 환영합니다~<br><br>
-            오시면 직접 느끼시겠지만 공간이 조용합니다~ 이웃분들이 모두 서로 배려하며 지내고 있기 때문인데요~ 그래서 이 공간을 함께 배려해주실 수 있는 분들을 기다리고 있습니다~<br><br>
-            구비되어 있는 품목들과 교통편 등 궁금하실 사항들을 정리해봤으니 잘 읽어봐주세요~<br><br>감사합니다🤗
+            roomData : {
+                maxUser : 2,
+                bedroom : 4,
+                bed : 3,
+                bathroom : 4,
+            },
+            description: `
+            집에 가져온 카페처럼 [서울 더레이크] 에 오신 것을 환영합니다.  
+            석촌호수와 롯데타워, 롯데월드가 내려다 보이는 나만의 공간에서 여유로운 휴식을 즐겨보세요~  
+            밤이되어 타워와 롯데월드에 조명이 켜지는 광경을 방안에 지켜보면 정말 멋있답니다~  
+            바로 앞에 석촌호수가 있어 산책하기에 좋고 건물1층 편의점, 송리단길, 먹자골목을 비롯해 롯데월드타워, 베이글 뮤지엄 등 잠실 주변 맛집들이 많습니다~  
+            편안한 잠자리를 위해 침구에 특별히 신경을 많이 썼습니다~ 이불도 구스이불이라 가볍고 포근해요~  
+            예약은 성인 최대 2인까지만 가능하며 뷰멍 때리며 조용히 쉬다가시고픈 분들 환영합니다~  
+            오시면 직접 느끼시겠지만 공간이 조용합니다~ 이웃분들이 모두 서로 배려하며 지내고 있기 때문인데요~ 그래서 이 공간을 함께 배려해주실 수 있는 분들을 기다리고 있습니다~  
+            구비되어 있는 품목들과 교통편 등 궁금하실 사항들을 정리해봤으니 잘 읽어봐주세요~  감사합니다🤗
             `,
-            amenities: [
-                {
-                    iconUrl: "./images/pages/search/main/miniDetail/amenities/image.svg", 
-                    name: "계곡 전망"
-                },
-                {
-                    iconUrl: "./images/pages/search/main/miniDetail/amenities/image.svg", 
-                    name: "산 전망"
-                },
-                {
-                    iconUrl: "./images/pages/search/main/miniDetail/amenities/wifi-full.svg", 
-                    name: "무선 인터넷"
-                },
-                {
-                    iconUrl: "./images/pages/search/main/miniDetail/amenities/tv.svg", 
-                    name: "45인치 HDTV + 프리미엄 케이블 TV"
-                },
-                {
-                    iconUrl: "./images/pages/search/main/miniDetail/amenities/car.svg", 
-                    name: "건물 내 무료 주차"
-                },
-                {
-                    iconUrl: "./images/pages/search/main/miniDetail/amenities/pool.svg",
-                    name: "전용 야외 수영장 - 연중 언제든 예약 가능, 특정 시간대만 이용 가능, 수영장 덮개, 온수"
-                },
-            ]
+            convenience : [
+                {con : "계곡 전망"},
+                {con : "산 전망"},
+                {con : "무선 인터넷"},
+                {con : "45인치 HDTV + 프리미엄 케이블 TV"},
+                {con : "건물 내 무료 주차"},
+                {con : "전용 야외 수영장 - 연중 언제든 예약가능,\n특정 시간대만 이용 가능, 수영장 덮개, 온수"},
+            ],
+            convenienceIcon : [
+                {icon : "picture"},
+                {icon : "picture"},
+                {icon : "wifi"},
+                {icon : "tv"},
+                {icon : "car"},
+                {icon : "pool"},
+            ],
         },
         {
             id : "8",
@@ -775,57 +622,35 @@ const SearchMainContainer = () => {
             title : "서대문구 창천동",
             address : "서울 서대문구",
             dayPrice : 15013135000,
-            roomData : [
-                {
-                    iconUrl: "./images/pages/search/main/miniDetail/overview/user.svg",
-                    count: 2,
-                },
-                {
-                    iconUrl: "./images/pages/search/main/miniDetail/overview/house.svg",
-                    count: 1,
-                },
-                {
-                    iconUrl: "./images/pages/search/main/miniDetail/overview/bed-single.svg",
-                    count: 1,
-                },
-                {
-                    iconUrl: "./images/pages/search/main/miniDetail/overview/bath.svg",
-                    count: 1,
-                },
-            ],
-            introduction: `
-            *저의 숙소는 서울특별시 서대문구 창천동에 위치 해있습니다* 저희 숙소는 귀여움과 안전!깔끔함 !편의 그리고 감각까지 모두 갖춘 분위기 있는 공간입니다~<br>
-            넷플릭스와 각종 ott를 영화같이 즐길 수 있는 빔프로젝터도 준비되어있습니다<br>*사진에서 보이는 예쁜 조명들도 저희 베어스테이에 머무시면서 <br>
-            예쁜 사진을 남길 수 있도록 여러분들께 제공됩니다~^^*<br>(조명 맛집이에요~ㅎㅎ)<br>*저희 숙소는 2층입니다*<br><br>
-            만약 예약 하고싶으신 날짜에 예약이 불가능하다면 다른 방도 준비되어있습니다~~!저희에게 다른방이 보고싶다고 연락주시면 아래 링크를 메세지로 보내드립니다!!.( 숙소의 인테리어 컨셉만 다를뿐 위치  층수 모두 동일합니다)<br>
+            roomData : {
+                maxUser : 2,
+                bedroom : 4,
+                bed : 3,
+                bathroom : 4,
+            },
+            description: `
+            *저의 숙소는 서울특별시 서대문구 창천동에 위치 해있습니다* 저희 숙소는 귀여움과 안전!깔끔함 !편의 그리고 감각까지 모두 갖춘 분위기 있는 공간입니다~ 
+            넷플릭스와 각종 ott를 영화같이 즐길 수 있는 빔프로젝터도 준비되어있습니다 *사진에서 보이는 예쁜 조명들도 저희 베어스테이에 머무시면서  
+            예쁜 사진을 남길 수 있도록 여러분들께 제공됩니다~^^* (조명 맛집이에요~ㅎㅎ) *저희 숙소는 2층입니다*  
+            만약 예약 하고싶으신 날짜에 예약이 불가능하다면 다른 방도 준비되어있습니다~~!저희에게 다른방이 보고싶다고 연락주시면 아래 링크를 메세지로 보내드립니다!!.( 숙소의 인테리어 컨셉만 다를뿐 위치  층수 모두 동일합니다) 
             https://www.airbnb.co.kr/h/105hohouse
             `,
-            amenities: [
-                {
-                    iconUrl: "./images/pages/search/main/miniDetail/amenities/image.svg", 
-                    name: "계곡 전망"
-                },
-                {
-                    iconUrl: "./images/pages/search/main/miniDetail/amenities/image.svg", 
-                    name: "산 전망"
-                },
-                {
-                    iconUrl: "./images/pages/search/main/miniDetail/amenities/wifi-full.svg", 
-                    name: "무선 인터넷"
-                },
-                {
-                    iconUrl: "./images/pages/search/main/miniDetail/amenities/tv.svg", 
-                    name: "45인치 HDTV + 프리미엄 케이블 TV"
-                },
-                {
-                    iconUrl: "./images/pages/search/main/miniDetail/amenities/car.svg", 
-                    name: "건물 내 무료 주차"
-                },
-                {
-                    iconUrl: "./images/pages/search/main/miniDetail/amenities/pool.svg",
-                    name: "전용 야외 수영장 - 연중 언제든 예약 가능, 특정 시간대만 이용 가능, 수영장 덮개, 온수"
-                },
-            ]
+            convenience : [
+                {con : "계곡 전망"},
+                {con : "산 전망"},
+                {con : "무선 인터넷"},
+                {con : "45인치 HDTV + 프리미엄 케이블 TV"},
+                {con : "건물 내 무료 주차"},
+                {con : "전용 야외 수영장 - 연중 언제든 예약가능,\n특정 시간대만 이용 가능, 수영장 덮개, 온수"},
+            ],
+            convenienceIcon : [
+                {icon : "picture"},
+                {icon : "picture"},
+                {icon : "wifi"},
+                {icon : "tv"},
+                {icon : "car"},
+                {icon : "pool"},
+            ],
         },
         {
             id : "9",
@@ -854,59 +679,37 @@ const SearchMainContainer = () => {
             title : "강원도 영월",
             address : "강원도 영월",
             dayPrice : 1500,
-            roomData : [
-                {
-                    iconUrl: "./images/pages/search/main/miniDetail/overview/user.svg",
-                    count: 2,
-                },
-                {
-                    iconUrl: "./images/pages/search/main/miniDetail/overview/house.svg",
-                    count: 1,
-                },
-                {
-                    iconUrl: "./images/pages/search/main/miniDetail/overview/bed-single.svg",
-                    count: 1,
-                },
-                {
-                    iconUrl: "./images/pages/search/main/miniDetail/overview/bath.svg",
-                    count: 1,
-                },
-            ],
-            introduction: `
-            영월의 스테이하우스는 커플이 프라이빗하게 쉬기 좋은 객실입니다.  <br>
-            별도의 출입문 계단이 있는 2층 전체를 사용합니다.<br>
+            roomData : {
+                maxUser : 2,
+                bedroom : 4,
+                bed : 3,
+                bathroom : 4,
+            },
+            description: `
+            영월의 스테이하우스는 커플이 프라이빗하게 쉬기 좋은 객실입니다.   
+            별도의 출입문 계단이 있는 2층 전체를 사용합니다. 
             창밖으로 보이는 주변 뷰와 예쁜 정원이 아름답고, 창밖으로 들리는 계곡물소리와 지저귀는 새소리 그리고 맑은 공기는 도시에서 지친 마음에 휴식을 주며,
-            매일 청결하게 관리하는 침구는 편안한 잠자리를 제공합니다. <br>김삿갓계곡의 외씨버선길과 가깝고 숙소 바로 앞에는 아름다운 계곡이 흐르고 있습니다.<br>
+            매일 청결하게 관리하는 침구는 편안한 잠자리를 제공합니다.  김삿갓계곡의 외씨버선길과 가깝고 숙소 바로 앞에는 아름다운 계곡이 흐르고 있습니다. 
             객실에서는 넷플릭스 및 Marshall 스피커로 감미로운 음악과 함께 빔 프로젝터로 보다 실감나고 편하게 영화를 감상하실 수 있으며, 
-            해질녘에는 아름다운 정원의 해먹에 누워 자연속에서 재충전의 시간을 가져보세요~<br>
+            해질녘에는 아름다운 정원의 해먹에 누워 자연속에서 재충전의 시간을 가져보세요~ 
             + 예약가능인원: 성인 2명(영월 스테이하우스는 노키즈존으로 운영됩니다.)
             `,
-            amenities: [
-                {
-                    iconUrl: "./images/pages/search/main/miniDetail/amenities/image.svg", 
-                    name: "계곡 전망"
-                },
-                {
-                    iconUrl: "./images/pages/search/main/miniDetail/amenities/image.svg", 
-                    name: "산 전망"
-                },
-                {
-                    iconUrl: "./images/pages/search/main/miniDetail/amenities/wifi-full.svg", 
-                    name: "무선 인터넷"
-                },
-                {
-                    iconUrl: "./images/pages/search/main/miniDetail/amenities/tv.svg", 
-                    name: "45인치 HDTV + 프리미엄 케이블 TV"
-                },
-                {
-                    iconUrl: "./images/pages/search/main/miniDetail/amenities/car.svg", 
-                    name: "건물 내 무료 주차"
-                },
-                {
-                    iconUrl: "./images/pages/search/main/miniDetail/amenities/pool.svg",
-                    name: "전용 야외 수영장 - 연중 언제든 예약 가능, 특정 시간대만 이용 가능, 수영장 덮개, 온수"
-                },
-            ]
+            convenience : [
+                {con : "계곡 전망"},
+                {con : "산 전망"},
+                {con : "무선 인터넷"},
+                {con : "45인치 HDTV + 프리미엄 케이블 TV"},
+                {con : "건물 내 무료 주차"},
+                {con : "전용 야외 수영장 - 연중 언제든 예약가능,\n특정 시간대만 이용 가능, 수영장 덮개, 온수"},
+            ],
+            convenienceIcon : [
+                {icon : "picture"},
+                {icon : "picture"},
+                {icon : "wifi"},
+                {icon : "tv"},
+                {icon : "car"},
+                {icon : "pool"},
+            ],
         },
         {
             id : "10",
@@ -933,56 +736,34 @@ const SearchMainContainer = () => {
             title : "강원도 강릉",
             address : "강원도 강릉",
             dayPrice : 124560000,
-            roomData : [
-                {
-                    iconUrl: "./images/pages/search/main/miniDetail/overview/user.svg",
-                    count: 6,
-                },
-                {
-                    iconUrl: "./images/pages/search/main/miniDetail/overview/house.svg",
-                    count: 2,
-                },
-                {
-                    iconUrl: "./images/pages/search/main/miniDetail/overview/bed-single.svg",
-                    count: 2,
-                },
-                {
-                    iconUrl: "./images/pages/search/main/miniDetail/overview/bath.svg",
-                    count: 2,
-                },
-            ],
-            introduction: `
-            이 독특한 숙소는 개성 넘치는 스타일을 자랑합니다.<br><br>
-            숙소<br>교동의 조용한 주택가에 위치한 숙소입니다<br>
-            2층전체를 이용합니다<br>아랫층 분들 배려해 실내화 착화 및 10시 이후 정숙해 주세요<br><br>기타 주의사항<br>분리수거 설거지<br>
-            냄새가 심하거나 기름이 많이튀는 음식 조리불가;삼겹살,스테이크,매운탕 등<br>🚭실내절대금연<br><br>
+            roomData : {
+                maxUser : 2,
+                bedroom : 4,
+                bed : 3,
+                bathroom : 4,
+            },
+            description: `
+            이 독특한 숙소는 개성 넘치는 스타일을 자랑합니다.  
+            숙소 교동의 조용한 주택가에 위치한 숙소입니다 
+            2층전체를 이용합니다 아랫층 분들 배려해 실내화 착화 및 10시 이후 정숙해 주세요  기타 주의사항 분리수거 설거지 
+            냄새가 심하거나 기름이 많이튀는 음식 조리불가;삼겹살,스테이크,매운탕 등 🚭실내절대금연  
             `,
-            amenities: [
-                {
-                    iconUrl: "./images/pages/search/main/miniDetail/amenities/image.svg", 
-                    name: "계곡 전망"
-                },
-                {
-                    iconUrl: "./images/pages/search/main/miniDetail/amenities/image.svg", 
-                    name: "산 전망"
-                },
-                {
-                    iconUrl: "./images/pages/search/main/miniDetail/amenities/wifi-full.svg", 
-                    name: "무선 인터넷"
-                },
-                {
-                    iconUrl: "./images/pages/search/main/miniDetail/amenities/tv.svg", 
-                    name: "45인치 HDTV + 프리미엄 케이블 TV"
-                },
-                {
-                    iconUrl: "./images/pages/search/main/miniDetail/amenities/car.svg", 
-                    name: "건물 내 무료 주차"
-                },
-                {
-                    iconUrl: "./images/pages/search/main/miniDetail/amenities/pool.svg",
-                    name: "전용 야외 수영장 - 연중 언제든 예약 가능, 특정 시간대만 이용 가능, 수영장 덮개, 온수"
-                },
-            ]
+            convenience : [
+                {con : "계곡 전망"},
+                {con : "산 전망"},
+                {con : "무선 인터넷"},
+                {con : "45인치 HDTV + 프리미엄 케이블 TV"},
+                {con : "건물 내 무료 주차"},
+                {con : "전용 야외 수영장 - 연중 언제든 예약가능,\n특정 시간대만 이용 가능, 수영장 덮개, 온수"},
+            ],
+            convenienceIcon : [
+                {icon : "picture"},
+                {icon : "picture"},
+                {icon : "wifi"},
+                {icon : "tv"},
+                {icon : "car"},
+                {icon : "pool"},
+            ],
         },
         {
             id : "11",
@@ -1003,67 +784,458 @@ const SearchMainContainer = () => {
             title : "강원도 강릉 강문동",
             address : "강원도 강릉 강문동",
             dayPrice : 1500000,
-            roomData : [
-                {
-                    iconUrl: "./images/pages/search/main/miniDetail/overview/user.svg",
-                    count: 3,
-                },
-                {
-                    iconUrl: "./images/pages/search/main/miniDetail/overview/house.svg",
-                    count: 1,
-                },
-                {
-                    iconUrl: "./images/pages/search/main/miniDetail/overview/bed-single.svg",
-                    count: 1,
-                },
-                {
-                    iconUrl: "./images/pages/search/main/miniDetail/overview/bath.svg",
-                    count: 1,
-                },
-            ],
-            introduction: `
-            세인트존스 경포호텔은 강문해변 앞에 위치해있으며, 오션뷰 객실로 시원한 동해 바다와 소나무를 함께 보실 수 있습니다. <br><br>
-            숙소 바로 앞에 해변가를 따라 소나무 길이 위치해 있어 거리를 산책하며 청정 자연을 만끽할 수 있습니다. <br><br>
-            호텔 주변에는 경포대와 최근 인기가 많아진 카페거리가 위아래로 인접해 있으며, 동해바다와 소나무를 따라 펼처진 해안도로는 드라이브의 운치를 더해줍니다. <br><br>
-            행복하고 잊지 못할 추억을 만들어가세요 :)<br><br>
+            roomData : {
+                maxUser : 2,
+                bedroom : 4,
+                bed : 3,
+                bathroom : 4,
+            },
+            description: `
+            세인트존스 경포호텔은 강문해변 앞에 위치해있으며, 오션뷰 객실로 시원한 동해 바다와 소나무를 함께 보실 수 있습니다.   
+            숙소 바로 앞에 해변가를 따라 소나무 길이 위치해 있어 거리를 산책하며 청정 자연을 만끽할 수 있습니다.   
+            호텔 주변에는 경포대와 최근 인기가 많아진 카페거리가 위아래로 인접해 있으며, 동해바다와 소나무를 따라 펼처진 해안도로는 드라이브의 운치를 더해줍니다.   
+            행복하고 잊지 못할 추억을 만들어가세요 :)  
             `,
-            amenities: [
-                {
-                    iconUrl: "./images/pages/search/main/miniDetail/amenities/image.svg", 
-                    name: "계곡 전망"
-                },
-                {
-                    iconUrl: "./images/pages/search/main/miniDetail/amenities/image.svg", 
-                    name: "산 전망"
-                },
-                {
-                    iconUrl: "./images/pages/search/main/miniDetail/amenities/wifi-full.svg", 
-                    name: "무선 인터넷"
-                },
-                {
-                    iconUrl: "./images/pages/search/main/miniDetail/amenities/tv.svg", 
-                    name: "45인치 HDTV + 프리미엄 케이블 TV"
-                },
-                {
-                    iconUrl: "./images/pages/search/main/miniDetail/amenities/car.svg", 
-                    name: "건물 내 무료 주차"
-                },
-                {
-                    iconUrl: "./images/pages/search/main/miniDetail/amenities/pool.svg",
-                    name: "전용 야외 수영장 - 연중 언제든 예약 가능, 특정 시간대만 이용 가능, 수영장 덮개, 온수"
-                },
-            ]
+            convenience : [
+                {con : "계곡 전망"},
+                {con : "산 전망"},
+                {con : "무선 인터넷"},
+                {con : "45인치 HDTV + 프리미엄 케이블 TV"},
+                {con : "건물 내 무료 주차"},
+                {con : "전용 야외 수영장 - 연중 언제든 예약가능,\n특정 시간대만 이용 가능, 수영장 덮개, 온수"},
+            ],
+            convenienceIcon : [
+                {icon : "picture"},
+                {icon : "picture"},
+                {icon : "wifi"},
+                {icon : "tv"},
+                {icon : "car"},
+                {icon : "pool"},
+            ],
+        },
+        {
+            id : "11",
+            cate : "coolPool",
+            img : [
+                "./images/pages/search/main/cardList/_11_/0c862c16-5fa9-4fca-80b2-2f4941dba801.jpg",
+                "./images/pages/search/main/cardList/_11_/270dd3af-0c38-43fd-b2b0-467e6f2bc508.jpg",
+                "./images/pages/search/main/cardList/_11_/6795f572-c2a1-4bbc-a66f-39124a97e4e8.jpg",
+                "./images/pages/search/main/cardList/_11_/6ee4733a-91d4-4dc1-a63c-964586853fc9.jpg",
+                "./images/pages/search/main/cardList/_11_/718e75ab-ce73-430e-9354-ffa5d2224132.jpg",
+                "./images/pages/search/main/cardList/_11_/86fbcbce-f1ce-49ef-afb6-2e82c14a4316.jpg",
+                "./images/pages/search/main/cardList/_11_/8abcd419-96aa-4971-a7fd-abfd4203d007.jpg",
+                "./images/pages/search/main/cardList/_11_/8d71f5a3-145d-4c23-8d4d-f0577ff8039e.jpg",
+                "./images/pages/search/main/cardList/_11_/b4dae24d-b019-49b9-9bb4-1825e4a5aca6.jpg",
+                "./images/pages/search/main/cardList/_11_/b7edb368-506f-4764-8abf-593c60d55c40.jpg",
+                "./images/pages/search/main/cardList/_11_/baf28f62-62ce-4035-adc3-116cc11e40be.jpg",
+            ],
+            title : "강원도 강릉 강문동",
+            address : "강원도 강릉 강문동",
+            dayPrice : 1500000,
+            roomData : {
+                maxUser : 2,
+                bedroom : 4,
+                bed : 3,
+                bathroom : 4,
+            },
+            description: `
+            세인트존스 경포호텔은 강문해변 앞에 위치해있으며, 오션뷰 객실로 시원한 동해 바다와 소나무를 함께 보실 수 있습니다.   
+            숙소 바로 앞에 해변가를 따라 소나무 길이 위치해 있어 거리를 산책하며 청정 자연을 만끽할 수 있습니다.   
+            호텔 주변에는 경포대와 최근 인기가 많아진 카페거리가 위아래로 인접해 있으며, 동해바다와 소나무를 따라 펼처진 해안도로는 드라이브의 운치를 더해줍니다.   
+            행복하고 잊지 못할 추억을 만들어가세요 :)  
+            `,
+            convenience : [
+                {con : "계곡 전망"},
+                {con : "산 전망"},
+                {con : "무선 인터넷"},
+                {con : "45인치 HDTV + 프리미엄 케이블 TV"},
+                {con : "건물 내 무료 주차"},
+                {con : "전용 야외 수영장 - 연중 언제든 예약가능,\n특정 시간대만 이용 가능, 수영장 덮개, 온수"},
+            ],
+            convenienceIcon : [
+                {icon : "picture"},
+                {icon : "picture"},
+                {icon : "wifi"},
+                {icon : "tv"},
+                {icon : "car"},
+                {icon : "pool"},
+            ],
+        },
+        {
+            id : "11",
+            cate : "coolPool",
+            img : [
+                "./images/pages/search/main/cardList/_11_/0c862c16-5fa9-4fca-80b2-2f4941dba801.jpg",
+                "./images/pages/search/main/cardList/_11_/270dd3af-0c38-43fd-b2b0-467e6f2bc508.jpg",
+                "./images/pages/search/main/cardList/_11_/6795f572-c2a1-4bbc-a66f-39124a97e4e8.jpg",
+                "./images/pages/search/main/cardList/_11_/6ee4733a-91d4-4dc1-a63c-964586853fc9.jpg",
+                "./images/pages/search/main/cardList/_11_/718e75ab-ce73-430e-9354-ffa5d2224132.jpg",
+                "./images/pages/search/main/cardList/_11_/86fbcbce-f1ce-49ef-afb6-2e82c14a4316.jpg",
+                "./images/pages/search/main/cardList/_11_/8abcd419-96aa-4971-a7fd-abfd4203d007.jpg",
+                "./images/pages/search/main/cardList/_11_/8d71f5a3-145d-4c23-8d4d-f0577ff8039e.jpg",
+                "./images/pages/search/main/cardList/_11_/b4dae24d-b019-49b9-9bb4-1825e4a5aca6.jpg",
+                "./images/pages/search/main/cardList/_11_/b7edb368-506f-4764-8abf-593c60d55c40.jpg",
+                "./images/pages/search/main/cardList/_11_/baf28f62-62ce-4035-adc3-116cc11e40be.jpg",
+            ],
+            title : "강원도 강릉 강문동",
+            address : "강원도 강릉 강문동",
+            dayPrice : 1500000,
+            roomData : {
+                maxUser : 2,
+                bedroom : 4,
+                bed : 3,
+                bathroom : 4,
+            },
+            description: `
+            세인트존스 경포호텔은 강문해변 앞에 위치해있으며, 오션뷰 객실로 시원한 동해 바다와 소나무를 함께 보실 수 있습니다.   
+            숙소 바로 앞에 해변가를 따라 소나무 길이 위치해 있어 거리를 산책하며 청정 자연을 만끽할 수 있습니다.   
+            호텔 주변에는 경포대와 최근 인기가 많아진 카페거리가 위아래로 인접해 있으며, 동해바다와 소나무를 따라 펼처진 해안도로는 드라이브의 운치를 더해줍니다.   
+            행복하고 잊지 못할 추억을 만들어가세요 :)  
+            `,
+            convenience : [
+                {con : "계곡 전망"},
+                {con : "산 전망"},
+                {con : "무선 인터넷"},
+                {con : "45인치 HDTV + 프리미엄 케이블 TV"},
+                {con : "건물 내 무료 주차"},
+                {con : "전용 야외 수영장 - 연중 언제든 예약가능,\n특정 시간대만 이용 가능, 수영장 덮개, 온수"},
+            ],
+            convenienceIcon : [
+                {icon : "picture"},
+                {icon : "picture"},
+                {icon : "wifi"},
+                {icon : "tv"},
+                {icon : "car"},
+                {icon : "pool"},
+            ],
+        },
+        {
+            id : "11",
+            cate : "coolPool",
+            img : [
+                "./images/pages/search/main/cardList/_11_/0c862c16-5fa9-4fca-80b2-2f4941dba801.jpg",
+                "./images/pages/search/main/cardList/_11_/270dd3af-0c38-43fd-b2b0-467e6f2bc508.jpg",
+                "./images/pages/search/main/cardList/_11_/6795f572-c2a1-4bbc-a66f-39124a97e4e8.jpg",
+                "./images/pages/search/main/cardList/_11_/6ee4733a-91d4-4dc1-a63c-964586853fc9.jpg",
+                "./images/pages/search/main/cardList/_11_/718e75ab-ce73-430e-9354-ffa5d2224132.jpg",
+                "./images/pages/search/main/cardList/_11_/86fbcbce-f1ce-49ef-afb6-2e82c14a4316.jpg",
+                "./images/pages/search/main/cardList/_11_/8abcd419-96aa-4971-a7fd-abfd4203d007.jpg",
+                "./images/pages/search/main/cardList/_11_/8d71f5a3-145d-4c23-8d4d-f0577ff8039e.jpg",
+                "./images/pages/search/main/cardList/_11_/b4dae24d-b019-49b9-9bb4-1825e4a5aca6.jpg",
+                "./images/pages/search/main/cardList/_11_/b7edb368-506f-4764-8abf-593c60d55c40.jpg",
+                "./images/pages/search/main/cardList/_11_/baf28f62-62ce-4035-adc3-116cc11e40be.jpg",
+            ],
+            title : "강원도 강릉 강문동",
+            address : "강원도 강릉 강문동",
+            dayPrice : 1500000,
+            roomData : {
+                maxUser : 2,
+                bedroom : 4,
+                bed : 3,
+                bathroom : 4,
+            },
+            description: `
+            세인트존스 경포호텔은 강문해변 앞에 위치해있으며, 오션뷰 객실로 시원한 동해 바다와 소나무를 함께 보실 수 있습니다.   
+            숙소 바로 앞에 해변가를 따라 소나무 길이 위치해 있어 거리를 산책하며 청정 자연을 만끽할 수 있습니다.   
+            호텔 주변에는 경포대와 최근 인기가 많아진 카페거리가 위아래로 인접해 있으며, 동해바다와 소나무를 따라 펼처진 해안도로는 드라이브의 운치를 더해줍니다.   
+            행복하고 잊지 못할 추억을 만들어가세요 :)  
+            `,
+            convenience : [
+                {con : "계곡 전망"},
+                {con : "산 전망"},
+                {con : "무선 인터넷"},
+                {con : "45인치 HDTV + 프리미엄 케이블 TV"},
+                {con : "건물 내 무료 주차"},
+                {con : "전용 야외 수영장 - 연중 언제든 예약가능,\n특정 시간대만 이용 가능, 수영장 덮개, 온수"},
+            ],
+            convenienceIcon : [
+                {icon : "picture"},
+                {icon : "picture"},
+                {icon : "wifi"},
+                {icon : "tv"},
+                {icon : "car"},
+                {icon : "pool"},
+            ],
+        },
+        {
+            id : "11",
+            cate : "coolPool",
+            img : [
+                "./images/pages/search/main/cardList/_11_/0c862c16-5fa9-4fca-80b2-2f4941dba801.jpg",
+                "./images/pages/search/main/cardList/_11_/270dd3af-0c38-43fd-b2b0-467e6f2bc508.jpg",
+                "./images/pages/search/main/cardList/_11_/6795f572-c2a1-4bbc-a66f-39124a97e4e8.jpg",
+                "./images/pages/search/main/cardList/_11_/6ee4733a-91d4-4dc1-a63c-964586853fc9.jpg",
+                "./images/pages/search/main/cardList/_11_/718e75ab-ce73-430e-9354-ffa5d2224132.jpg",
+                "./images/pages/search/main/cardList/_11_/86fbcbce-f1ce-49ef-afb6-2e82c14a4316.jpg",
+                "./images/pages/search/main/cardList/_11_/8abcd419-96aa-4971-a7fd-abfd4203d007.jpg",
+                "./images/pages/search/main/cardList/_11_/8d71f5a3-145d-4c23-8d4d-f0577ff8039e.jpg",
+                "./images/pages/search/main/cardList/_11_/b4dae24d-b019-49b9-9bb4-1825e4a5aca6.jpg",
+                "./images/pages/search/main/cardList/_11_/b7edb368-506f-4764-8abf-593c60d55c40.jpg",
+                "./images/pages/search/main/cardList/_11_/baf28f62-62ce-4035-adc3-116cc11e40be.jpg",
+            ],
+            title : "강원도 강릉 강문동",
+            address : "강원도 강릉 강문동",
+            dayPrice : 1500000,
+            roomData : {
+                maxUser : 2,
+                bedroom : 4,
+                bed : 3,
+                bathroom : 4,
+            },
+            description: `
+            세인트존스 경포호텔은 강문해변 앞에 위치해있으며, 오션뷰 객실로 시원한 동해 바다와 소나무를 함께 보실 수 있습니다.   
+            숙소 바로 앞에 해변가를 따라 소나무 길이 위치해 있어 거리를 산책하며 청정 자연을 만끽할 수 있습니다.   
+            호텔 주변에는 경포대와 최근 인기가 많아진 카페거리가 위아래로 인접해 있으며, 동해바다와 소나무를 따라 펼처진 해안도로는 드라이브의 운치를 더해줍니다.   
+            행복하고 잊지 못할 추억을 만들어가세요 :)  
+            `,
+            convenience : [
+                {con : "계곡 전망"},
+                {con : "산 전망"},
+                {con : "무선 인터넷"},
+                {con : "45인치 HDTV + 프리미엄 케이블 TV"},
+                {con : "건물 내 무료 주차"},
+                {con : "전용 야외 수영장 - 연중 언제든 예약가능,\n특정 시간대만 이용 가능, 수영장 덮개, 온수"},
+            ],
+            convenienceIcon : [
+                {icon : "picture"},
+                {icon : "picture"},
+                {icon : "wifi"},
+                {icon : "tv"},
+                {icon : "car"},
+                {icon : "pool"},
+            ],
+        },
+        {
+            id : "11",
+            cate : "coolPool",
+            img : [
+                "./images/pages/search/main/cardList/_11_/0c862c16-5fa9-4fca-80b2-2f4941dba801.jpg",
+                "./images/pages/search/main/cardList/_11_/270dd3af-0c38-43fd-b2b0-467e6f2bc508.jpg",
+                "./images/pages/search/main/cardList/_11_/6795f572-c2a1-4bbc-a66f-39124a97e4e8.jpg",
+                "./images/pages/search/main/cardList/_11_/6ee4733a-91d4-4dc1-a63c-964586853fc9.jpg",
+                "./images/pages/search/main/cardList/_11_/718e75ab-ce73-430e-9354-ffa5d2224132.jpg",
+                "./images/pages/search/main/cardList/_11_/86fbcbce-f1ce-49ef-afb6-2e82c14a4316.jpg",
+                "./images/pages/search/main/cardList/_11_/8abcd419-96aa-4971-a7fd-abfd4203d007.jpg",
+                "./images/pages/search/main/cardList/_11_/8d71f5a3-145d-4c23-8d4d-f0577ff8039e.jpg",
+                "./images/pages/search/main/cardList/_11_/b4dae24d-b019-49b9-9bb4-1825e4a5aca6.jpg",
+                "./images/pages/search/main/cardList/_11_/b7edb368-506f-4764-8abf-593c60d55c40.jpg",
+                "./images/pages/search/main/cardList/_11_/baf28f62-62ce-4035-adc3-116cc11e40be.jpg",
+            ],
+            title : "강원도 강릉 강문동",
+            address : "강원도 강릉 강문동",
+            dayPrice : 1500000,
+            roomData : {
+                maxUser : 2,
+                bedroom : 4,
+                bed : 3,
+                bathroom : 4,
+            },
+            description: `
+            세인트존스 경포호텔은 강문해변 앞에 위치해있으며, 오션뷰 객실로 시원한 동해 바다와 소나무를 함께 보실 수 있습니다.   
+            숙소 바로 앞에 해변가를 따라 소나무 길이 위치해 있어 거리를 산책하며 청정 자연을 만끽할 수 있습니다.   
+            호텔 주변에는 경포대와 최근 인기가 많아진 카페거리가 위아래로 인접해 있으며, 동해바다와 소나무를 따라 펼처진 해안도로는 드라이브의 운치를 더해줍니다.   
+            행복하고 잊지 못할 추억을 만들어가세요 :)  
+            `,
+            convenience : [
+                {con : "계곡 전망"},
+                {con : "산 전망"},
+                {con : "무선 인터넷"},
+                {con : "45인치 HDTV + 프리미엄 케이블 TV"},
+                {con : "건물 내 무료 주차"},
+                {con : "전용 야외 수영장 - 연중 언제든 예약가능,\n특정 시간대만 이용 가능, 수영장 덮개, 온수"},
+            ],
+            convenienceIcon : [
+                {icon : "picture"},
+                {icon : "picture"},
+                {icon : "wifi"},
+                {icon : "tv"},
+                {icon : "car"},
+                {icon : "pool"},
+            ],
+        },
+        {
+            id : "11",
+            cate : "coolPool",
+            img : [
+                "./images/pages/search/main/cardList/_11_/0c862c16-5fa9-4fca-80b2-2f4941dba801.jpg",
+                "./images/pages/search/main/cardList/_11_/270dd3af-0c38-43fd-b2b0-467e6f2bc508.jpg",
+                "./images/pages/search/main/cardList/_11_/6795f572-c2a1-4bbc-a66f-39124a97e4e8.jpg",
+                "./images/pages/search/main/cardList/_11_/6ee4733a-91d4-4dc1-a63c-964586853fc9.jpg",
+                "./images/pages/search/main/cardList/_11_/718e75ab-ce73-430e-9354-ffa5d2224132.jpg",
+                "./images/pages/search/main/cardList/_11_/86fbcbce-f1ce-49ef-afb6-2e82c14a4316.jpg",
+                "./images/pages/search/main/cardList/_11_/8abcd419-96aa-4971-a7fd-abfd4203d007.jpg",
+                "./images/pages/search/main/cardList/_11_/8d71f5a3-145d-4c23-8d4d-f0577ff8039e.jpg",
+                "./images/pages/search/main/cardList/_11_/b4dae24d-b019-49b9-9bb4-1825e4a5aca6.jpg",
+                "./images/pages/search/main/cardList/_11_/b7edb368-506f-4764-8abf-593c60d55c40.jpg",
+                "./images/pages/search/main/cardList/_11_/baf28f62-62ce-4035-adc3-116cc11e40be.jpg",
+            ],
+            title : "강원도 강릉 강문동",
+            address : "강원도 강릉 강문동",
+            dayPrice : 1500000,
+            roomData : {
+                maxUser : 2,
+                bedroom : 4,
+                bed : 3,
+                bathroom : 4,
+            },
+            description: `
+            세인트존스 경포호텔은 강문해변 앞에 위치해있으며, 오션뷰 객실로 시원한 동해 바다와 소나무를 함께 보실 수 있습니다.   
+            숙소 바로 앞에 해변가를 따라 소나무 길이 위치해 있어 거리를 산책하며 청정 자연을 만끽할 수 있습니다.   
+            호텔 주변에는 경포대와 최근 인기가 많아진 카페거리가 위아래로 인접해 있으며, 동해바다와 소나무를 따라 펼처진 해안도로는 드라이브의 운치를 더해줍니다.   
+            행복하고 잊지 못할 추억을 만들어가세요 :)  
+            `,
+            convenience : [
+                {con : "계곡 전망"},
+                {con : "산 전망"},
+                {con : "무선 인터넷"},
+                {con : "45인치 HDTV + 프리미엄 케이블 TV"},
+                {con : "건물 내 무료 주차"},
+                {con : "전용 야외 수영장 - 연중 언제든 예약가능,\n특정 시간대만 이용 가능, 수영장 덮개, 온수"},
+            ],
+            convenienceIcon : [
+                {icon : "picture"},
+                {icon : "picture"},
+                {icon : "wifi"},
+                {icon : "tv"},
+                {icon : "car"},
+                {icon : "pool"},
+            ],
+        },
+        {
+            id : "11",
+            cate : "coolPool",
+            img : [
+                "./images/pages/search/main/cardList/_11_/0c862c16-5fa9-4fca-80b2-2f4941dba801.jpg",
+                "./images/pages/search/main/cardList/_11_/270dd3af-0c38-43fd-b2b0-467e6f2bc508.jpg",
+                "./images/pages/search/main/cardList/_11_/6795f572-c2a1-4bbc-a66f-39124a97e4e8.jpg",
+                "./images/pages/search/main/cardList/_11_/6ee4733a-91d4-4dc1-a63c-964586853fc9.jpg",
+                "./images/pages/search/main/cardList/_11_/718e75ab-ce73-430e-9354-ffa5d2224132.jpg",
+                "./images/pages/search/main/cardList/_11_/86fbcbce-f1ce-49ef-afb6-2e82c14a4316.jpg",
+                "./images/pages/search/main/cardList/_11_/8abcd419-96aa-4971-a7fd-abfd4203d007.jpg",
+                "./images/pages/search/main/cardList/_11_/8d71f5a3-145d-4c23-8d4d-f0577ff8039e.jpg",
+                "./images/pages/search/main/cardList/_11_/b4dae24d-b019-49b9-9bb4-1825e4a5aca6.jpg",
+                "./images/pages/search/main/cardList/_11_/b7edb368-506f-4764-8abf-593c60d55c40.jpg",
+                "./images/pages/search/main/cardList/_11_/baf28f62-62ce-4035-adc3-116cc11e40be.jpg",
+            ],
+            title : "강원도 강릉 강문동",
+            address : "강원도 강릉 강문동",
+            dayPrice : 1500000,
+            roomData : {
+                maxUser : 2,
+                bedroom : 4,
+                bed : 3,
+                bathroom : 4,
+            },
+            description: `
+            세인트존스 경포호텔은 강문해변 앞에 위치해있으며, 오션뷰 객실로 시원한 동해 바다와 소나무를 함께 보실 수 있습니다.   
+            숙소 바로 앞에 해변가를 따라 소나무 길이 위치해 있어 거리를 산책하며 청정 자연을 만끽할 수 있습니다.   
+            호텔 주변에는 경포대와 최근 인기가 많아진 카페거리가 위아래로 인접해 있으며, 동해바다와 소나무를 따라 펼처진 해안도로는 드라이브의 운치를 더해줍니다.   
+            행복하고 잊지 못할 추억을 만들어가세요 :)  
+            `,
+            convenience : [
+                {con : "계곡 전망"},
+                {con : "산 전망"},
+                {con : "무선 인터넷"},
+                {con : "45인치 HDTV + 프리미엄 케이블 TV"},
+                {con : "건물 내 무료 주차"},
+                {con : "전용 야외 수영장 - 연중 언제든 예약가능,\n특정 시간대만 이용 가능, 수영장 덮개, 온수"},
+            ],
+            convenienceIcon : [
+                {icon : "picture"},
+                {icon : "picture"},
+                {icon : "wifi"},
+                {icon : "tv"},
+                {icon : "car"},
+                {icon : "pool"},
+            ],
+        },
+        {
+            id : "11",
+            cate : "coolPool",
+            img : [
+                "./images/pages/search/main/cardList/_11_/0c862c16-5fa9-4fca-80b2-2f4941dba801.jpg",
+                "./images/pages/search/main/cardList/_11_/270dd3af-0c38-43fd-b2b0-467e6f2bc508.jpg",
+                "./images/pages/search/main/cardList/_11_/6795f572-c2a1-4bbc-a66f-39124a97e4e8.jpg",
+                "./images/pages/search/main/cardList/_11_/6ee4733a-91d4-4dc1-a63c-964586853fc9.jpg",
+                "./images/pages/search/main/cardList/_11_/718e75ab-ce73-430e-9354-ffa5d2224132.jpg",
+                "./images/pages/search/main/cardList/_11_/86fbcbce-f1ce-49ef-afb6-2e82c14a4316.jpg",
+                "./images/pages/search/main/cardList/_11_/8abcd419-96aa-4971-a7fd-abfd4203d007.jpg",
+                "./images/pages/search/main/cardList/_11_/8d71f5a3-145d-4c23-8d4d-f0577ff8039e.jpg",
+                "./images/pages/search/main/cardList/_11_/b4dae24d-b019-49b9-9bb4-1825e4a5aca6.jpg",
+                "./images/pages/search/main/cardList/_11_/b7edb368-506f-4764-8abf-593c60d55c40.jpg",
+                "./images/pages/search/main/cardList/_11_/baf28f62-62ce-4035-adc3-116cc11e40be.jpg",
+            ],
+            title : "강원도 강릉 강문동",
+            address : "강원도 강릉 강문동",
+            dayPrice : 1500000,
+            roomData : {
+                maxUser : 2,
+                bedroom : 4,
+                bed : 3,
+                bathroom : 4,
+            },
+            description: `
+            세인트존스 경포호텔은 강문해변 앞에 위치해있으며, 오션뷰 객실로 시원한 동해 바다와 소나무를 함께 보실 수 있습니다.   
+            숙소 바로 앞에 해변가를 따라 소나무 길이 위치해 있어 거리를 산책하며 청정 자연을 만끽할 수 있습니다.   
+            호텔 주변에는 경포대와 최근 인기가 많아진 카페거리가 위아래로 인접해 있으며, 동해바다와 소나무를 따라 펼처진 해안도로는 드라이브의 운치를 더해줍니다.   
+            행복하고 잊지 못할 추억을 만들어가세요 :)  
+            `,
+            convenience : [
+                {con : "계곡 전망"},
+                {con : "산 전망"},
+                {con : "무선 인터넷"},
+                {con : "45인치 HDTV + 프리미엄 케이블 TV"},
+                {con : "건물 내 무료 주차"},
+                {con : "전용 야외 수영장 - 연중 언제든 예약가능,\n특정 시간대만 이용 가능, 수영장 덮개, 온수"},
+            ],
+            convenienceIcon : [
+                {icon : "picture"},
+                {icon : "picture"},
+                {icon : "wifi"},
+                {icon : "tv"},
+                {icon : "car"},
+                {icon : "pool"},
+            ],
         },
     ];
 
-    // CardList에서 클릭한 컴포넌트 MiniDetail에 띄우기 위한 상태
+    // CardList에서 클릭한 컴포넌트 MiniDetail에 띄우기 위한 상태(인덱스값)
     const [ clickCardListIndex, setClickCardListIndex ] = useState(0);
 
+    // 상원씨가 보내준 쿼리스트링
+    const [ searchParams ] = useSearchParams(`?val=서울&guests=1`);
+    const maxUser = searchParams.get("guests");
+    const area = searchParams.get("val");
+    const cate = searchParams.get("cate");
+
+    // 검색결과에 맞는 숙소?
+    const filterContent = contentData.filter((data) => {
+        const [ first, second ] = data.address.split(" ");
+        
+        console.log(cate);
+        // 카테고리가 검색결과일 때
+        if (cate === "searchResult") {
+            return first.includes(area) && data.roomData.maxUser >= maxUser;
+        }
+
+        return data.cate === cate && first.includes(area) && data.roomData.maxUser >= maxUser;
+    });
 
     return (
         <S.SearchMainContainer>
-            <CardListContainer contentData={contentData} setClickCardListIndex={setClickCardListIndex} />
-            <MiniDetailComponents contentData={contentData} clickCardListIndex={clickCardListIndex} />
+        {
+            filterContent.length > 0 ? 
+            (
+                <>
+                    <CardListContainer contentData={filterContent} setClickCardListIndex={setClickCardListIndex} />
+                    <MiniDetailComponents contentData={filterContent} clickCardListIndex={clickCardListIndex} />
+                </>
+            )
+            :
+            (
+                <div>검색 결과가 없습니다.</div>
+            )
+        }
         </S.SearchMainContainer>
     );
 };

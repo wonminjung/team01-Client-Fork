@@ -103,6 +103,7 @@ const S = {};
     S.CardListComponentsContainer = styled.div`
         display: flex;
         flex-direction: column;
+        cursor: pointer;
 
         /* 카드리스트에 마우스 오버 시 슬라이드 버튼 */
         &:hover {
