@@ -23,35 +23,32 @@ const CardListComponents = ({ cardList, handleClickEvent, index }) => {
     const priceAsString = dayPrice.toLocaleString();
     
     return (
-        // <S.Link to={linkUri}> // 누를 때마다 이동되서 임시로 주석!
-        <S.Link to="#" onClick={() => handleClickEvent(index)}>
-            <S.CardListComponentsContainer>
-                <S.Swiper {...swiperOptions}>
-                    {
-                        img.map((img, i) => (
-                            <S.SwiperSlide key={i}>
-                                <img src={img} alt="숙소 이미지"/>
-                            </S.SwiperSlide>
-                        ))
-                    }
-                </S.Swiper>
-                
-                <S.DescriptionSection>
-                    <h6>
-                        {title}
-                    </h6>
-                    <S.AddrPrice>
-                        <div>{firstAddr}/{secondAddr}</div>
-                        <div>￦{priceAsString}</div>
-                    </S.AddrPrice>
-                    <S.Reservation>
-                        예약하기
-                    </S.Reservation>
-                </S.DescriptionSection>
+        <S.CardListComponentsContainer onClick={() => handleClickEvent(index)}>
+            <S.Swiper {...swiperOptions}>
+                {
+                    img.map((img, i) => (
+                        <S.SwiperSlide key={i}>
+                            <img src={img} alt="숙소 이미지"/>
+                        </S.SwiperSlide>
+                    ))
+                }
+            </S.Swiper>
+            
+            <S.DescriptionSection>
+                <h6>
+                    {title}
+                </h6>
+                <S.AddrPrice>
+                    <div>{firstAddr}/{secondAddr}</div>
+                    <div>￦{priceAsString}</div>
+                </S.AddrPrice>
+                <S.Reservation>
+                    예약하기
+                </S.Reservation>
+            </S.DescriptionSection>
 
-                
-            </S.CardListComponentsContainer>
-        </S.Link>
+            
+        </S.CardListComponentsContainer>
     );
 };
 
