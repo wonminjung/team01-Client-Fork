@@ -85,7 +85,8 @@ const S = {};
     // 여러 카드리스트 구조 잡아줄 포장지
     S.CardListsWrapper = styled.div`
         display: grid;
-        grid-template-columns: repeat(auto-fill, minmax(calc(30% - 24px), auto));
+        /* grid-template-columns: repeat(auto-fill, minmax(calc(30% - 24px), 30%)); */
+        grid-template-columns: repeat(auto-fill, minmax(calc(30% - 24px), 1fr));
         grid-auto-rows: minmax(5%, auto);
         gap: 24px;
     `;
@@ -93,7 +94,6 @@ const S = {};
 
     
     /** CardListComponents.jsx 파일 스타일 섹션 */
-    
     S.Link = styled(Link)`
         text-decoration: none;
         color: black;
@@ -181,7 +181,7 @@ const S = {};
         display: flex;
 
         /* 카드리스트 내 이미지 디자인 */
-        &>img {
+        & > img {
             width: 100%;
             height: 100%;
             object-fit: cover;
@@ -193,7 +193,7 @@ const S = {};
         padding: 20px 0;
         text-align: center;
 
-        &>h6 {
+        & > h6 {
             font-weight: ${theme.FONT_WEIGHT.bold};
             margin-bottom: 13px;
             font-size: 18px;
