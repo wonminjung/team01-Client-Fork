@@ -80,7 +80,7 @@ const DetailContainer = () => {
                 {con : "전용 야외 수영장 - 연중 언제든 예약가능,\n특정 시간대만 이용 가능, 수영장 덮개, 온수"},
             ],
             convenienceIcon : [
-                {icon : "picture"},
+                {icon : "tv"},
                 {icon : "picture"},
                 {icon : "wifi"},
                 {icon : "tv"},
