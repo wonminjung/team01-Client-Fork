@@ -19,15 +19,21 @@ const S = {};
         overflow: hidden;
     `;
 
-    // 숙소 제목
-    S.Title = styled.div`
+    // 숙소 제목과 숙소 상세보기 버튼 감싸는 컨테이너
+    S.HeaderContainer = styled.div`
         margin: 32px 0 24px 0;
         text-align: center;
         font-weight: ${theme.FONT_WEIGHT.bold};
+        display: flex;
+        justify-content: space-between;
+        text-align: center;
 
         & > div {
             font-size: ${theme.FONT_SIZE.h6};
+            display: flex;
+            align-items: center;
         }
+
     `;
 
     // 숙소 이미지 컨테이너
