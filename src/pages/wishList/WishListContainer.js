@@ -28,7 +28,7 @@ const WishListContainer = () => {
     };
 
     // 유저가 찜한 숙소가 있는지 여부 상태
-    const [isWished, setIsWished] = useState(false);
+    const [isWished, setIsWished] = useState(true);
 
 
     return (
@@ -39,7 +39,6 @@ const WishListContainer = () => {
                     <div>
                         {/* 찜한 숙소가 없다면 모달창 먼저 띄우기. */}
                          {isModalOpen && (
-                            // 
                             <Modal showButtons={false}>
                                 <div className='modalDecorate'>
                                     <button  className="closeButton"  onClick={handleModalClose}>X</button>
