@@ -21,7 +21,17 @@ S.WishListContainer = styled.div`
                 top: -10px;
                 left: 20px;
                 font-weight: bold;
+                cursor: pointer;
+                padding: 8px 8px;
+                border: none;
+                border-radius: 3px;
+                background-color: white;
                 color : ${theme.PALETTE.yellow};
+
+                &:hover {
+                transition: 0.3s; // hover되면 0.3초동안 커짐
+                transform: scale(1.3);
+            }
             }
             & .modalBody{
                 margin-top: 30px;
