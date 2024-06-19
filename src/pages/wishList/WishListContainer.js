@@ -17,26 +17,31 @@ const WishListContainer = () => {
 
     const navigate = useNavigate();
 
-    const [isModalOpen, setIsModalOpen] = useState(true); // 모달 상태 관리
+    // 모달 상태 관리
+    const [isModalOpen, setIsModalOpen] = useState(true); 
 
+    // 모달창 닫는 함수
     const handleModalClose = () => {
         setIsModalOpen(false);
-        setIsWished(true); // WishItemContents를 보이게 함
+        // WishItemContents를 보이게 함
+        setIsWished(true); 
     };
 
     // 유저가 찜한 숙소가 있는지 여부 상태
-    const [isWished, setIsWished] = useState(false);
+    const [isWished, setIsWished] = useState(true);
 
 
     return (
         <S.WishListContainer>
             <S.PageTitle>위시리스트</S.PageTitle>
+            {/* 찜한 숙소가 있다면 바로 위시리스트 페이지 보이게 하기 */}
             {isWished ? <WishItemContents /> : (
                     <div>
+                        {/* 찜한 숙소가 없다면 모달창 먼저 띄우기. */}
                          {isModalOpen && (
                             <Modal showButtons={false}>
                                 <div className='modalDecorate'>
-                                    <button className="closeButton"  onClick={handleModalClose}>X</button>
+                                    <button  className="closeButton"  onClick={handleModalClose}>X</button>
                                     <div className='modalBody'>
                                         <img src="./images/pages/wishList/NotWished1.png" alt="숙소사진" />
                                         <h2>마음에 드는 숙소를 한곳에 저장해보세요!</h2>

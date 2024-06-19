@@ -27,7 +27,7 @@ S.ModalWrapper = styled.div`
             gap: 10px;
             justify-content: center;
         }
-        & button {
+        & .okButton {
             cursor: pointer;
             padding: 8px 8px;
             border: none;
