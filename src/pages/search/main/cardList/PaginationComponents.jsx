@@ -1,7 +1,7 @@
 import React from 'react';
 import S from './style';
 
-const NavigatePageComponents = () => {
+const PaginationComponents = () => {
 
     const pageNumber = [ 1, 2, 3, 4, 5, 6, 7, 8, 9, 10, 11, 12, 13, 14, 15 ];
 
@@ -21,4 +21,4 @@ const NavigatePageComponents = () => {
     );
 };
 
-export default NavigatePageComponents;
+export default PaginationComponents;

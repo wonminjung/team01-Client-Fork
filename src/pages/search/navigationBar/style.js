@@ -135,6 +135,11 @@ const S = {};
             display: none;
         }
 
+
+        & div.swiper-slide:first-child {
+            width: 74px !important;
+        }
+
     `;
 
     /* SwiperSlide 태그 import 해와서 디자인 */

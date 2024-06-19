@@ -228,7 +228,7 @@ const S = {};
 
 
 
-    /** NavigatePageComponents.jsx 파일 스타일 섹션 */
+    /** PaginationComponents.jsx 파일 스타일 섹션 */
     
     // 페이징 컨테이너 디자인
     S.pageNumberContaner = styled.nav`

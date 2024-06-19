@@ -1,7 +1,7 @@
 import React from 'react';
 import S from './style';
 import CardListComponents from './CardListComponents';
-import NavigatePageComponents from './NavigatePageComponents';
+import PaginationComponents from './PaginationComponents';
 
 const CardListContainer = (props) => {
     const { contentData, setClickCardListIndex } = props;
@@ -9,6 +9,8 @@ const CardListContainer = (props) => {
     const handleClickEvent = (index) => {
         setClickCardListIndex(index);
     };
+
+    const contentPerPage = 18;
 
     return (
         <S.CardListContainer>
@@ -26,7 +28,7 @@ const CardListContainer = (props) => {
                 </S.CardListsWrapper>
 
                 {
-                    contentData.length > 18 ? <NavigatePageComponents /> : <></>
+                    contentData.length > contentPerPage ? <PaginationComponents /> : <></>
                 }
             </S.SideMarginWrapper>
         </S.CardListContainer>

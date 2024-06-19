@@ -100,7 +100,6 @@ const S = {};
             margin-bottom: 8px;
             color: ${theme.PALETTE.gray[300]};
             display: flex;
-            margin-bottom: 8px;
 
             & > span {
                 font-size: 14px;
@@ -166,22 +165,18 @@ const S = {};
         row-gap: 12px;
 
         & .dIcon{
-        margin-bottom: 15px;
-        position: relative;
-        font-size: 14px;
-        color: ${theme.PALETTE.gray[300]};
-        padding-left: 22px;
-        line-height: 22px;
+            margin-bottom: 15px;
+            position: relative;
+            font-size: 14px;
+            color: ${theme.PALETTE.gray[300]};
+            line-height: 22px;
 
             &::before{
                 margin-right: 7px;
                 display: inline-block;
-                position: absolute;
-                top: 2px;
-                left: 0;
                 width: 15px;
                 height: 15px;
-                vertical-align: bottom;
+                object-fit: cover;
             }
             &.user::before{
                 content: url("./images/pages/detail/user.svg");
