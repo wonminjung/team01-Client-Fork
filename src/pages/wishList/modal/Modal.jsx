@@ -14,7 +14,7 @@ const Modal = ({message, onConfirm, onCancel, children, BasicButton, showButtons
                 {/* showButtons가 true일때만 o, x 버튼 보이게 하기(wishList페이지 하트클릭시 아이템 제거 확인 모달창 전용) */}
                 {showButtons && 
                     <div className='modal-buttons'>
-                        <button className='okButton' onClick={onConfirm} >
+                        <button className='okButton' onClick={onConfirm}>
                             <img src="./images/pages/wishList/checkButton.svg" alt="확인버튼" />
                         </button>
                         <button className='okButton' onClick={onCancel}>
