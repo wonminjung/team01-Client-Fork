@@ -81,7 +81,7 @@ const BookingDetail = ({item, isActive, index}) => {
                             <ul className='tipList'>
                                 <li className='tipOne'>
                                 {item.howToCheck1}
-                                </li>
+                                </li> 
                                 <li className='tipTwo'>
                                   {item.howToCheck2}
                                 </li>

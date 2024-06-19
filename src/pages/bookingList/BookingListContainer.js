@@ -53,13 +53,8 @@ const BookingListContainer = () => {
             infants : 1,
             hostPhoneNum : "010-1234-5678",
             hostName : "Sunsetia", 
-            howToCheck1 : (
-                <>
-                    <p>도어락 셀프 체크인</p>
-                    <p>(비밀번호는 호스트가 문자로 전달)</p>
-                </>
-            )
-            ,
+            howToCheck1 : `도어락 셀프 체크인 
+            (비밀번호는 호스트가 문자로 전달)`,
             howToCheck2 : `건물 내 무료 주차`,
             dayPrice: 250000,
             stayPeriod : 2
@@ -84,13 +79,8 @@ const BookingListContainer = () => {
             infants : 1,
             hostPhoneNum : "010-1234-5678",
             hostName : "Sunsetia", 
-            howToCheck1 : (
-                <>
-                    <p>도어락 셀프 체크인</p>
-                    <p>(비밀번호는 호스트가 문자로 전달)</p>
-                </>
-            )
-            ,
+            howToCheck1 : `도어락 셀프 체크인 
+            (비밀번호는 호스트가 문자로 전달)`,
             howToCheck2 : `건물 내 무료 주차`,
             dayPrice: 350000,
             stayPeriod : 2
@@ -114,13 +104,8 @@ const BookingListContainer = () => {
             infants : 1,
             hostPhoneNum : "010-1234-5678",
             hostName : "Sunsetia", 
-            howToCheck1 : (
-                <>
-                    <p>도어락 셀프 체크인</p>
-                    <p>(비밀번호는 호스트가 문자로 전달)</p>
-                </>
-            )
-            ,
+            howToCheck1 : `도어락 셀프 체크인 
+            (비밀번호는 호스트가 문자로 전달)`,
             howToCheck2 : `건물 내 무료 주차`,
             dayPrice: 500000,
             stayPeriod : 2

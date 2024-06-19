@@ -208,7 +208,9 @@ S.bookingDetailWrapper = styled.div`
                     }
                     & .detailAddress{ // 주소
                         font-size:15px;
-                        color: ${PALETTE.gray[300]}
+                        color: ${PALETTE.gray[300]};
+                        width: calc(100% - 85px);
+                        word-break: keep-all;
                     }
                 }
             }
@@ -367,12 +369,11 @@ S.bookingDetailWrapper = styled.div`
                         & .tipOne{
                             color : ${PALETTE.gray[300]};
                             margin-bottom: 10px;
-                            & p{
-                                font-size: 18px;
-                            }
+                            white-space: pre-line
                         }
                         & .tipTwo{
                             color : ${PALETTE.gray[300]};
+
                         }
                     }
                 }
