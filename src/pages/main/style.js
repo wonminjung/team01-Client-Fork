@@ -239,7 +239,7 @@ S.CategoryContainer = styled.div`
             color: #fff;
             transform: scale(1.1);
             background-color: ${PALETTE.yellow};
-            border: 1px solid ${PALETTE.yellow};
+            border: 1px solid ${PALETTE.yellow};q
             box-shadow: 0 0 3px ${PALETTE.yellow};
         }
     }

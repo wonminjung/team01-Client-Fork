@@ -1,11 +1,14 @@
-import React, { useState } from 'react';
+import React, { useEffect, useState } from 'react';
 
 import S from './style';
 import KakaoMap from '../../../../components/kakaomap/KakaoMap';
+import BasicButton from '../../../../components/button/BasicButton';
+import { Link } from 'react-router-dom';
 
-const MiniDetailComponents = (props) => {
-    const { contentData, clickCardListIndex } = props;
-    const { title, img, roomData, introduction, amenities, address } = contentData[clickCardListIndex];
+const MiniDetailComponents = ({ contentData, clickCardListIndex }) => {
+    // console.log(contentData, clickCardListIndex);
+    // useEffect(() => {}, [])
+    const { title, img, roomData, description, address, convenience, convenienceIcon } = contentData[clickCardListIndex];
 
     // 기존 숙소 이미지 30개에서 mini Detail에 쓸 이미지 5개만 추출
     const miniDetailImg = img.slice(0, 5);
@@ -19,13 +22,18 @@ const MiniDetailComponents = (props) => {
     return (
         <S.MiniDetailContainer>
             <S.MarginSideContainer>
-                <S.Title>
-                    <div>{title}</div>
-                </S.Title>
+                <S.HeaderContainer>
+                    <div>{title && title}</div>
+                    <Link to="/detail?roomId=1">
+                        <BasicButton>
+                                상세보기
+                        </BasicButton>
+                    </Link>
+                </S.HeaderContainer>
 
                 <S.ImageGridContainer>
                     {
-                        miniDetailImg.map((img, i) => (
+                        miniDetailImg && miniDetailImg.map((img, i) => (
                             <div className={`gridItem-${i+1}`} key={i}>
                                 <img src={img} alt="이미지"/>
                             </div>
@@ -36,39 +44,39 @@ const MiniDetailComponents = (props) => {
                 <S.OverviewContainer>
                     <S.SectionContainer>
                         <S.SectionTitle>
-                            {title} 전체
+                            {title && title} 전체
                         </S.SectionTitle>
                         <S.OverviewList>
                             <li>
                                 <span>
-                                    <img src={roomData[0].iconUrl} alt="이미지" />
+                                    <img src={"./images/pages/search/main/miniDetail/overview/user.svg"} alt="이미지" />
                                 </span>
                                 <span>
-                                    {`최대인원 ${roomData[0].count}명`}
-                                </span>
-                            </li>
-                            <li>
-                                <span>
-                                    <img src={roomData[1].iconUrl} alt="이미지" />
-                                </span>
-                                <span>
-                                    {`침실 ${roomData[1].count}명`}
+                                    {`최대인원 ${roomData.maxUser}명`}
                                 </span>
                             </li>
                             <li>
                                 <span>
-                                    <img src={roomData[2].iconUrl} alt="이미지" />
+                                    <img src={"./images/pages/search/main/miniDetail/overview/house.svg"} alt="이미지" />
                                 </span>
                                 <span>
-                                    {`침대 ${roomData[2].count}명`}
+                                    {`침실 ${roomData.bedroom}명`}
                                 </span>
                             </li>
                             <li>
                                 <span>
-                                    <img src={roomData[3].iconUrl} alt="이미지" />
+                                    <img src={"./images/pages/search/main/miniDetail/overview/bed-single.svg"} alt="이미지" />
                                 </span>
                                 <span>
-                                    {`욕실 ${roomData[3].count}명`}
+                                    {`침대 ${roomData.bed}명`}
+                                </span>
+                            </li>
+                            <li>
+                                <span>
+                                    <img src={"./images/pages/search/main/miniDetail/overview/bath.svg"} alt="이미지" />
+                                </span>
+                                <span>
+                                    {`욕실 ${roomData.bathroom}명`}
                                 </span>
                             </li>
                         </S.OverviewList>
@@ -78,11 +86,13 @@ const MiniDetailComponents = (props) => {
                         <S.SectionTitle>
                             숙소 설명
                         </S.SectionTitle>
-                        <S.OverviewIntroductionContainer
+                        <S.OverviewDescriptionContainer
                             className={isMoreCheck ? "overviewChecked" : ""}
                         >
-                            <S.OverviewIntorduction dangerouslySetInnerHTML={{__html: introduction}}/>
-                        </S.OverviewIntroductionContainer>
+                            <S.OverviewDescription>
+                                {description && description}
+                            </S.OverviewDescription>
+                        </S.OverviewDescriptionContainer>
                         <S.OverviewMoreButton 
                             className={isMoreCheck ? "OMBnotMore" : ""}
                             onClick={moreCheckHandle}
@@ -95,20 +105,18 @@ const MiniDetailComponents = (props) => {
                         <S.SectionTitle>
                             숙소 편의시설
                         </S.SectionTitle>
-                        <S.OverviewAmenities>
+                        <S.OverviewConvenience>
                             {
-                                amenities && amenities.map((data, i) => (
+                                convenience && convenience.map((li, i) => (
                                     <li key={i}>
+                                        <span className={`dIcon ${convenienceIcon[i].icon}`}></span>
                                         <span>
-                                            <img src={data.iconUrl} alt="이미지" />
-                                        </span>
-                                        <span>
-                                            {data.name}
+                                            {li.con}
                                         </span>
                                     </li>
                                 ))
                             }
-                        </S.OverviewAmenities>
+                        </S.OverviewConvenience>
                     </S.SectionContainer>
 
                     <S.SectionContainer>
