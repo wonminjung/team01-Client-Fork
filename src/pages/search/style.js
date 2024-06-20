@@ -25,10 +25,13 @@ const S = {};
 
     S.Popup = styled.div`
         width: 500px;
-        /* height: 500px; */
         background-color: white;
         border-radius: 20px;
         max-height: calc(100vh - 300px);
+        overflow: hidden;
+        background-color: #fff;
+        box-shadow: 0 6px 10px rgba(0,0,0,0.15);
+        
 
         & .filterHeader {
             text-align: center;
@@ -54,6 +57,7 @@ const S = {};
 
 
         & .filterListBox {
+            
             padding: 20px 15px 15px;
             height: calc(100vh - 414px);
             overflow-y: scroll;
