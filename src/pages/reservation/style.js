@@ -8,20 +8,23 @@ S.ReservationContainer = styled.div`
     & h1 {
         font-size: 50px;
         margin-bottom: 50px;
+        font-weight: 600;
     }
     & h2 {
         font-size: 32px;
         margin-bottom: 50px;
+        font-weight: 600;
     }
     & h3 {
         font-size: 22px;
-        margin-bottom: 50px;
+        margin-bottom: 30px;
+        font-weight: 600;
     }
     & h4 {
         font-size: 16px;
         margin-bottom: 10px;
     }
-    & h4Strong {
+    & .h4Strong {
         font-size: 16px;
         margin-bottom: 10px;
         font-weight: 600; 
@@ -70,12 +73,70 @@ S.ReservationContainer = styled.div`
     }
 `
 S.SideBox = styled.div`
+    padding: 50px 35px;
     display: inline-block;
     justify-content: flex-start;
     align-items: flex-start;
     flex-wrap: wrap;
     min-height: 720px;
     width: calc(100% - 430px);
+    & img {
+        height: 9px;
+    }
+    &.rightBox {
+        position: -webkit-sticky;
+        position: sticky;
+        top: 125px;
+        padding: 0 20px;
+        width: 40%;
+        min-height: 360px;
+        border: 1px solid ${theme.PALETTE.gray[200]};
+        border-radius: 20px;
+        &>div {
+            display: flex;
+            width: 100%;
+            border-bottom: 1px solid ${theme.PALETTE.gray[200]};
+            margin: 20px 0;
+            padding-bottom: 20px;
+            &:first-child div:nth-child(2) {
+                display: flex;
+                align-items: center; /*위 아래 정렬. display: column이면 좌우 정렬*/
+
+            }
+            &:nth-child(2) {
+                flex-direction: column;
+                &>div {
+                    display: flex;
+                    justify-content: space-between;
+                }
+            }
+            &:last-child  {
+                border-bottom: none;
+                & div {
+                    width: 100%;
+                    display: flex;
+                    justify-content: space-between;
+                    & .h4Strong {
+                        font-weight: 600;
+                    }
+                }
+            }
+        }
+        & h4 {
+            display: inline-block;
+        }
+        & .imgBox {
+            width: 100px;
+            height: 100px;
+            margin-right: 20px;
+            &>img {
+                width: 100%;
+                height: inherit;
+                object-fit: cover;
+                border-radius: 20%;
+            }
+        }
+    }
 `
 S.CategoryBox = styled.div`
     display: block;
