@@ -765,18 +765,16 @@ const ModalFilterBox = ({isFilterActivate, setFilterActivate, handlFilterStatus}
                             </ul>
                         </div>
                     </div>
-
-                    <div className="bottomBox">
-                        <div className="filterRemoveBox">
-                            <button type='bottom' className='filterRemoveBtn' onClick={resetCondition}>전체 해제</button>
-                        </div>
-                        <div className="filterSubmitBox">
-                            <BasicButton className='filterSubmitBtn' onClick={viewFiltered}>숙소 {filterd.length}개 보기</BasicButton>
-                        </div>
-                    </div>
-
                 </div>
 
+                <div className="bottomBox">
+                    <div className="filterRemoveBox">
+                        <button type='bottom' className='filterRemoveBtn' onClick={resetCondition}>전체 해제</button>
+                    </div>
+                    <div className="filterSubmitBox">
+                        <BasicButton className='filterSubmitBtn' onClick={viewFiltered}>숙소 {filterd.length}개 보기</BasicButton>
+                    </div>
+                </div>
             </S.Popup>
         </S.ModalFilter>
     );
