@@ -70,7 +70,7 @@ const BookingListContainer = () => {
             address: "구좌읍, 제주도, 한국",
             reservationNum: "HMZXMWA5J3",
 
-            detailAddress : "제주특별자치도 제주시 특별자치도, 구좌읍 월정1길 54-15 KR",
+            detailAddress : "제주특별자치도 제주시 구좌읍 월정1길 54-15",
             checkInDate : "5월 19일",
             checkInTime : "오후 3:00",
             checkOutDate : "5월 21일",
@@ -95,7 +95,7 @@ const BookingListContainer = () => {
             address: "연천군, 경기도, 한국",
             reservationNum: "HMZXMWA5J2",
 
-            detailAddress : "제주특별자치도 제주시 특별자치도, 구좌읍 월정1길 54-15 KR",
+            detailAddress : "경기 연천군 장남면 장백로330번길 216-80",
             checkInDate : "5월 19일",
             checkInTime : "오후 3:00",
             checkOutDate : "5월 21일",
@@ -129,13 +129,14 @@ const BookingListContainer = () => {
                                 onClick={() => handleAccordionClick(index)}  
                                 isActive={activeIndex === index} // isActive props 전달
                                 />
-                            <S.panel style={{ maxHeight: activeIndex === index ? '500px' : '0' }}>
+                        {activeIndex === index ? (<S.panel style={{ maxHeight: activeIndex === index ? '500px' : '0' }}>
                                 <BookingDetail 
                                     item={item}
                                     index={index}
                                     isActive={ activeIndex === index}
                                     />
-                            </S.panel>
+                            </S.panel>) : <div></div>}
+                            
                         </div>
                     ))
                 ) : ( // 예약한 숙소 없을 때,
