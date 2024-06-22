@@ -8,8 +8,8 @@ import 'swiper/css/navigation';
 import { Navigation } from 'swiper/modules';
 
 // FontAwesome
-import { FontAwesomeIcon } from '@fortawesome/react-fontawesome'
-import { faSliders } from '@fortawesome/free-solid-svg-icons'
+import { FontAwesomeIcon } from '@fortawesome/react-fontawesome';
+import { faSliders } from '@fortawesome/free-solid-svg-icons';
 
 import NavSwiperComponents from './NavSwiperComponents';
 import S from './style';
@@ -18,9 +18,9 @@ import S from './style';
 const NavSwiperContainer = ({handlFilterStatus}) => {
 
    // 카테고리 선택 상태
-   const [ isNavActivate, setNavActivate ] = useState(0);
+  const [ isNavActivate, setNavActivate ] = useState(0);
    
-   const category = [
+  const category = [
       {
         id: 0,
         cate: "searchResult",
@@ -127,43 +127,45 @@ const NavSwiperContainer = ({handlFilterStatus}) => {
         img: "./images/pages/main/cate20.jpg",
         tag: "스키"
       }
-   ]
+  ]
    
-   const categoryHalf = (category.length / 1.5) + 2;
-   const swiperOptions = {
-      slidesPerView: categoryHalf,
-      slidesPerGroup: Math.floor(categoryHalf),
-      allowTouchMove: false,
-      navigation: true,
-      modules: [Navigation],
-   };
+  const categoryHalf = (category.length / 1.5) + 2;
+  const swiperOptions = {
+    slidesPerView: categoryHalf,
+    slidesPerGroup: Math.floor(categoryHalf),
+    allowTouchMove: false,
+    navigation: true,
+    modules: [Navigation],
+  };
 
-   return (
-      <S.NavBfAfContainer>
-         <S.NavLeftRightPadding>
-            <S.Swiper {...swiperOptions}>
-               {
-                  category.map((data, i) => (
-                     <S.SwiperSlide key={i}>
+  return (
+    <S.NavBfAfContainer>
+        <S.NavLeftRightPadding>
+          <S.Swiper {...swiperOptions}>
+              {
+                category.map((data, i) => 
+                  (
+                    <S.SwiperSlide key={i}>
                         <NavSwiperComponents 
-                           data={data} 
-                           index={i}
-                           isNavActivate={isNavActivate} 
-                           setNavActivate={setNavActivate}
+                          data={data} 
+                          index={i}
+                          isNavActivate={isNavActivate} 
+                          setNavActivate={setNavActivate}
                         />
-                     </S.SwiperSlide>
-                  ))
-               }
-            </S.Swiper>
+                    </S.SwiperSlide>
+                  )
+                )
+              }
+          </S.Swiper>
 
-            <S.FilterButton onClick={handlFilterStatus}>
-               <FontAwesomeIcon icon={faSliders}/>
-               <div>필터</div>
-            </S.FilterButton>
+          <S.FilterButton onClick={handlFilterStatus}>
+            <FontAwesomeIcon icon={faSliders}/>
+            <div>필터</div>
+          </S.FilterButton>
 
-         </S.NavLeftRightPadding>
-      </S.NavBfAfContainer>
-   );
+        </S.NavLeftRightPadding>
+    </S.NavBfAfContainer>
+  );
 };
 
 export default NavSwiperContainer;

@@ -15,7 +15,7 @@ const NavSwiperComponents = (props) => {
 
     return (
         <>
-            { 
+            {
                 data.tag === "검색결과" ?
                 (
                     <>
@@ -41,7 +41,6 @@ const NavSwiperComponents = (props) => {
                 )
             }
         </>
-
     );
 };
 

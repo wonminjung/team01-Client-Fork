@@ -9,7 +9,7 @@ import 'swiper/css/pagination';
 import { Navigation, Pagination } from 'swiper/modules';
 
 const CardListComponents = ({ cardList, handleClickEvent, index }) => { 
-    const { title, address, img, dayPrice } = cardList;
+    const { title, address, roomImg, dayPrice } = cardList;
 
     const [ firstAddr, secondAddr ] = address.split(" ");
 
@@ -20,27 +20,29 @@ const CardListComponents = ({ cardList, handleClickEvent, index }) => {
         modules: [Navigation, Pagination],
     };
 
-    const priceAsString = dayPrice.toLocaleString();
+    const dayPriceAsString = dayPrice.toLocaleString();
     
     return (
         <S.CardListComponentsContainer onClick={() => handleClickEvent(index)}>
             <S.Swiper {...swiperOptions}>
                 {
-                    img.map((img, i) => (
-                        <S.SwiperSlide key={i}>
-                            <img src={img} alt="숙소 이미지"/>
-                        </S.SwiperSlide>
-                    ))
+                    roomImg && roomImg.map((img, i) => 
+                        (
+                            <S.SwiperSlide key={i}>
+                                <img src={img} alt="숙소 이미지"/>
+                            </S.SwiperSlide>
+                        )
+                    )
                 }
             </S.Swiper>
             
             <S.DescriptionSection>
-                <h6>
-                    {title}
-                </h6>
+                    <h6>
+                        {title}
+                    </h6>
                 <S.AddrPrice>
                     <div>{firstAddr}/{secondAddr}</div>
-                    <div>￦{priceAsString}</div>
+                    <div>￦{dayPriceAsString}</div>
                 </S.AddrPrice>
                 <S.Reservation>
                     예약하기
