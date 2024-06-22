@@ -21,15 +21,18 @@ const CardListContainer = (props) => {
 
                 <S.CardListsWrapper>
                     {
-                        contentData && contentData.map((cardList, i) => (
-                            <CardListComponents key={i} cardList={cardList} index={i} handleClickEvent={handleClickEvent}/>
-                        ))
+                        contentData && contentData.map((cardList, i) => 
+                            (
+                                <CardListComponents key={i} cardList={cardList} index={i} handleClickEvent={handleClickEvent}/>
+                            )
+                        )
                     }
                 </S.CardListsWrapper>
 
-                {
-                    contentData.length > contentPerPage ? <PaginationComponents /> : <></>
-                }
+                {/* {
+                    contentData.length >= contentPerPage ? <PaginationComponents /> : <></>
+                } */}
+                <PaginationComponents />
             </S.SideMarginWrapper>
         </S.CardListContainer>
     );

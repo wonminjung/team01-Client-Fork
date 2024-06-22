@@ -13,7 +13,6 @@ const navSlideButtonStyle = css`
     
     transition: 0.3s;
     transform: translateY(-50%);
-    background: linear-gradient(270deg, white 50%, transparent);
 `;
 
 // 해당 파일에서 여러번 쓰여서 만든 공용 스타일
@@ -85,7 +84,7 @@ const S = {};
     S.FilterButton = styled(BasicButton)`
         width: 84px;
         justify-content: space-evenly;
-        border-radius: 14px;
+        border-radius: 20px;
 
     `;
 
@@ -98,6 +97,7 @@ const S = {};
         /* 슬라이드 이전 버튼 */
         & > .swiper-button-prev {
             ${navSlideButtonStyle}
+            background: linear-gradient(90deg, white 50%, transparent);
             left: 0;
             
             /* 화살표 디자인 */
@@ -115,6 +115,7 @@ const S = {};
         /* 슬라이드 다음 버튼 */
         & > .swiper-button-next {
             ${navSlideButtonStyle}
+            background: linear-gradient(270deg, white 50%, transparent);
             right: 0;
             
             /* 화살표 디자인 */
@@ -219,6 +220,7 @@ const S = {};
         display: flex;
         flex-direction: column;
         font-size: 12px;
+        white-space: nowrap;
     `;
 
 export default S;

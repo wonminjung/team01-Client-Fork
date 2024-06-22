@@ -1,4 +1,4 @@
-import React, { useEffect, useState } from 'react';
+import React, { useState } from 'react';
 
 import S from './style';
 import KakaoMap from '../../../../components/kakaomap/KakaoMap';
@@ -6,12 +6,12 @@ import BasicButton from '../../../../components/button/BasicButton';
 import { Link } from 'react-router-dom';
 
 const MiniDetailComponents = ({ contentData, clickCardListIndex }) => {
-    // console.log(contentData, clickCardListIndex);
-    // useEffect(() => {}, [])
-    const { title, img, roomData, description, address, convenience, convenienceIcon } = contentData[clickCardListIndex];
+    // const { title, img, roomData, description, address, convenience, convenienceIcon } = contentData[clickCardListIndex];
+    const { id, title, roomImg, roomData, description, address, convenience } = contentData[clickCardListIndex];
+
 
     // 기존 숙소 이미지 30개에서 mini Detail에 쓸 이미지 5개만 추출
-    const miniDetailImg = img.slice(0, 5);
+    const miniDetailImg = roomImg.slice(0, 5);
 
     // 소개글 더보기 버튼 상태
     const [ isMoreCheck, setMoreCheck ] = useState(false);
@@ -23,9 +23,9 @@ const MiniDetailComponents = ({ contentData, clickCardListIndex }) => {
         <S.MiniDetailContainer>
             <S.MarginSideContainer>
                 <S.HeaderContainer>
-                    <div>{title && title}</div>
-                    <Link to="/detail?roomId=1">
-                        <BasicButton>
+                    <div>{title}</div>
+                    <Link to={`/detail?roomId=${id}`}>
+                        <BasicButton style={{width: "80px"}}>
                                 상세보기
                         </BasicButton>
                     </Link>
@@ -33,18 +33,20 @@ const MiniDetailComponents = ({ contentData, clickCardListIndex }) => {
 
                 <S.ImageGridContainer>
                     {
-                        miniDetailImg && miniDetailImg.map((img, i) => (
-                            <div className={`gridItem-${i+1}`} key={i}>
-                                <img src={img} alt="이미지"/>
-                            </div>
-                        ))
+                        miniDetailImg && miniDetailImg.map((img, i) => 
+                            (
+                                <div className={`gridItem-${i+1}`} key={i}>
+                                    <img src={img} alt="이미지"/>
+                                </div>
+                            )
+                        )
                     }
                 </S.ImageGridContainer>
 
                 <S.OverviewContainer>
                     <S.SectionContainer>
                         <S.SectionTitle>
-                            {title && title} 전체
+                            {title} 전체
                         </S.SectionTitle>
                         <S.OverviewList>
                             <li>
@@ -107,14 +109,16 @@ const MiniDetailComponents = ({ contentData, clickCardListIndex }) => {
                         </S.SectionTitle>
                         <S.OverviewConvenience>
                             {
-                                convenience && convenience.map((li, i) => (
-                                    <li key={i}>
-                                        <span className={`dIcon ${convenienceIcon[i].icon}`}></span>
-                                        <span>
-                                            {li.con}
-                                        </span>
-                                    </li>
-                                ))
+                                convenience && convenience.map((conv, i) => 
+                                    (
+                                        <li key={i}>
+                                            <span className={`dIcon ${conv.icon}`}></span>
+                                            <span>
+                                                {conv.con}
+                                            </span>
+                                        </li>
+                                    )
+                                )
                             }
                         </S.OverviewConvenience>
                     </S.SectionContainer>

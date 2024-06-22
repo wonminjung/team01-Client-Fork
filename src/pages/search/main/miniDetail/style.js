@@ -32,6 +32,7 @@ const S = {};
             font-size: ${theme.FONT_SIZE.h6};
             display: flex;
             align-items: center;
+            margin-right: 16px;
         }
 
     `;
