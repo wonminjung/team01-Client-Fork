@@ -23,6 +23,7 @@ const KakaoMap = ({ props, index }) => { // props로 주소 받기
                 const container = containerRef.current;
                 console.log(container);
                 const geocoder = new window.kakao.maps.services.Geocoder(); //주소-좌표 변환 geocoder메서드
+    
                 // 주소로 좌표를 검색
                 geocoder.addressSearch(props, function (result, status) {
                     if (status === window.kakao.maps.services.Status.OK) {
