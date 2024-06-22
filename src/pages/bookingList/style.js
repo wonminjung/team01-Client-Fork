@@ -197,8 +197,9 @@ S.bookingDetailWrapper = styled.div`
                 margin-bottom: 15px;
                 & .iconPort{
                     & img{ // port-icon
-                        width: 50px;
-                        height: 30px;
+                        width: 25px;
+                        height: 25px;
+                        margin-right : 20px;
                     }}
                 & .textArea{
                     padding-left: 0px;
@@ -213,6 +214,10 @@ S.bookingDetailWrapper = styled.div`
                         word-break: keep-all;
                     }
                 }
+            }
+            & #map{
+                    height : 100%;
+                    border-radius: 20px;
             }
             & .iconCopy{
                 border: none;
@@ -239,28 +244,29 @@ S.bookingDetailWrapper = styled.div`
 
         & .leftBox{
             width: 50%;
+            height : 80%;
             display: flex;
             flex-direction: column;
-            align-items: center;// 수평 가운데 정렬
-            justify-content: center;// 수직 가운데 정렬
+            padding-left: 70px;
 
             /* 숙박 일정 */
             & .scheduleWrapper{
-                width: 80%;
-                height: 163px;
-                /* border: 1px solid #73AD21; */
+                margin-top : 75px;
                 justify-content: center;
                 display: flex;
                 flex-direction: column;
                 align-items: flex-start;// 수평 가운데 정렬
                 justify-content: center;// 수직 가운데 정렬
                 & .title{
+                    width : 200px;
+                    height: 20px;
                     display: flex;
                     align-items: center;
                     margin-bottom: 15px;
                     margin-right:50px;
                     & img{ // 달 아이콘
-                    height: 23px;
+                    width : 27px;
+                    margin-right: 13px;
                     }
                     & h3{ // 숙박일정
                     font-size: 18px;
@@ -272,15 +278,20 @@ S.bookingDetailWrapper = styled.div`
                     flex-direction: column;
                     gap:10px; 
                     font-size: 16px;
-                    margin-right: 15px;
+                    padding-left: 45px;
+                & .dat>div>h5{
+                    width : 100px;                
+                   }
                         & .checkInBox{
                             display: flex;
                             flex-direction: row;
                             & .checkIn{
                                 color : ${PALETTE.gray[300]};
-                                margin-right: 8px;
+                                /* margin-right: 8px; */
+                                width: 70px;
                                 }
                             & .checkInDate{
+                                /* width: 200px; */
                                 }  
                         }
                             & .checkOutBox{
@@ -288,9 +299,11 @@ S.bookingDetailWrapper = styled.div`
                                 flex-direction: row;
                                 & .CheckOut{
                                  color : ${PALETTE.gray[300]};
-                                 margin-right: 8px;
+                                
+                                 width: 70px;
                                 }
                                 & .checkOutDate{
+                                    width: 200px;
                                 }
                          }
                              & .headCountBox{
@@ -298,9 +311,11 @@ S.bookingDetailWrapper = styled.div`
                                 flex-direction: row;
                                  & .headCount{
                                  color : ${PALETTE.gray[300]};
-                                 margin-right: 8px;
+                                
+                                 width: 70px;
                                  }
                                 & .headContNum{
+                                   
                                  }
                         }
 
@@ -316,14 +331,16 @@ S.bookingDetailWrapper = styled.div`
                     flex-direction: column;
                     align-items: flex-start;// 수평 가운데 정렬
                     justify-content: center;// 수직 가운데 정렬
+                    
                     & .title{
                         display: flex;
                         align-items: center;
                         margin-bottom: 10px;
                         margin-right:50px;
                         & img{
-                            height: 23px;
                             margin-bottom: 5px;
+                            width : 27px;
+                            margin-right: 13px;
                         }
                         & h3{
                             font-size: 18px;
@@ -331,6 +348,8 @@ S.bookingDetailWrapper = styled.div`
                         }
                     }
                     & .data{
+                        position: relative;
+                        left : 40px;
                         & h5{
                             color : ${PALETTE.gray[300]}
                             }
@@ -352,24 +371,23 @@ S.bookingDetailWrapper = styled.div`
                     margin-bottom: 10px;
                     margin-right:50px;
                     & img{
-                        height: 38px;
-                        position: relative;
-                        left: -10px;
+                        width : 27px;
+                        margin-right: 13px;
+                        transform : scale(1.3)
                     }
                     & h3{
                         font-size: 18px;
-                        margin-left: -10px;
 
                     }
                 }
                 & .data{
                     & .tipList{
-                        padding-left: 20px;
+                        padding-left: 40px;
                         list-style-type : disc;
                         & .tipOne{
                             color : ${PALETTE.gray[300]};
                             margin-bottom: 10px;
-                            white-space: pre-line
+                            white-space: pre-line;
                         }
                         & .tipTwo{
                             color : ${PALETTE.gray[300]};
@@ -384,20 +402,22 @@ S.bookingDetailWrapper = styled.div`
 
         & .rightBox{
             width: 50%;
+            height: 300px;
             display: flex;
             flex-direction: column;
             position: relative;
 
             /* 요금 상세 내역 */
             & .chargeWrapper {
-                width: 80%;
+                margin-top : 70px;
+                width: 100%;
                 height: 163px;
                 /* border: 1px solid #73AD21; */
-                justify-content: center;
                 display: flex;
+                justify-content: flex-start;
                 flex-direction: column;
                 align-items: flex-start;// 수평 가운데 정렬
-                justify-content: center;// 수직 가운데 정렬
+                margin-bottom:10px;
                 & .title{
                     display: flex;
                     justify-content: center;
@@ -405,7 +425,8 @@ S.bookingDetailWrapper = styled.div`
                     margin-bottom: 12px;
                     margin-right:50px;
                     & img{
-                        height: 27px;
+                        width : 27px;
+                        margin-right: 13px;
                     }
                     & h3{
                         font-size: 18px;
@@ -413,8 +434,19 @@ S.bookingDetailWrapper = styled.div`
                     }
                 }
                 & .data{
+                    position: relative;
+                    left : 40px;
+                    width : 75%;
                     & .calc{
-                        font-size: 17px;
+                        font-size: 15px;
+                        display: flex;
+                        justify-content: space-between;
+                        align-items: center;
+                        margin-bottom: 15px;
+                        & span{
+                            font-size: 15px;
+                            color: ${PALETTE.black};
+                        }
                     }
                     & .divisionLine{
                         border-top: 1px solid #444444;
@@ -423,7 +455,11 @@ S.bookingDetailWrapper = styled.div`
                         }
                     }
                     & .sum{
-                        font-size: 17px;
+                        display: flex;
+                        justify-content: space-between;
+                        font-size: 15px;
+                        margin-bottom: 30px;
+                        color : ${PALETTE.yellow}
                     }
                 }
             }
@@ -438,6 +474,7 @@ S.bookingDetailWrapper = styled.div`
             flex-direction: column;
             align-items: flex-start;// 수평 가운데 정렬
             justify-content: center;// 수직 가운데 정렬
+            margin-top : 20px;
             & .title{
                 display: flex;
                 justify-content: center;
@@ -445,7 +482,8 @@ S.bookingDetailWrapper = styled.div`
                 margin-bottom: 12px;
                 margin-right:50px;
                 & img{
-                    height: 27px;
+                    margin-right: 13px;
+                    width : 27px;
                 }
                 & h3{
                     font-size: 18px;
@@ -453,6 +491,8 @@ S.bookingDetailWrapper = styled.div`
                 }
             }
             & p{
+                position: relative;
+                left : 40px;
                 margin:0 5px;
                 letter-spacing: 0.5px;
                 /* word-spacing:-1px; */
@@ -461,8 +501,8 @@ S.bookingDetailWrapper = styled.div`
         }
         & .navToDetailPage{
             position: absolute;
-            top: 350px;
-            left: -1px;
+            top: -20px;
+            right: 33px;
             & button{
                 width: 200px;
                 position: relative;
