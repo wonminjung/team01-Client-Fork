@@ -57,8 +57,8 @@ const BookingListContainer = () => {
             (비밀번호는 호스트가 문자로 전달)`,
             howToCheck2 : `건물 내 무료 주차`,
             dayPrice: 250000,
-            stayPeriod : 2
-            
+            stayPeriod : 2,
+            cleanVat : 50000,
 
             
         },
@@ -83,7 +83,8 @@ const BookingListContainer = () => {
             (비밀번호는 호스트가 문자로 전달)`,
             howToCheck2 : `건물 내 무료 주차`,
             dayPrice: 350000,
-            stayPeriod : 2
+            stayPeriod : 2,
+            cleanVat : 10000,
             
 
         },
@@ -108,7 +109,8 @@ const BookingListContainer = () => {
             (비밀번호는 호스트가 문자로 전달)`,
             howToCheck2 : `건물 내 무료 주차`,
             dayPrice: 500000,
-            stayPeriod : 2
+            stayPeriod : 2,
+            cleanVat : 0,
             
 
         }
