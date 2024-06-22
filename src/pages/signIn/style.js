@@ -1,6 +1,9 @@
 import styled from "styled-components";
 import {flexCenterColumn} from './../../global/common'
+import theme from "../../global/theme";
+
 const S = {}
+const PALETTE = theme.PALETTE;
 
 S.SignInWrapper = styled.div`
     ${flexCenterColumn}
@@ -20,18 +23,18 @@ S.Label = styled.label`
 S.Title = styled.p`
     font-size: 40px;
     font-weight: bold;
-    color: #F2AC29;
+    color: ${PALETTE.yellow};
     margin: 120px 40px 40px 40px;
 `
 
 S.ConfirmMessage = styled.p`
     font-size: 15px;
-    color: #F29A2E;
+    color: ${PALETTE.orange};
     padding-top: 10px;
 `
 S.Subtitle = styled.p`
     font-size: 15px;
-    color: #222222;
+    color: ${PALETTE.black};
     text-align: center;
     margin: 20px;
 `
@@ -42,9 +45,9 @@ S.Button = styled.button`
     height: 50px;
     display: inline-flex;
     padding: 0 12px;
-    border: 1px solid #F2AC29;
+    border: 1px solid ${PALETTE.yellow};
     border-radius: 20px;
-    background-color: #F2AC29;
+    background-color: ${PALETTE.yellow};
     align-items: center;
     justify-content: center;
     cursor: pointer;
@@ -53,13 +56,13 @@ S.Button = styled.button`
 
     &:hover {
         color: white;
-        background-color: #F2AC29;
+        background-color: ${PALETTE.yellow};
     }
 
     // 비활성화 버튼
     &:disabled {
         color:  #6A6A6A !important;
-        background-color: #F7F7F7;
+        background-color: ${PALETTE.gray[100]};
         border: none;
     }
 
@@ -70,18 +73,18 @@ S.Input = styled.input`
         width: 490px;
         height: 50px;
         padding: 0 20px;
-        border: 1px solid #6A6A6A; 
+        border: 1px solid ${PALETTE.gray[300]}; 
         border-radius: 20px;
         outline: none;
 
         &:focus {
-            border: 1px solid #F2AC29;
+            border: 1px solid ${PALETTE.yellow};
         }
 
         &:disabled {
             border: none;
-            background-color: #F7F7F7;
-            color: #6A6A6A;
+            background-color: ${PALETTE.gray[100]};
+            color: ${PALETTE.gray[300]};
         }
     `;
 

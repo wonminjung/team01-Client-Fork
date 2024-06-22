@@ -1,11 +1,12 @@
 import React from 'react';
-import BasicButton from '../../components/button/BasicButton';
-import BasicInput from '../../components/input/BasicInput';
-import S from './style';
 import { useForm } from 'react-hook-form';
 import { Link } from 'react-router-dom';
+import RemoveHeader from '../layout/RemoveHeader';
+import S from './style';
 
 const SignInContainer = () => {
+
+    RemoveHeader()
 
     const {register, handleSubmit, getValues,
         formState : {isSubmitting, isSubmitted, errors}

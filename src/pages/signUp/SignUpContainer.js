@@ -2,8 +2,11 @@ import React from 'react';
 import S from './style';
 import { Link } from 'react-router-dom';
 import {useForm} from 'react-hook-form';
+import RemoveHeader from '../layout/RemoveHeader';
 
 const SignUpContainer = () => {
+
+    RemoveHeader()
 
     const {register, handleSubmit, getValues,
         formState : {isSubmitting, isSubmitted, errors}

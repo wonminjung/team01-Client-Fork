@@ -20,7 +20,7 @@ export default function Content(img) {
       slidesPerView={1}
     >
       {image.map((img,i)=>
-        <SwiperSlide key={i}><img src={`${img}`} alt={`이미지${i+1}`} /></SwiperSlide>
+        <SwiperSlide key={i}><img src={img} alt={`이미지${i+1}`} /></SwiperSlide>
       )}
     </Swiper>
   );
