@@ -11,7 +11,7 @@ const Main = () => {
         // 선언문
         const header = document.querySelector("header");
         const search = document.querySelector("#searchBox");
-        
+        header.style.display = "flex";
         // 스크롤 이벤트시
         const scrollEvent = () => {
             let offsetTop = document.documentElement.scrollTop;
