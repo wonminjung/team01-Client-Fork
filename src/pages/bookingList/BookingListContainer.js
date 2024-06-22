@@ -19,6 +19,7 @@ const BookingListContainer = () => {
     // null은 패널이 열리지 않은 상태
     const [activeIndex, setActiveIndex] = useState(null);
 
+
     // 아코디언 클릭 핸들러 (BookingItem부분 클릭시, BookingDetail 열림)
     const handleAccordionClick = (index) => {
         // activeIndex : 현재 열려 있는 아코디언 패널의 인덱스를 저장하는 상태 
@@ -30,7 +31,6 @@ const BookingListContainer = () => {
         // activeIndex !== index 는 
         // 클릭한 헤더의 정보와 관련도니 패널이 열린게 없으니 새로 패널을 열고자 할 때를 의미하여 index를 불러오는 로직.
         setActiveIndex(activeIndex === index ? null : index);
-
     };
 
 
@@ -126,7 +126,7 @@ const BookingListContainer = () => {
                         <div key={item.id} style={{marginBottom :'50px'}}>
                             <BookingItem 
                                 item={item}  
-                                onClick={() => handleAccordionClick(index)}  
+                                onClick={() => handleAccordionClick(index)}   
                                 isActive={activeIndex === index} // isActive props 전달
                                 />
                             <S.panel style={{ maxHeight: activeIndex === index ? '500px' : '0' }}>

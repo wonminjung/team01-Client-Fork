@@ -1,13 +1,13 @@
 // 🫠 되도록 const와 let 사용하고, 기능 추가시 kakao앞에 window를 꼭 붙여 사용하셔야 합니닷!
 // APP_KEY 공유 금지 부탁드려용. NO MONEY.🥲
 
-import React, { useEffect, useState } from 'react';
+import React, { useEffect, useRef, useState } from 'react';
 import S from './style';
 
 // 지도 생성 전에 주소로부터 좌표를 먼저 얻고, 그 좌표로 options.center를 설정한 뒤 지도를 생성하는 로직
-const KakaoMap = ({ props }) => { // props로 주소 받기
+const KakaoMap = ({ props, index }) => { // props로 주소 받기
     const [center, setCenter] = useState({ lat: 33.450701, lng: 126.570667 }); // 초기값 설정(제주 카카오)
-
+    const containerRef = useRef();
     useEffect(() => {
         // Kakao Maps API 스크립트 로드(index.html에 심는 것 대신)
         const script = document.createElement('script');
@@ -19,18 +19,23 @@ const KakaoMap = ({ props }) => { // props로 주소 받기
             window.kakao.maps.load(() => {
 
                 // 1. 주소로 좌표 구하기
-                const container = document.getElementById(`map`); // 지도를 담을 영역의 DOM 레퍼런스
+                // const container = document.getElementById(`map${index}`); // 지도를 담을 영역의 DOM 레퍼런스
+                const container = containerRef.current;
+                console.log(container);
                 const geocoder = new window.kakao.maps.services.Geocoder(); //주소-좌표 변환 geocoder메서드
                 // 주소로 좌표를 검색
                 geocoder.addressSearch(props, function (result, status) {
                     if (status === window.kakao.maps.services.Status.OK) {
                         const coords = new window.kakao.maps.LatLng(result[0].y, result[0].x);// coords변수에 좌표 저장
                         setCenter({ lat: result[0].y, lng: result[0].x }); // 중심 좌표상태 업데이트
+            
+
                 // 지도를 생성
-                const map = new window.kakao.maps.Map(container, {
+               const map = new window.kakao.maps.Map(container, {
                     center: coords,
                     level: 3
                 });
+              
 
                 // 2. 마커에 img 넣기
                 let imageSrc = "../../images/pages/bookingList/simpleHome.svg", // 마커이미지의 주소입니다    
@@ -83,11 +88,12 @@ const KakaoMap = ({ props }) => { // props로 주소 받기
         script.onerror = () => {
             console.error("Kakao Maps API 스크립트를 로드할 수 없습니다.");
         };
-    }, [props]);
+    }, []);
+
 
     return (
         <S.map>
-            <div id="map"></div>
+            <div ref={containerRef} id='map'></div>
         </S.map>
     );
 };

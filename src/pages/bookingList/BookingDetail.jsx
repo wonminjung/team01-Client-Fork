@@ -6,7 +6,7 @@ import KakaoMap from '../../components/kakaomap/KakaoMap.jsx';
 
 
 const BookingDetail = ({item, isActive, index}) => {
-    
+
     const[isHovered, setIsHovered] = useState(false);
 
     const navigate = useNavigate();
@@ -33,7 +33,7 @@ const BookingDetail = ({item, isActive, index}) => {
                     <h5>주소 복사</h5>
                 </button>
                 {/* ⭐카카오맵api 여러개 기능 구현 안됨 해결해야함! */}
-                    <KakaoMap props={item.detailAddress} propsNum={index}/>
+                    <KakaoMap props={item.detailAddress} index={index} />
             </div>
         {/* 우측 예약 상세 내역*/}
         <div className="infoBox">
