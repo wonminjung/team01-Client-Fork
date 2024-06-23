@@ -10,18 +10,18 @@ const Info = () => {
                 예약 정보
             </h3>
             <div>
-                <h4Strong>
+                <h4 className='h4Strong'>
                     날짜
-                </h4Strong>
+                </h4>
                 <h4>
                     {stayingPeriod}
                 </h4>
             </div>
             <br />
             <div>
-                <h4Strong>
+                <h4 className='h4Strong'>
                     게스트
-                </h4Strong>
+                </h4>
                 <h4>
                     게스트 {guest}명
                 </h4>

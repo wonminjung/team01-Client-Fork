@@ -25,9 +25,7 @@ S.ReservationContainer = styled.div`
         margin-bottom: 10px;
     }
     & .h4Strong {
-        font-size: 16px;
-        margin-bottom: 10px;
-        font-weight: 600; 
+        font-weight: 600;
     }
     & h5 {
         font-size: 12px;
@@ -101,7 +99,6 @@ S.SideBox = styled.div`
             &:first-child div:nth-child(2) {
                 display: flex;
                 align-items: center; /*위 아래 정렬. display: column이면 좌우 정렬*/
-
             }
             &:nth-child(2) {
                 flex-direction: column;
@@ -116,9 +113,6 @@ S.SideBox = styled.div`
                     width: 100%;
                     display: flex;
                     justify-content: space-between;
-                    & .h4Strong {
-                        font-weight: 600;
-                    }
                 }
             }
         }
