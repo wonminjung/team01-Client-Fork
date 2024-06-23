@@ -9,9 +9,13 @@ import { faSearch } from '@fortawesome/free-solid-svg-icons';
 const SearchMainContainer = () => {
 
     const [ contentData, setContentData ] = useState([]);
+    // 현재 URI정보를 객체로 저장
     const currentLocation = useLocation();
 
-    // URI 변경될 때마다 출력
+    // CardList에서 클릭한 컴포넌트 MiniDetail에 띄우기 위한 상태(인덱스값)
+    const [ clickCardListIndex, setClickCardListIndex ] = useState(0);
+
+    // URI 변경될 때마다 실행
     useEffect(() => {
         console.log(currentLocation);
         const getRoomList = async () => {
@@ -27,8 +31,6 @@ const SearchMainContainer = () => {
         });
     }, [currentLocation]);
 
-    // CardList에서 클릭한 컴포넌트 MiniDetail에 띄우기 위한 상태(인덱스값)
-    const [ clickCardListIndex, setClickCardListIndex ] = useState(0);
 
     return (
         <S.SearchMainContainer>

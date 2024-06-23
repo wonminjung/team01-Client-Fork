@@ -200,6 +200,7 @@ const S = {};
             overflow: hidden;
             white-space: nowrap;
             text-overflow: ellipsis;
+            line-height: 22px;
         }
     `;
 

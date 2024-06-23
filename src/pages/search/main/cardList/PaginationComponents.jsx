@@ -8,12 +8,14 @@ const PaginationComponents = () => {
     const [ currentPage, setCurrentPage ] = useState(1);
     const firstPage = pageNumber[0];
     const lastPage = pageNumber[pageNumber.length - 1];
-    console.log(currentPage);
+    
     console.log(lastPage);
 
     return (
         <S.pageNumberContaner>
-            <S.FirstButton onClick={(e) => console.log(e.target.innerText)}>
+            <S.FirstButton onClick={(e) => {
+                console.log(e.target.innerText);
+            }}>
                 <div>
                     &lt;
                 </div>
