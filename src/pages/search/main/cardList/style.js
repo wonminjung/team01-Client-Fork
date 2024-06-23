@@ -85,7 +85,8 @@ const S = {};
     // 여러 카드리스트 구조 잡아줄 포장지
     S.CardListsWrapper = styled.div`
         display: grid;
-        grid-template-columns: repeat(auto-fill, minmax(calc(30% - 24px), auto));
+        /* grid-template-columns: repeat(auto-fill, minmax(calc(30% - 24px), 30%)); */
+        grid-template-columns: repeat(auto-fill, minmax(calc(30% - 24px), 1fr));
         grid-auto-rows: minmax(5%, auto);
         gap: 24px;
     `;
@@ -93,7 +94,6 @@ const S = {};
 
     
     /** CardListComponents.jsx 파일 스타일 섹션 */
-    
     S.Link = styled(Link)`
         text-decoration: none;
         color: black;
@@ -103,6 +103,7 @@ const S = {};
     S.CardListComponentsContainer = styled.div`
         display: flex;
         flex-direction: column;
+        cursor: pointer;
 
         /* 카드리스트에 마우스 오버 시 슬라이드 버튼 */
         &:hover {
@@ -180,7 +181,7 @@ const S = {};
         display: flex;
 
         /* 카드리스트 내 이미지 디자인 */
-        &>img {
+        & > img {
             width: 100%;
             height: 100%;
             object-fit: cover;
@@ -192,10 +193,13 @@ const S = {};
         padding: 20px 0;
         text-align: center;
 
-        &>h6 {
+        & > h6 {
             font-weight: ${theme.FONT_WEIGHT.bold};
             margin-bottom: 13px;
             font-size: 18px;
+            overflow: hidden;
+            white-space: nowrap;
+            text-overflow: ellipsis;
         }
     `;
 
@@ -227,7 +231,7 @@ const S = {};
 
 
 
-    /** NavigatePageComponents.jsx 파일 스타일 섹션 */
+    /** PaginationComponents.jsx 파일 스타일 섹션 */
     
     // 페이징 컨테이너 디자인
     S.pageNumberContaner = styled.nav`
@@ -239,18 +243,7 @@ const S = {};
         user-select: none;
     `;
 
-    // 이전 버튼
-    S.PrevButton = styled.div`
-
-    `;
-
-    // 다음 버튼
-    S.NextButton = styled.div`
-
-    `;
-
-    // 페이지 버튼
-    S.PageButton = styled.div`
+    const paginationStyle = css`
         width: 32px;
         height: 32px;
         border-radius: 50%;
@@ -263,7 +256,31 @@ const S = {};
         &:hover {
             background-color: ${theme.PALETTE.gray[100]};
         }
+    `;
 
+    // 제일 처음으로 이동 버튼
+    S.FirstButton = styled.div`
+        ${paginationStyle};
+    `;
+
+    // 이전 버튼
+    S.PrevButton = styled.div`
+        ${paginationStyle};
+    `;
+
+    // 제일 마지막으로 이동 버튼
+    S.LastButton = styled.div`
+        ${paginationStyle};
+    `;
+
+    // 다음 버튼
+    S.NextButton = styled.div`
+        ${paginationStyle};
+    `;
+
+    // 페이지 버튼
+    S.PageButton = styled.div`
+        ${paginationStyle};
     `;
 
 

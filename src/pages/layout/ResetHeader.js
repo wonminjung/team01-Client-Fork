@@ -5,6 +5,7 @@ const ResetHeader = () => {
     useEffect(()=>{
         const header = document.querySelector("header");
         const search = document.querySelector("#searchBox");
+        header.style.display = "flex";
         header.style.position = "sticky";
         search.classList.remove("big","down","ldown");
     })

@@ -13,7 +13,6 @@ const navSlideButtonStyle = css`
     
     transition: 0.3s;
     transform: translateY(-50%);
-    background: linear-gradient(270deg, white 50%, transparent);
 `;
 
 // 해당 파일에서 여러번 쓰여서 만든 공용 스타일
@@ -85,23 +84,8 @@ const S = {};
     S.FilterButton = styled(BasicButton)`
         width: 84px;
         justify-content: space-evenly;
-        border-radius: 14px;
+        border-radius: 20px;
 
-        & > .filterOn {
-            & > .filterBg {
-                /* display: contents; */
-            }
-        }
-
-        & > .filterBg {
-            width: 100vw;
-            height: 100vw;
-            display: none;
-            background-color: rgb(0, 0, 0, 0.5);
-            position: fixed;
-            z-index: 1500;
-            inset: 0;
-        }
     `;
 
     /* Swiper 라이브러리 태그 import 해서 디자인 */
@@ -113,6 +97,7 @@ const S = {};
         /* 슬라이드 이전 버튼 */
         & > .swiper-button-prev {
             ${navSlideButtonStyle}
+            background: linear-gradient(90deg, white 50%, transparent);
             left: 0;
             
             /* 화살표 디자인 */
@@ -130,6 +115,7 @@ const S = {};
         /* 슬라이드 다음 버튼 */
         & > .swiper-button-next {
             ${navSlideButtonStyle}
+            background: linear-gradient(270deg, white 50%, transparent);
             right: 0;
             
             /* 화살표 디자인 */
@@ -148,6 +134,11 @@ const S = {};
         /* 슬라이드 이동버튼 비활성화 */
         & > .swiper-button-disabled {
             display: none;
+        }
+
+
+        & div.swiper-slide:first-child {
+            width: 74px !important;
         }
 
     `;
@@ -229,6 +220,7 @@ const S = {};
         display: flex;
         flex-direction: column;
         font-size: 12px;
+        white-space: nowrap;
     `;
 
 export default S;

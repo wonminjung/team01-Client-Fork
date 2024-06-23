@@ -9,7 +9,7 @@ import 'swiper/css/pagination';
 import { Navigation, Pagination } from 'swiper/modules';
 
 const CardListComponents = ({ cardList, handleClickEvent, index }) => { 
-    const { title, address, img, dayPrice } = cardList;
+    const { title, address, roomImg, dayPrice } = cardList;
 
     const [ firstAddr, secondAddr ] = address.split(" ");
 
@@ -20,38 +20,37 @@ const CardListComponents = ({ cardList, handleClickEvent, index }) => {
         modules: [Navigation, Pagination],
     };
 
-    const priceAsString = dayPrice.toLocaleString();
+    const dayPriceAsString = dayPrice.toLocaleString();
     
     return (
-        // <S.Link to={linkUri}> // 누를 때마다 이동되서 임시로 주석!
-        <S.Link to="#" onClick={() => handleClickEvent(index)}>
-            <S.CardListComponentsContainer>
-                <S.Swiper {...swiperOptions}>
-                    {
-                        img.map((img, i) => (
+        <S.CardListComponentsContainer onClick={() => handleClickEvent(index)}>
+            <S.Swiper {...swiperOptions}>
+                {
+                    roomImg && roomImg.map((img, i) => 
+                        (
                             <S.SwiperSlide key={i}>
                                 <img src={img} alt="숙소 이미지"/>
                             </S.SwiperSlide>
-                        ))
-                    }
-                </S.Swiper>
-                
-                <S.DescriptionSection>
+                        )
+                    )
+                }
+            </S.Swiper>
+            
+            <S.DescriptionSection>
                     <h6>
                         {title}
                     </h6>
-                    <S.AddrPrice>
-                        <div>{firstAddr}/{secondAddr}</div>
-                        <div>￦{priceAsString}</div>
-                    </S.AddrPrice>
-                    <S.Reservation>
-                        예약하기
-                    </S.Reservation>
-                </S.DescriptionSection>
+                <S.AddrPrice>
+                    <div>{firstAddr}/{secondAddr}</div>
+                    <div>￦{dayPriceAsString}</div>
+                </S.AddrPrice>
+                <S.Reservation>
+                    예약하기
+                </S.Reservation>
+            </S.DescriptionSection>
 
-                
-            </S.CardListComponentsContainer>
-        </S.Link>
+            
+        </S.CardListComponentsContainer>
     );
 };
 

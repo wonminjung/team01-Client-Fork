@@ -53,17 +53,12 @@ const BookingListContainer = () => {
             infants : 1,
             hostPhoneNum : "010-1234-5678",
             hostName : "Sunsetia", 
-            howToCheck1 : (
-                <>
-                    <p>도어락 셀프 체크인</p>
-                    <p>(비밀번호는 호스트가 문자로 전달)</p>
-                </>
-            )
-            ,
+            howToCheck1 : `도어락 셀프 체크인 
+            (비밀번호는 호스트가 문자로 전달)`,
             howToCheck2 : `건물 내 무료 주차`,
             dayPrice: 250000,
-            stayPeriod : 2
-            
+            stayPeriod : 2,
+            cleanVat : 50000,
 
             
         },
@@ -75,7 +70,7 @@ const BookingListContainer = () => {
             address: "구좌읍, 제주도, 한국",
             reservationNum: "HMZXMWA5J3",
 
-            detailAddress : "제주특별자치도 제주시 특별자치도, 구좌읍 월정1길 54-15 KR",
+            detailAddress : "제주특별자치도 제주시 구좌읍 월정1길 54-15",
             checkInDate : "5월 19일",
             checkInTime : "오후 3:00",
             checkOutDate : "5월 21일",
@@ -84,16 +79,12 @@ const BookingListContainer = () => {
             infants : 1,
             hostPhoneNum : "010-1234-5678",
             hostName : "Sunsetia", 
-            howToCheck1 : (
-                <>
-                    <p>도어락 셀프 체크인</p>
-                    <p>(비밀번호는 호스트가 문자로 전달)</p>
-                </>
-            )
-            ,
+            howToCheck1 : `도어락 셀프 체크인 
+            (비밀번호는 호스트가 문자로 전달)`,
             howToCheck2 : `건물 내 무료 주차`,
             dayPrice: 350000,
-            stayPeriod : 2
+            stayPeriod : 2,
+            cleanVat : 10000,
             
 
         },
@@ -105,7 +96,7 @@ const BookingListContainer = () => {
             address: "연천군, 경기도, 한국",
             reservationNum: "HMZXMWA5J2",
 
-            detailAddress : "제주특별자치도 제주시 특별자치도, 구좌읍 월정1길 54-15 KR",
+            detailAddress : "경기 연천군 장남면 장백로330번길 216-80",
             checkInDate : "5월 19일",
             checkInTime : "오후 3:00",
             checkOutDate : "5월 21일",
@@ -114,16 +105,12 @@ const BookingListContainer = () => {
             infants : 1,
             hostPhoneNum : "010-1234-5678",
             hostName : "Sunsetia", 
-            howToCheck1 : (
-                <>
-                    <p>도어락 셀프 체크인</p>
-                    <p>(비밀번호는 호스트가 문자로 전달)</p>
-                </>
-            )
-            ,
+            howToCheck1 : `도어락 셀프 체크인 
+            (비밀번호는 호스트가 문자로 전달)`,
             howToCheck2 : `건물 내 무료 주차`,
             dayPrice: 500000,
-            stayPeriod : 2
+            stayPeriod : 2,
+            cleanVat : 0,
             
 
         }
@@ -144,13 +131,14 @@ const BookingListContainer = () => {
                                 onClick={() => handleAccordionClick(index)}  
                                 isActive={activeIndex === index} // isActive props 전달
                                 />
-                            <S.panel style={{ maxHeight: activeIndex === index ? '500px' : '0' }}>
+                        {activeIndex === index ? (<S.panel style={{ maxHeight: activeIndex === index ? '500px' : '0' }}>
                                 <BookingDetail 
                                     item={item}
                                     index={index}
                                     isActive={ activeIndex === index}
                                     />
-                            </S.panel>
+                            </S.panel>) : <div></div>}
+                            
                         </div>
                     ))
                 ) : ( // 예약한 숙소 없을 때,

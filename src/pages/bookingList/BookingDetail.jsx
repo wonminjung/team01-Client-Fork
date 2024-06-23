@@ -5,11 +5,30 @@ import S from './style';
 import KakaoMap from '../../components/kakaomap/KakaoMap.jsx';
 
 
-const BookingDetail = ({item, isActive, index}) => {
+const BookingDetail = ({item, isActive, index,}) => {
     
     const[isHovered, setIsHovered] = useState(false);
 
     const navigate = useNavigate();
+
+    const sub = Math.round((item.dayPrice*item.stayPeriod) + item.cleanVat)
+
+    const serviceVat = sub * 0.1;
+
+    const total = sub + serviceVat;
+
+    const coma = (prop) => {
+        const result = prop.toLocaleString('ko-KR');
+        return result;
+    }
+    const onClickCopy = async (text) => {
+        try {
+          await navigator.clipboard.writeText(text);
+          alert('주소가 복사되었습니다!');
+        } catch (e) {
+          alert('주소 복사에 실패했습니다🥲');
+        }
+      };
 
     return (
     <S.bookingDetailWrapper className={isActive ? 'active' : ''} >
@@ -28,7 +47,7 @@ const BookingDetail = ({item, isActive, index}) => {
                         </h5>
                     </div>
                 </div>
-                <button className='iconCopy'>
+                <button className='iconCopy'onClick={()=>onClickCopy(item.detailAddress)}>
                     <img src="./images/pages/bookingList/copy.svg" alt="copy"/>
                     <h5>주소 복사</h5>
                 </button>
@@ -48,11 +67,11 @@ const BookingDetail = ({item, isActive, index}) => {
                         <div className='data'>
                             <div className='checkInBox'>
                                 <h5 className='checkIn'>체크인</h5>
-                                <h5 className='checkInDate'>{item.checkInDate}  {item.checkInTime}</h5>
+                                <h5 className='checkInDate'>{item.checkInDate} {item.checkInTime}</h5>
                             </div>
                             <div className='checkOutBox'>
                                 <h5 className='CheckOut'>체크아웃</h5>
-                                <h5 className='checkOutDate'>{item.checkOutDate}  {item.checkOutTime}</h5>
+                                <h5 className='checkOutDate'>{item.checkOutDate} {item.checkOutTime}</h5>
                             </div>
                             <div className='headCountBox'>
                                 <h5 className='headCount'>인원</h5>
@@ -81,7 +100,7 @@ const BookingDetail = ({item, isActive, index}) => {
                             <ul className='tipList'>
                                 <li className='tipOne'>
                                 {item.howToCheck1}
-                                </li>
+                                </li> 
                                 <li className='tipTwo'>
                                   {item.howToCheck2}
                                 </li>
@@ -99,12 +118,19 @@ const BookingDetail = ({item, isActive, index}) => {
                     </div>
                     <div className='data'>
                         <div className='calc'>
-                            {`₩${item.dayPrice} x ${item.stayPeriod}박 `}
+                            <span>₩{coma(item.dayPrice)} x {item.stayPeriod}박</span><span>₩{coma(item.dayPrice*item.stayPeriod)}</span>
+                        </div>
+                        <div className='calc'>
+                            <span>청소비</span><span>￦ {coma(item.cleanVat)}</span>
+                        </div>
+                        <div className='calc'>
+                            <span>서비스 수수료</span><span>￦ {coma(serviceVat)}</span>
                         </div>
                         {/* 구분선 */}
                         <div className='divisionLine'></div>
                         <div className='sum'>
-                            = ₩{item.dayPrice * item.stayPeriod}
+                            <span>총 합계</span>
+                            <span className='sumPrice'>￦ {coma(total)}</span>
                         </div>
                     </div>   
                 </div>
