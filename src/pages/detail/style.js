@@ -449,7 +449,7 @@ S.LeftBox = styled.div`
                 margin-right: 12px;
                 & img{
                     object-fit: cover;
-                    width: 100px;
+                    width: 100%;
                     height: inherit;
                 }
             }
@@ -557,11 +557,11 @@ S.LeftBox = styled.div`
             margin-bottom: 23px;
         }
         & p{
-            font-size: 14px;
+            font-size: 16px;
             margin-bottom: 8px;
         }
         & p.desc{
-            font-size: 12px;
+            font-size: 14px;
             color: ${PALETTE.gray[300]};
         }
         & p.listTitle{
@@ -573,7 +573,7 @@ S.LeftBox = styled.div`
             margin-bottom: 4px;
             white-space: pre-line;
             color: ${PALETTE.black};
-            font-size: 12px;
+            font-size: 14px;
         }
         &~button{
             width: 100%;
@@ -901,6 +901,8 @@ S.DetailCommentBox = styled.div`
                             margin-right: 25px;
                             & img{
                                 width: 100%;
+                                height: inherit;
+                                object-fit: cover;
                             }
                         }
                         & .commentId{
