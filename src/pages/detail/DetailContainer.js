@@ -35,7 +35,7 @@ const DetailContainer = () => {
             setCommentUsers(data.commentUsers);
         });
     },[searchParams])
-    const {title, roomImg, _id, dayPrice, cleanVat, address} = room;
+    const {title, roomImg, _id, dayPrice, cleanVat, address, roomSchedule} = room;
     const starAvr = () => {
         let total = 0;
         for(let i = 0; i<comment.length; i++){
@@ -59,7 +59,7 @@ const DetailContainer = () => {
                         starAvr={starAvr}
                         setpopup1State={setpopup1State}
                     />
-                    <RightContentBox id={_id} dayPrice={dayPrice} cleanVat={cleanVat}/>
+                    <RightContentBox id={_id} dayPrice={dayPrice} cleanVat={cleanVat} roomSchedule={roomSchedule}/>
                 </S.DetailContentBox>
                 <DetailGradeBox comment={comment}/>
                 <DetailCommentBox 
