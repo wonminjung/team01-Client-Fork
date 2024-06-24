@@ -1,9 +1,10 @@
-import React, { useEffect } from 'react';
+import React, { useEffect, useState } from 'react';
 import S from './style';
 import Banner from './MainBanner';
 import Category from './CategorySlider';
 import CategoryContents from './CategoryContents';
 import TextBanner from './TextBanner';
+import { useSearchParams } from 'react-router-dom';
 
 const Main = () => {
     
@@ -44,15 +45,27 @@ const Main = () => {
             window.removeEventListener("scroll",scrollEvent);
         }
     },[])
-    
+    const [searchParams, setSearchParams] = useSearchParams('?cate=coolPool&lPrice=0&gPrice=1000000&maxUser=0&bedroom=0&bed=0&bathroom=0')
+    const [roomList, setRoomList] = useState([]);
+    useEffect(()=>{
+        const getRoomList = async () => {
+            const response = await fetch(`http://localhost:8000/room/?${searchParams}`);
+            const room = response.json();
+            return room;
+        };
+        getRoomList()
+        .then(({room}) => {
+            setRoomList(room);
+        });
+    },[searchParams])
     return (
         <S.MainContainer>
             <Banner />
             <TextBanner />
             <S.CategoryContainer>
-                <Category />
+                <Category searchParams={searchParams} setSearchParams={setSearchParams} roomList={roomList}/>
             </S.CategoryContainer>
-            <CategoryContents />
+            <CategoryContents roomList={roomList} searchParams={searchParams}/>
         </S.MainContainer>
     );
 };

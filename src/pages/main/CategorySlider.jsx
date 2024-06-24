@@ -5,11 +5,11 @@ import 'swiper/css/navigation';
 
 import { Navigation } from 'swiper/modules';
 import FilterBox from './FilterBox';
-import { createSearchParams, useNavigate, useSearchParams } from 'react-router-dom';
+import { createSearchParams } from 'react-router-dom';
 import FilterModal from './FilterModal';
 import { useState } from 'react';
 
-export default function Category(){
+export default function Category({searchParams, setSearchParams, roomList}){
   const category = [
     {
       id: 1,
@@ -113,22 +113,17 @@ export default function Category(){
       tag: "스키"
     }
   ]
-  const [searchParams] = useSearchParams('?cate=coolPool&lPrice=0&gPrice=1000000&maxUser=0&bedroom=0&bed=0&bathroom=0');
   const getKey = searchParams.get('cate'); // 카테고리 params 가져오기
   const getPrice = [searchParams.get("lPrice"),searchParams.get("gPrice")]; // 가격범위 params 가져오기
   const getMaxUser = searchParams.get("maxUser"); // 최대인원 params 가져오기
   const getBedroom = searchParams.get("bedroom"); // 침실 params 가져오기
   const getBed = searchParams.get("bed"); // 침대 params 가져오기
   const getBathroom = searchParams.get("bathroom"); // 욕실 params 가져오기
-  const navigate = useNavigate();
   const setCur = category.filter((cate)=>cate.cate === getKey)[0].id - 1;
   const selectSlide = (nav) => {
     // 카테고리만 변경하고 필터값은 바꾸지않음
-    const params = {cate : nav, lPrice : getPrice[0], gPrice: getPrice[1], maxUser: getMaxUser, bedroom: getBedroom, bed: getBed, bathroom: getBathroom}
-    navigate({
-      pathname : '/',
-      search : `?${createSearchParams(params)}`
-    })
+    const params = createSearchParams({cate : nav, lPrice : getPrice[0], gPrice: getPrice[1], maxUser: getMaxUser, bedroom: getBedroom, bed: getBed, bathroom: getBathroom})
+    setSearchParams(params);
   }
   let scrollY = "";
   const [modalOpen,setModalOpen] = useState(false);
@@ -193,7 +188,7 @@ export default function Category(){
         )}
       </Swiper>
       <FilterBox modalOnOff={modalOnOff}/>
-      <FilterModal modalOpen={modalOpen} modalOnOff={modalOnOff}/>
+      <FilterModal modalOpen={modalOpen} modalOnOff={modalOnOff} searchParams={searchParams} setSearchParams={setSearchParams} roomList={roomList}/>
     </>
   );
 };

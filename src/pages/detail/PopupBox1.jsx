@@ -3,7 +3,7 @@ import { FontAwesomeIcon } from '@fortawesome/react-fontawesome';
 import React, { useState } from 'react';
 import DetailGradeBox from './DetailGradeBox';
 
-const PopupBox1 = ({content,commentData,allUserData,popup1State,setpopup1State}) => {
+const PopupBox1 = ({title,commentData,commentUsers,popup1State,setpopup1State}) => {
     const starAvr = () => {
         let number = 0;
         for(let i = 0; i < commentData.length; i++){
@@ -37,7 +37,7 @@ const PopupBox1 = ({content,commentData,allUserData,popup1State,setpopup1State})
             <div className="reviewBox">
                 <div className="reviewTop">
                     <button type='button' onClick={closePopup1}><FontAwesomeIcon icon={faXmark}/></button>
-                    <h6>{content.title} 후기</h6>
+                    <h6>{title} 후기</h6>
                 </div>
                 <div className="reviewContent">
                     <div className="contentLeft">
@@ -68,12 +68,17 @@ const PopupBox1 = ({content,commentData,allUserData,popup1State,setpopup1State})
                                 <div className="userComment" key={i}>
                                     <div className="commentTop">
                                         <div className="commentTL">
-                                            <div className="userProfileImg"><img src={allUserData.filter((user)=>user.userId===comment.userId)[0].profileImg} alt={`userProfileImg${i+1}`} /></div>
-                                            <div className="userId">{comment.userId}</div>
+                                            <div className="userProfileImg">
+                                                <img src={commentUsers.filter((user)=>user._id===comment.userId)[0].profileImg
+                                                    ?commentUsers.filter((user)=>user._id===comment.userId)[0].profileImg
+                                                    :"./images/pages/detail/emptyUser.jpg"
+                                                } alt={`userProfileImg${i+1}`} />
+                                            </div>
+                                            <div className="userId">{commentUsers.filter((user)=>user._id === comment.userId)[0].userId}</div>
                                         </div>
                                         <div className="commentTR">
                                             <span className='starBox'>
-                                                <span className="star" style={{width: `${comment.star * 20}` + "%"}}></span>
+                                                <span className="star" style={{width: `${comment.star * 20}%`}}></span>
                                             </span>
                                         </div>
                                     </div>
