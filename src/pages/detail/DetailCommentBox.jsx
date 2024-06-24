@@ -2,7 +2,7 @@ import React from 'react';
 import S from './style';
 import BasicButton from '../../components/button/BasicButton';
 
-const DetailCommentBox = ({commentData,allUserData,setpopup1State}) => {
+const DetailCommentBox = ({commentData, commentUsers, setpopup1State}) => {
     const allCommentAction = () => {
         setpopup1State(true);
         let scrollY = "";
@@ -12,21 +12,26 @@ const DetailCommentBox = ({commentData,allUserData,setpopup1State}) => {
         document.body.style.overflowY = "scroll";
         document.body.style.width = "100%";
     }
+    const fewCommentArray = commentData.filter((comment,i)=> i<4).concat()
     return (
         <S.DetailCommentBox>
             <div>
-                {commentData.map((comment,i)=>
+                {fewCommentArray.map((comment,i)=>
                     <div key={i} className='commentCard'>
                         <div className="commentTBox">
                             <div>
                                 <div className="commentImg">
-                                    <img src={allUserData.filter((user)=>user.userId === comment.userId)[0].profileImg} alt="유저 프로필사진" />
+                                    <img src={
+                                        commentUsers.filter((user)=>user._id === comment.userId)[0].profileImg
+                                        ?commentUsers.filter((user)=>user._id === comment.userId)[0].profileImg
+                                        :"./images/pages/detail/emptyUser.jpg"
+                                    } alt="유저 썸네일" />
                                 </div>
-                                <div className="commentId">{comment.userId}</div>
+                                <div className="commentId">{commentUsers.filter((user)=>user._id === comment.userId)[0].userId}</div>
                             </div>
                             <div>
                                 <span className='starBox'>
-                                    <span className="star" style={{width: `${comment.star * 20}` + "%"}}></span>
+                                    <span className="star" style={{width: `${comment.star * 20}%`}}></span>
                                 </span>
                             </div>
                         </div>
