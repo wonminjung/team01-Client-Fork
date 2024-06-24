@@ -11,6 +11,7 @@ import { Navigation, Pagination } from 'swiper/modules';
 const CardListComponents = ({ cardList, handleClickEvent, index }) => { 
     const { title, address, roomImg, dayPrice } = cardList;
 
+    // 주소값 2개 추출
     const [ firstAddr, secondAddr ] = address.split(" ");
 
     const swiperOptions = {
@@ -20,6 +21,7 @@ const CardListComponents = ({ cardList, handleClickEvent, index }) => {
         modules: [Navigation, Pagination],
     };
 
+    // number타입 숫자를 문자열로 변환하며 쉼표 생성
     const dayPriceAsString = dayPrice.toLocaleString();
     
     return (

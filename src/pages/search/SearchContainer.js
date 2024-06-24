@@ -3,7 +3,6 @@ import NavSwiperContainer from './navigationBar/NavSwiperContainer';
 import SearchMainContainer from './main/SearchMainContainer';
 import ResetHeader from '../layout/ResetHeader';
 import ScrollEvent from '../layout/ScrollEvent';
-import S from './style';
 import ModalFilterBox from './ModalFilterBox';
 
 const SearchContainer = () => {
@@ -11,20 +10,23 @@ const SearchContainer = () => {
     ScrollEvent();
     ResetHeader();
 
+
     // 필터버튼 클릭 상태
    const [ isFilterActivate, setFilterActivate ] = useState(false);
     // 필터 클릭 함수
-    const handlFilterStatus = () => {
+    const handleFilterStatus = () => {
         setFilterActivate(!isFilterActivate);
     };
 
-    
+    // 현재 페이지 상태
+    const [ currentPage, setCurrentPage ] = useState(1);
 
+    
     return (
         <>
-            <NavSwiperContainer handlFilterStatus={handlFilterStatus} />
-            <SearchMainContainer />
-            <ModalFilterBox isFilterActivate={isFilterActivate} handlFilterStatus={handlFilterStatus} />
+            <NavSwiperContainer handleFilterStatus={handleFilterStatus} setCurrentPage={setCurrentPage}/>
+            <SearchMainContainer currentPage={currentPage} setCurrentPage={setCurrentPage} />
+            <ModalFilterBox isFilterActivate={isFilterActivate} handleFilterStatus={handleFilterStatus} />
         </>
     );
 };

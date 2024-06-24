@@ -244,6 +244,7 @@ const S = {};
         user-select: none;
     `;
 
+    // 페이지네이션 버튼 공용 스타일
     const paginationStyle = css`
         width: 32px;
         height: 32px;
@@ -252,10 +253,13 @@ const S = {};
         justify-content: center;
         align-items: center;
         margin: 0 4px;
+        color: ${theme.PALETTE.yellow};
+        font-weight: ${theme.FONT_WEIGHT.regular};
         cursor: pointer;
         
         &:hover {
-            background-color: ${theme.PALETTE.gray[100]};
+            background-color: ${theme.PALETTE.yellow};
+            color: white;
         }
     `;
 
@@ -288,7 +292,8 @@ const S = {};
         ${paginationStyle};
 
         &.pageActive {
-            background-color: ${theme.PALETTE.gray[200]};
+            background-color: ${theme.PALETTE.yellow};
+            color: white;
         }
     `;
 

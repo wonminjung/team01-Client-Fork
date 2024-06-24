@@ -11,6 +11,7 @@ const MiniDetailComponents = ({ contentData, clickCardListIndex }) => {
     // 기존 숙소 이미지 30개에서 mini Detail에 쓸 이미지 5개만 추출
     const miniDetailImg = roomImg.slice(0, 5);
 
+    // 미니디테일 스크롤
     const scrollRef = useRef();
 
     // 소개글 더보기 버튼 상태
@@ -74,7 +75,7 @@ const MiniDetailComponents = ({ contentData, clickCardListIndex }) => {
                                     <img src={"./images/pages/search/main/miniDetail/overview/house.svg"} alt="이미지" />
                                 </span>
                                 <span>
-                                    {`침실 ${roomData.bedroom}명`}
+                                    {`침실 ${roomData.bedroom}개`}
                                 </span>
                             </li>
                             <li>
@@ -82,7 +83,7 @@ const MiniDetailComponents = ({ contentData, clickCardListIndex }) => {
                                     <img src={"./images/pages/search/main/miniDetail/overview/bed-single.svg"} alt="이미지" />
                                 </span>
                                 <span>
-                                    {`침대 ${roomData.bed}명`}
+                                    {`침대 ${roomData.bed}개`}
                                 </span>
                             </li>
                             <li>
@@ -90,7 +91,7 @@ const MiniDetailComponents = ({ contentData, clickCardListIndex }) => {
                                     <img src={"./images/pages/search/main/miniDetail/overview/bath.svg"} alt="이미지" />
                                 </span>
                                 <span>
-                                    {`욕실 ${roomData.bathroom}명`}
+                                    {`욕실 ${roomData.bathroom}개`}
                                 </span>
                             </li>
                         </S.OverviewList>

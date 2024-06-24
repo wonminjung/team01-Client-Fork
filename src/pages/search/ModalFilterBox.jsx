@@ -9,13 +9,13 @@ import { createSearchParams, useLocation, useNavigate, useSearchParams } from 'r
 import BasicButton from '../../components/button/BasicButton';
 
 
-const ModalFilterBox = ({isFilterActivate, setFilterActivate, handlFilterStatus}) => {
+const ModalFilterBox = ({isFilterActivate, setFilterActivate, handleFilterStatus}) => {
 
     //  백그라운드만 클릭했을 때 닫히게
     const backgroundClick = () => {
         window.addEventListener("click", (e) => {
             if (e.target.classList.contains("filterBg")) {
-                handlFilterStatus();
+                handleFilterStatus();
             }
         });
 
@@ -83,7 +83,7 @@ const ModalFilterBox = ({isFilterActivate, setFilterActivate, handlFilterStatus}
 
     const viewFiltered = () => {
         const params = {cate: getKey, lPrice: value[0], gPrice: value[1], maxUser: maxUser, bedroom: bedroom, bed: bed, bathroom: bathroom}
-        handlFilterStatus();
+        handleFilterStatus();
     }
 
 
@@ -108,7 +108,7 @@ const ModalFilterBox = ({isFilterActivate, setFilterActivate, handlFilterStatus}
         <S.ModalFilter className={ isFilterActivate ? "filterBg" : "" } onClick={backgroundClick}>
             <S.Popup>
                 <div className="filterHeader">
-                    <div className="closeBtn" onClick={handlFilterStatus}>
+                    <div className="closeBtn" onClick={handleFilterStatus}>
                         <FontAwesomeIcon icon={faXmark}/>
                     </div>
                     <h6>필터</h6>

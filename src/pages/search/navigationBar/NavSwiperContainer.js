@@ -1,4 +1,4 @@
-import React, { useState } from 'react';
+import React, { useEffect, useState } from 'react';
 
 // Import Swiper styles
 import 'swiper/css';
@@ -15,11 +15,11 @@ import NavSwiperComponents from './NavSwiperComponents';
 import S from './style';
 
 
-const NavSwiperContainer = ({handlFilterStatus}) => {
+const NavSwiperContainer = ({ handleFilterStatus, setCurrentPage }) => {
 
    // 카테고리 선택 상태
   const [ isNavActivate, setNavActivate ] = useState(0);
-   
+  
   const category = [
       {
         id: 0,
@@ -128,7 +128,7 @@ const NavSwiperContainer = ({handlFilterStatus}) => {
         tag: "스키"
       }
   ]
-   
+  
   const categoryHalf = (category.length / 1.5) + 2;
   const swiperOptions = {
     slidesPerView: categoryHalf,
@@ -137,6 +137,17 @@ const NavSwiperContainer = ({handlFilterStatus}) => {
     navigation: true,
     modules: [Navigation],
   };
+
+  useEffect(() => {
+    // 네비게이션바 인덱스
+    setNavActivate(0);
+  }, []);
+
+
+  useEffect(() => {
+    // 네비게이션바 카테고리 선택할 때마다 페이지 1로 초기화
+    setCurrentPage(1);
+  }, [isNavActivate]);
 
   return (
     <S.NavBfAfContainer>
@@ -158,7 +169,7 @@ const NavSwiperContainer = ({handlFilterStatus}) => {
               }
           </S.Swiper>
 
-          <S.FilterButton onClick={handlFilterStatus}>
+          <S.FilterButton onClick={handleFilterStatus}>
             <FontAwesomeIcon icon={faSliders}/>
             <div>필터</div>
           </S.FilterButton>

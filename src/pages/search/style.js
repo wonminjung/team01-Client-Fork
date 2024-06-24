@@ -4,6 +4,7 @@ import theme from "../../global/theme";
 const { PALETTE } = theme;
 const S = {};
 
+    /** ModalFilterBox.jsx */
     S.ModalFilter = styled.div`
         width: 100vw;
         height: 100vh;
