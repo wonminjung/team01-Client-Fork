@@ -239,7 +239,7 @@ S.CategoryContainer = styled.div`
             color: #fff;
             transform: scale(1.1);
             background-color: ${PALETTE.yellow};
-            border: 1px solid ${PALETTE.yellow};q
+            border: 1px solid ${PALETTE.yellow};
             box-shadow: 0 0 3px ${PALETTE.yellow};
         }
     }
@@ -650,7 +650,7 @@ S.CategoryContentBox = styled.div`
     }
     & .filtered0{
         width: 100%;
-        min-height: 720px;
+        min-height: 670px;
         display: flex;
         flex-direction: column;
         justify-content: center;
