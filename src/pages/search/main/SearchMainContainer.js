@@ -5,8 +5,9 @@ import S from './style';
 import { FontAwesomeIcon } from '@fortawesome/react-fontawesome';
 import { faSearch } from '@fortawesome/free-solid-svg-icons';
 import { createSearchParams, useSearchParams } from 'react-router-dom';
+import ModalFilterBox from './ModalFilterBox';
 
-const SearchMainContainer = ({ currentPage, setCurrentPage }) => {
+const SearchMainContainer = ({ currentPage, setCurrentPage, isFilterActivate, handleFilterStatus }) => {
 
     // 숙소 목록
     const [ contentData, setContentData ] = useState([]);
@@ -38,8 +39,9 @@ const SearchMainContainer = ({ currentPage, setCurrentPage }) => {
     const guests = searchParams.get("guests");
 
     // 검색창에서 날짜 선택 안 했을때 default 날짜
-    const defaultSdate = new Date("2024.01.01").toLocaleDateString().split(" ").join("");
-    const defaultEdate = new Date("2024.12.31").toLocaleDateString().split(" ").join("");
+    const defaultSdate = "2024.01.31";
+    const defaultEdate = "2024.12.31";
+
 
     // URI 변경될 때마다 렌더링
     useEffect(() => {
@@ -50,7 +52,7 @@ const SearchMainContainer = ({ currentPage, setCurrentPage }) => {
                 val: val ?? "",
                 sdate: sdate ?? defaultSdate,
                 edate: edate ?? defaultEdate, 
-                guests: guests ?? 0,
+                guests: guests ?? 0, 
                 lPrice: lPrice ?? 0, 
                 gPrice: gPrice ?? 1000000, 
                 maxUser: maxUser ?? 0, 
@@ -71,12 +73,11 @@ const SearchMainContainer = ({ currentPage, setCurrentPage }) => {
         };
         getRoomList()
         .then((res) => {
+            
             if (!res.searchResult) {
                 // 검색결과 없거나 서버와 통신 안된다는 메시지 받아서 설정
                 setSearchResultMessage(res.message);
             } else {
-                // 숙소 결과 상태에 담기
-                setContentData(res.rooms);
                 // 숙소 전체 결과 개수
                 setRoomsCount(res.roomsCount);
 
@@ -86,41 +87,50 @@ const SearchMainContainer = ({ currentPage, setCurrentPage }) => {
                 // body 스크롤 초기화
                 window.scrollTo({ top: 0, behavior: "smooth" });
             }
+            // 숙소 결과 상태에 담기
+            setContentData(res.rooms);
         })
         .catch((err) => {
             console.error(err);
             setSearchResultMessage("서버와 통신 실패");
         });
-    }, [cate, lPrice, gPrice, maxUser, bedroom, bed, bathroom, currentPage]);
+    }, [cate, val, sdate, edate, guests, lPrice, gPrice, maxUser, bedroom, bed, bathroom, currentPage]);
 
 
 
     return (
-        <S.SearchMainContainer>
-        {
-            contentData && contentData.length > 0 ? 
-                (   // 숙소 데이터 가져왔을 때
-                    <>
-                        <CardListContainer
-                            contentData={contentData} 
-                            roomsCount={roomsCount}
-                            setClickCardListIndex={setClickCardListIndex}
-                            currentPage={currentPage}
-                            setCurrentPage={setCurrentPage}
-                            maxPage={maxPage}
-                        />
-                        <MiniDetailComponents contentData={contentData} clickCardListIndex={clickCardListIndex} />
-                    </>
-                )
-                :
-                (   // 숙소 데이터 못 가져왔을 때
-                    <S.NoSearchResult>
-                        <FontAwesomeIcon icon={faSearch} />
-                        <h6>{searchResultMessage}</h6>
-                    </S.NoSearchResult>
-                )
-        }
-        </S.SearchMainContainer>
+        <>
+            <ModalFilterBox 
+                searchParams={searchParams} setSearchParams={setSearchParams} contentData={contentData} 
+                setContentData={setContentData} isFilterActivate={isFilterActivate} handleFilterStatus={handleFilterStatus} 
+                setMaxPage={setMaxPage} setSearchResultMessage={setSearchResultMessage} setRoomsCount={setRoomsCount} roomsCount={roomsCount}
+            />
+            <S.SearchMainContainer>
+            {
+                contentData && contentData.length > 0 ? 
+                    (   // 숙소 데이터 가져왔을 때
+                        <>
+                            <CardListContainer
+                                contentData={contentData} 
+                                roomsCount={roomsCount}
+                                setClickCardListIndex={setClickCardListIndex}
+                                currentPage={currentPage}
+                                setCurrentPage={setCurrentPage}
+                                maxPage={maxPage}
+                            />
+                            <MiniDetailComponents contentData={contentData} clickCardListIndex={clickCardListIndex} />
+                        </>
+                    )
+                    :
+                    (   // 숙소 데이터 못 가져왔을 때
+                        <S.NoSearchResult>
+                            <FontAwesomeIcon icon={faSearch} />
+                            <h6>{searchResultMessage}</h6>
+                        </S.NoSearchResult>
+                    )
+            }
+            </S.SearchMainContainer>
+        </>
     );
 };
 

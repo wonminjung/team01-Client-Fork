@@ -3,7 +3,6 @@ import NavSwiperContainer from './navigationBar/NavSwiperContainer';
 import SearchMainContainer from './main/SearchMainContainer';
 import ResetHeader from '../layout/ResetHeader';
 import ScrollEvent from '../layout/ScrollEvent';
-import ModalFilterBox from './ModalFilterBox';
 
 const SearchContainer = () => {
 
@@ -25,8 +24,10 @@ const SearchContainer = () => {
     return (
         <>
             <NavSwiperContainer handleFilterStatus={handleFilterStatus} setCurrentPage={setCurrentPage}/>
-            <SearchMainContainer currentPage={currentPage} setCurrentPage={setCurrentPage} />
-            <ModalFilterBox isFilterActivate={isFilterActivate} handleFilterStatus={handleFilterStatus} />
+            <SearchMainContainer 
+                currentPage={currentPage} setCurrentPage={setCurrentPage} 
+                isFilterActivate={isFilterActivate} handleFilterStatus={handleFilterStatus}
+            />
         </>
     );
 };

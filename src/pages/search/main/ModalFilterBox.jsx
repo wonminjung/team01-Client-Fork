@@ -1,15 +1,17 @@
-import React, { useRef, useState } from 'react';
+import React, { useEffect, useRef, useState } from 'react';
 import S from './style';
 import { FontAwesomeIcon } from '@fortawesome/react-fontawesome';
-import { faBath, faBed, faHouse, faLocationDot, faUser, faXmark } from '@fortawesome/free-solid-svg-icons';
+import { faBath, faBed, faHouse, faUser, faXmark } from '@fortawesome/free-solid-svg-icons';
 
 import RangeSlider from 'react-range-slider-input';
 import 'react-range-slider-input/dist/style.css';
-import { createSearchParams, useLocation, useNavigate, useSearchParams } from 'react-router-dom';
-import BasicButton from '../../components/button/BasicButton';
+import { createSearchParams, useSearchParams } from 'react-router-dom';
+import BasicButton from '../../../components/button/BasicButton';
 
 
-const ModalFilterBox = ({isFilterActivate, setFilterActivate, handleFilterStatus}) => {
+const ModalFilterBox = ({searchParams, setSearchParams, isFilterActivate, 
+    handleFilterStatus, contentData, setContentData, setMaxPage,
+    setSearchResultMessage, setRoomsCount, roomsCount}) => {
 
     //  백그라운드만 클릭했을 때 닫히게
     const backgroundClick = () => {
@@ -21,10 +23,6 @@ const ModalFilterBox = ({isFilterActivate, setFilterActivate, handleFilterStatus
 
     };
 
-    const location = useLocation();
-    const navigate = useNavigate();
-
-    const [ searchParams ] = useSearchParams("?cate=coolPool&lPrice=0&gPrice=1000000&maxUser=0&bedroom=0&bed=0&bathroom=0");
     const getKey = searchParams.get('cate'); // 카테고리 params 가져오기
     const getPrice = [searchParams.get("lPrice"),searchParams.get("gPrice")]; // 가격범위 params 가져오기
     const getMaxUser = searchParams.get("maxUser"); // 최대인원 params 가져오기
@@ -42,9 +40,6 @@ const ModalFilterBox = ({isFilterActivate, setFilterActivate, handleFilterStatus
     const bedroomBoxRef = useRef(null); // 최대침실박스 참조
     const bedBoxRef = useRef(null); // 최대침대박스 참조
     const bathroomBoxRef = useRef(null); // 최대욕조박스 참조
-
-    const [ roomListCount, setRoomListCount ] = useState(0);
-
     const setVal = () => { // 가격범위 값 조건 함수
         setValue([val0Ref.current.value, val1Ref.current.value]); // 가격범위 값을 참조 input값으로 설정
     }
@@ -71,36 +66,58 @@ const ModalFilterBox = ({isFilterActivate, setFilterActivate, handleFilterStatus
         setBathroom(0); // 최대욕실 0으로 초기화
         bathroomBoxRef.current.children[0].checked = true; // 최대욕실 "상관없음" 체크
     }
-    // const filterd = contentData.filter((content) => // 필터를 걸친 데이터
-    //     content.cate===getKey // 카테고리 조건
-    //     && content.dayPrice >= value[0] // 최소가격 조건
-    //     && content.dayPrice <= value[1] // 최대가격 조건
-    //     && content.roomData.maxUser >= maxUser // 최대인원 조건
-    //     && content.roomData.bedroom >= bedroom // 최대침실 조건
-    //     && content.roomData.bed >= bed // 최대침대 조건
-    //     && content.roomData.bathroom >= bathroom // 최대욕실 조건
-    // );
-
+    
+    const filtered = contentData.filter((room)=>
+        room.dayPrice>= value[0] &&
+        room.dayPrice<= value[1] &&
+        room.roomData.maxUser>= maxUser &&
+        room.roomData.bedroom>= bedroom &&
+        room.roomData.bed>= bed &&
+        room.roomData.bathroom>= bathroom
+    )
     const viewFiltered = () => {
-        const params = {cate: getKey, lPrice: value[0], gPrice: value[1], maxUser: maxUser, bedroom: bedroom, bed: bed, bathroom: bathroom}
+        // console.log(getKey, value[0], value[1], maxUser, bedroom, bed, bathroom);
+        const params = createSearchParams({cate: getKey, lPrice: value[0], gPrice: value[1], maxUser: maxUser, bedroom: bedroom, bed: bed, bathroom: bathroom})
+        setSearchParams(params);
+
+        // 조건 초기화
+        resetCondition();
+        // 모달 닫기
         handleFilterStatus();
     }
 
 
-    // 필터값들 변경될 때마다 실행
-    // useEffect(() => {
-    //     const getRoomListCount = async () => {
-    //         const response = await fetch(`http://localhost:8000/room/search`);
-    //         const roomsCount = await response.json();
+    useEffect(() => {
+        // 숙소 요청
+        const getRoomList = async () => {
+            const response = await fetch(`http://localhost:8000/room/search?${searchParams}`);
+            const rooms = await response.json();
 
-    //         return roomsCount;
-    //     };
-    //     getRoomListCount()
-    //     .then(({roomsCount}) => {
-    //         setRoomListCount(roomsCount);
-    //     });
+            return rooms;
+        };
+        getRoomList()
+        .then((res) => {
+            if (!res.searchResult) {
+                // 검색결과 없거나 서버와 통신 안된다는 메시지 받아서 설정
+                setSearchResultMessage(res.message);
+            } else {
+                // 숙소 전체 결과 개수
+                setRoomsCount(res.roomsCount);
 
-    // }, [val0Ref, val1Ref, numBoxRef, bedroomBoxRef, bedBoxRef, bathroomBoxRef]);
+                // 페이지 당 표시할 숙소로 나눠서 최대 페이지 설정
+                setMaxPage(Math.floor(res.roomsCount / 18) + 1);
+                
+                // body 스크롤 초기화
+                window.scrollTo({ top: 0, behavior: "smooth" });
+            }
+            // 숙소 결과 상태에 담기
+            setContentData(res.rooms);
+        })
+        .catch((err) => {
+            console.error(err);
+            setSearchResultMessage("서버와 통신 실패");
+        });
+    }, []);
 
 
 
@@ -201,7 +218,7 @@ const ModalFilterBox = ({isFilterActivate, setFilterActivate, handleFilterStatus
                         <button type='bottom' className='filterRemoveBtn' onClick={resetCondition}>전체 해제</button>
                     </div>
                     <div className="filterSubmitBox">
-                        <BasicButton className='filterSubmitBtn' onClick={viewFiltered}>숙소 {roomListCount}개 보기</BasicButton>
+                        <BasicButton className='filterSubmitBtn' onClick={viewFiltered}>숙소 {roomsCount}개 보기</BasicButton>
                     </div>
                 </div>
             </S.Popup>
