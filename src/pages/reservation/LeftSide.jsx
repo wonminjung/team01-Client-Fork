@@ -12,6 +12,9 @@ const LeftSide = () => {
             <Charge />
             <Refund />
             <Rules />
+            <S.ChargeButton>
+                확인 및 결제
+            </S.ChargeButton>
         </S.SideBox>
     );
 };
