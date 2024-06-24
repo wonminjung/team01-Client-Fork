@@ -6,7 +6,7 @@ import BasicButton from '../../../../components/button/BasicButton';
 import { Link } from 'react-router-dom';
 
 const MiniDetailComponents = ({ contentData, clickCardListIndex }) => {
-    const { id, title, roomImg, roomData, description, address, convenience } = contentData[clickCardListIndex];
+    const { _id, title, roomImg, roomData, description, address, convenience } = contentData[clickCardListIndex];
 
     // 기존 숙소 이미지 30개에서 mini Detail에 쓸 이미지 5개만 추출
     const miniDetailImg = roomImg.slice(0, 5);
@@ -36,7 +36,7 @@ const MiniDetailComponents = ({ contentData, clickCardListIndex }) => {
             <S.MarginSideContainer>
                 <S.HeaderContainer>
                     <div>{title}</div>
-                    <Link to={`/detail?roomId=${id}`}>
+                    <Link to={`/detail?roomId=${_id}`}>
                         <BasicButton style={{width: "80px"}}>
                                 상세보기
                         </BasicButton>

@@ -48,8 +48,6 @@ const CardListComponents = ({ cardList, handleClickEvent, index }) => {
                     예약하기
                 </S.Reservation>
             </S.DescriptionSection>
-
-            
         </S.CardListComponentsContainer>
     );
 };

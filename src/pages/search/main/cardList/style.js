@@ -259,29 +259,37 @@ const S = {};
         }
     `;
 
-    // 제일 처음으로 이동 버튼
-    S.FirstButton = styled.div`
-        ${paginationStyle};
-    `;
-
     // 이전 버튼
     S.PrevButton = styled.div`
         ${paginationStyle};
-    `;
+        font-weight: ${theme.FONT_WEIGHT.regular};
 
-    // 제일 마지막으로 이동 버튼
-    S.LastButton = styled.div`
-        ${paginationStyle};
+        &.prevDisabled {
+            opacity: 0.3;
+            user-select: none;
+            cursor: not-allowed;
+        }
     `;
 
     // 다음 버튼
     S.NextButton = styled.div`
         ${paginationStyle};
+        font-weight: ${theme.FONT_WEIGHT.regular};
+
+        &.nextDisabled {
+            opacity: 0.3;
+            user-select: none;
+            cursor: not-allowed;
+        }
     `;
 
     // 페이지 버튼
     S.PageButton = styled.div`
         ${paginationStyle};
+
+        &.pageActive {
+            background-color: ${theme.PALETTE.gray[200]};
+        }
     `;
 
 
