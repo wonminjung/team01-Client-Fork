@@ -1,38 +1,44 @@
-import React from 'react';
+import React, { useEffect, useRef } from 'react';
 import S from './style';
 import CardListComponents from './CardListComponents';
 import PaginationComponents from './PaginationComponents';
 
-const CardListContainer = (props) => {
-    const { contentData, setClickCardListIndex } = props;
+const CardListContainer = ({ contentData, roomsCount, setClickCardListIndex, currentPage, setCurrentPage, maxPage }) => {
 
+    // 클릭한 카드리스트를 미니디테일에 띄우기 위한 인덱스 설정
     const handleClickEvent = (index) => {
         setClickCardListIndex(index);
     };
 
-    const contentPerPage = 18;
+    // 카드리스트 컨테이너 태그 참조(스크롤바 이동시킬 목적으로 사용)
+    const cardListScrollRef = useRef();
+
+    
+    useEffect(() => {
+        // 카드리스트 스크롤 초기화
+        cardListScrollRef.current.scrollTop = 0;
+    }, [currentPage]);
 
     return (
-        <S.CardListContainer>
+        <S.CardListContainer ref={cardListScrollRef}>
             <S.SideMarginWrapper>
                 <S.AccommodationTotal>
-                    <h6>숙소 {contentData && contentData.length}개 이상</h6>
+                    <h6>숙소 {roomsCount}개 이상</h6>
                 </S.AccommodationTotal>
 
                 <S.CardListsWrapper>
                     {
                         contentData && contentData.map((cardList, i) => 
                             (
-                                <CardListComponents key={i} cardList={cardList} index={i} handleClickEvent={handleClickEvent}/>
+                                <CardListComponents key={i} cardList={cardList} index={i} handleClickEvent={handleClickEvent} />
                             )
                         )
                     }
                 </S.CardListsWrapper>
 
-                {/* {
-                    contentData.length >= contentPerPage ? <PaginationComponents /> : <></>
-                } */}
-                <PaginationComponents />
+                {   // 페이지 수가 1 초과하면 페이지네이션 표시
+                    maxPage > 1 ? <PaginationComponents currentPage={currentPage} setCurrentPage={setCurrentPage} maxPage={maxPage}/> : <></>
+                }
             </S.SideMarginWrapper>
         </S.CardListContainer>
     );
