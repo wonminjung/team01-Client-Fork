@@ -15,6 +15,9 @@ const SearchMainContainer = () => {
     // CardList에서 클릭한 컴포넌트 MiniDetail에 띄우기 위한 상태(인덱스값)
     const [ clickCardListIndex, setClickCardListIndex ] = useState(0);
 
+    // 검색결과가 없을 때 띄울 메시지 상태
+    const [ searchResultMessage, setSearchResultMessage ] = useState("");
+
     // URI 변경될 때마다 실행
     useEffect(() => {
         console.log(currentLocation);
@@ -25,20 +28,28 @@ const SearchMainContainer = () => {
             return rooms;
         };
         getRoomList()
-        .then(({rooms}) => {
-            console.log(rooms);
-            setContentData(rooms);
+        .then((res) => {
+            if (!res.searchResult) {
+                setSearchResultMessage(res.message);
+            } else {
+                setContentData(res.rooms);
+            }      
+        })
+        .catch((err) => {
+            console.error(err);
+            setSearchResultMessage("서버와 통신 실패");
         });
     }, [currentLocation]);
+
 
 
     return (
         <S.SearchMainContainer>
         {
-            contentData.length > 0 ? 
+            contentData && contentData.length > 0 ? 
                 (
                     <>
-                        <CardListContainer contentData={contentData} setClickCardListIndex={setClickCardListIndex} />
+                        <CardListContainer contentData={contentData} currentLocation={currentLocation} setClickCardListIndex={setClickCardListIndex} />
                         <MiniDetailComponents contentData={contentData} clickCardListIndex={clickCardListIndex} />
                     </>
                 )
@@ -46,7 +57,7 @@ const SearchMainContainer = () => {
                 (
                     <S.NoSearchResult>
                         <FontAwesomeIcon icon={faSearch} />
-                        <h6>검색 결과가 없습니다.</h6>
+                        <h6>{searchResultMessage}</h6>
                     </S.NoSearchResult>
                 )
         }

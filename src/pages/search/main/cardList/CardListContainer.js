@@ -4,7 +4,7 @@ import CardListComponents from './CardListComponents';
 import PaginationComponents from './PaginationComponents';
 
 const CardListContainer = (props) => {
-    const { contentData, setClickCardListIndex } = props;
+    const { contentData, setClickCardListIndex, currentLocation } = props;
 
     const handleClickEvent = (index) => {
         setClickCardListIndex(index);
@@ -32,7 +32,7 @@ const CardListContainer = (props) => {
                 {/* {
                     contentData.length >= contentPerPage ? <PaginationComponents /> : <></>
                 } */}
-                <PaginationComponents />
+                <PaginationComponents currentLocation={currentLocation} />
             </S.SideMarginWrapper>
         </S.CardListContainer>
     );
