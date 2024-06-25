@@ -3,7 +3,7 @@ import S from './style'
 
 const BodyTop = () => {
     return (
-        <div>
+        <S.BodyTop>
             {/* <div>
                 <h3></h3>
                 <div className='next-button' />
@@ -11,7 +11,7 @@ const BodyTop = () => {
             </div>
             <div></div> */}
             <h1>마이페이지</h1>
-        </div>
+        </S.BodyTop>
     );
 };
 
