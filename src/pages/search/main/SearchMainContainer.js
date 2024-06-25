@@ -64,6 +64,7 @@ const SearchMainContainer = ({ currentPage, setCurrentPage, isFilterActivate, ha
         );
         setSearchParams(params);
 
+        console.log(params.toString());
         // 숙소 요청
         const getRoomList = async () => {
             const response = await fetch(`http://localhost:8000/room/search?${params.toString()}`);

@@ -30,6 +30,7 @@ const ModalFilterBox = ({searchParams, setSearchParams, isFilterActivate,
     const getBed = searchParams.get("bed"); // 침대 params 가져오기
     const getBathroom = searchParams.get("bathroom"); // 욕실 params 가져오기
     const [value, setValue] = useState([getPrice[0]? getPrice[0]: 10000, getPrice[1]? getPrice[1]: 1000000]); // 가격범위 초기세팅을 params로 세팅
+    const [filterValue, setFilterValue] = useState([getPrice[0]? getPrice[0]: 10000, getPrice[1]? getPrice[1]: 1000000]);
     const [maxUser, setMaxUser] = useState(getMaxUser); // 최대인원 초기세팅을 params로 세팅
     const [bedroom, setBedroom] = useState(getBedroom); // 침실 초기세팅을 params로 세팅
     const [bed, setBed] = useState(getBed); // 침대 초기세팅을 params로 세팅
@@ -42,6 +43,7 @@ const ModalFilterBox = ({searchParams, setSearchParams, isFilterActivate,
     const bathroomBoxRef = useRef(null); // 최대욕조박스 참조
     const setVal = () => { // 가격범위 값 조건 함수
         setValue([val0Ref.current.value, val1Ref.current.value]); // 가격범위 값을 참조 input값으로 설정
+        setFilterValue([val0Ref.current.value, val1Ref.current.value]);
     }
     const numberBtnClick = (e) => { // 최대 인원 버튼 조건 함수
         setMaxUser(e.target.value); // 클릭한 radio의 value값으로 최대 인원 조건 세팅
@@ -86,38 +88,42 @@ const ModalFilterBox = ({searchParams, setSearchParams, isFilterActivate,
         handleFilterStatus();
     }
 
-
     useEffect(() => {
-        // 숙소 요청
-        // const getRoomList = async () => {
-        //     const response = await fetch(`http://localhost:8000/room/search?${searchParams}`);
-        //     const rooms = await response.json();
+            if (isFilterActivate) {
+                // 숙소 요청
+                const getRoomList = async () => {
+                    const response = await fetch(`http://localhost:8000/room/search?${searchParams}`);
+                    const rooms = await response.json();
+                    
+                    return rooms;
+                };
+                getRoomList()
+                .then((res) => {
+                    if (!res.searchResult) {
+                        // 검색결과 없거나 서버와 통신 안된다는 메시지 받아서 설정
+                        setSearchResultMessage(res.message);
+                    } else {
+                        // 숙소 전체 결과 개수
+                        setRoomsCount(res.roomsCount);
+                        
+                        // 페이지 당 표시할 숙소로 나눠서 최대 페이지 설정
+                        setMaxPage(Math.floor(res.roomsCount / 18) + 1);
+                        
+                        // console.log(val0Ref.value, val1Ref.value, numBoxRef.value, bedroomBoxRef.value, bedBoxRef.value, bathroomBoxRef.value);
+                        console.log("modalconsole");
+                        // body 스크롤 초기화
+                        window.scrollTo({ top: 0, behavior: "smooth" });
+                    }
+                    // 숙소 결과 상태에 담기
+                    setContentData(res.rooms);
+                })
+                .catch((err) => {
+                    console.error(err);
+                    setSearchResultMessage("서버와 통신 실패");
+                });
+                }
+        }, [filterValue, maxUser, bedroom, bed, bathroom]);
 
-        //     return rooms;
-        // };
-        // getRoomList()
-        // .then((res) => {
-        //     if (!res.searchResult) {
-        //         // 검색결과 없거나 서버와 통신 안된다는 메시지 받아서 설정
-        //         setSearchResultMessage(res.message);
-        //     } else {
-        //         // 숙소 전체 결과 개수
-        //         setRoomsCount(res.roomsCount);
-
-        //         // 페이지 당 표시할 숙소로 나눠서 최대 페이지 설정
-        //         setMaxPage(Math.floor(res.roomsCount / 18) + 1);
-                
-        //         // body 스크롤 초기화
-        //         window.scrollTo({ top: 0, behavior: "smooth" });
-        //     }
-        //     // 숙소 결과 상태에 담기
-        //     setContentData(res.rooms);
-        // })
-        // .catch((err) => {
-        //     console.error(err);
-        //     setSearchResultMessage("서버와 통신 실패");
-        // });
-    }, []);
 
 
 
