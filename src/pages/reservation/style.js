@@ -98,7 +98,7 @@ S.SideBox = styled.div`
             padding-bottom: 20px;
             &:first-child div:nth-child(2) {
                 display: flex;
-                align-items: center; /*위 아래 정렬. display: column이면 좌우 정렬*/
+                align-items: center; /*위 아래 정렬. flex-direction: column이면 좌우 정렬*/
             }
             &:nth-child(2) {
                 flex-direction: column;
