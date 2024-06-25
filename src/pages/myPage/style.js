@@ -51,9 +51,10 @@ S.BodyTop = styled.div`
 S.Profile = styled.div`
     margin-bottom: 50px;
     width: calc(100% - 430px);
+    border: 1px solid ${theme.PALETTE.gray[200]};
     display: flex;
     flex-direction: row;
-    justify-content: flex-start;
+    justify-content: flex-end;
     align-items: flex-start;
     flex-wrap: nowrap;
     min-height: 200px;
@@ -69,6 +70,9 @@ S.Profile = styled.div`
 S.InfoBox = styled.div`
     display: block;
     margin: 0 0 50px;
+    &>div {
+        border-bottom: 1px solid ${theme.PALETTE.gray[200]};
+    }
 `
 
 export default S;

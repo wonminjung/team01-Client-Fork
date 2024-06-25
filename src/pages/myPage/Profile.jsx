@@ -3,11 +3,12 @@ import S from './style'
 
 const Profile = () => {
     const time = 1;
+    const user = "승민";
     return (
         <S.Profile>
             <div>
                 <div><img src="" alt="profile" /></div>
-                <div><h1>승민</h1></div>
+                <div><h1>{user}</h1></div>
                 <div><h3>게스트</h3></div>
             </div>
             <div>
