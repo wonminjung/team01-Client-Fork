@@ -36,6 +36,7 @@ const DetailContainer = () => {
         });
     },[searchParams])
     const {title, roomImg, _id, dayPrice, cleanVat, address, roomSchedule} = room;
+    console.log(room)
     const starAvr = () => {
         let total = 0;
         for(let i = 0; i<comment.length; i++){

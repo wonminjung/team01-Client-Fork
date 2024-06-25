@@ -620,11 +620,11 @@ S.RightBox = styled.div`
         & .dayPriceBox{
             margin-bottom: 26px;
             & h6{
-                color: ${PALETTE.yellow};
-                font-size: 20px;
+                color: ${PALETTE.black};
+                font-size: 18px;
                 font-weight: bold;
                 & span:first-child{
-                    letter-spacing: 1px;
+                    letter-spacing: 0.5px;
                 }
                 & span:last-child{
                     font-size: 14px;
@@ -703,10 +703,10 @@ S.RightBox = styled.div`
                         color: ${PALETTE.black};
                     }
                     &.total{
-                        font-weight: bold;
                         margin-bottom: 30px;
                         & span{
-                            font-size: 14px;
+                            font-size: 18px;
+                            color: ${PALETTE.yellow};
                         }
                     }
                 }
