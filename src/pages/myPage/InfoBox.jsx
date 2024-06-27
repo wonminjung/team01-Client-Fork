@@ -1,42 +1,302 @@
-import React from 'react';
+import React, { useEffect, useRef, useState } from 'react';
 import S from './style'
+import { FontAwesomeIcon } from '@fortawesome/react-fontawesome';
+import { faXmark } from '@fortawesome/free-solid-svg-icons';
+import BasicButton from '../../components/button/BasicButton';
+import PostModal from './PostModal';
+import PopupPostCode from './PopupPostCode';
 
-const InfoBox = () => {
+const InfoBox = ({info, setInfo}) => {
+    // 로그인된 유저 id
+    const _id = "667ad4d1ab5eb02e847a411b";
+    // 초기화 정보
     
-    const name = "홍길동";
-    const email = "12345@gmail.com";
-    const phone = "010-1234-5678";
+    // 모달창 state
+    const [modalState, setModalState] = useState(false);
+    // 모달제목 state
+    const [title, setTitle] = useState("");
+    // 모달컨텐츠 state
+    const [content, setContent] = useState(<></>);
+    // 모달 input 레퍼런스
+    const inputRef = useRef(null);
+    // 비밀번호 input 레퍼런스
+    const pwRef1 = useRef(null);
+    const pwRef2 = useRef(null);
+    // 비밀번호 input tag 레퍼런스
+    const pwTag = useRef(null);
+    const pw1Tag = useRef(null);
+    const pw2Tag = useRef(null);
+    // 이메일 중복검사 통과상태
+    const [emailValidate, setEmailValidate] = useState(false);
+    // 정보확인태그 레퍼런스
+    const messageRef = useRef(null);
+    // 이메일 정규식검사
+    const valEmail = (email_address) => {
+        const email_regex = /^[a-zA-Z0-9._-]+@[a-zA-Z0-9.-]+\.[a-zA-Z]{2,4}$/i;
+        return email_regex.test(email_address)
+    }
+    // 이메일 중복확인 이벤트
+    const checkEmail = async () => {
+        // input value 가져오기
+        const refValue = inputRef.current.value;
+        // value가 정규식검사를 통과했다면
+        if(valEmail(refValue)){
+            // db에서 해당 이메일을 중복검사하여 true(존재함) false(존재하지않음) 판별
+            await checkInfo(refValue).then((result)=>{
+                // true값일 때
+                if(result.message){
+                    messageRef.current.className = "red"
+                    messageRef.current.innerText = "이미 존재하는 이메일입니다"
+                    return
+                }
+                // false값일 때
+                messageRef.current.className = "green"
+                messageRef.current.innerText = "사용할 수 있는 이메일입니다"
+                setEmailValidate(true);
+            })
+        // 정규식검사를 통과하지 못했을 때
+        } else {
+            messageRef.current.className = "red"
+            messageRef.current.innerText = "유효하지 않은 이메일 주소입니다."
+            setEmailValidate(false);
+        }
+    }
+    
+    // 우편번호 모달창 state
+    const [postModal, setPostModal] = useState(false);
+    // 우편번호 input 레퍼런스
+    const post1Ref = useRef(null);
+    const post2Ref = useRef(null);
+    const post3Ref = useRef(null);
+    // 우편번호 input3 value state
+    const [post3Val, setPost3Val] = useState("");
+    const changePost3Val = (e) => {
+        setPost3Val(e.target.value)
+    }
+    // fetch로 보낼 body정보 state
+    const [modify, setModify] = useState([{_id : _id}, {}]);
+    
 
-    return (
-        <S.InfoBox>
+    // 수정 fetch
+    const updateUserInfo = async () => {
+        console.log(modify)
+        const response = await fetch("http://localhost:8000/user/myPage", {
+            method : "PATCH",
+            body : JSON.stringify(modify),
+            headers : {
+                "Content-Type" : "application/json; charset=utf-8"
+            },
+        })
+        const userInfo = await response.json();
+        const message = userInfo.message;
+        const info = userInfo.user;
+        alert(message)
+        console.log(info)
+        setInfo(info)
+    }
+    // 중복 확인 fetch
+    const checkInfo = async (ref) => {
+        const response = await fetch("http://localhost:8000/user/myPage", {
+            method : "POST",
+            body : JSON.stringify({email : ref}),
+            headers : {
+                "Content-Type" : "application/json; charset=utf-8"
+            },
+        })
+        const message = await response.json();
+        console.log(message)
+        return message
+    }
+
+    // 이름수정 이벤트
+    const modifyName = () => {
+        setModify([{_id : _id}, {}])
+        setModalState(true)
+        console.log("name")
+        setTitle("이름")
+        setContent(<>
+            <input type="text" ref={inputRef} placeholder='새로운 이름을 입력해주세요.'/>
+        </>)
+    }
+    // 비밀번호수정 이벤트
+    const modifyPw = () => {
+        setModify([{_id : _id}, {}])
+        setModalState(true)
+        console.log("password")
+        setTitle("비밀번호")
+        setContent(<div className='pwInputBox'>
+            <input type="password" ref={pwRef1} placeholder='기존 비밀번호를 입력해주세요.'/>
+            <p ref={pw1Tag}>가나다</p>
+            <input type="password" ref={inputRef} placeholder='새로운 비밀번호를 입력해주세요.'/>
+            <p ref={pwTag}>가나다</p>
+            <input type="password" ref={pwRef2} placeholder='새로운 비밀번호를 다시 한번 입력해주세요.'/>
+            <p ref={pw2Tag}>가나다</p>
+        </div>)
+    }
+    // 이메일수정 이벤트
+    
+    const modifyEmail = () => {
+        setModify([{_id : _id}, {}])
+        // 이메일 정규식 체크 초기화
+        setEmailValidate(false);
+        // 모달창 오픈
+        setModalState(true)
+        console.log("email")
+        setTitle("이메일")
+        setContent(<div className='emailInputBox'>
             <div>
+                <input type="email" ref={inputRef} placeholder='새로운 이메일을 입력해주세요.'/>
+                <button type='button' onClick={checkEmail}>중복확인</button>
+            </div>
+            <div>
+                <p ref={messageRef}></p>
+            </div>
+        </div>)
+    }
+    // 연락처수정 이벤트
+    const modifyPhone = () => {
+        setModify([{_id : _id}, {}])
+        setModalState(true)
+        console.log("phone")
+        setTitle("연락처")
+        setContent(<>
+            <input type="text" ref={inputRef} placeholder='새로운 연락처를 입력해주세요.'/>
+        </>)
+    }
+    // 주소수정 이벤트
+    const modifyAddress = () => {
+        setModify([{_id : _id}, {}])
+        setModalState(true)
+        console.log("address")
+        setTitle("주소")
+        setContent(<div className='postInputBox'>
+            <div><input type="text" ref={post1Ref} className='disabledPostInput' disabled={true} placeholder='우편번호'/><button type='button' onClick={openPostModal}>주소 검색</button></div>
+            <div><input type="text" ref={post2Ref} className='disabledPostInput' disabled={true} placeholder='주소를 입력하세요.'/></div>
+            <div><input type="text" ref={post3Ref} placeholder='상세주소를 입력해주세요.' onChange={changePost3Val}/></div>
+        </div>)
+    }
+
+    // 모달창 닫기
+    const closeModal = () => {
+        setModalState(false);
+    }
+    // 주소 모달창 열기
+    const openPostModal = () => {
+        setPostModal(true)
+    }
+    // 주소 모달창 닫기
+    const closePostModal = () => {
+        setPostModal(false)
+    }
+    // 수정완료버튼 이벤트
+    const subModify = () => {
+        if(title === "이름"){
+            const refValue = inputRef.current.value;
+            if(!refValue){
+                alert("이름을 입력해주세요.")
+                return
+            }
+            setModify(modify[1] = {name : refValue})
+            updateUserInfo()
+            setModalState(false)
+        }else if(title === "비밀번호"){
+            
+        }else if(title === "이메일"){
+            if(!emailValidate){
+                alert("중복검사를 통과해야합니다!")
+                return
+            }
+            setModify(modify[1] = {email : inputRef.current.value})
+            updateUserInfo()
+            setModalState(false)
+        }else if(title === "연락처"){
+            setModify(modify[1] = {phone : inputRef.current.value})
+            updateUserInfo()
+            setModalState(false)
+        }else if(title === "주소"){
+            setModify(modify[1] = {address : post2Ref.current.value + ` ${post3Val}` })
+            updateUserInfo()
+            setModalState(false)
+        }
+    }
+    // 모달창 이외 클릭시 모달창 닫기
+    useEffect(()=>{
+        window.addEventListener("click", (e) => {
+            if(e.target.className === "modifyModal"){
+                setModalState(false)
+            }
+        })
+    },[modalState])
+    return (
+        <>
+        <S.InfoBox>
+            <div className='infoBox'>
                 <div>
                     <h2>실명</h2>
-                    <h3>수정</h3>
+                    <p>{info.name}</p>
                 </div>
                 <div>
-                    <h3>{name}</h3>
-                </div>
-            </div>
-            <div>
-                <div>
-                    <h2>이메일 주소</h2>
-                    <h3>수정</h3>
-                </div>
-                <div>
-                    <h3>{email}</h3>
+                    <button type='button' className='name' onClick={modifyName}>수정</button>
                 </div>
             </div>
-            <div>
+            <div className='infoBox'>
                 <div>
-                    <h2>전화번호</h2>
-                    <h3>수정</h3>
+                    <h2>비밀번호 수정</h2>
                 </div>
                 <div>
-                    <h3>{phone}</h3>
+                    <button type='button' className='password' onClick={modifyPw}>수정</button>
+                </div>
+            </div>
+            <div className='infoBox'>
+                <div>
+                    <h2>이메일</h2>
+                    <p>{info.email}</p>
+                </div>
+                <div>
+                    <button type='button' className='email' onClick={modifyEmail}>수정</button>
+                </div>
+            </div>
+            <div className='infoBox'>
+                <div>
+                    <h2>연락처</h2>
+                    <p>{info.phone}</p>
+                </div>
+                <div>
+                    <button type='button' className='phone' onClick={modifyPhone}>수정</button>
+                </div>
+            </div>
+            <div className='infoBox'>
+                <div>
+                    <h2>주소</h2>
+                    <p>{info.address}</p>
+                </div>
+                <div>
+                    <button type='button' className='address' onClick={modifyAddress}>수정</button>
                 </div>
             </div>
         </S.InfoBox>
+        {modalState?
+        <div className='modifyModal'>
+            <div className='modalBox'>
+                <div className="modalHeader">
+                    <button type='button' onClick={closeModal}><FontAwesomeIcon icon={faXmark}/></button>
+                    <h2>{title} 수정</h2>
+                </div>
+                <div id='contentBox' className="modalContent">
+                    {content}
+                </div>
+                <div className="modalFooter">
+                    <BasicButton type="button" onClick={subModify}>수정</BasicButton>
+                </div>
+            </div>
+        </div>
+        :<></>}
+        {postModal?
+        <PostModal>
+            <PopupPostCode post1Ref={post1Ref} post2Ref={post2Ref} onClose={closePostModal}/>
+        </PostModal>
+        :<></>}
+        </>
     );
 };
 

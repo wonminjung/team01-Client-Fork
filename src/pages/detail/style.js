@@ -9,10 +9,10 @@ S.DetailContainer = styled.div`
 `
 /* 디테일 래퍼 디자인 */
 S.DetailWrapper = styled.div`
-    max-width: 1080px;
+    max-width: 1180px;
     width: 100%;
     margin: 0 auto;
-    padding: 70px 0;
+    padding: 70px 50px;
     /* 타이틀박스 디자인 */
     & .contentTitleBox{
         text-align: center;
