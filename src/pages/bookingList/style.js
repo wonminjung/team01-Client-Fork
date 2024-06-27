@@ -96,6 +96,8 @@ S.NotBookingWrapper = styled.div`
         min-width : 400px;
         & img{
             width: 100%;   
+            height: inherit;
+            object-fit: cover;
         }
     }
 
