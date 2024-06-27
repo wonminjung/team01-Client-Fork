@@ -1,12 +1,15 @@
 import React from 'react';
 import S from './style';
-import { Link } from 'react-router-dom';
+import { Link, useNavigate } from 'react-router-dom';
 import {useForm} from 'react-hook-form';
 import RemoveHeader from '../layout/RemoveHeader';
 
 const SignUpContainer = () => {
 
     RemoveHeader()
+
+    // 회원가입 완료 시 로그인 페이지로 바로 이동시켜주기 위해
+    const navigate = useNavigate();
 
     const {register, handleSubmit, getValues,
         formState : {isSubmitting, isSubmitted, errors}
@@ -17,10 +20,53 @@ const SignUpContainer = () => {
 
     return (
         <S.SignUpWrapper>
-            <S.Form onSubmit={handleSubmit((data)=>{
+            <S.Form onSubmit={handleSubmit(async (data)=>{
                 console.log(data)
+
+                //회원가입 로직
+                await fetch('http://localhost:3000/user/signUp', {
+                    method : 'POST',
+                    headers : {
+                        'Content-Type' : 'application/json'
+                    },
+                    body : JSON.stringify({
+                        userId : data.userId,
+                        name : data.name,
+                        email : data.email,
+                        password : data.password,
+                        address : data.address,
+                        phone : data.phone
+                    })
+                })
+                .then((res)=>res.json())
+                .then((res)=>{
+                    if(res.registerSuccess){
+                        alert(res.message)
+                    }
+                    // 로그인 페이지로 보내기
+                    navigate('/signIn')
+                })
+                .catch(console.error)
+
             })}>
-                <S.Title>회원가입</S.Title>
+                <S.LogoImage src="./images/pages/layout/logo.svg" alt="eggbnb"></S.LogoImage>
+                {/* 이름 */}
+                <S.Label>
+                {/* <S.Minititle>이름</S.Minititle> */}
+                    <S.Input
+                        type="text" id="name"
+                        placeholder='이름'
+                        {...register('name', {
+                            required : true,
+                            
+                        })}
+                    />
+                    {errors?.name?.type === 'required' && (
+                        <S.ConfirmMessage>이름을 입력해주세요</S.ConfirmMessage>
+                    )}
+
+                </S.Label>
+
                 {/* 이메일 */}
                 <S.Label htmlFor='email'>
                     {/* <S.Minititle>이메일</S.Minititle> */}
@@ -84,78 +130,36 @@ const SignUpContainer = () => {
 
                 </S.Label>
 
-                {/* 이름 */}
+                {/* 주소 */}
                 <S.Label>
-                    {/* <S.Minititle>이름</S.Minititle> */}
+                    {/* <S.Minititle>주소</S.Minititle> */}
                     <S.Input
-                        type="text" id="name"
-                        placeholder='이름'
-                        {...register('name', {
-                            required : true,
+                        type="text" id="address"
+                        placeholder='주소'
+                        {...register('address', {
+                            required : false,
                             
                         })}
                     />
-                    {errors?.name?.type === 'required' && (
-                        <S.ConfirmMessage>이름을 입력해주세요</S.ConfirmMessage>
-                    )}
-
                 </S.Label>
 
-                {/* 핸드폰 번호 */}
-                <S.Label>
+                 {/* 핸드폰 번호 */}
+                 <S.Label>
                     {/* <S.Minititle>핸드폰 번호</S.Minititle> */}
                     <S.Input
-                        type="number" id="name"
-                        placeholder='핸드폰 번호(-없이)'
-                        {...register('number', {
+                        type="text" id="phone"
+                        placeholder='핸드폰 번호(-포함)'
+                        {...register('phone', {
                             required : true,
                             
                         })}
                     />
-                    {errors?.number?.type === 'required' && (
+                    {errors?.phone?.type === 'required' && (
                         <S.ConfirmMessage>핸드폰 번호를 입력해주세요</S.ConfirmMessage>
                     )}
 
                 </S.Label>
 
-                {/* 생년월일 */}
-                <S.Label>
-                    {/* <S.Minititle>생년월일</S.Minititle> */}
-                    <S.Input
-                        type="date" id="birth"
-                        {...register('birth', {
-                            required : true,
-                            
-                        })}
-                    />
-                    {errors?.birth?.type === 'required' && (
-                        <S.ConfirmMessage>생년월일 입력해주세요</S.ConfirmMessage>
-                    )}
-
-                </S.Label>
-
-                {/* 성별 */}
-                {/* <S.Label>
-
-                    <S.Minititle>성별</S.Minititle>
-                    <p>여자</p>
-                    <S.InputRadio
-                        type="radio" id="gender"
-                        {...register('birth', {
-                            required : true,
-                        })}
-                    />
-                    <p>남자</p><S.InputRadio
-                        type="radio" id="gender"
-                        {...register('birth', {
-                            required : true,
-                        })}
-                    />
-                    {errors?.birth?.type === 'required' && (
-                        <S.ConfirmMessage>성별을 선택해주세요</S.ConfirmMessage>
-                    )}
-
-                </S.Label> */}
 
                 {/* 약관동의 */}
                 <S.Label>

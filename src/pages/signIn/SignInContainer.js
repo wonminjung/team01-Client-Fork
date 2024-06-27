@@ -3,6 +3,8 @@ import { useForm } from 'react-hook-form';
 import { Link } from 'react-router-dom';
 import RemoveHeader from '../layout/RemoveHeader';
 import S from './style';
+import { FontAwesomeIcon } from '@fortawesome/react-fontawesome';
+import { faEnvelope } from '@fortawesome/free-regular-svg-icons';
 
 const SignInContainer = () => {
 
@@ -15,23 +17,67 @@ const SignInContainer = () => {
     const emailRegex = /^[a-zA-Z0-9.!#$%&'*+/=?^_`{|}~-]+@[a-zA-Z0-9-]+(?:\.[a-zA-Z0-9-]+)*$/;
     const passwordRegex = /^(?=.*\d)(?=.*[a-z])(?=.*[!@#])[\da-zA-Z!@#]{8,}$/;
 
+    // redux 는 따로 사용하지 않는 것? 
+    /*
+        const dispatch = useDispatch();
+        const currentUser = useSelector((state)=>state.user.currentUser);
+        const userStatus = useSelector((state)=>state.user.isLogin);
+
+        // 로그인 상태일 때, (true)
+        if(userStatus){
+            return (
+                <div>{currentUser.name}님 환영합니다.</div>
+                <button>메인페이지<button>
+            )
+        }
+    */
+    
     return (
         <S.SignInWrapper>
-            <S.Form onSubmit={handleSubmit((data)=>{
+            <S.Form onSubmit={handleSubmit(async (data)=>{
                 console.log(data)
+
+                // 로그인 로직
+                await fetch('http://localhost:3000/user/signIn', {
+                    method : 'POST', 
+                    headers : {
+                        'Content-Type' : 'application/json',
+                    },
+                    body : JSON.stringify({
+                        email : data.email,
+                        password : data.password
+                    })
+                })
+                .then((res)=>res.json())
+                .then((res)=>{
+                    // 데이터를 들고 있는 res
+                    console.log(res)
+                    /*
+                        redux 이용 시 
+                        dispatch(setUser(res.user))
+                        dispatch(setUserStatus(true))
+                    */
+                })
+                
+
+
             })}>
-                <Link to='/'><S.Title>Logo</S.Title></Link>
+                <Link to='/'><S.LogoImage src="./images/pages/layout/logo.svg" alt="eggbnb"></S.LogoImage></Link>
                 {/* 이메일 */}
                 <S.Label htmlFor='email'>
-                    <S.Input
-                        type="text" id="email" placeholder='이메일 주소'
-                        {...register('email', {
-                            required : true,
-                            pattern : {
-                                value : emailRegex
-                            }
-                        })}
-                    />
+                    {/* <S.InputWrapper> */}
+                        {/* <FontAwesomeIcon icon={faEnvelope} className='icon'/> */}
+                        <S.Input
+                            type="text" id="email" placeholder='이메일 주소'
+                            {...register('email', {
+                                required : true,
+                                pattern : {
+                                    value : emailRegex
+                                }
+                            })}    
+                        />
+
+                    {/* </S.InputWrapper>                     */}
                     {errors?.email?.type === 'required' && (
                         <S.ConfirmMessage>이메일을 입력해주세요</S.ConfirmMessage>
                         )}
@@ -64,9 +110,9 @@ const SignInContainer = () => {
 
             {/* 네이버, 카카오, 애플 버튼 */}
             <S.Ul>
-                <li><S.Subtitle>네이버</S.Subtitle></li>
-                <li><S.Subtitle>카카오</S.Subtitle></li>
-                <li><S.Subtitle>애플</S.Subtitle></li>
+                <li><S.Subtitle><S.IconImage src="./images/pages/signIn/naverIcon.png" alt="naverIcon"/></S.Subtitle></li>
+                <li><S.Subtitle><S.IconImage src="./images/pages/signIn/kakaoIcon.png" alt="kakaoIcon"/></S.Subtitle></li>
+                <li><S.Subtitle><S.IconImage src="./images/pages/signIn/appleIcon.png" alt="appleIcon"/></S.Subtitle></li>
             </S.Ul>
 
         </S.SignInWrapper>

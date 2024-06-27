@@ -1,6 +1,7 @@
 import styled from "styled-components";
 import {flexCenterColumn} from './../../global/common'
 import theme from "../../global/theme";
+import { FontAwesomeIcon } from "@fortawesome/react-fontawesome";
 
 const S = {}
 const PALETTE = theme.PALETTE;
@@ -20,11 +21,21 @@ S.Label = styled.label`
     margin: 0 0 8px 0;
 `
 
-S.Title = styled.p`
-    font-size: 40px;
-    font-weight: bold;
-    color: ${PALETTE.yellow};
-    margin: 120px 40px 40px 40px;
+S.InputWrapper = styled.p`
+    position: relative;
+    display: flex;
+    align-items: center;
+`
+
+S.Icon = styled(FontAwesomeIcon)`
+    position: absolute;
+    left : 10px;
+    color : #aaa;
+`
+
+S.LogoImage = styled.img`
+    width : 60%;
+    margin: 80px 100px 20px 100px;
 `
 
 S.ConfirmMessage = styled.p`
@@ -41,8 +52,8 @@ S.Subtitle = styled.p`
 
 S.Button = styled.button`
         
-    width: 490px;
-    height: 50px;
+    width: 530px;
+    height: 65px;
     display: inline-flex;
     padding: 0 12px;
     border: 1px solid ${PALETTE.yellow};
@@ -70,8 +81,8 @@ S.Button = styled.button`
 
 S.Input = styled.input`
         
-        width: 490px;
-        height: 50px;
+        width: 530px;
+        height: 65px;
         padding: 0 20px;
         border: 1px solid ${PALETTE.gray[300]}; 
         border-radius: 20px;
@@ -88,9 +99,18 @@ S.Input = styled.input`
         }
     `;
 
+S.IconImage = styled.img`
+    width : 70px;
+    height: 70px;
+`
+
+
 S.Ul = styled.ul`
     display: flex;
     justify-content: space-between;
     align-items: center;
+    padding: 25px;
 ` 
+
+
 export default S;

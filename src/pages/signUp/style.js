@@ -21,7 +21,13 @@ S.Title = styled.p`
     font-size: 40px;
     font-weight: bold;
     color: #F2AC29;
-    margin: 90px 40px 40px 40px;
+    margin: 90px 40px 30px 40px;
+    text-align: center;
+`
+
+S.LogoImage = styled.img`
+    width : 30%;
+    margin: 20px 0px 40px 0px;
 `
 
 S.ConfirmMessage = styled.p`
@@ -44,8 +50,8 @@ S.Minititle = styled.p`
 
 S.Button = styled.button`
         
-    width: 490px;
-    height: 50px;
+    width: 530px;
+    height: 60px;
     display: inline-flex;
     padding: 0 12px;
     border: 1px solid #F2AC29;
@@ -73,8 +79,8 @@ S.Button = styled.button`
 
 S.Input = styled.input`
         
-        width: 490px;
-        height: 50px;
+        width: 530px;
+        height: 60px;
         padding: 0 20px;
         border: 1px solid #6A6A6A; 
         border-radius: 20px;
