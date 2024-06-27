@@ -8,17 +8,24 @@ const PALETTE = theme.PALETTE;
 
 S.SignInWrapper = styled.div`
     ${flexCenterColumn}
-    height: 600px;
+    height: calc(100vh - 130px);
 `
 
 S.Form = styled.form`
-    height: 100%;
 `
 
 S.Label = styled.label`
     display: block;
     width: 100%;
     margin: 0 0 8px 0;
+`
+
+S.Title = styled.p`
+    font-size: 40px;
+    font-weight: bold;
+    color: #F2AC29;
+    margin: 90px 40px 30px 40px;
+    text-align: left;
 `
 
 S.InputWrapper = styled.p`
@@ -36,6 +43,11 @@ S.Icon = styled(FontAwesomeIcon)`
 S.LogoImage = styled.img`
     width : 60%;
     margin: 80px 100px 20px 100px;
+`
+
+S.LogoImageLittle = styled.img`
+    width : 40%;
+    margin: 10px 100px 20px 100px;
 `
 
 S.ConfirmMessage = styled.p`
@@ -103,7 +115,9 @@ S.IconImage = styled.img`
     width : 70px;
     height: 70px;
 `
+S.WelcomImage = styled.img`
 
+`
 
 S.Ul = styled.ul`
     display: flex;

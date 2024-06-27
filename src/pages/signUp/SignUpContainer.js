@@ -24,7 +24,7 @@ const SignUpContainer = () => {
                 console.log(data)
 
                 //회원가입 로직
-                await fetch('http://localhost:3000/user/signUp', {
+                await fetch('http://localhost:8000/user/signUp', {
                     method : 'POST',
                     headers : {
                         'Content-Type' : 'application/json'
@@ -49,10 +49,27 @@ const SignUpContainer = () => {
                 .catch(console.error)
 
             })}>
+
                 <S.LogoImage src="./images/pages/layout/logo.svg" alt="eggbnb"></S.LogoImage>
+                
+                {/* 유저아이디 */}
+                <S.Label>
+                    <S.Input
+                        type="text" id="userId"
+                        placeholder='아이디'
+                        {...register('userId', {
+                            required : true,
+                            
+                        })}
+                    />
+                    {errors?.userId?.type === 'required' && (
+                        <S.ConfirmMessage>아이디를 입력해주세요</S.ConfirmMessage>
+                    )}
+
+                </S.Label>
+
                 {/* 이름 */}
                 <S.Label>
-                {/* <S.Minititle>이름</S.Minititle> */}
                     <S.Input
                         type="text" id="name"
                         placeholder='이름'
@@ -69,7 +86,6 @@ const SignUpContainer = () => {
 
                 {/* 이메일 */}
                 <S.Label htmlFor='email'>
-                    {/* <S.Minititle>이메일</S.Minititle> */}
                     <S.Input
                         type="text" id="email" placeholder='이메일 주소'
                         {...register('email', {
@@ -89,7 +105,6 @@ const SignUpContainer = () => {
 
                 {/* 비밀번호 */}
                 <S.Label htmlFor='password'>
-                    {/* <S.Minititle>비밀번호</S.Minititle> */}
                     <S.Input
                         type="password" id="password" placeholder='비밀번호(영문 소문자 숫자 특수문자 조합 8자리 이상)'
                         {...register('password', {
@@ -109,7 +124,6 @@ const SignUpContainer = () => {
 
                 {/* 비밀번호 확인 */}
                 <S.Label htmlFor="passwordConfirm">
-                    {/* <S.Minititle>비밀번호 확인</S.Minititle> */}
                     <S.Input
                         type="password" id="passwordConfirm"
                         placeholder='비밀번호 확인'
@@ -132,7 +146,6 @@ const SignUpContainer = () => {
 
                 {/* 주소 */}
                 <S.Label>
-                    {/* <S.Minititle>주소</S.Minititle> */}
                     <S.Input
                         type="text" id="address"
                         placeholder='주소'
@@ -145,7 +158,6 @@ const SignUpContainer = () => {
 
                  {/* 핸드폰 번호 */}
                  <S.Label>
-                    {/* <S.Minititle>핸드폰 번호</S.Minititle> */}
                     <S.Input
                         type="text" id="phone"
                         placeholder='핸드폰 번호(-포함)'
@@ -168,7 +180,7 @@ const SignUpContainer = () => {
                 </S.Label>
 
                 {/* submit 버튼 */}
-                <S.Button>회원가입</S.Button>
+                <S.Button disabled={isSubmitting}>회원가입</S.Button>
 
                 {/* 로그인 페이지로 */}
                 <Link to='/signIn'><S.Subtitle>이미 회원이신가요?</S.Subtitle></Link>
