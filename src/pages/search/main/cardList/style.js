@@ -152,6 +152,7 @@ const S = {};
         position: relative;
 
         & > div {
+            display: flex;
             position: absolute;
             width: 28px;
             height: 28px;
@@ -161,10 +162,10 @@ const S = {};
         }
 
         & .heart {
-            right: 0;
-            top: 0;
-            width: 100%;
-            height: 100%;
+            right: 0 !important;
+            top: 0 !important;
+            width: inherit !important;
+            height: inherit !important;
         }
     `;
 
