@@ -7,9 +7,12 @@ import HeartButton from '../../components/heartbutton/HeartButton';
 import Modal from './modal/Modal';
 
 
-const WishItemContents = () => {
-    //💥현재 서버와 연결 안되어 있어 새로고침시, 삭제한 데이터 화면에 다시 뜸.
-    // 이 부분 서버 연결시, 수정하기!
+const WishItemContents = ({rooms, userId}) => {
+
+    console.log(rooms);
+    console.log(userId);
+
+    
 
     // 모달의 상태
     const [showModal, setShowModal] = useState(false);
@@ -69,7 +72,6 @@ const WishItemContents = () => {
             wishList : [2,3,5]
         }
     ]
-
     // 위시리스트 데이터 (wishList-array)
     const [contentData, setContentData] = useState([
         {
@@ -195,6 +197,17 @@ const WishItemContents = () => {
     // 삭제 확인 모달창의 O 버튼 클릭시, user데이터의 wishList배열에서 해당 아이템 삭제하는 메서드
     const handleConfirmRemove = () => {
 
+        // useEffect(()=>{
+        //     const deleteWishItem = async() => {
+        //         try{
+        //             const response = await fetch(`http://localhost:8000/room/wishList?userId=${userId}&roomId=${room._id}&${searchParams}}`)
+                    
+        //         }catch(error){
+
+        //         }
+        //     }
+        // })
+
         // 상태로 관리된 roomId는 현재 삭제하려고 클릭한 roomId를 나타냄
         console.log(roomId) 
 
@@ -231,23 +244,23 @@ const WishItemContents = () => {
         <S.ContentBox>
             {/* 로그인한 유저의 user데이터의 wishList 데이터에 데이터가 있다면 위시리스트페이지에 아이템 보여주기*/}
             {loginUser.wishList.length > 0 ? (
-                loginUser.wishList.map((data, i) =>
+                rooms.map((room, i) =>
                     <div className="content" key={i}>
                         {/* 하트버튼 클릭시, 해당 아이템 삭제 기능 메서드 삽입 */}
-                        <HeartButton onClick={() => handleRemoveItem(data)} />
-                        {/* 아이템 클릭시, 해당 아이템의 detail페이지로 이동 구현 (Link의 a태그기능을 막아둠. 현재 클릭한 data가 detail의 roomId와 같음)*/}
-                        <Link onClick={e => {e.preventDefault(); navigate(`/detail?roomId=${data}`)}}>
+                        <HeartButton onClick={() => handleRemoveItem(room._id)} />
+                        {/* a가 detail의 roomId와 같음)*/}
+                        <Link onClick={() => { navigate(`/detail?roomId=${room._id}`)}}>
                             <div className="imgBox">
                                 {/* 로그인한 유저의 wishList 컨텐츠 이미지 불러오기 */}
-                                <img src={contentData.filter((room)=> room.id === data)[0].img} />
+                                <img src={room.roomImg[0]} />
                             </div>
                             <div className="textBox">
                                 <div className="titleBox">
-                                    <h6>{contentData.filter((room)=> room.id === data)[0].title}</h6>
+                                    <h6>{room.title}</h6>
                                 </div>
                                 <div className="addressAndPriceBox">
-                                    <span className="address">{contentData.filter((room)=> room.id === data)[0].address}</span>
-                                    <span className="price">{contentData.filter((room)=> room.id === data)[0].dayPrice}</span>
+                                    <span className="address">{room.address}</span>
+                                    <span className="price">{room.dayPrice}</span>
                                 </div>
                                 <div className="ReservateButton">예약하기</div>
                             </div>

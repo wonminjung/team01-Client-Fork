@@ -19,41 +19,24 @@ const WishListContainer = () => {
     const [rooms, setRooms] = useState([]);
     const [isWished, setIsWished] = useState(true);
     const [isModalOpen, setIsModalOpen] = useState(true); 
-    
+    const userId = "hyeona023";// 로그인한 유저의 아이디(임의)
     const navigate = useNavigate();
-
-    // 로그인한 유저라고 가정
-    // const signInUser = {
-    //         id : '6672c609aa021dac908a48db',
-    //         userId : "hyeona023",
-    //         password : "1234",
-    //         name : "현아",
-    //         profileImg : "./images/pages/detail/user/1/thumb.jpg",
-    //         email : "hyeona@gmail.com",
-    //         address : {
-    //             city : "Kulas Light",
-    //             street : "Gwenborough",
-    //             suit : "Apt. 556",
-    //             zipcode : "92998-3874",
-    //         },
-    //         phone : "010-1234-1234",
-    //         // wishList 부분
-    //         wishList : [1,2,3]
-    //     };
     
     useEffect(()=> {
         const getWishList = async () => {
             try{
-                const userId = '6672c609aa021dac908a48db'; // 사용자 ID (임시로 하드코딩)
-                const response = await fetch(`http://localhost:8000/room/wishList?userId=${userId}&{searchparams.toString()}`);
+              
+                const response = await fetch(`http://localhost:8000/room/wishList?userId=${userId}&${searchParams}}`);
+
                 const data = await response.json();
                 if(data && data.rooms) {
                     setRooms(data.rooms);
-                    setIsWished(data.rooms.length > 0);
+                    setIsWished(data.rooms.length > 0); //찜한 숙소가 1개 이상이면 모달창 안 띄움.
+                    //check
                     console.log(data);
                 }
             }catch(error){
-                console.error("Eroor fetching wishList:", error);
+                console.error("Error fetching wishList:", error);
             }
 
         };
@@ -73,7 +56,7 @@ const WishListContainer = () => {
             <S.PageTitle>위시리스트</S.PageTitle>
             {/* 찜한 숙소가 있다면 바로 위시리스트 페이지 보이게 하기 */}
             {isWished ? (
-                <WishItemContents rooms={rooms} /> 
+                <WishItemContents rooms={rooms} userId={userId}  /> 
             ): (
                     <div>
                         {/* 찜한 숙소가 없다면 모달창 먼저 띄우기. */}
