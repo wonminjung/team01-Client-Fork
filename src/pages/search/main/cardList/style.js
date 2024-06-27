@@ -4,6 +4,8 @@ import theme from '../../../../global/theme';
 import { Swiper, SwiperSlide } from 'swiper/react';
 import { Link } from 'react-router-dom';
 
+
+
 // 해당 파일에서 여러번 쓰여서 만든 공용 스타일
 const slideButtonStyle = css`
     width: 32px;
@@ -103,7 +105,7 @@ const S = {};
     S.CardListComponentsContainer = styled.div`
         display: flex;
         flex-direction: column;
-        cursor: pointer;
+        
 
         /* 카드리스트에 마우스 오버 시 슬라이드 버튼 */
         &:hover {
@@ -118,11 +120,60 @@ const S = {};
         }
     `;
 
+    // 위시리스트 추가 버튼 컨테이너
+    S.WishContainer = styled.div`
+        position: relative;
+        cursor: pointer;
+    `;
+
+    // 위시리스트에 없는 숙소일 경우 버튼 디자인
+    S.HeartDisabled = styled.div`
+        width: 28px;
+        height: 28px;
+        position: absolute;
+        right: 0;
+        transform: translate(-40%, 40%);
+        z-index: 1000;
+        opacity: 0.8;
+        filter: grayscale(0.4);
+
+        &:hover {
+            opacity: 1;
+            filter: none;
+        }
+
+        & > img {
+            object-fit: cover;
+        }
+    `;
+
+    // 위시리스트에 있는 숙소일 경우 버튼 디자인
+    S.HeartButtonWrapper = styled.div`
+        position: relative;
+
+        & > div {
+            position: absolute;
+            width: 28px;
+            height: 28px;
+            right: 0;
+            transform: translate(-40%, 40%);
+            z-index: 1000;
+        }
+
+        & .heart {
+            right: 0;
+            top: 0;
+            width: 100%;
+            height: 100%;
+        }
+    `;
+
     // Swiper 라이브러리 import 해서 디자인
     S.Swiper = styled(Swiper)`
         width: 100%;
         border-radius: 20px;
         user-select: none;
+        cursor: pointer;
 
         /* 슬라이드 하단에 현재 이미지 위치 표시한거 디자인 */
         & .swiper-pagination-bullet-active {
@@ -225,9 +276,10 @@ const S = {};
     `;
 
     // 예약글씨
-    S.Reservation = styled.div`
+    S.Reservation = styled.span`
         font-size: 12px;
         font-weight: ${theme.FONT_WEIGHT.bold};
+        cursor: pointer;
     `;
 
 

@@ -5,7 +5,7 @@ import KakaoMap from '../../../../components/kakaomap/KakaoMap';
 import BasicButton from '../../../../components/button/BasicButton';
 import { Link } from 'react-router-dom';
 
-const MiniDetailComponents = ({ contentData, clickCardListIndex }) => {
+const MiniDetailComponents = ({ contentData, clickCardListIndex, currentPage }) => {
     const { _id, title, roomImg, roomData, description, address, convenience } = contentData[clickCardListIndex];
 
     // 기존 숙소 이미지 30개에서 mini Detail에 쓸 이미지 5개만 추출
@@ -30,7 +30,7 @@ const MiniDetailComponents = ({ contentData, clickCardListIndex }) => {
 
         // 해당 페이지의 스크롤도 초기화
         window.scrollTo({ top: 0 });
-    }, [clickCardListIndex]);
+    }, [currentPage, clickCardListIndex]);
 
     return (
         <S.MiniDetailContainer ref={scrollRef}>

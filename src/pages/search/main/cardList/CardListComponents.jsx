@@ -1,4 +1,4 @@
-import React from 'react';
+import React, { useState } from 'react';
 
 import S from './style';
 
@@ -7,9 +7,18 @@ import 'swiper/css/navigation';
 import 'swiper/css/pagination';
 
 import { Navigation, Pagination } from 'swiper/modules';
+import HeartButton from '../../../../components/heartbutton/HeartButton';
+import { FontAwesomeIcon } from '@fortawesome/react-fontawesome';
+import { faHeart } from '@fortawesome/free-solid-svg-icons';
 
-const CardListComponents = ({ cardList, handleClickEvent, index }) => { 
+const CardListComponents = ({ cardList, handleClickEvent, index }) => {
     const { title, address, roomImg, dayPrice } = cardList;
+
+    
+    const [ isWishList, setIsWishList ] = useState(false);
+    const handleWishList = () => {
+        setIsWishList(!isWishList);
+    };
 
     // 주소값 2개 추출
     const [ firstAddr, secondAddr ] = address.split(" ");
@@ -25,8 +34,25 @@ const CardListComponents = ({ cardList, handleClickEvent, index }) => {
     const dayPriceAsString = dayPrice.toLocaleString();
     
     return (
-        <S.CardListComponentsContainer onClick={() => handleClickEvent(index)}>
-            <S.Swiper {...swiperOptions}>
+        <S.CardListComponentsContainer>
+            <S.WishContainer onClick={handleWishList}>
+                {
+                    isWishList ? 
+                    (
+                        <S.HeartButtonWrapper>
+                            <HeartButton />
+                        </S.HeartButtonWrapper>
+                    )
+                    : 
+                    (
+                        <S.HeartDisabled>
+                            <img src="./images/pages/search/main/heart-regular.svg"/>
+                        </S.HeartDisabled>
+                    )
+                }
+            </S.WishContainer>
+
+            <S.Swiper {...swiperOptions} onClick={() => handleClickEvent(index)}>
                 {
                     roomImg && roomImg.map((img, i) => 
                         (
@@ -46,7 +72,7 @@ const CardListComponents = ({ cardList, handleClickEvent, index }) => {
                     <div>{firstAddr}/{secondAddr}</div>
                     <div>￦{dayPriceAsString}</div>
                 </S.AddrPrice>
-                <S.Reservation>
+                <S.Reservation onClick={() => handleClickEvent(index)}>
                     예약하기
                 </S.Reservation>
             </S.DescriptionSection>

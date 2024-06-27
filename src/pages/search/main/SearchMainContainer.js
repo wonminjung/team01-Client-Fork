@@ -68,8 +68,7 @@ const SearchMainContainer = ({ currentPage, setCurrentPage, isFilterActivate, ha
                     setRoomsCount(res.roomsCount);
 
                     // 페이지 당 표시할 숙소로 나눠서 최대 페이지 설정
-                    setMaxPage(Math.floor(res.roomsCount / 18) + 1);
-                    
+                    setMaxPage(Math.floor(res.roomsCount / (18 + 1) + 1));
                     // body 스크롤 초기화
                     window.scrollTo({ top: 0, behavior: "smooth" });
                 }
@@ -101,7 +100,7 @@ const SearchMainContainer = ({ currentPage, setCurrentPage, isFilterActivate, ha
                                 setCurrentPage={setCurrentPage}
                                 maxPage={maxPage}
                             />
-                            <MiniDetailComponents contentData={contentData} clickCardListIndex={clickCardListIndex} />
+                            <MiniDetailComponents contentData={contentData} clickCardListIndex={clickCardListIndex} currentPage={currentPage}/>
                         </>
                     )
                     :
@@ -114,9 +113,9 @@ const SearchMainContainer = ({ currentPage, setCurrentPage, isFilterActivate, ha
             }
             </S.SearchMainContainer>
             <ModalFilterBox 
-                searchParams={searchParams} setSearchParams={setSearchParams} currentPage={currentPage}
+                searchParams={searchParams} setSearchParams={setSearchParams} currentPage={currentPage} setCurrentPage={setCurrentPage}
                 setContentData={setContentData} isFilterActivate={isFilterActivate} handleFilterStatus={handleFilterStatus} 
-                setMaxPage={setMaxPage} setSearchResultMessage={setSearchResultMessage} setRoomsCount={setRoomsCount} roomsCount={roomsCount}
+                setMaxPage={setMaxPage} setSearchResultMessage={setSearchResultMessage} setRoomsCount={setRoomsCount}
             />
         </>
     );

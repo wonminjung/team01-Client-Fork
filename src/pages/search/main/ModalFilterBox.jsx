@@ -10,15 +10,13 @@ import BasicButton from '../../../components/button/BasicButton';
 
 
 const ModalFilterBox = ({searchParams, setSearchParams, isFilterActivate, 
-    handleFilterStatus, setContentData, setMaxPage,
-    setSearchResultMessage, setRoomsCount, roomsCount, currentPage}) => {
+    handleFilterStatus, setContentData, setMaxPage, setCurrentPage, currentPage,
+    setSearchResultMessage, setRoomsCount}) => {
 
-    //  백그라운드만 클릭했을 때 닫히게
-    const backgroundClick = (e) => {
-        if (e.target.classList.contains("filterBg")) {
-            handleFilterStatus();
-        }
-    };
+
+    
+    // 필터창에서 URI 변경 전
+    const [ beforeUri, setBeforeUri ] = useState("");
 
     const getKey = searchParams.get('cate') ?? "searchResult"; // 카테고리 params 가져오기
     const getPrice = [searchParams.get("lPrice") ?? 0, searchParams.get("gPrice") ?? 1000000]; // 가격범위 params 가져오기
@@ -45,23 +43,36 @@ const ModalFilterBox = ({searchParams, setSearchParams, isFilterActivate,
     const bedBoxRef = useRef(0); // 최대침대박스 참조
     const bathroomBoxRef = useRef(0); // 최대욕조박스 참조
 
+    // 임시 숙소 저장
+    const [ tempContentData, setTempContentData ] = useState([]);
+    // 임시 최대 페이지 저장
+    const [ tempMaxPage, setTempMaxPage ] = useState(0);
+    // 임시 숙소 개수 저장
+    const [ tempContentCount, setTempContentCount ] = useState(0);
+
+
 
     const setVal = () => { // 가격범위 값 조건 함수
         setValue([val0Ref.current.value, val1Ref.current.value]); // 가격범위 값을 참조 input값으로 설정
         setFilterValue([val0Ref.current.value, val1Ref.current.value]);
     }
+
     const numberBtnClick = (e) => { // 최대 인원 버튼 조건 함수
         setMaxUser(e.target.value); // 클릭한 radio의 value값으로 최대 인원 조건 세팅
     }
+
     const bedroomBtnClick = (e) => { // 최대 침실 버튼 조건 함수
         setBedroom(e.target.value); // 클릭한 radio의 value값으로 최대 침실 조건 세팅
     }
+
     const bedBtnClick = (e) => { // 최대 침대 버튼 조건 함수
         setBed(e.target.value); // 클릭한 radio의 value값으로 최대 침대 조건 세팅
     }
+
     const bathroomBtnClick = (e) => { // 최대 욕실 버튼 조건 함수
         setBathroom(e.target.value); // 클릭한 radio의 value값으로 최대 욕실 조건 세팅
     }
+
     const resetCondition = () => { // 조건 리셋 함수
         setValue([0,1000000]); // 가격조건 0 , 100만으로 초기화
         setMaxUser(0); // 최대인원 0으로 초기화
@@ -74,14 +85,13 @@ const ModalFilterBox = ({searchParams, setSearchParams, isFilterActivate,
         bathroomBoxRef.current.children[0].checked = true; // 최대욕실 "상관없음" 체크
     }
 
-
-    const [ tempContentData, setTempContentData ] = useState([]);
-    const [ tempMaxPage, setTempMaxPage ] = useState(0);
     const viewFiltered = () => {
         // 임시 저장소에 있던거 클릭 이벤트 발생하면 contentData에 업데이트
         setContentData(tempContentData);
         // 임시로 넣어둔 맥스 페이지 maxPage에 업데이트
         setMaxPage(tempMaxPage);
+        // 임시 숙소 개수 업데이트
+        setRoomsCount(tempContentCount);
 
         // 조건 초기화
         resetCondition();
@@ -91,6 +101,34 @@ const ModalFilterBox = ({searchParams, setSearchParams, isFilterActivate,
 
 
 
+    // 필터 실행됐을 때 변경 전 URI값 저장
+    useEffect(() => {
+        if (isFilterActivate) {
+            const beforeParams = createSearchParams(
+                {
+                    cate: getKey, val: val, sdate: sdate, edate: edate, guests: guests, lPrice: value[0], gPrice: value[1], 
+                    maxUser: maxUser, bedroom: bedroom, bed: bed, bathroom: bathroom, guests: guests, page: currentPage
+                }
+            );
+            setBeforeUri(beforeParams);
+        }
+    }, [])
+
+    // 필터창 닫기
+    const filterClose = (e) => {
+        if (e.target.classList.contains("filterBg") || e.currentTarget.className.includes("closeBtn")) {
+            // filter 상태 false로 전환
+            handleFilterStatus();
+
+            // 변경한 URI 값 초기화
+            setSearchParams(beforeUri);
+            
+            // 조건 초기화
+            resetCondition();
+        }
+    };
+
+    // 필터 데이터 선택할 때마다 숙소 개수 업데이트
     useEffect(() => {
         if (isFilterActivate) {
             const params = createSearchParams(
@@ -114,15 +152,18 @@ const ModalFilterBox = ({searchParams, setSearchParams, isFilterActivate,
                     // 검색결과 없거나 서버와 통신 안된다는 메시지 받아서 설정
                     setSearchResultMessage(res.message);
                 } else {
-                    // 숙소 전체 결과 개수
-                    setRoomsCount(res.roomsCount);
-
                     // 페이지 당 표시할 숙소로 나눠서 임시 최대 페이지 설정
-                    setTempMaxPage(Math.floor(res.roomsCount / 18) + 1);
+                    setTempMaxPage(Math.floor(res.roomsCount / (18 + 1) + 1));
 
                     // body 스크롤 초기화
                     window.scrollTo({ top: 0, behavior: "smooth" });
                 }
+                // 숙소 전체 결과 개수
+                setTempContentCount(res.roomsCount);
+
+                // 페이지 1로 초기화
+                setCurrentPage(1);
+
                 // 숙소 결과 임시 저장 상태에 담기
                 setTempContentData(res.rooms);
             })
@@ -136,10 +177,10 @@ const ModalFilterBox = ({searchParams, setSearchParams, isFilterActivate,
 
 
     return (
-        <S.ModalFilter className={ isFilterActivate ? "filterBg" : "" } onClick={backgroundClick}>
+        <S.ModalFilter className={ isFilterActivate ? "filterBg" : "" } onClick={filterClose}>
             <S.Popup>
                 <div className="filterHeader">
-                    <div className="closeBtn" onClick={handleFilterStatus}>
+                    <div className="closeBtn" onClick={filterClose}>
                         <FontAwesomeIcon icon={faXmark}/>
                     </div>
                     <h6>필터</h6>
@@ -232,7 +273,7 @@ const ModalFilterBox = ({searchParams, setSearchParams, isFilterActivate,
                         <button type='bottom' className='filterRemoveBtn' onClick={resetCondition}>전체 해제</button>
                     </div>
                     <div className="filterSubmitBox">
-                        <BasicButton className='filterSubmitBtn' onClick={viewFiltered}>숙소 {roomsCount}개 보기</BasicButton>
+                        <BasicButton className='filterSubmitBtn' onClick={viewFiltered}>숙소 {tempContentCount}개 보기</BasicButton>
                     </div>
                 </div>
             </S.Popup>
