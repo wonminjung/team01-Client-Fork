@@ -1,7 +1,7 @@
 import { faHeart } from '@fortawesome/free-solid-svg-icons';
 import { FontAwesomeIcon } from '@fortawesome/react-fontawesome';
 import React, { useState } from 'react';
-import { Link, useNavigate } from 'react-router-dom';
+import { Link, redirect, useNavigate } from 'react-router-dom';
 import S from './style';
 import HeartButton from '../../components/heartbutton/HeartButton';
 import Modal from './modal/Modal';
@@ -20,171 +20,11 @@ const WishItemContents = ({rooms, userId}) => {
     // 삭제하기 위해 클릭한 하트의 해당 룸 아이템의 상태
     const [roomId, setRoomId] = useState("");
 
-    // user 데이터 (상원님 detil의 userData 임시로 사용)
-    const userData = [
-        {
-            id : 1,
-            userId : "hyeona023",
-            password : "1234",
-            name : "현아",
-            profileImg : "./images/pages/detail/user/1/thumb.jpg",
-            email : "hyeona@gmail.com",
-            address : {
-                city : "Kulas Light",
-                street : "Gwenborough",
-                suit : "Apt. 556",
-                zipcode : "92998-3874",
-            },
-            phone : "010-1234-1234",
-            // wishList 부분
-            wishList : [1,2,3]
-        },
-        {
-            id : 2,
-            userId : "example1",
-            password : "1234",
-            name : "닉네임1",
-            profileImg : "./images/pages/detail/user/2/thumb.jpg",
-            email : "example1@gmail.com",
-            address : {
-                city : "Kulas Light",
-                street : "Gwenborough",
-                suit : "Apt. 556",
-                zipcode : "92998-3874",
-            },
-            phone : "010-4321-4321",
-            wishList : [3,6]
-        },
-        {
-            id : 3,
-            userId : "example2",
-            password : "1234",
-            name : "닉네임2",
-            profileImg : "./images/pages/detail/user/3/thumb.jpg",
-            email : "example2@gmail.com",
-            address : {
-                city : "Kulas Light",
-                street : "Gwenborough",
-                suit : "Apt. 556",
-                zipcode : "92998-3874",
-            },
-            phone : "010-1111-1111",
-            wishList : [2,3,5]
-        }
-    ]
-    // 위시리스트 데이터 (wishList-array)
-    const [contentData, setContentData] = useState([
-        {
-            id : 1,
-            img : "./images/pages/main/image1-1.jpg",
-            title : "위드독 독채 풀빌라",
-            address : "충남/태안군",
-            dayPrice : "150,000"
-        },
-        {
-            id : 2,
-            img : "./images/pages/main/image2-1.jpg",
-            title : "강화도 럭셔리 대형 풀빌라",
-            address : "인천/강화도",
-            dayPrice : "200,000"
-        },
-        {
-            id : 3,
-            img : "./images/pages/main/image3-1.jpg",
-            title : "6.다온빌(스파/개별풀)",
-            address : "서면/양양",
-            dayPrice : "250,000"
-        },
-        {
-            id : 4,
-            img : "./images/pages/main/image4-1.jpg",
-            title : "독채풀빌라 스테이호은",
-            address : "경기/양평군",
-            dayPrice : "250,000"
-        },
-        {
-            id : 5,
-            img : "./images/pages/main/image5-1.jpg",
-            title : "별담하늘담",
-            address : "경기/양평군",
-            dayPrice : "250,000"
-        },
-        {
-            id : 6,
-            img : "./images/pages/main/image6-1.jpg",
-            title : "춘천 유유자적 일동",
-            address : "춘천/서면",
-            dayPrice : "250,000"
-        },
-        {
-            id : 7,
-            img : "./images/pages/main/image1-1.jpg",
-            title : "위드독 독채 풀빌라",
-            address : "충남/태안군",
-            dayPrice : "150,000"
-        },
-        {
-            id : 8,
-            img : "./images/pages/main/image2-1.jpg",
-            title : "강화도 럭셔리 대형 풀빌라",
-            address : "인천/강화도",
-            dayPrice : "200,000"
-        },
-        {
-            id : 9,
-            img : "./images/pages/main/image3-1.jpg",
-            title : "6.다온빌(스파/개별풀)",
-            address : "서면/양양",
-            dayPrice : "250,000"
-        },
-        {
-            id : 10,
-            img : "./images/pages/main/image4-1.jpg",
-            title : "독채풀빌라 스테이호은",
-            address : "경기/양평군",
-            dayPrice : "250,000"
-        },
-        {
-            id : 11,
-            img : "./images/pages/main/image5-1.jpg",
-            title : "별담하늘담",
-            address : "경기/양평군",
-            dayPrice : "250,000"
-        },
-        {
-            id : 12,
-            img : "./images/pages/main/image6-1.jpg",
-            title : "춘천 유유자적 일동",
-            address : "춘천/서면",
-            dayPrice : "250,000"
-        },{
-            id : 13,
-            img : "./images/pages/main/image1-1.jpg",
-            title : "위드독 독채 풀빌라",
-            address : "충남/태안군",
-            dayPrice : "150,000"
-        },
-        {
-            id : 14,
-            img : "./images/pages/main/image2-1.jpg",
-            title : "강화도 럭셔리 대형 풀빌라",
-            address : "인천/강화도",
-            dayPrice : "200,000"
-        },
-        {
-            id :15,
-            img : "./images/pages/main/image3-1.jpg",
-            title : "6.다온빌(스파/개별풀)",
-            address : "서면/양양",
-            dayPrice : "250,000"
-        }
-    ]);
 
-
-   // 로그인한 유저의 상태 관리
-   // *filter메서드는 새로운 array를 반환하므로 [0]으로 표시해줘야 함
-    const [loginUser, setLoginUser] = useState(userData.filter((user)=> user.id === 1)[0]);
-    // console.log(loginUser); // id가 1번인 name:현아 객체 조회 확인됨
+//    // 로그인한 유저의 상태 관리
+//    // *filter메서드는 새로운 array를 반환하므로 [0]으로 표시해줘야 함
+//     const [loginUser, setLoginUser] = useState(userData.filter((user)=> user.id === 1)[0]);
+//     // console.log(loginUser); // id가 1번인 name:현아 객체 조회 확인됨
 
 
     // 하트버튼 클릭시, 해당 아이템 삭제위해 컨펌 모달메시지 띄우는 메서드
@@ -195,33 +35,41 @@ const WishItemContents = ({rooms, userId}) => {
     };
 
     // 삭제 확인 모달창의 O 버튼 클릭시, user데이터의 wishList배열에서 해당 아이템 삭제하는 메서드
-    const handleConfirmRemove = () => {
+    const handleConfirmRemove = async( room) => {
 
-        // useEffect(()=>{
-        //     const deleteWishItem = async() => {
-        //         try{
-        //             const response = await fetch(`http://localhost:8000/room/wishList?userId=${userId}&roomId=${room._id}&${searchParams}}`)
-                    
-        //         }catch(error){
+                try{
+                    const response = await fetch(`http://localhost:8000/room/updateWishList`,
+                        { 
+                            method : "POST"
+                        },
+                        {
+                            body : JSON.stringify({
+                                roomId : room._id,
+                                userId : userId
+                            })
+                        }
+                    )
+                  navigate('/wishList') 
+                }catch(error){
 
-        //         }
-        //     }
-        // })
+                }
+            
+        
 
         // 상태로 관리된 roomId는 현재 삭제하려고 클릭한 roomId를 나타냄
         console.log(roomId) 
 
         // 로그인한 유저의 wishList배열을 삭제하려는 roomId를 제외한 새로운 배열로 필터링함
-        const updatedWishList  = loginUser.wishList.filter((list)=> list !== roomId)
+        // const updatedWishList  = loginUser.wishList.filter((list)=> list !== roomId)
 
         // 삭제하려던 roomId를 제외한 배열만 추출됨
-        console.log(updatedWishList);
+        // console.log(updatedWishList);
 
-        // 로그인유저의 wishList 데이터 업데이트
-        setLoginUser({
-            ...loginUser,
-            wishList: updatedWishList,
-        })
+        // // 로그인유저의 wishList 데이터 업데이트
+        // setLoginUser({
+        //     ...loginUser,
+        //     wishList: updatedWishList,
+        // })
 
         // 모달 종료
         setShowModal(false);  
@@ -243,11 +91,11 @@ const WishItemContents = ({rooms, userId}) => {
         
         <S.ContentBox>
             {/* 로그인한 유저의 user데이터의 wishList 데이터에 데이터가 있다면 위시리스트페이지에 아이템 보여주기*/}
-            {loginUser.wishList.length > 0 ? (
+            {rooms.length > 0 ? (
                 rooms.map((room, i) =>
                     <div className="content" key={i}>
                         {/* 하트버튼 클릭시, 해당 아이템 삭제 기능 메서드 삽입 */}
-                        <HeartButton onClick={() => handleRemoveItem(room._id)} />
+                        <HeartButton onClick={() => handleRemoveItem(room)} />
                         {/* a가 detail의 roomId와 같음)*/}
                         <Link onClick={() => { navigate(`/detail?roomId=${room._id}`)}}>
                             <div className="imgBox">

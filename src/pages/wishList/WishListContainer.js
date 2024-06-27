@@ -15,7 +15,6 @@ const WishListContainer = () => {
     ResetHeader();
     ScrollEvent();
 
-    const [searchParams] = useSearchParams();
     const [rooms, setRooms] = useState([]);
     const [isWished, setIsWished] = useState(true);
     const [isModalOpen, setIsModalOpen] = useState(true); 
@@ -26,7 +25,15 @@ const WishListContainer = () => {
         const getWishList = async () => {
             try{
               
-                const response = await fetch(`http://localhost:8000/room/wishList?userId=${userId}&${searchParams}}`);
+                const response = await fetch(`http://localhost:8000/room/wishList`,{
+                    method : "POST",
+                    headers : {
+                        'Content-Type' : 'application/json'
+                    },
+                    body: JSON.stringify({
+                        userId : userId
+                    })
+                })
 
                 const data = await response.json();
                 if(data && data.rooms) {
@@ -42,7 +49,7 @@ const WishListContainer = () => {
         };
         getWishList()
 
-    },[searchParams])
+    },[])
 
     // 모달창 닫는 함수
     const handleModalClose = () => {
