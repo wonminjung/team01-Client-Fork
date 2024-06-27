@@ -7,20 +7,24 @@ S.MyPageContainer = styled.div`
     padding: 50px 50px 50px;
     & h1 {
         font-size: 32px;
-        margin-bottom: 50px;
         font-weight: 600;
     }
     & h2 {
         font-size: 16px;
-        margin-bottom: 50px;
         font-weight: 600;
     }
     & h3 {
         font-size: 14px;
-        margin-bottom: 30px;
+        font-weight: 500;
+    }
+    & h4 { 
+        font-size: 10px;
+        font-weight: 500;
+    }
+    & h5 {
+        font-size: 22px;
         font-weight: 600;
     }
-    & h4 { /*예비*/ }
     & .next-button {
         position: relative;
         float: left;
@@ -41,9 +45,34 @@ S.MyPageContainer = styled.div`
         transform: rotate(45deg); /* 각도 */
     }
 `
+S.BodyTop = styled.div`
+    margin-bottom: 50px;
+`
+S.Profile = styled.div`
+    margin-bottom: 50px;
+    width: calc(100% - 430px);
+    border: 1px solid ${theme.PALETTE.gray[200]};
+    display: flex;
+    flex-direction: row;
+    justify-content: flex-end;
+    align-items: flex-start;
+    flex-wrap: nowrap;
+    min-height: 200px;
+    &>div {
+        display: flex;
+        flex-direction: column;
+        width: 100%;
+        &:last-child div:last-child {
+            display: flex;
+        }
+    }
+`
 S.InfoBox = styled.div`
     display: block;
     margin: 0 0 50px;
+    &>div {
+        border-bottom: 1px solid ${theme.PALETTE.gray[200]};
+    }
 `
 
 export default S;

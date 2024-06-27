@@ -9,7 +9,6 @@ const SearchContainer = () => {
     ScrollEvent();
     ResetHeader();
 
-
     // 필터버튼 클릭 상태
    const [ isFilterActivate, setFilterActivate ] = useState(false);
     // 필터 클릭 함수
@@ -23,7 +22,7 @@ const SearchContainer = () => {
     
     return (
         <>
-            <NavSwiperContainer handleFilterStatus={handleFilterStatus} setCurrentPage={setCurrentPage}/>
+            <NavSwiperContainer handleFilterStatus={handleFilterStatus} setCurrentPage={setCurrentPage} isFilterActivate={isFilterActivate} />
             <SearchMainContainer 
                 currentPage={currentPage} setCurrentPage={setCurrentPage} 
                 isFilterActivate={isFilterActivate} handleFilterStatus={handleFilterStatus}
