@@ -4,11 +4,10 @@ const S = {}
 
 S.SignUpWrapper = styled.div`
     ${flexCenterColumn}
-    height: 600px;
+    height: calc(100vh - 130px);
 `
 
 S.Form = styled.form`
-    height: 100%;
 `
 
 S.Label = styled.label`
@@ -27,7 +26,7 @@ S.Title = styled.p`
 
 S.LogoImage = styled.img`
     width : 30%;
-    margin: 20px 0px 40px 0px;
+    margin: 20px 0px 30px 0px;
 `
 
 S.ConfirmMessage = styled.p`
@@ -40,12 +39,6 @@ S.Subtitle = styled.p`
     color: #222222;
     text-align: center;
     margin: 20px;
-`
-S.Minititle = styled.p`
-    font-size: 15px;
-    color: #222222;
-    text-align: left;
-    margin: 1px;
 `
 
 S.Button = styled.button`
