@@ -1,7 +1,7 @@
 import React from 'react';
 import S from './style';
 
-const LeftHostBox = ({profileImg, name, commentData, starAvr, setpopup1State}) => {
+const LeftHostBox = ({profileImg, userId, commentData, starAvr, setpopup1State}) => {
     const openPopup1 = () => {
         setpopup1State(true)
         let scrollY = "";
@@ -22,7 +22,7 @@ const LeftHostBox = ({profileImg, name, commentData, starAvr, setpopup1State}) =
                     } alt="호스트썸네일" />
                 </div>
                 <div className="hostName">
-                    <h6>호스트 : {name} 님</h6>
+                    <h6>호스트 : {userId} 님</h6>
                 </div>
             </div>
             <div>
