@@ -78,7 +78,7 @@ S.MyPageContainer = styled.div`
                     }
                 }
                 & .modalContent{
-                    padding: 30px 30px 0;
+                    padding: 20px 20px 0;
                     &>input{
                         border: 0;
                         border-bottom: 1px solid ${PALETTE.gray[200]};
@@ -231,6 +231,23 @@ S.MyPageContainer = styled.div`
                             font-size: 12px;
                             top: -4px;
                             left: 10px;
+                            &.green{
+                                color: #01b700;
+                            }
+                            &.red{
+                                color: red;
+                            }
+                        }
+                        &>div{
+                            display: flex;
+                            justify-content: space-between;
+                            & input{
+                                width: calc(100% - 110px);
+                                height: 48px;
+                            }
+                            & button {
+                                width: 100px;
+                            }
                         }
                     }
                 }
@@ -268,9 +285,20 @@ S.Profile = styled.div`
         padding: 30px;
         & form{
             display: flex;
-            justify-content: center;
+            flex-direction: column;
+            align-items: center;
+            justify-content: flex-start;
             margin-bottom: 30px;
             position: relative;
+            & .submitBox{
+                margin-top: 10px;
+                & button{
+                    width: 100px;
+                    font-size: 14px;
+                    height: inherit;
+                    padding: 10px;
+                }
+            }
         }
         & label{
             width: 150px;
@@ -291,7 +319,7 @@ S.Profile = styled.div`
             }
             & span{
                 position: absolute;
-                bottom: 8px;
+                top: 105px;
                 right: 70px;
                 z-index: 1;
                 border: 1px solid #ddd;

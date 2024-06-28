@@ -13,6 +13,7 @@ const MyPageContainer = () => {
     const initialset = {
         name : "홍길동",
         email : "12345@gmail.com",
+        profileImg : "uploads/profile/0f800888eb88a80c0773a6dfef5af73c",
         phone : "010-1234-5678",
         address : "경기도 성남시"
     }

@@ -24,8 +24,62 @@ const InfoBox = ({info, setInfo}) => {
     const pwRef2 = useRef(null);
     // 비밀번호 input tag 레퍼런스
     const pwTag = useRef(null);
-    const pw1Tag = useRef(null);
     const pw2Tag = useRef(null);
+    // 새로운 비밀번호 value state
+
+    // 비밀번호 중복검사 state
+    const [checkPwState, setCheckPwState] = useState(false);
+    const [checkPwState2, setCheckPwState2] = useState(false);
+    const [checkPwState3, setCheckPwState3] = useState(false);
+
+    // 기존 비밀번호 일치여부
+    const checkPw = async () => {
+        try{
+            await checkInfo({password : pwRef1.current.value, _id : _id}).then((result)=>{
+                if(!result.message){
+                    alert("비밀번호가 일치하지 않습니다!")
+                    return
+                }else{
+                    setCheckPwState(true);
+                    modifyPw2();
+                }
+            })
+        }catch(error){
+            console.log(error)
+        }
+    }
+    // 새로운 비밀번호 정규식검사
+    const regExp = /^(?=.*[a-zA-Z])(?=.*[!@#$%^*+=-])(?=.*[0-9]).{8,12}$/
+    const valPw = () => {
+        if(regExp.test(inputRef.current.value)){
+            // 정규식 검사 통과 했을 때
+            pwTag.current.className = "green"
+            pwTag.current.innerText = "사용 가능한 비밀번호 입니다."
+            setCheckPwState2(true);
+        }else{
+            // 정규식 검사 실패 했을 때
+            pwTag.current.className = "red"
+            pwTag.current.innerText = "8~12자리 영문 + 숫자 + 특수문자를 포함시켜주세요."
+            setCheckPwState2(false);
+        }
+    }
+    // 새로운 비밀번호 확인 검사
+    const valPwCheck = () => {
+        const newPw = inputRef.current.value;
+        // 정규식을 통과했을 때
+        if(newPw === pwRef2.current.value){
+            // 비밀번호가 서로 일치할 때
+            pw2Tag.current.className = "green"
+            pw2Tag.current.innerText = "비밀번호가 일치합니다"
+            setCheckPwState3(true)
+        }else{
+            // 비밀번호가 일치하지 않을 때
+            pw2Tag.current.className = "red"
+            pw2Tag.current.innerText = "비밀번호가 일치하지 않습니다."
+            setCheckPwState3(false)
+        }
+    }
+    
     // 이메일 중복검사 통과상태
     const [emailValidate, setEmailValidate] = useState(false);
     // 정보확인태그 레퍼런스
@@ -42,11 +96,12 @@ const InfoBox = ({info, setInfo}) => {
         // value가 정규식검사를 통과했다면
         if(valEmail(refValue)){
             // db에서 해당 이메일을 중복검사하여 true(존재함) false(존재하지않음) 판별
-            await checkInfo(refValue).then((result)=>{
+            await checkInfo({email : refValue}).then((result)=>{
                 // true값일 때
                 if(result.message){
                     messageRef.current.className = "red"
                     messageRef.current.innerText = "이미 존재하는 이메일입니다"
+                    setEmailValidate(false);
                     return
                 }
                 // false값일 때
@@ -80,32 +135,41 @@ const InfoBox = ({info, setInfo}) => {
     // 수정 fetch
     const updateUserInfo = async () => {
         console.log(modify)
-        const response = await fetch("http://localhost:8000/user/myPage", {
-            method : "PATCH",
-            body : JSON.stringify(modify),
-            headers : {
-                "Content-Type" : "application/json; charset=utf-8"
-            },
-        })
-        const userInfo = await response.json();
-        const message = userInfo.message;
-        const info = userInfo.user;
-        alert(message)
-        console.log(info)
-        setInfo(info)
+        try{
+            const response = await fetch("http://localhost:8000/user/myPage", {
+                method : "PATCH",
+                body : JSON.stringify(modify),
+                headers : {
+                    "Content-Type" : "application/json; charset=utf-8"
+                },
+            })
+            const userInfo = await response.json();
+            const message = userInfo.message;
+            const info = userInfo.user;
+            alert(message)
+            console.log(info)
+            setInfo(info)
+        }catch(error){
+            console.log(error);
+        }
     }
     // 중복 확인 fetch
-    const checkInfo = async (ref) => {
-        const response = await fetch("http://localhost:8000/user/myPage", {
-            method : "POST",
-            body : JSON.stringify({email : ref}),
-            headers : {
-                "Content-Type" : "application/json; charset=utf-8"
-            },
-        })
-        const message = await response.json();
-        console.log(message)
-        return message
+    const checkInfo = async (props) => {
+        console.log(props)
+        try{
+            const response = await fetch("http://localhost:8000/user/myPage", {
+                method : "POST",
+                body : JSON.stringify(props),
+                headers : {
+                    "Content-Type" : "application/json; charset=utf-8"
+                },
+            })
+            const message = await response.json();
+            console.log(message)
+            return message
+        }catch(error){
+            console.log(error)
+        }
     }
 
     // 이름수정 이벤트
@@ -124,17 +188,25 @@ const InfoBox = ({info, setInfo}) => {
         setModalState(true)
         console.log("password")
         setTitle("비밀번호")
+        setCheckPwState(false)
+        setCheckPwState2(false)
+        setCheckPwState3(false)
         setContent(<div className='pwInputBox'>
-            <input type="password" ref={pwRef1} placeholder='기존 비밀번호를 입력해주세요.'/>
-            <p ref={pw1Tag}>가나다</p>
-            <input type="password" ref={inputRef} placeholder='새로운 비밀번호를 입력해주세요.'/>
-            <p ref={pwTag}>가나다</p>
-            <input type="password" ref={pwRef2} placeholder='새로운 비밀번호를 다시 한번 입력해주세요.'/>
-            <p ref={pw2Tag}>가나다</p>
+            <div>
+                <input type="password" ref={pwRef1} placeholder='기존 비밀번호를 입력해주세요.'/>
+                <BasicButton type='button' onClick={checkPw}>본인확인</BasicButton>
+            </div>
         </div>)
     }
+    const modifyPw2 = () => {
+        setContent(<div className='pwInputBox'>
+        <input type="password" ref={inputRef} onChange={valPw} placeholder='새로운 비밀번호를 입력해주세요.'/>
+        <p ref={pwTag}></p>
+        <input type="password" ref={pwRef2} onChange={valPwCheck} placeholder='새로운 비밀번호를 다시 한번 입력해주세요.'/>
+        <p ref={pw2Tag}></p>
+    </div>)
+    }
     // 이메일수정 이벤트
-    
     const modifyEmail = () => {
         setModify([{_id : _id}, {}])
         // 이메일 정규식 체크 초기화
@@ -191,6 +263,7 @@ const InfoBox = ({info, setInfo}) => {
     // 수정완료버튼 이벤트
     const subModify = () => {
         if(title === "이름"){
+            // 이름 수정
             const refValue = inputRef.current.value;
             if(!refValue){
                 alert("이름을 입력해주세요.")
@@ -200,8 +273,27 @@ const InfoBox = ({info, setInfo}) => {
             updateUserInfo()
             setModalState(false)
         }else if(title === "비밀번호"){
-            
+            // 비밀번호 수정
+            console.log(checkPwState)
+            console.log(checkPwState2)
+            console.log(checkPwState3)
+            if(!checkPwState){
+                alert("본인확인을 완료해주세요!")
+                return
+            }
+            if(!checkPwState2){
+                alert("비밀번호를 확인해주세요!")
+                return
+            }
+            if(!checkPwState3){
+                alert("비밀번호가 일치하지 않습니다!")
+                return
+            }
+            setModify(modify[1] = {password : inputRef.current.value})
+            updateUserInfo()
+            setModalState(false)
         }else if(title === "이메일"){
+            // 이메일 수정
             if(!emailValidate){
                 alert("중복검사를 통과해야합니다!")
                 return
@@ -210,10 +302,12 @@ const InfoBox = ({info, setInfo}) => {
             updateUserInfo()
             setModalState(false)
         }else if(title === "연락처"){
+            // 연락처 수정
             setModify(modify[1] = {phone : inputRef.current.value})
             updateUserInfo()
             setModalState(false)
         }else if(title === "주소"){
+            // 주소 수정
             setModify(modify[1] = {address : post2Ref.current.value + ` ${post3Val}` })
             updateUserInfo()
             setModalState(false)
