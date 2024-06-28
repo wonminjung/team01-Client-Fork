@@ -8,11 +8,11 @@ import LeftNoticeBox from './LeftNoticeBox';
 
 const LeftContentBox = ({contentData, hostData, commentData, starAvr, setpopup1State}) => {
     const {address, convenience, description, roomData, notice} = contentData;
-    const {name, profileImg} = hostData;
+    const {userId, profileImg} = hostData;
     return (
         <S.LeftBox>
             <LeftTitleBox address={address} roomData={roomData}/>
-            <LeftHostBox profileImg={profileImg} name={name} starAvr={starAvr} contentData={contentData} commentData={commentData} setpopup1State={setpopup1State}/>
+            <LeftHostBox profileImg={profileImg} userId={userId} starAvr={starAvr} contentData={contentData} commentData={commentData} setpopup1State={setpopup1State}/>
             <LeftDescriptionBox description={description}/>
             <LeftConvenienceBox convenience={convenience}/>
             <LeftNoticeBox notice={notice}/>

@@ -3,7 +3,7 @@ import { DateRange } from 'react-date-range';
 import theme from '../../global/theme';
 import { ko } from 'date-fns/locale';
 
-const PopupBox2 = ({popupState,today,state,setState,setStartDateState,setEndDateState}) => {
+const PopupBox2 = ({popupState, today, state, setState, setStartDateState, setEndDateState, roomSchedule}) => {
     const PALETTE = theme.PALETTE;
     const onChangeDate = (item) => {
         const startday = item.selection.startDate;
@@ -35,6 +35,7 @@ const PopupBox2 = ({popupState,today,state,setState,setStartDateState,setEndDate
                     months={2}
                     direction="horizontal"
                     dateDisplayFormat={'yyyy.MM.dd'}
+                    disabledDates={roomSchedule}
                 />
             </div>
         </div>
