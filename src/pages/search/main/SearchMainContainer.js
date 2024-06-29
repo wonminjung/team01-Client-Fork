@@ -85,7 +85,6 @@ const SearchMainContainer = ({ currentPage, setCurrentPage, isFilterActivate, ha
             });
 
         }
-    // }, [cate, val, sdate, edate, guests, lPrice, gPrice, maxUser, bedroom, bed, bathroom, currentPage]);
     }, [searchParams, currentPage]);
 
 
