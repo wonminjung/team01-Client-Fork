@@ -156,8 +156,6 @@ const S = {};
             position: absolute;
             width: 25px;
             height: 25px;
-            /* top: 34px;
-            right: 34px; */
             right: 0;
             transform: translate(-40%, 40%);
             z-index: 1000;
