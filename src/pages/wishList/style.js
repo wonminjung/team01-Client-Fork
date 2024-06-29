@@ -129,31 +129,51 @@ S.ContentBox = styled.div`
                     }
                 }
             & .textBox{
-            padding: 20px 0;
-            text-align: center;
-            & .titleBox{
-                font-size: 20px;
-                margin-bottom: 13px;
-                font-weight: bold;
-                color: ${PALETTE.black};
-            }
-            & .addressAndPriceBox{
+                padding: 20px 10px;
+                display: flex;
+                flex-direction: column;
+                justify-content: space-between;
+                height: 155px;
+                &>div:last-child{
+                    display: flex;
+                    flex-direction: row;
+                    justify-content: space-between;
+                    & .price{
+                        display: inline-block;
+                        margin-left: 10px;
+                        font-weight: bold;
+                        letter-spacing: 0.8px;
+                        color: ${PALETTE.yellow};
+                    }
+                }
+                & .titleBox{
+                    font-size: 20px;
+                    margin-bottom: 13px;
+                    font-weight: bold;
+                    & h6{
+                        line-height: 22px;
+                        letter-spacing: 0.6px;
+                        word-break: keep-all;
+                        text-overflow: ellipsis;
+                        overflow: hidden;
+                        display: -webkit-box;
+                        -webkit-box-orient: vertical;
+                        -webkit-line-clamp: 2;
+                        color: ${PALETTE.black};
+                    }
+                }
+                & .addAndPriceBox{
                     font-size: 14px;
                     margin-bottom: 28px;
                     & .address{
                         color: ${PALETTE.gray[300]};
                     }
-                    & .price{
-                        color: ${PALETTE.yellow};
-                        display: inline-block;
-                        margin-left: 10px;
-                    }
                 }
-            & .ReservateButton{
-                font-size: 12px;
-                font-weight: bold;
-                color: ${PALETTE.black};
-            }
+                & .linkBox{
+                    font-size: 12px;
+                    font-weight: bold;
+                    color: ${PALETTE.black};
+                }
         } }
     }
         
