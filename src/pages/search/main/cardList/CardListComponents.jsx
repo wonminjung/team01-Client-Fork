@@ -39,6 +39,7 @@ const CardListComponents = ({ cardList, setClickRoom }) => {
     const testUserWishList = [ "667adac97aa8b09d01fb7e42", "667adac97aa8b09d01fb7dfa", "667adac97aa8b09d01fb7e33" ];
     // 현재 로그인 사용자 wishList 가져오기
     const currentUserWishList = useSelector((state) => state.user.currentUser);
+    const isLogin = useSelector((state) => state.user.isLogin);
 
     // _id 변경될 때마다 위시리스트 목록에 있는 숙소인지 비교
     useEffect(() => {

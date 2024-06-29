@@ -154,8 +154,10 @@ const S = {};
         & > div {
             display: flex;
             position: absolute;
-            width: 28px;
-            height: 28px;
+            width: 25px;
+            height: 25px;
+            /* top: 34px;
+            right: 34px; */
             right: 0;
             transform: translate(-40%, 40%);
             z-index: 1000;
