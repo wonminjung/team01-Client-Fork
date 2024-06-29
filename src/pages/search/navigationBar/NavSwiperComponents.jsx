@@ -3,6 +3,8 @@ import React from 'react';
 import S from './style';
 import { useNavigate } from 'react-router-dom';
 
+
+
 const NavSwiperComponents = (props) => {
     const { data, index, isNavActivate, setNavActivate } = props;
 
@@ -13,6 +15,8 @@ const NavSwiperComponents = (props) => {
         navigate(`/search?cate=${data.cate}`);
     };
 
+
+    
     return (
         <>
             {

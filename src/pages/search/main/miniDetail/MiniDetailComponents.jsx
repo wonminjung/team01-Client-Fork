@@ -5,8 +5,10 @@ import KakaoMap from '../../../../components/kakaomap/KakaoMap';
 import BasicButton from '../../../../components/button/BasicButton';
 import { Link } from 'react-router-dom';
 
-const MiniDetailComponents = ({ contentData, clickCardListIndex }) => {
-    const { _id, title, roomImg, roomData, description, address, convenience } = contentData[clickCardListIndex];
+
+
+const MiniDetailComponents = ({ currentPage, clickRoom }) => {
+    const { title, roomImg, roomData, description, address, convenience } = clickRoom;
 
     // 기존 숙소 이미지 30개에서 mini Detail에 쓸 이미지 5개만 추출
     const miniDetailImg = roomImg.slice(0, 5);
@@ -20,6 +22,7 @@ const MiniDetailComponents = ({ contentData, clickCardListIndex }) => {
         setMoreCheck(!isMoreCheck);
     };
 
+
     // 카드리스트에서 클릭한 인덱스가 변경되었을 때마다 초기화
     useEffect(() => {
         // 소개글 더보기 버튼 초기화
@@ -29,15 +32,17 @@ const MiniDetailComponents = ({ contentData, clickCardListIndex }) => {
         scrollRef.current.scrollTop = 0;
 
         // 해당 페이지의 스크롤도 초기화
-        window.scrollTo({ top: 0 });
-    }, [clickCardListIndex]);
+        window.scrollTo({ top: 0, behavior: "smooth" });
+    }, [currentPage, clickRoom]);
+
+
 
     return (
         <S.MiniDetailContainer ref={scrollRef}>
             <S.MarginSideContainer>
                 <S.HeaderContainer>
                     <div>{title}</div>
-                    <Link to={`/detail?roomId=${_id}`}>
+                    <Link to={`/detail?roomId=${clickRoom._id}`}>
                         <BasicButton style={{width: "80px"}}>
                                 상세보기
                         </BasicButton>
