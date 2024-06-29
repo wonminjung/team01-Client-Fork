@@ -15,6 +15,7 @@ import NavSwiperComponents from './NavSwiperComponents';
 import S from './style';
 
 
+
 const NavSwiperContainer = ({ handleFilterStatus, setCurrentPage }) => {
 
    // 카테고리 선택 상태
@@ -138,16 +139,18 @@ const NavSwiperContainer = ({ handleFilterStatus, setCurrentPage }) => {
     modules: [Navigation],
   };
 
+
   useEffect(() => {
     // 네비게이션바 인덱스
     setNavActivate(0);
   }, []);
 
-
   useEffect(() => {
     // 네비게이션바 카테고리 선택할 때마다 페이지 1로 초기화
     setCurrentPage(1);
   }, [isNavActivate]);
+
+
 
   return (
     <S.NavBfAfContainer>

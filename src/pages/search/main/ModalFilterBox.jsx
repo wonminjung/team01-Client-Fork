@@ -9,12 +9,11 @@ import { createSearchParams } from 'react-router-dom';
 import BasicButton from '../../../components/button/BasicButton';
 
 
+
 const ModalFilterBox = ({searchParams, setSearchParams, isFilterActivate, 
     handleFilterStatus, setContentData, setMaxPage, setCurrentPage, currentPage,
-    setSearchResultMessage, setRoomsCount}) => {
+    setSearchResultMessage, setRoomsCount, setClickRoom}) => {
 
-
-    
     // 필터창에서 URI 변경 전
     const [ beforeUri, setBeforeUri ] = useState("");
 
@@ -28,7 +27,6 @@ const ModalFilterBox = ({searchParams, setSearchParams, isFilterActivate,
     const sdate = searchParams.get("sdate");
     const edate = searchParams.get("edate");
     const guests = searchParams.get("guests");
-
 
     const [value, setValue] = useState([getPrice[0], getPrice[1]]); // 가격범위 초기세팅을 params로 세팅
     const [filterValue, setFilterValue] = useState([getPrice[0], getPrice[1]]);
@@ -49,7 +47,6 @@ const ModalFilterBox = ({searchParams, setSearchParams, isFilterActivate,
     const [ tempMaxPage, setTempMaxPage ] = useState(0);
     // 임시 숙소 개수 저장
     const [ tempContentCount, setTempContentCount ] = useState(0);
-
 
 
     const setVal = () => { // 가격범위 값 조건 함수
@@ -92,27 +89,14 @@ const ModalFilterBox = ({searchParams, setSearchParams, isFilterActivate,
         setMaxPage(tempMaxPage);
         // 임시 숙소 개수 업데이트
         setRoomsCount(tempContentCount);
+        // 검색결과 첫 숙소를 미니디테일에 표시
+        setClickRoom(tempContentData[0]);
 
         // 조건 초기화
         resetCondition();
         // 모달 닫기
         handleFilterStatus();
     }
-
-
-
-    // 필터 실행됐을 때 변경 전 URI값 저장
-    useEffect(() => {
-        if (isFilterActivate) {
-            const beforeParams = createSearchParams(
-                {
-                    cate: getKey, val: val, sdate: sdate, edate: edate, guests: guests, lPrice: value[0], gPrice: value[1], 
-                    maxUser: maxUser, bedroom: bedroom, bed: bed, bathroom: bathroom, guests: guests, page: currentPage
-                }
-            );
-            setBeforeUri(beforeParams);
-        }
-    }, [])
 
     // 필터창 닫기
     const filterClose = (e) => {
@@ -127,6 +111,20 @@ const ModalFilterBox = ({searchParams, setSearchParams, isFilterActivate,
             resetCondition();
         }
     };
+
+
+    // 필터 실행됐을 때 변경 전 URI값 저장
+    useEffect(() => {
+        if (isFilterActivate) {
+            const beforeParams = createSearchParams(
+                {
+                    cate: getKey, val: val, sdate: sdate, edate: edate, guests: guests, lPrice: value[0], gPrice: value[1], 
+                    maxUser: maxUser, bedroom: bedroom, bed: bed, bathroom: bathroom, guests: guests, page: currentPage
+                }
+            );
+            setBeforeUri(beforeParams);
+        }
+    }, [isFilterActivate])
 
     // 필터 데이터 선택할 때마다 숙소 개수 업데이트
     useEffect(() => {
@@ -166,13 +164,14 @@ const ModalFilterBox = ({searchParams, setSearchParams, isFilterActivate,
 
                 // 숙소 결과 임시 저장 상태에 담기
                 setTempContentData(res.rooms);
+
             })
             .catch((err) => {
                 console.error(err);
                 setSearchResultMessage("서버와 통신 실패");
             });
         }
-    }, [filterValue, maxUser, bedroom, bed, bathroom]);
+    }, [isFilterActivate, filterValue, maxUser, bedroom, bed, bathroom]);
 
 
 

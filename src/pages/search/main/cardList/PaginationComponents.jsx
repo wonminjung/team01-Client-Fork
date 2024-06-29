@@ -15,6 +15,7 @@ const PaginationComponents = ({ currentPage, setCurrentPage, maxPage }) => {
     const firstPage = pageNumber[0];
     const lastPage = pageNumber[pageNumber.length - 1];
 
+
     // 페이지 클릭 함수
     const pagenationClickEvent = (e) => {
         setCurrentPage(+e.currentTarget.innerText); // Number(e.currnetTarget.innerText)
