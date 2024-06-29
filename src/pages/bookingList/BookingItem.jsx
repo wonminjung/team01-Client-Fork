@@ -6,7 +6,9 @@ const BookingItem = ({item, onClick, isActive }) => {
         <S.BookingItemWrapper  className={isActive ? 'active' : ''} onClick={onClick}>
             <div className="textBox" >
                 <div className="text">
+                    {/* room.title */}
                     <div className="title">{item.title}</div>
+                    {/*  */}
                     <div className="schedule">{item.schedule}</div>
                     <div className="briefAddress">{item.address}</div>
                     <div className="bookingCode"> 예약번호 : {item.reservationNum}</div>
