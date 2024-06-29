@@ -8,7 +8,7 @@ const PALETTE = theme.PALETTE;
 
 /* 전체 페이지 */
 S.BookingListContainer = styled.div`
-    height: 200vh;
+    min-height: calc(100vh - 230px);
     padding: 40px 100px;
     position: relative;
 
@@ -96,6 +96,8 @@ S.NotBookingWrapper = styled.div`
         min-width : 400px;
         & img{
             width: 100%;   
+            height: inherit;
+            object-fit: cover;
         }
     }
 
@@ -210,7 +212,7 @@ S.bookingDetailWrapper = styled.div`
                     & .detailAddress{ // 주소
                         font-size:15px;
                         color: ${PALETTE.gray[300]};
-                        width: calc(100% - 85px);
+                        width: 100%;
                         word-break: keep-all;
                     }
                 }
@@ -507,22 +509,31 @@ S.bookingDetailWrapper = styled.div`
                 width: 200px;
                 position: relative;
                 margin: 4px;
-                & .whiteIcon, .yellowIcon{
-                        height: 20px;
-                        position: absolute;
-                        left: 24px;
-                        bottom: 15px;
+                padding: 0;
+                &>div{
+                    width: 100%;
+                    height: 100%;
+                    & a{
+                        display: flex;
+                        justify-content: center;
+                        align-items: center;
+                        height: 100%;
+                        margin: 0;
+                        color : ${PALETTE.yellow};
+                        &:hover{
+                            color: white;
+                        }
                     }
-                & .yellowFont, .whiteFont{
-                    /* font-weight: bold; */
-                    margin-left: 10px;
+                    & img{
+                        position: relative;
+                        width: 20px;
+                        margin-right: 5px;
+                        top: -1px;
+                    }
                 }
-                & .yellowFont{
-                    color: ${PALETTE.yellow};
-                }
-                & .whiteFont{
-                    color: white;
-                }
+                
+
+               
                 
             }
         }
