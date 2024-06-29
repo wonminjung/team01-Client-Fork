@@ -4,10 +4,15 @@ import SearchMainContainer from './main/SearchMainContainer';
 import ResetHeader from '../layout/ResetHeader';
 import ScrollEvent from '../layout/ScrollEvent';
 
+
+
 const SearchContainer = () => {
 
     ScrollEvent();
     ResetHeader();
+
+    // 현재 페이지 상태
+    const [ currentPage, setCurrentPage ] = useState(1);
 
     // 필터버튼 클릭 상태
    const [ isFilterActivate, setFilterActivate ] = useState(false);
@@ -16,10 +21,8 @@ const SearchContainer = () => {
         setFilterActivate(!isFilterActivate);
     };
 
-    // 현재 페이지 상태
-    const [ currentPage, setCurrentPage ] = useState(1);
 
-    
+
     return (
         <>
             <NavSwiperContainer handleFilterStatus={handleFilterStatus} setCurrentPage={setCurrentPage} isFilterActivate={isFilterActivate} />

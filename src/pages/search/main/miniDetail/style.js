@@ -138,7 +138,7 @@ const S = {};
     S.OverviewDescription = styled.div`
         font-size: 14px;
         height: 100%;
-        margin-bottom: 16px;
+        margin-bottom: 40px;
         line-height: 18px;
         white-space: pre-line;
     `;
