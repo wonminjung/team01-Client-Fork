@@ -177,13 +177,11 @@ const extractCheckOutTime = (timeString) => {
                         <img src="./images/pages/bookingList/refund.svg" alt="refund"/>
                         <h3>환불 정책</h3>
                     </div>
-                    {/* 고정 */}
                     <p>
-                    체크인 시간인 5월 19일 오후 3:00 전에 
-                    취소하시면, 부분 환불을 받으실 수 있습니다. 
-                    그 이후에 취소하시면 예약 대금이 환불되지 않습니다.
-                    자세한 부분 환불 관련 정보는 아래 ‘숙소 페이지로 이동’ 버튼을 
-                    통해 페이지에서 확인 가능합니다. 
+                    체크인 시간인 {formatDate(item.checkInDate)} 오후 3:00 전에 
+                    취소하시면, 
+                    <br /> 부분 환불을 받으실 수 있습니다. 
+                    <br />그 이후에 취소하시면 예약 대금이 환불되지 않습니다.
                     </p>
                 </div>
                 {/* 숙소 페이지로 이동 버튼 */}
