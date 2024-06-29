@@ -35,14 +35,18 @@ const CategoryContents = ({roomList, searchParams}) => {
                             <Content img={data.roomImg}/>
                         </div>
                         <div className="textBox">
-                            <div className="titleBox">
-                                <h6>{data.title}</h6>
+                            <div>
+                                <div className="titleBox">
+                                    <h6>{data.title}</h6>
+                                </div>
+                                <div className="addAndPriceBox">
+                                    <span className="address">{data.address}</span>
+                                </div>
                             </div>
-                            <div className="addAndPriceBox">
-                                <span className="address">{data.address}</span>
-                                <span className="price">{"￦" + data.dayPrice}</span>
+                            <div>
+                                <div className="linkBox">예약하기</div>
+                                <span className="price">{"￦" + data.dayPrice.toLocaleString('ko-KR')}</span>
                             </div>
-                            <div className="linkBox">예약하기</div>
                         </div>
                     </Link>
                     {/* <EmptyHeartButton userData={userData} loginUser={loginUser} loginState={loginState} roomid={data.id}/> */}

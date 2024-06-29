@@ -7,7 +7,7 @@ import moment from 'moment';
 import { addDays } from 'date-fns';
 import PopupBox3 from './PopupBox3';
 
-const RightContentBox = ({id,dayPrice,cleanVat}) => {
+const RightContentBox = ({id, dayPrice, cleanVat, roomSchedule}) => {
     const [popupState, setPopupState] = useState(false);
     const [popup2State, setPopup2State] = useState(false);
     const [state, setState] = useState([
@@ -88,7 +88,7 @@ const RightContentBox = ({id,dayPrice,cleanVat}) => {
                     </ul>
                 </div>
                 <BasicButton className="reserveBtn" onClick={reserveBtn}>예약하기</BasicButton>
-                <PopupBox2 popupState={popupState} today={today} state={state} setState={setState} setStartDateState={setStartDateState} setEndDateState={setEndDateState}/>
+                <PopupBox2 popupState={popupState} today={today} state={state} setState={setState} setStartDateState={setStartDateState} setEndDateState={setEndDateState} roomSchedule={roomSchedule}/>
                 <PopupBox3 popup2State={popup2State} guestsState={guestsState} setguestsState={setguestsState} infantsState={infantsState} setInfantsState={setInfantsState}/>
             </div>
         </S.RightBox>

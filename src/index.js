@@ -4,10 +4,21 @@ import './index.css';
 import App from './App';
 import reportWebVitals from './reportWebVitals';
 
+// Redux 
+import { legacy_createStore as createStore } from 'redux';
+import { Provider } from 'react-redux';
+import { devToolsEnhancer } from 'redux-devtools-extension';
+import rootReducer from './modules';
+
+// Reducer 상태 전달
+const store = createStore(rootReducer, devToolsEnhancer())
+
 const root = ReactDOM.createRoot(document.getElementById('root'));
 root.render(
   <>
-    <App />
+    <Provider store={store}>
+      <App />
+    </Provider>  
   </>
 );
 
