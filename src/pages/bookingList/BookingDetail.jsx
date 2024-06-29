@@ -6,7 +6,7 @@ import KakaoMap from '../../components/kakaomap/KakaoMap.jsx';
 
 
 const BookingDetail = ({item, isActive, index,}) => {
-    
+    console.log(item)
     const[isHovered, setIsHovered] = useState(false);
 
     const navigate = useNavigate();

@@ -5,12 +5,9 @@ import S from './style';
 // import EmptyHeartButton from './EmptyHeartButton';
 import { FontAwesomeIcon } from '@fortawesome/react-fontawesome';
 import { faSearch } from '@fortawesome/free-solid-svg-icons';
+import EmptyHeartButton from './EmptyHeartButton';
 
 const CategoryContents = ({roomList, searchParams}) => {
-    // const [loginState] = useState(true); // 로그인상태
-    // console.log(`로그인상태 : ${loginState}`)
-    // const loginUser = 1; // 로그인유저
-    // console.log(`로그인유저 : ${loginUser}`)
     const getPrice = [searchParams.get("lPrice"),searchParams.get("gPrice")]; // 가격범위 params 가져오기
     const getMaxUser = searchParams.get("maxUser"); // 최대인원 params 가져오기
     const getBedroom = searchParams.get("bedroom"); // 침실 params 가져오기
@@ -49,7 +46,7 @@ const CategoryContents = ({roomList, searchParams}) => {
                             </div>
                         </div>
                     </Link>
-                    {/* <EmptyHeartButton userData={userData} loginUser={loginUser} loginState={loginState} roomid={data.id}/> */}
+                    <EmptyHeartButton roomid={data._id}/>
                 </div>
             )
             :

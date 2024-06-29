@@ -5,18 +5,16 @@ import Profile from './Profile';
 import InfoBox from './InfoBox';
 import ResetHeader from '../layout/ResetHeader';
 import ScrollEvent from '../layout/ScrollEvent';
+import { useSelector } from 'react-redux';
 
 const MyPageContainer = () => {
     ResetHeader();
     ScrollEvent();
 
-    const initialset = {
-        name : "홍길동",
-        email : "12345@gmail.com",
-        profileImg : "uploads/profile/0f800888eb88a80c0773a6dfef5af73c",
-        phone : "010-1234-5678",
-        address : "경기도 성남시"
-    }
+    const currentUser = useSelector((state)=>state.user.currentUser);
+    console.log(currentUser)
+
+    const initialset = currentUser
     // 표시되는 정보 state
     const [info, setInfo] = useState(initialset);
 
