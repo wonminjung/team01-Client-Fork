@@ -7,16 +7,18 @@ import { faSearch } from '@fortawesome/free-solid-svg-icons';
 import { createSearchParams, useSearchParams } from 'react-router-dom';
 import ModalFilterBox from './ModalFilterBox';
 
+
+
 const SearchMainContainer = ({ currentPage, setCurrentPage, isFilterActivate, handleFilterStatus }) => {
 
     // 숙소 목록
     const [ contentData, setContentData ] = useState([]);
 
+    // 클릭 했을 때 미니디테일에 표시할 숙소 상태
+    const [ clickRoom, setClickRoom ] = useState({});
+
     // 검색 숙소 개수
     const [ roomsCount, setRoomsCount ] = useState(0);
-
-    // CardList에서 클릭한 컴포넌트 MiniDetail에 띄우기 위한 상태(인덱스값)
-    const [ clickCardListIndex, setClickCardListIndex ] = useState(0);
 
     // 검색결과가 없을 때 띄울 메시지 상태
     const [ searchResultMessage, setSearchResultMessage ] = useState("");
@@ -68,13 +70,14 @@ const SearchMainContainer = ({ currentPage, setCurrentPage, isFilterActivate, ha
                     setRoomsCount(res.roomsCount);
 
                     // 페이지 당 표시할 숙소로 나눠서 최대 페이지 설정
-                    setMaxPage(Math.floor(res.roomsCount / 18) + 1);
-                    
+                    setMaxPage(Math.floor(res.roomsCount / (18 + 1) + 1));
                     // body 스크롤 초기화
                     window.scrollTo({ top: 0, behavior: "smooth" });
                 }
                 // 숙소 결과 상태에 담기
                 setContentData(res.rooms);
+                // 미니디테일에 표시할 숙소를 가져온 첫 번째 숙소로 기본 설정
+                setClickRoom(res.rooms[0]);
             })
             .catch((err) => {
                 console.error(err);
@@ -82,7 +85,7 @@ const SearchMainContainer = ({ currentPage, setCurrentPage, isFilterActivate, ha
             });
 
         }
-    }, [cate, val, sdate, edate, guests, lPrice, gPrice, maxUser, bedroom, bed, bathroom, currentPage]);
+    }, [searchParams, currentPage]);
 
 
 
@@ -96,12 +99,12 @@ const SearchMainContainer = ({ currentPage, setCurrentPage, isFilterActivate, ha
                             <CardListContainer
                                 contentData={contentData}
                                 roomsCount={roomsCount}
-                                setClickCardListIndex={setClickCardListIndex}
                                 currentPage={currentPage}
                                 setCurrentPage={setCurrentPage}
                                 maxPage={maxPage}
+                                setClickRoom={setClickRoom}
                             />
-                            <MiniDetailComponents contentData={contentData} clickCardListIndex={clickCardListIndex} />
+                            <MiniDetailComponents currentPage={currentPage} clickRoom={clickRoom} />
                         </>
                     )
                     :
@@ -114,9 +117,9 @@ const SearchMainContainer = ({ currentPage, setCurrentPage, isFilterActivate, ha
             }
             </S.SearchMainContainer>
             <ModalFilterBox 
-                searchParams={searchParams} setSearchParams={setSearchParams} currentPage={currentPage}
+                searchParams={searchParams} setSearchParams={setSearchParams} currentPage={currentPage} setCurrentPage={setCurrentPage}
                 setContentData={setContentData} isFilterActivate={isFilterActivate} handleFilterStatus={handleFilterStatus} 
-                setMaxPage={setMaxPage} setSearchResultMessage={setSearchResultMessage} setRoomsCount={setRoomsCount} roomsCount={roomsCount}
+                setMaxPage={setMaxPage} setSearchResultMessage={setSearchResultMessage} setRoomsCount={setRoomsCount} setClickRoom={setClickRoom}
             />
         </>
     );

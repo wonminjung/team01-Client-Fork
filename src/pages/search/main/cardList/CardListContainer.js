@@ -3,21 +3,20 @@ import S from './style';
 import CardListComponents from './CardListComponents';
 import PaginationComponents from './PaginationComponents';
 
-const CardListContainer = ({ contentData, roomsCount, setClickCardListIndex, currentPage, setCurrentPage, maxPage }) => {
 
-    // 클릭한 카드리스트를 미니디테일에 띄우기 위한 인덱스 설정
-    const handleClickEvent = (index) => {
-        setClickCardListIndex(index);
-    };
+
+const CardListContainer = ({ contentData, roomsCount, currentPage, setCurrentPage, maxPage, setClickRoom }) => {
 
     // 카드리스트 컨테이너 태그 참조(스크롤바 이동시킬 목적으로 사용)
     const cardListScrollRef = useRef();
 
-    
+
     useEffect(() => {
         // 카드리스트 스크롤 초기화
         cardListScrollRef.current.scrollTop = 0;
     }, [currentPage]);
+
+
 
     return (
         <S.CardListContainer ref={cardListScrollRef}>
@@ -30,7 +29,7 @@ const CardListContainer = ({ contentData, roomsCount, setClickCardListIndex, cur
                     {
                         contentData && contentData.map((cardList, i) => 
                             (
-                                <CardListComponents key={i} cardList={cardList} index={i} handleClickEvent={handleClickEvent} />
+                                <CardListComponents key={i} cardList={cardList} index={i} setClickRoom={setClickRoom}/>
                             )
                         )
                     }
