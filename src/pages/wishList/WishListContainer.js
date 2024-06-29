@@ -51,17 +51,10 @@ const WishListContainer = () => {
 
     },[update]) // update값이 변경되면 useEffect 재실행!
 
-    useEffect(() => {
-        if(isWished === false){
-            setIsModalOpen(true);
-        }
-    }, [isWished]) // isWished 값이 변경되면 useEffect 재실행!
-    
 
     // 모달창 닫는 함수
     const handleModalClose = () => {
-        setIsModalOpen(false);
-        
+        setIsModalOpen(false);  
     };
 
 

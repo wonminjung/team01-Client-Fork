@@ -91,14 +91,18 @@ const WishItemContents = ({rooms, userId, setUpdate}) => {
                                 <img src={room.roomImg[0]} />
                             </div>
                             <div className="textBox">
-                                <div className="titleBox">
-                                    <h6>{room.title}</h6>
+                                <div>
+                                    <div className="titleBox">
+                                        <h6>{room.title}</h6>
+                                    </div>
+                                    <div className="addAndPriceBox">
+                                        <span className="address">{room.address}</span> 
+                                    </div>
                                 </div>
-                                <div className="addressAndPriceBox">
-                                    <span className="address">{room.address}</span>
-                                    <span className="price">{room.dayPrice}</span>
+                                <div>
+                                    <div className="linkBox">예약하기</div>
+                                    <span className="price">{"￦" + room.dayPrice.toLocaleString('ko-KR')}</span>
                                 </div>
-                                <div className="ReservateButton">예약하기</div>
                             </div>
                         </Link>
                     </div>
