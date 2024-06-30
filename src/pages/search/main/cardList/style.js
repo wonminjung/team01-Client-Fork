@@ -275,6 +275,7 @@ const S = {};
     S.Price = styled.div`
         padding-left: 5px;
         font-size: 14px;
+        font-weight: ${theme.FONT_WEIGHT.bold};
         color: ${theme.PALETTE.yellow};
     `;
 
