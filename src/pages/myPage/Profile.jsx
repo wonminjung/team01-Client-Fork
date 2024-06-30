@@ -3,12 +3,15 @@ import S from './style'
 import { FontAwesomeIcon } from '@fortawesome/react-fontawesome';
 import { faPen } from '@fortawesome/free-solid-svg-icons';
 import BasicButton from '../../components/button/BasicButton';
+import { useDispatch } from 'react-redux';
+import { setUser } from '../../modules/user';
 
-const Profile = ({info, setInfo}) => {
-    const userId = "HwangKH";
+const Profile = ({info}) => {
+    const userId = info.userId;
     const time = 1;
     const imgRef = useRef(null);
     const fileInputRef = useRef(null);
+    const dispatch = useDispatch();
     const [content, setContent] = useState(<></>);
     const thumbImg = (input) => {
         if(input.target.files && input.target.files[0]){
@@ -45,7 +48,7 @@ const Profile = ({info, setInfo}) => {
             const info = userInfo.user;
             alert(message)
             console.log(info)
-            setInfo(info)
+            dispatch(setUser(info))
             setContent(<></>)
         }catch(error){
             console.log(error)

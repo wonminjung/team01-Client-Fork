@@ -1,18 +1,24 @@
-import React, { useState } from 'react';
+import React from 'react';
+import { useDispatch, useSelector } from 'react-redux';
 import { Link, useNavigate } from 'react-router-dom';
+import { setUser, setUserStatus } from '../../modules/user';
 
 const PopupBox4 = React.forwardRef(({menuState},ref) => {
-    const [loginState,setLoginState] = useState(true);
+
+    const userStatus = useSelector((state)=>state.user.isLogin);
+    const dispatch = useDispatch();
     const navigate = useNavigate();
     const onClickOut = (e) => {
         e.preventDefault(false);
-        setLoginState(false);
+        dispatch(setUser({}))
+        dispatch(setUserStatus(false))
         navigate('/');
     }
+
     return (
         <div className='userPopupBox' style={{display : menuState? "block": "none"}} ref={ref}>
             <>
-            {loginState?
+            {userStatus?
                 <ul>
                     <li><Link to={'/myPage'}>계정</Link></li>
                     <li><Link to={'/bookingList'}>여행</Link></li>

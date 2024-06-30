@@ -3,13 +3,19 @@ import { FontAwesomeIcon } from '@fortawesome/react-fontawesome';
 import React, { useEffect, useRef, useState } from 'react';
 import S from './style';
 import PopupBox4 from './PopupBox4';
+import { useSelector } from 'react-redux';
 
 const UserMenu = () => {
+    const userStatus = useSelector((state)=>state.user.isLogin);
     const [menuState,setMenuState] = useState(false);
     const menuRef = useRef(null);
     const menuListRef = useRef(null);
     const setUserMenu = () => {
-        setMenuState(true)
+        if(menuState){
+            setMenuState(false)
+        }else{
+            setMenuState(true)
+        }
     }
     useEffect(() => {
         const handleOutsideClose = (e) => {
@@ -23,8 +29,15 @@ const UserMenu = () => {
     
     return (
         <S.UserMenu ref={menuRef} onClick={setUserMenu}>
-            <div><FontAwesomeIcon icon={faBars} /></div>
-            <div><FontAwesomeIcon icon={faCircleUser} /></div>
+            {userStatus?
+            <>
+                <div><FontAwesomeIcon icon={faBars} /></div>
+                <div><FontAwesomeIcon icon={faCircleUser} /></div>
+            </>
+            :
+            <>
+                로그인
+            </>}
             <PopupBox4 menuState={menuState} ref={menuListRef}/>
         </S.UserMenu>
     );

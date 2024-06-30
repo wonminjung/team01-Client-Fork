@@ -6,12 +6,21 @@ import 'swiper/css/pagination';
 
 import { EffectCoverflow, Pagination } from 'swiper/modules';
 
-export default function ImageSlide({img}) {
+export default function ImageSlide({img,setImgModalState}) {
   const images = img;
+  const openImgModal= () => {
+    setImgModalState(true)
+    let scrollY = "";
+    scrollY = window.scrollY;
+    document.body.style.position = "fixed";
+    document.body.style.top = "-"+scrollY+"px";
+    document.body.style.overflowY = "scroll";
+    document.body.style.width = "100%";
+  }
   return (
     <Swiper
         effect={'coverflow'}
-        grabCursor={true}
+        grabCursor={false}
         centeredSlides={true}
         slidesPerView={3}
         spaceBetween={20}
@@ -28,7 +37,7 @@ export default function ImageSlide({img}) {
         className='contentSlide'
     >
         {images.map((img,i)=>
-            <SwiperSlide key={i}><img src={`${img}`} alt={`이미지${i + 1}`} /></SwiperSlide>
+            <SwiperSlide key={i} onClick={openImgModal}><img src={`${img}`} alt={`이미지${i + 1}`} /></SwiperSlide>
         )}
     </Swiper>
   );

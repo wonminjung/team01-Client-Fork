@@ -40,6 +40,7 @@ S.DetailWrapper = styled.div`
         border-radius: 20px;
         user-select: none;
         height: 240px;
+        cursor: pointer;
         /* 이미지 */
         & img{
             width: 100%;
@@ -316,6 +317,46 @@ S.DetailWrapper = styled.div`
                         }
                     }
                 }
+            }
+        }
+    }
+    & .imgModalBox{
+        position: fixed;
+        top: 0;
+        left: 0;
+        width: 100%;
+        height: 100vh;
+        background-color: rgba(255,255,255,0.7);
+        backdrop-filter: blur(10px);
+        z-index: 1000;
+        & .closeModalBtn{
+            border: 0;
+            font-size: 30px;
+            background-color: transparent;
+            padding: 30px;
+            cursor: pointer;
+            position: absolute;
+            top: 0;
+            left: 0;
+        }
+        & .modalContent{
+            max-height: 100vh;
+            overflow-y: scroll;
+            padding-top: 30px;
+            cursor: pointer;
+            &::-webkit-scrollbar{
+                width: 8px;
+                background-color: ${PALETTE.gray[100]};
+            }
+            &::-webkit-scrollbar-thumb{
+                
+                background-color: ${PALETTE.yellow};
+                border-radius: 5px;
+            }
+            &>div{
+                display: flex;
+                justify-content: center;
+                margin-bottom: 30px;
             }
         }
     }
