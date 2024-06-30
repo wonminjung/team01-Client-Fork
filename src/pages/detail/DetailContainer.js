@@ -11,6 +11,7 @@ import DetailCommentBox from './DetailCommentBox';
 import DetailMapBox from './DetailMapBox';
 import ScrollEvent from '../layout/ScrollEvent';
 import PopupBox1 from './PopupBox1';
+import ImageModal from './ImageModal';
 
 const DetailContainer = () => {
     ResetHeader();
@@ -21,6 +22,7 @@ const DetailContainer = () => {
     const [comment, setComment] = useState({});
     const [commentUsers, setCommentUsers] = useState({});
     const [popup1State, setpopup1State] = useState(false);
+    const [imgModalState, setImgModalState] = useState(false);
     useEffect(()=>{
         const getRoomAndUserList = async () => {
             const response = await fetch(`http://localhost:8000/room/detail?${searchParams}`);
@@ -36,7 +38,6 @@ const DetailContainer = () => {
         });
     },[searchParams])
     const {title, roomImg, _id, dayPrice, cleanVat, address, roomSchedule} = room;
-    console.log(room)
     const starAvr = () => {
         let total = 0;
         for(let i = 0; i<comment.length; i++){
@@ -51,7 +52,7 @@ const DetailContainer = () => {
                 {roomImg&&
                 <>
                 <TitleBox title={title}/>
-                <ImageSlide img={roomImg}/>
+                <ImageSlide img={roomImg} setImgModalState={setImgModalState}/>
                 <S.DetailContentBox>
                     <LeftContentBox 
                         contentData={room} 
@@ -74,6 +75,7 @@ const DetailContainer = () => {
                 popup1State={popup1State} 
                 setpopup1State={setpopup1State}
                 />
+                {imgModalState?<ImageModal roomImg={roomImg} setImgModalState={setImgModalState}/>:<></>}
                 </>
                 }
             </S.DetailWrapper>

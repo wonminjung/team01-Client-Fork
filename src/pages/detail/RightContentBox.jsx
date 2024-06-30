@@ -37,12 +37,20 @@ const RightContentBox = ({id, dayPrice, cleanVat, roomSchedule}) => {
         navigate(`/reservation?roomId=${id}&sdate=${startDateState}&edate=${endDateState}&guests=${guestsState}&infants=${infantsState}`);
     }
     const openPopup = () => {
-        setPopupState(true);
+        if(popupState){
+            setPopupState(false);
+        }else{
+            setPopupState(true);
+        }
         setPopup2State(false);
     }
     const openPopup2 = () => {
+        if(popup2State){
+            setPopup2State(false);
+        }else{
+            setPopup2State(true);
+        }
         setPopupState(false);
-        setPopup2State(true);
     }
     useEffect(() => {
         const handleOutsideClose = (e) => {
@@ -56,40 +64,42 @@ const RightContentBox = ({id, dayPrice, cleanVat, roomSchedule}) => {
     return (
         <>
         <S.RightBox>
-            <div className="rightBox" ref={datePopupRef}>
+            <div className="rightBox">
                 <div className="dayPriceBox">
                     <h6>￦ <span>{coma(dayPrice)}</span><span> / 박</span></h6>
                 </div>
-                <div className="checkInOutBox">
-                    <div>
-                        <button type='button' onClick={openPopup}>
-                            <span>체크인</span>
-                            <span>{startDateState}</span>
-                        </button>
-                        <button type='button' onClick={openPopup}>
-                            <span>체크아웃</span>
-                            <span>{endDateState}</span>
-                        </button>
+                <div ref={datePopupRef}>
+                    <div className="checkInOutBox">
+                        <div>
+                            <button type='button' onClick={openPopup}>
+                                <span>체크인</span>
+                                <span>{startDateState}</span>
+                            </button>
+                            <button type='button' onClick={openPopup}>
+                                <span>체크아웃</span>
+                                <span>{endDateState}</span>
+                            </button>
+                        </div>
+                        <div>
+                            <button type='button' onClick={openPopup2}>
+                                <span>인원</span>
+                                <span>{`게스트 : ${guestsState}명${infantsState>0? ', 유아 : '+  infantsState + '명':""}`}</span>
+                            </button>
+                        </div>
                     </div>
-                    <div>
-                        <button type='button' onClick={openPopup2}>
-                            <span>인원</span>
-                            <span>{`게스트 : ${guestsState}명${infantsState>0? ', 유아 : '+  infantsState + '명':""}`}</span>
-                        </button>
+                    <div className="payListBox">
+                        <ul>
+                            <li><span>￦ {coma(dayPrice)} x {diff}박</span><span>￦ {coma(dayPrice*diff)}</span></li>
+                            <li><span>청소비</span><span>￦ {coma(cleanVat)}</span></li>
+                            <li><span>서비스 수수료</span><span>￦ {coma(serviceVat)}</span></li>
+                            <hr />
+                            <li className='total'><span>총 합계</span><span>￦ {coma(total)}</span></li>
+                        </ul>
                     </div>
-                </div>
-                <div className="payListBox">
-                    <ul>
-                        <li><span>￦ {coma(dayPrice)} x {diff}박</span><span>￦ {coma(dayPrice*diff)}</span></li>
-                        <li><span>청소비</span><span>￦ {coma(cleanVat)}</span></li>
-                        <li><span>서비스 수수료</span><span>￦ {coma(serviceVat)}</span></li>
-                        <hr />
-                        <li className='total'><span>총 합계</span><span>￦ {coma(total)}</span></li>
-                    </ul>
+                    <PopupBox2 popupState={popupState} today={today} state={state} setState={setState} setStartDateState={setStartDateState} setEndDateState={setEndDateState} roomSchedule={roomSchedule}/>
+                    <PopupBox3 popup2State={popup2State} guestsState={guestsState} setguestsState={setguestsState} infantsState={infantsState} setInfantsState={setInfantsState}/>
                 </div>
                 <BasicButton className="reserveBtn" onClick={reserveBtn}>예약하기</BasicButton>
-                <PopupBox2 popupState={popupState} today={today} state={state} setState={setState} setStartDateState={setStartDateState} setEndDateState={setEndDateState} roomSchedule={roomSchedule}/>
-                <PopupBox3 popup2State={popup2State} guestsState={guestsState} setguestsState={setguestsState} infantsState={infantsState} setInfantsState={setInfantsState}/>
             </div>
         </S.RightBox>
         </>
