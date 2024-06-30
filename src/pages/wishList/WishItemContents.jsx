@@ -84,7 +84,7 @@ const WishItemContents = ({rooms, userId, setUpdate}) => {
                 rooms.map((room, i) =>
                     <div className="content" key={i}>
                         {/* 하트버튼 클릭시, 해당 아이템 삭제 기능 메서드 삽입 */}
-                        <HeartButton onClick={() => handleRemoveItem(room) } />
+                        <HeartButton className='heart' onClick={() => handleRemoveItem(room) } />
                         <Link onClick={() => { navigate(`/detail?roomId=${room._id}`)}}>
                             <div className="imgBox">
                                 {/* 로그인한 유저의 wishList 컨텐츠 이미지 불러오기 */}

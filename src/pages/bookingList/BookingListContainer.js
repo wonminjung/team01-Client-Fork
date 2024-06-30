@@ -5,18 +5,23 @@ import NotBooking from './NotBooking';
 import BookingDetail from './BookingDetail';
 import ResetHeader from '../layout/ResetHeader';
 import ScrollEvent from '../layout/ScrollEvent';
+import { useSelector } from 'react-redux';
+import { Navigate } from 'react-router-dom';
 
 // 예약한 숙소리스트
 const BookingListContainer = () => {
     ResetHeader();
     ScrollEvent();
-   
-    const userObjectId = "667ad4d1ab5eb02e847a4118";// 로그인한 유저의 식별자(임의)
+
+    const userStatus = useSelector((state) => state.user.isLogin); //useSelector 훅을 사용하여 로그인 상태를 확인
+    const userObjectId = useSelector((state) => state.user.currentUser._id); // 현재 로그인한 유저의 ObjecId(_id)
     const [isReserved, setIsReserved] = useState(null); // 유저가 예약한 숙소가 있는지 여부 상태
     const [activeIndex, setActiveIndex] = useState(null); // 열린 아코디언 패널의 인덱스를 저장하는 상태(null은 패널이 열리지 않은 상태)
     const [itemData, setItemData] = useState([]);
 
-    useEffect(() => {
+    console.log(userObjectId)
+
+    useEffect(() => {        
         const getBookingList = async () => {
             try{ //userId를 가지고 User객체에서 해당 _id를 찾고 => userId
                  // 그 _id를 가지고 Booking 해당 booking객체들을 가져오기 => bookingList
@@ -35,10 +40,10 @@ const BookingListContainer = () => {
                 }
 
                 const data = await response.json();
-                // console.log(data);
+                console.log(data);
    
 
-                if(data){//데이터가 있는경우
+                if(data.length>0){//데이터가 있는경우
                     setIsReserved(true);// 예약한 숙소가 있어서 예약한숙소 보여줌
                     setItemData(data);// 뿌려줄 예약한 숙소 데이터 세팅
                 }else{
@@ -53,7 +58,15 @@ const BookingListContainer = () => {
         }
         getBookingList();
 
-    },[])
+    },[userStatus, userObjectId])
+
+      // 로그인 상태 확인 후 로그인 안된 경우 리디렉션
+      if(!userStatus) {
+        alert("로그인이 필요합니다.")
+        // replace로 왔던 기록을 없애고 로그인 페이지로 이동(뒤로가기시 메인페이지로)
+        return <Navigate to={"/signIn"} replace={true}/>
+    }
+
 
 
 
@@ -62,7 +75,7 @@ const BookingListContainer = () => {
     const handleAccordionClick = (index) => {
         // console.log(index) 
         if (typeof index !== 'undefined') { 
-            console.log('Clicked index:', index); 
+            // console.log('Clicked index:', index); 
             setActiveIndex(activeIndex === index ? null : index);
         } else {
             console.log('Index is undefined or null');
