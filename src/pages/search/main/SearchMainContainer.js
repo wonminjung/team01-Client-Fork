@@ -51,7 +51,7 @@ const SearchMainContainer = ({ currentPage, setCurrentPage, isFilterActivate, ha
                     maxUser: maxUser, bedroom: bedroom, bed: bed, bathroom: bathroom, page: currentPage
                 }
             );
-            setSearchParams(params);
+            setSearchParams(params, { replace: true });
 
             // 숙소 요청
             const getRoomList = async () => {

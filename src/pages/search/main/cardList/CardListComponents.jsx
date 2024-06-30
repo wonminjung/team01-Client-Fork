@@ -8,15 +8,16 @@ import 'swiper/css/pagination';
 
 import { Navigation, Pagination } from 'swiper/modules';
 import HeartButton from '../../../../components/heartbutton/HeartButton';
-import { useSelector } from 'react-redux';
+// import { useSelector } from 'react-redux';
+import { useNavigate } from 'react-router-dom';
 
 
 
-const CardListComponents = ({ cardList, setClickRoom }) => {
+const CardListComponents = ({ cardList, setClickRoom, currentUser, isLogin }) => {
     const { title, address, roomImg, dayPrice, _id } = cardList;
 
-    // 주소값 2개 파싱
-    const [ firstAddr, secondAddr ] = address.split(" ");
+    // 현재 로그인 사용자 wishList 가져오기
+    const currentWishList = currentUser.wishList;
 
     const swiperOptions = {
         pagination: { dynamicBullets: true },
@@ -30,25 +31,67 @@ const CardListComponents = ({ cardList, setClickRoom }) => {
 
     // wishList에 있는지 상태
     const [ isWishList, setIsWishList ] = useState(false);
+
+    const navigate = useNavigate();
+
+
+    // 서버쪽으로 위시리스트 통신?
+    const updateWish = async () => {
+        const response = await fetch("http://localhost:8000/room/updateWishList", 
+            {
+                method: "POST",
+                headers: {
+                    "Content-Type": "application/json"
+                },
+                body: JSON.stringify(
+                    {
+                        userId: currentUser.userId,
+                        roomId: _id
+                    }
+                ),
+            }
+        );
+        const data = await response.json();
+
+        return data;
+    };
+
     // 하트버튼 클릭시 변경 함수
     const handleWishList = () => {
-        setIsWishList(!isWishList);
+        if (!isLogin) {
+            alert("로그인 해주세요!");
+            navigate("/signIn");
+            return;
+        }
+
+        if (isWishList) {
+            // 이미 위시리스트에 있는데 클릭한 경우
+            updateWish()
+                .then((res) => {
+                    console.log(res);
+                    setIsWishList(!isWishList);
+                });
+        } else {
+            // 위시리스트에 없는데 클릭한 경우
+            updateWish()
+                .then((res) => {
+                    console.log(res);
+                    setIsWishList(!isWishList);
+                });
+        }
     };
-    
-    // 테스트용 위시리스트 목록
-    const testUserWishList = [ "667adac97aa8b09d01fb7e42", "667adac97aa8b09d01fb7dfa", "667adac97aa8b09d01fb7e33" ];
-    // 현재 로그인 사용자 wishList 가져오기
-    const currentUserWishList = useSelector((state) => state.user.currentUser);
-    const isLogin = useSelector((state) => state.user.isLogin);
 
-    // _id 변경될 때마다 위시리스트 목록에 있는 숙소인지 비교
+
+    // _id 변경될 때마다 로그인 한 사용자의 위시리스트 목록에 있는 숙소인지 비교
     useEffect(() => {
-        // 현재 로그인 한 유저의 WishList(roomId)와 현재 cardList의 _id값을 비교하여 isWishList 상태 변경
-        testUserWishList.includes(_id) ? setIsWishList(true) : setIsWishList(false);
+        if (isLogin) {
+            // 현재 로그인 한 유저의 WishList(roomId)와 현재 cardList의 _id값을 비교하여 isWishList 상태 변경
+            currentWishList?.includes(_id) ? setIsWishList(true) : setIsWishList(false);
+        }
     }, [_id]);
-
-
     
+
+
     return (
         <S.CardListComponentsContainer>
             <S.WishContainer onClick={handleWishList}>
@@ -81,16 +124,23 @@ const CardListComponents = ({ cardList, setClickRoom }) => {
             </S.Swiper>
             
             <S.DescriptionSection>
+                <S.DescriptionHead>
                     <h6>
                         {title}
                     </h6>
-                <S.AddrPrice>
-                    <div>{firstAddr}/{secondAddr}</div>
-                    <div>￦{dayPriceAsString}</div>
-                </S.AddrPrice>
-                <S.Reservation onClick={() => setClickRoom(cardList)}>
-                    정보보기
-                </S.Reservation>
+                    <S.Addr>
+                        {address}
+                    </S.Addr>
+                </S.DescriptionHead>
+
+                <S.DescriptionBottom>
+                    <S.Reservation onClick={() => setClickRoom(cardList)}>
+                        정보보기
+                    </S.Reservation>
+                    <S.Price>
+                        ￦{dayPriceAsString}
+                    </S.Price>
+                </S.DescriptionBottom>
             </S.DescriptionSection>
         </S.CardListComponentsContainer>
     );
