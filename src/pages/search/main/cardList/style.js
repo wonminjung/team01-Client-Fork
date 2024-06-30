@@ -131,14 +131,9 @@ const S = {};
         width: 25px;
         height: 25px;
         position: absolute;
-        right: 0;
-        transform: translate(-40%, 40%);
-        z-index: 1000;
-
-        &:hover {
-            opacity: 1;
-            filter: none;
-        }
+        top: 20px;
+        right: 19px;
+        z-index: 100;
 
         & > img {
             object-fit: cover;
@@ -152,18 +147,16 @@ const S = {};
         & > div {
             display: flex;
             position: absolute;
-            width: 25px;
-            height: 25px;
-            right: 0;
-            transform: translate(-40%, 40%);
-            z-index: 1000;
+            width: 25px !important;
+            height: 25px !important;
+            top: 0 !important;
+            right: 0 !important;
+            z-index: 100;
         }
 
         & .heart {
-            right: 0 !important;
-            top: 0 !important;
-            width: inherit !important;
-            height: inherit !important;
+            top: 20px !important;
+            right: 19px !important;
         }
     `;
 

@@ -35,8 +35,15 @@ const CardListComponents = ({ cardList, setClickRoom, currentUser, isLogin }) =>
     const navigate = useNavigate();
 
 
-    // 서버쪽으로 위시리스트 통신?
-    const updateWish = async () => {
+
+    // 위시리스트 업데이트 함수
+    const updateWish = async (bool) => {
+        if (bool) {
+            
+        } else {
+
+        }
+        
         const response = await fetch("http://localhost:8000/room/updateWishList", 
             {
                 method: "POST",
@@ -46,7 +53,8 @@ const CardListComponents = ({ cardList, setClickRoom, currentUser, isLogin }) =>
                 body: JSON.stringify(
                     {
                         userId: currentUser.userId,
-                        roomId: _id
+                        // roomId: _id
+                        // wishList: ,
                     }
                 ),
             }
