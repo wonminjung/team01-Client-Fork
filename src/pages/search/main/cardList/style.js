@@ -56,12 +56,13 @@ const S = {};
         }
         
         &::-webkit-scrollbar-thumb {
-            background: ${theme.PALETTE.gray[200]};
+            /* background: ${theme.PALETTE.gray[200]}; */
+            background: ${theme.PALETTE.yellow};
             border-radius: 12px;
             
-            &:hover {
+            /* &:hover {
                 background: ${theme.PALETTE.yellow};
-            }
+            } */
         }
         
         &::-webkit-scrollbar-track {
@@ -127,8 +128,8 @@ const S = {};
 
     // 위시리스트에 없는 숙소일 경우 버튼 디자인
     S.HeartDisabled = styled.div`
-        width: 28px;
-        height: 28px;
+        width: 25px;
+        height: 25px;
         position: absolute;
         right: 0;
         transform: translate(-40%, 40%);

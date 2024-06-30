@@ -13,14 +13,11 @@ import { useNavigate } from 'react-router-dom';
 
 
 
-const CardListComponents = ({ cardList, setClickRoom, currentUserWishList, isLogin }) => {
+const CardListComponents = ({ cardList, setClickRoom, currentUser, isLogin }) => {
     const { title, address, roomImg, dayPrice, _id } = cardList;
 
-    // // 현재 로그인 사용자 wishList 가져오기
-    // const currentUserWishList = useSelector((state) => state.user.currentUser.wishList);
-
-    // // 로그인 한 상태
-    // const isLogin = useSelector((state) => state.user.isLogin);
+    // 현재 로그인 사용자 wishList 가져오기
+    const currentWishList = currentUser.wishList;
 
     const swiperOptions = {
         pagination: { dynamicBullets: true },
@@ -38,15 +35,27 @@ const CardListComponents = ({ cardList, setClickRoom, currentUserWishList, isLog
     const navigate = useNavigate();
 
 
-    // _id 변경될 때마다 로그인 한 사용자의 위시리스트 목록에 있는 숙소인지 비교
-    useEffect(() => {
-        if (isLogin) {
-            // 현재 로그인 한 유저의 WishList(roomId)와 현재 cardList의 _id값을 비교하여 isWishList 상태 변경
-            currentUserWishList.includes(_id) ? setIsWishList(true) : setIsWishList(false);
-        }
-    }, [_id]);
+    // 서버쪽으로 위시리스트 통신?
+    const updateWish = async () => {
+        const response = await fetch("http://localhost:8000/room/updateWishList", 
+            {
+                method: "POST",
+                headers: {
+                    "Content-Type": "application/json"
+                },
+                body: JSON.stringify(
+                    {
+                        userId: currentUser.userId,
+                        roomId: _id
+                    }
+                ),
+            }
+        );
+        const data = await response.json();
 
-    
+        return data;
+    };
+
     // 하트버튼 클릭시 변경 함수
     const handleWishList = () => {
         if (!isLogin) {
@@ -54,9 +63,33 @@ const CardListComponents = ({ cardList, setClickRoom, currentUserWishList, isLog
             navigate("/signIn");
             return;
         }
-        setIsWishList(!isWishList);
+
+        if (isWishList) {
+            // 이미 위시리스트에 있는데 클릭한 경우
+            updateWish()
+                .then((res) => {
+                    console.log(res);
+                    setIsWishList(!isWishList);
+                });
+        } else {
+            // 위시리스트에 없는데 클릭한 경우
+            updateWish()
+                .then((res) => {
+                    console.log(res);
+                    setIsWishList(!isWishList);
+                });
+        }
     };
 
+
+    // _id 변경될 때마다 로그인 한 사용자의 위시리스트 목록에 있는 숙소인지 비교
+    useEffect(() => {
+        if (isLogin) {
+            // 현재 로그인 한 유저의 WishList(roomId)와 현재 cardList의 _id값을 비교하여 isWishList 상태 변경
+            currentWishList?.includes(_id) ? setIsWishList(true) : setIsWishList(false);
+        }
+    }, [_id]);
+    
 
 
     return (
