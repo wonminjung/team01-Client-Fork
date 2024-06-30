@@ -12,11 +12,12 @@ const CardListContainer = ({ contentData, roomsCount, currentPage, setCurrentPag
     const cardListScrollRef = useRef();
 
     // 현재 로그인 사용자 wishList 가져오기
-    const currentUser = useSelector((state) => state.user.currentUser.wishList) ?? {};
+    const currentUser = useSelector((state) => state.user.currentUser) ?? {};
 
     // 로그인 한 상태
     const isLogin = useSelector((state) => state.user.isLogin);
 
+    console.log(currentUser, isLogin);
 
     useEffect(() => {
         // 카드리스트 스크롤 초기화

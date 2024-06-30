@@ -10,6 +10,8 @@ import { Navigation, Pagination } from 'swiper/modules';
 import HeartButton from '../../../../components/heartbutton/HeartButton';
 // import { useSelector } from 'react-redux';
 import { useNavigate } from 'react-router-dom';
+import { useDispatch } from 'react-redux';
+import { setUser } from '../../../../modules/user';
 
 
 
@@ -18,6 +20,8 @@ const CardListComponents = ({ cardList, setClickRoom, currentUser, isLogin }) =>
 
     // 현재 로그인 사용자 wishList 가져오기
     const currentWishList = currentUser.wishList;
+
+    const dispatch = useDispatch();
 
     const swiperOptions = {
         pagination: { dynamicBullets: true },
@@ -35,26 +39,37 @@ const CardListComponents = ({ cardList, setClickRoom, currentUser, isLogin }) =>
     const navigate = useNavigate();
 
 
-    // 서버쪽으로 위시리스트 통신?
-    const updateWish = async () => {
-        const response = await fetch("http://localhost:8000/room/updateWishList", 
+
+    // 위시리스트 업데이트 함수
+    const updateWish = async (bool) => {
+        let updatedWish = [];
+        
+        if (bool) {
+            updatedWish = currentWishList.filter((roomId) => roomId !== _id);
+        } else {
+            updatedWish = [...currentWishList, _id];
+        }
+        
+        const response = await fetch("http://localhost:8000/user/",
             {
-                method: "POST",
+                method: "PATCH",
                 headers: {
                     "Content-Type": "application/json"
                 },
                 body: JSON.stringify(
                     {
-                        userId: currentUser.userId,
-                        roomId: _id
+                        _id: currentUser._id,
+                        // roomId: _id
+                        wishList: updatedWish,
                     }
-                ),
+                )
             }
         );
         const data = await response.json();
 
         return data;
     };
+
 
     // 하트버튼 클릭시 변경 함수
     const handleWishList = () => {
@@ -63,21 +78,25 @@ const CardListComponents = ({ cardList, setClickRoom, currentUser, isLogin }) =>
             navigate("/signIn");
             return;
         }
-
+        
         if (isWishList) {
-            // 이미 위시리스트에 있는데 클릭한 경우
-            updateWish()
-                .then((res) => {
-                    console.log(res);
-                    setIsWishList(!isWishList);
-                });
+            if(currentWishList!==undefined && Object.keys(currentUser).length!==0) {
+                // 이미 위시리스트에 있는데 클릭한 경우
+                updateWish(isWishList)
+                    .then((res) => {
+                        dispatch(setUser(res.user));
+                        setIsWishList(!isWishList);
+                    });
+            }
         } else {
-            // 위시리스트에 없는데 클릭한 경우
-            updateWish()
-                .then((res) => {
-                    console.log(res);
-                    setIsWishList(!isWishList);
-                });
+            if(currentWishList!==undefined && Object.keys(currentUser).length!==0) {
+                // 위시리스트에 없는데 클릭한 경우
+                updateWish(isWishList)
+                    .then((res) => {
+                        dispatch(setUser(res.user));
+                        setIsWishList(!isWishList);
+                    });
+            }
         }
     };
 
