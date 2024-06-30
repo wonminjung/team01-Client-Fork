@@ -7,16 +7,12 @@ import ResetHeader from '../layout/ResetHeader';
 import ScrollEvent from '../layout/ScrollEvent';
 import { useSelector } from 'react-redux';
 import { Navigate } from 'react-router-dom';
-import { useSelector } from 'react-redux';
-import { Navigate } from 'react-router-dom';
 
 // 예약한 숙소리스트
 const BookingListContainer = () => {
     ResetHeader();
     ScrollEvent();
 
-    const userStatus = useSelector((state) => state.user.isLogin); //useSelector 훅을 사용하여 로그인 상태를 확인
-    const userObjectId = useSelector((state) => state.user.currentUser._id); // 현재 로그인한 유저의 ObjecId(_id)
 
     const userStatus = useSelector((state) => state.user.isLogin); //useSelector 훅을 사용하여 로그인 상태를 확인
     const userObjectId = useSelector((state) => state.user.currentUser._id); // 현재 로그인한 유저의 ObjecId(_id)
@@ -25,8 +21,7 @@ const BookingListContainer = () => {
     const [itemData, setItemData] = useState([]);
 
     console.log(userObjectId);
-
-    useEffect(() => {        
+       
     useEffect(() => {        
         const getBookingList = async () => {
             try{ //userId를 가지고 User객체에서 해당 _id를 찾고 => userId
@@ -73,16 +68,6 @@ const BookingListContainer = () => {
         // replace로 왔던 기록을 없애고 로그인 페이지로 이동(뒤로가기시 메인페이지로)
         return <Navigate to={"/signIn"} replace={true}/>
     }
-
-    },[userStatus, userObjectId])
-
-      // 로그인 상태 확인 후 로그인 안된 경우 리디렉션
-      if(!userStatus) {
-        alert("로그인이 필요합니다.")
-        // replace로 왔던 기록을 없애고 로그인 페이지로 이동(뒤로가기시 메인페이지로)
-        return <Navigate to={"/signIn"} replace={true}/>
-    }
-
 
 
 
