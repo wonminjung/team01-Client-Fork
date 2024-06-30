@@ -4,12 +4,12 @@ import MiniDetailComponents from './miniDetail/MiniDetailComponents';
 import S from './style';
 import { FontAwesomeIcon } from '@fortawesome/react-fontawesome';
 import { faSearch } from '@fortawesome/free-solid-svg-icons';
-import { createSearchParams, useSearchParams } from 'react-router-dom';
+import { createSearchParams } from 'react-router-dom';
 import ModalFilterBox from './ModalFilterBox';
 
 
 
-const SearchMainContainer = ({ currentPage, setCurrentPage, isFilterActivate, handleFilterStatus }) => {
+const SearchMainContainer = ({ searchParams, setSearchParams, currentPage, setCurrentPage, isFilterActivate, handleFilterStatus }) => {
 
     // 숙소 목록
     const [ contentData, setContentData ] = useState([]);
@@ -28,7 +28,7 @@ const SearchMainContainer = ({ currentPage, setCurrentPage, isFilterActivate, ha
 
     const now = new Date().toLocaleDateString().split(" ").join("");
 
-    const [ searchParams, setSearchParams ] = useSearchParams();
+    
     const cate = searchParams.get("cate") ?? "searchResult";
     const lPrice = searchParams.get("lPrice") ?? 0;
     const gPrice = searchParams.get("gPrice") ?? 1000000;

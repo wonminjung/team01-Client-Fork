@@ -16,7 +16,7 @@ import S from './style';
 
 
 
-const NavSwiperContainer = ({ handleFilterStatus, setCurrentPage }) => {
+const NavSwiperContainer = ({ searchParams, handleFilterStatus, setCurrentPage }) => {
 
    // 카테고리 선택 상태
   const [ isNavActivate, setNavActivate ] = useState(0);
@@ -165,6 +165,7 @@ const NavSwiperContainer = ({ handleFilterStatus, setCurrentPage }) => {
                           index={i}
                           isNavActivate={isNavActivate} 
                           setNavActivate={setNavActivate}
+                          searchParams={searchParams}
                         />
                     </S.SwiperSlide>
                   )
