@@ -649,7 +649,6 @@ S.CategoryContentBox = styled.div`
             right: 34px;
             z-index: 1;
             color: #fff;
-            filter: drop-shadow(0px 0px 3px #F2AC29);
             background-color: transparent;
             border: 0;
             width: 25px;
@@ -657,6 +656,9 @@ S.CategoryContentBox = styled.div`
             cursor: pointer;
             & svg{
                 font-size: 25px;
+                & path{
+                    fill: ${PALETTE.yellow}
+                }
             }
         }
         &>div{

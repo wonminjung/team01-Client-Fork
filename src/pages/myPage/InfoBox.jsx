@@ -5,11 +5,15 @@ import { faXmark } from '@fortawesome/free-solid-svg-icons';
 import BasicButton from '../../components/button/BasicButton';
 import PostModal from './PostModal';
 import PopupPostCode from './PopupPostCode';
+import { useDispatch, useSelector } from 'react-redux';
+import { setUser } from '../../modules/user';
 
-const InfoBox = ({info, setInfo}) => {
+const InfoBox = ({info}) => {
     // 로그인된 유저 id
-    const _id = "667ad4d1ab5eb02e847a411b";
-    // 초기화 정보
+    const currentUser = useSelector((state)=>state.user.currentUser);
+    const _id = currentUser._id;
+    
+    const dispatch = useDispatch();
     
     // 모달창 state
     const [modalState, setModalState] = useState(false);
@@ -148,7 +152,7 @@ const InfoBox = ({info, setInfo}) => {
             const info = userInfo.user;
             alert(message)
             console.log(info)
-            setInfo(info)
+            dispatch(setUser(info))
         }catch(error){
             console.log(error);
         }

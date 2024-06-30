@@ -351,16 +351,20 @@ S.UserMenu = styled.div`
     width: 86px;
     min-width: 86px;
     height: 48px;
-    padding-left: 8px;
     cursor: pointer;
     transition: transform 0.3s;
-    & div:first-child svg{
-        width: 16px;
-        height: 16px;
-        & path{
-            fill: ${PALETTE.yellow};
+    font-size: 14px;
+    color: #F2AC29;
+    & div:first-child{
+        padding-left: 8px;
+        & svg{
+            width: 16px;
+            height: 16px;
+            & path{
+                fill: ${PALETTE.yellow};
+            }
         }
-    } 
+    }
     & div:nth-child(2) svg{
         width: 32px;
         height: 32px;

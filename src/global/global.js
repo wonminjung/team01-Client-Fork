@@ -1,6 +1,8 @@
 import { createGlobalStyle } from "styled-components";
 import reset from "styled-reset";
+import theme from "./theme";
 
+const PALETTE = theme.PALETTE;
 
 const GlobalStyle = createGlobalStyle`
     ${reset}
@@ -20,9 +22,18 @@ const GlobalStyle = createGlobalStyle`
         letter-spacing: 0.3px;
         font-family: 'Pretendard-Regular' !important;
     }
-    
+
     body {
         font-size: 16px;
+        &::-webkit-scrollbar{
+            width: 8px;
+            background-color: ${PALETTE.gray[100]};
+        }
+        &::-webkit-scrollbar-thumb{
+            
+            background-color: ${PALETTE.yellow};
+            border-radius: 5px;
+        }
     }
 
     p, button {

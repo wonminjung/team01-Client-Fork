@@ -1,62 +1,45 @@
-import React, { useState } from 'react';
+import React from 'react';
 import { useNavigate } from 'react-router-dom';
 import HeartButton from '../../components/heartbutton/HeartButton';
 import { FontAwesomeIcon } from '@fortawesome/react-fontawesome';
-import { faHeart } from '@fortawesome/free-solid-svg-icons';
+import { faHeart as faHeartSolid } from '@fortawesome/free-regular-svg-icons';
 import { useSelector } from 'react-redux';
 
-const EmptyHeartButton = ({roomid}) => {
-    const currentUser = useSelector((state)=>state.user.currentUser);
+const EmptyHeartButton = ({roomid,wishList,setWishList}) => {
     const userStatus = useSelector((state)=>state.user.isLogin);
-
-    let list = currentUser.wishList;
-    console.log(list)
     const navigate = useNavigate();
-    const [refresh,setRefresh] = useState(0);
+    
     const clickEmptyBtn = () => { // 빈 위시버튼클릭시
         if(userStatus){ // 로그인판별
             // 로그인일 때
-            // .................................... 추후 서버로 데이터옮길시 서버로 데이터변경을 요청해야함
-            list.push(roomid)
-            console.log(list, "추가됨")
-            setRefresh(refresh? 0:1)
-            // ....................................
+            setWishList([...wishList,roomid])
         }else{
             // 로그인이 아닐때
             alert("로그인이 필요합니다");
             navigate('/signIn');
         }
     }
-    const clickHeartBtn = () => {
+    const clickHeartBtn = async () => {
         // 위시리스트 삭제시
-        // .................................... 추후 서버로 데이터옮길시 서버로 데이터변경을 요청해야함
-        list = list.filter((ls)=>ls !== roomid);
-        console.log(list, "삭제됨")
-        setRefresh(refresh? 0:1)
-        // ....................................
+        setWishList(wishList.filter((list)=>list!==roomid))
     }
     return (
         <>
-        {userStatus? // 로그인판별
-        (
-            list.filter((list)=>list===roomid).length?
+            {userStatus? // 로그인판별
+            wishList.filter((list)=>list===roomid).length?
             // 로그인, 위시리스트에 있을때
             <HeartButton onClick={clickHeartBtn}/>
             :
             // 로그인, 위시리스트에 없을때
             <button className='emptyHeartBtn' onClick={clickEmptyBtn}>
-                <FontAwesomeIcon icon={faHeart} />
+                <FontAwesomeIcon icon={faHeartSolid} />
             </button>
-        )
-        :
-        (
+            :
             // 로그인 아닐시
             <button className='emptyHeartBtn' onClick={clickEmptyBtn}>
-                <FontAwesomeIcon icon={faHeart} />
+                <FontAwesomeIcon icon={faHeartSolid} />
             </button>
-        )
-        }
-        
+            }
         </>
         
     );

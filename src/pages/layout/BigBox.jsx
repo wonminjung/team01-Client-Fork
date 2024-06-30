@@ -28,7 +28,35 @@ const BigBox = React.forwardRef((_,ref) => {
     const navigate = useNavigate();
     const searchSubmit = (e) => {
         e.preventDefault()
-        navigate(`/search?cate=serchResult${inputValue===""? "": `&val=${inputValue}`}${startDateState==="날짜 추가"? "":`&sdate=${startDateState}&edate=${endDateState}`}${guestsState<1? "":`&guests=${guestsState}&infants=${infantsState}`}`)
+        navigate(`/search?cate=searchResult${inputValue===""? "": `&val=${inputValue}`}${startDateState==="날짜 추가"? "":`&sdate=${startDateState}&edate=${endDateState}`}${guestsState<1? "":`&guests=${guestsState}&infants=${infantsState}`}`)
+    }
+    const clickLocationBtn = () => {
+        if(modalIsOpen){
+            setModalIsOpen(false);
+        }else{
+            setModalIsOpen(true);
+        }
+        setModal2IsOpen(false);
+        setModal3IsOpen(false);
+    }
+    const clickDateBtn = () => {
+        if(modal2IsOpen){
+            setModal2IsOpen(false);
+        }else{
+            setModal2IsOpen(true);
+        }
+        setModalIsOpen(false);
+        setModal3IsOpen(false);
+    }
+    const clickGuestBtn = () => {
+        if(modal3IsOpen){
+            setModal3IsOpen(false);
+        }else{
+            setModal3IsOpen(true);
+        }
+        setModalIsOpen(false);
+        setModal2IsOpen(false);
+        
     }
     useEffect(() => {
         const handleOutsideClose = (e) => {
@@ -43,22 +71,22 @@ const BigBox = React.forwardRef((_,ref) => {
     return (
         <div className="bigBox" ref={ref}>
             <form onSubmit={searchSubmit}>
-                <div className='locationBox' onClick={()=>{setModalIsOpen(true);setModal2IsOpen(false);setModal3IsOpen(false);}}>
+                <div className='locationBox' onClick={clickLocationBtn}>
                     <div>여행지</div>
                     <div><input type="text" placeholder="여행지 검색" ref={inputRef} onChange={inputChange}/></div>
                 </div>
                 <span></span>
-                <div className='checkInBox' onClick={()=>{setModalIsOpen(false);setModal2IsOpen(true);setModal3IsOpen(false);}}>
+                <div className='checkInBox' onClick={clickDateBtn}>
                     <div>체크인</div>
                     <div>{startDateState}</div>
                 </div>
                 <span></span>
-                <div className='checkOutBox' onClick={()=>{setModalIsOpen(false);setModal2IsOpen(true);setModal3IsOpen(false);}}>
+                <div className='checkOutBox' onClick={clickDateBtn}>
                     <div>체크아웃</div>
                     <div>{endDateState}</div>
                 </div>
                 <span></span>
-                <div className='guestsBox' onClick={()=>{setModalIsOpen(false);setModal2IsOpen(false);setModal3IsOpen(true);}}>
+                <div className='guestsBox' onClick={clickGuestBtn}>
                     <div>여행자</div>
                     <div>{guestsState>0? `게스트 : ${guestsState}명${infantsState>0? `, 유아 : ${infantsState}명`: ""}`: "게스트 추가"}</div>
                 </div>
