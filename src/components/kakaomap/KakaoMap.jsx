@@ -21,7 +21,6 @@ const KakaoMap = ({ props, index }) => { // props로 주소 받기
                 // 1. 주소로 좌표 구하기
                 // const container = document.getElementById(`map${index}`); // 지도를 담을 영역의 DOM 레퍼런스
                 const container = containerRef.current;
-                console.log(container);
                 const geocoder = new window.kakao.maps.services.Geocoder(); //주소-좌표 변환 geocoder메서드
     
                 // 주소로 좌표를 검색

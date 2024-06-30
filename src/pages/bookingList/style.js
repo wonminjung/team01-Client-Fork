@@ -404,7 +404,7 @@ S.bookingDetailWrapper = styled.div`
 
         & .rightBox{
             width: 50%;
-            height: 300px;
+            height: 80%;
             display: flex;
             flex-direction: column;
             position: relative;
