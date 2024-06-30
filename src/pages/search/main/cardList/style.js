@@ -106,7 +106,6 @@ const S = {};
         display: flex;
         flex-direction: column;
         
-
         /* 카드리스트에 마우스 오버 시 슬라이드 버튼 */
         &:hover {
             .swiper-button-next, .swiper-button-prev {
@@ -242,45 +241,50 @@ const S = {};
 
     // 설명섹션 디자인
     S.DescriptionSection = styled.div`
-        padding: 20px 0;
-        text-align: center;
+        padding: 20px 10px;
+        display: flex;
+        flex-direction: column;
+        justify-content: space-between;
+    `;
+
+    // 설명 상단 디자인
+    S.DescriptionHead = styled.div`
+        display: flex;
+        height: 80px;
+        flex-direction: column;
 
         & > h6 {
             font-weight: ${theme.FONT_WEIGHT.bold};
             margin-bottom: 13px;
             font-size: 18px;
-            overflow: hidden;
-            white-space: nowrap;
-            text-overflow: ellipsis;
-            line-height: 22px;
+            line-height: 20px;
         }
     `;
 
-    // 주소 부분 디자인
-    S.AddrPrice = styled.div`
+    // 주소
+    S.Addr = styled.div`
+        font-size: 14px;
+        color: ${theme.PALETTE.gray[300]};
+    `;
+
+    // 설명 하단
+    S.DescriptionBottom = styled.div`
         display: flex;
-        justify-content: center;
-        margin-bottom: 20px;
-        align-items: center;
-
-        &>div:first-child  {
-            padding-right: 5px;
-            font-size: 14px;
-            color: ${theme.PALETTE.gray[300]};
-        }
-        
-        &>div:last-child {
-            padding-left: 5px;
-            font-size: 14px;
-            color: ${theme.PALETTE.yellow};
-        }
+        justify-content: space-between;
     `;
 
-    // 예약글씨
+    // 정보보기
     S.Reservation = styled.span`
         font-size: 12px;
         font-weight: ${theme.FONT_WEIGHT.bold};
         cursor: pointer;
+    `;
+
+    // 가격
+    S.Price = styled.div`
+        padding-left: 5px;
+        font-size: 14px;
+        color: ${theme.PALETTE.yellow};
     `;
 
 
