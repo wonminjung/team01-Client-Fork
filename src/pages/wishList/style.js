@@ -97,6 +97,15 @@ S.ContentBox = styled.div`
         width: 50%;
         padding: 10px; //<-이거 화면커지면 왜 적용 안되는지 알아보기
         transition: 0.3s; // hover되면 0.3초동안 커짐
+
+        & .heart{
+            position: absolute;
+            top: 50px;
+            right : 34px;
+            width: 25px;
+            height: 25px;
+        }
+
         &:hover{//커서 이미지 위에 올리면 1.02배 커짐
             transform: scale(1.02);
         }
@@ -115,6 +124,7 @@ S.ContentBox = styled.div`
         @media(min-width: 1900px){
             width: calc(100% / 6);
         }
+ 
 
         & a{ // 링크로 감싸준 부분
             & .imgBox{

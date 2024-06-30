@@ -1,7 +1,7 @@
 import { faHand } from '@fortawesome/free-regular-svg-icons';
 import { FontAwesomeIcon } from '@fortawesome/react-fontawesome';
 import React from 'react';
-import { Link } from 'react-router-dom';
+import { Link, Navigate } from 'react-router-dom';
 import S from './style';
 import BasicButton from '../../components/button/BasicButton';
 
@@ -22,7 +22,7 @@ const NotBooking = () => {
                     </div>
                     <div className="navToMainPage">
                         <BasicButton>
-                            <Link to={'/main'}>숙소 검색하기</Link>
+                            <Link to="/" >숙소 검색하기</Link>
                         </BasicButton> 
                     </div>
                 </div>
