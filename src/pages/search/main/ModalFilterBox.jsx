@@ -113,19 +113,6 @@ const ModalFilterBox = ({searchParams, setSearchParams, isFilterActivate,
     };
 
 
-    // 필터 실행됐을 때 변경 전 URI값 저장
-    useEffect(() => {
-        if (isFilterActivate) {
-            const beforeParams = createSearchParams(
-                {
-                    cate: getKey, val: val, sdate: sdate, edate: edate, guests: guests, lPrice: value[0], gPrice: value[1], 
-                    maxUser: maxUser, bedroom: bedroom, bed: bed, bathroom: bathroom, guests: guests, page: currentPage
-                }
-            );
-            setBeforeUri(beforeParams);
-        }
-    }, [isFilterActivate])
-
     // 필터 데이터 선택할 때마다 숙소 개수 업데이트
     useEffect(() => {
         if (isFilterActivate) {
