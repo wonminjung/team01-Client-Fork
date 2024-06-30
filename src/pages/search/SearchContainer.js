@@ -3,6 +3,7 @@ import NavSwiperContainer from './navigationBar/NavSwiperContainer';
 import SearchMainContainer from './main/SearchMainContainer';
 import ResetHeader from '../layout/ResetHeader';
 import ScrollEvent from '../layout/ScrollEvent';
+import { useSearchParams } from 'react-router-dom';
 
 
 
@@ -21,13 +22,16 @@ const SearchContainer = () => {
         setFilterActivate(!isFilterActivate);
     };
 
+    const [ searchParams, setSearchParams ] = useSearchParams();
+
 
 
     return (
         <>
-            <NavSwiperContainer handleFilterStatus={handleFilterStatus} setCurrentPage={setCurrentPage} isFilterActivate={isFilterActivate} />
+            <NavSwiperContainer 
+                handleFilterStatus={handleFilterStatus} setCurrentPage={setCurrentPage} isFilterActivate={isFilterActivate} searchParams={searchParams} />
             <SearchMainContainer 
-                currentPage={currentPage} setCurrentPage={setCurrentPage} 
+                currentPage={currentPage} setCurrentPage={setCurrentPage} searchParams={searchParams} setSearchParams={setSearchParams}
                 isFilterActivate={isFilterActivate} handleFilterStatus={handleFilterStatus}
             />
         </>
