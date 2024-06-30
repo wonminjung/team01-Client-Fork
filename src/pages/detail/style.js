@@ -327,7 +327,7 @@ S.DetailWrapper = styled.div`
         width: 100%;
         height: 100vh;
         background-color: rgba(255,255,255,0.7);
-        backdrop-filter: blur(10px);
+        backdrop-filter: blur(7px);
         z-index: 1000;
         & .closeModalBtn{
             border: 0;
