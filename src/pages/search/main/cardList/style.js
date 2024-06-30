@@ -56,13 +56,12 @@ const S = {};
         }
         
         &::-webkit-scrollbar-thumb {
-            /* background: ${theme.PALETTE.gray[200]}; */
-            background: ${theme.PALETTE.yellow};
+            background: ${theme.PALETTE.gray[200]};
             border-radius: 12px;
             
-            /* &:hover {
+            &:hover {
                 background: ${theme.PALETTE.yellow};
-            } */
+            }
         }
         
         &::-webkit-scrollbar-track {
