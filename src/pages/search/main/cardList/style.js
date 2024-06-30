@@ -134,8 +134,6 @@ const S = {};
         right: 0;
         transform: translate(-40%, 40%);
         z-index: 1000;
-        opacity: 0.8;
-        filter: grayscale(0.4);
 
         &:hover {
             opacity: 1;
