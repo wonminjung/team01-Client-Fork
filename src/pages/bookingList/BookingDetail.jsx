@@ -6,8 +6,6 @@ import KakaoMap from '../../components/kakaomap/KakaoMap.jsx';
 
 
 const BookingDetail = ({item, isActive, index,}) => {
-    
-    console.log(item);
 
     const[isHovered, setIsHovered] = useState(false);
     const navigate = useNavigate();
@@ -26,35 +24,35 @@ const BookingDetail = ({item, isActive, index,}) => {
         return `${month}월 ${day}일`;
     }
 
-// 체크인 시간 문자열에서 오후 4:00만 추출하는 함수
-const extractCheckInTime = (timeString) => {
-    // 시간 문자열에서 ":"를 기준으로 분리
-    const parts = timeString.split(':')[1];
-    const partsForTime = parts.split(' ');
-    const pm = partsForTime[1];
-    const time = partsForTime[2];
+    // 체크인 시간 문자열에서 오후 4:00만 추출하는 함수
+    const extractCheckInTime = (timeString) => {
+        // 시간 문자열에서 ":"를 기준으로 분리
+        const parts = timeString.split(':')[1];
+        const partsForTime = parts.split(' ');
+        const pm = partsForTime[1];
+        const time = partsForTime[2];
 
-     // 오후/오전 여부를 판별하고 시간을 12시간 형식으로 변경
-     if (pm === "오후") {
-        return `오후 ${time}시`;
-     }
-        return timeString; // 예외 처리
-};
+        // 오후/오전 여부를 판별하고 시간을 12시간 형식으로 변경
+        if (pm === "오후") {
+            return `오후 ${time}시`;
+        }
+            return timeString; // 예외 처리
+    };
 
-const extractCheckOutTime = (timeString) => {
-    // 시간 문자열에서 ":"를 기준으로 분리
-    const parts = timeString.split(' ');
-    const amPm = parts[2]; // 오후
-    const part = parts[3]  // 4:00~9:00
-    const partsForTime = part.split(':');
-    const time = partsForTime[0]; //4
-;
-     // 오후/오전 여부를 판별하고 시간을 12시간 형식으로 변경
-     if (amPm === "오전") {
-        return `오전 ${time}시`;
-     }
-        return timeString; // 예외 처리
-};
+    const extractCheckOutTime = (timeString) => {
+        // 시간 문자열에서 ":"를 기준으로 분리
+        const parts = timeString.split(' ');
+        const amPm = parts[2]; // 오후
+        const part = parts[3]  // 4:00~9:00
+        const partsForTime = part.split(':');
+        const time = partsForTime[0]; //4
+    
+        // 오후/오전 여부를 판별하고 시간을 12시간 형식으로 변경
+        if (amPm === "오전") {
+            return `오전 ${time}시`;
+        }
+            return timeString; // 예외 처리
+    };
 
 
     const onClickCopy = async (text) => {
@@ -65,6 +63,11 @@ const extractCheckOutTime = (timeString) => {
           alert('주소 복사에 실패했습니다🥲');
         }
       };
+
+      const coma = (prop) => {
+        const result = prop.toLocaleString('ko-KR');
+        return result;
+    }
 
     return (
     <S.bookingDetailWrapper className={isActive ? 'active' : ''} >
@@ -155,19 +158,19 @@ const extractCheckOutTime = (timeString) => {
                     </div>
                     <div className='data'>
                         <div className='calc'>
-                            <span>₩{item.roomId.dayPrice} x {stayPeriod}박</span><span>₩{item.roomId.dayPrice*stayPeriod}</span>
+                            <span>₩{coma(item.roomId.dayPrice)} x {stayPeriod}박</span><span>₩{coma(item.roomId.dayPrice*stayPeriod)}</span>
                         </div>
                         <div className='calc'>
-                            <span>청소비</span><span>￦ {item.roomId.cleanVat}</span>
+                            <span>청소비</span><span>￦ {coma(item.roomId.cleanVat)}</span>
                         </div>
                         <div className='calc'>
-                            <span>서비스 수수료</span><span>￦ {serviceVat}</span>
+                            <span>서비스 수수료</span><span>￦ {coma(serviceVat)}</span>
                         </div>
                         {/* 구분선 */}
                         <div className='divisionLine'></div>
                         <div className='sum'>
                             <span>총 합계</span>
-                            <span className='sumPrice'>￦ {total}</span>
+                            <span className='sumPrice'>￦ {coma(total)}</span>
                         </div>
                     </div>   
                 </div>
@@ -179,9 +182,10 @@ const extractCheckOutTime = (timeString) => {
                     </div>
                     <p>
                     체크인 시간인 {formatDate(item.checkInDate)} 오후 3:00 전에 
-                    취소하시면, 
-                    <br /> 부분 환불을 받으실 수 있습니다. 
-                    <br />그 이후에 취소하시면 예약 대금이 환불되지 않습니다.
+                    취소하시면,부분 환불을 받으실 수 있습니다. 그 이후에 취소하시면 예약 대금이 환불되지 않습니다.
+                    <br />숙박 도중 예약 취소를 원하신다면, 호스트에게 문제 해결을 요청하실 수 있도록 에어비앤비에서 도와드리겠습니다. 
+                    <br />게스트는 호스트에게 문제 시정, 부분 환불 또는 예약 취소 및 전액 환불을 요청할 수 있습니다. 
+                    예약 시 사용하신 결제 수단으로 환불 금액이 지급됩니다. 
                     </p>
                 </div>
                 {/* 숙소 페이지로 이동 버튼 */}
