@@ -8,19 +8,19 @@ import 'swiper/css/pagination';
 
 import { Navigation, Pagination } from 'swiper/modules';
 import HeartButton from '../../../../components/heartbutton/HeartButton';
-import { useSelector } from 'react-redux';
-import { Navigate, useNavigate } from 'react-router-dom';
+// import { useSelector } from 'react-redux';
+import { useNavigate } from 'react-router-dom';
 
 
 
-const CardListComponents = ({ cardList, setClickRoom }) => {
+const CardListComponents = ({ cardList, setClickRoom, currentUserWishList, isLogin }) => {
     const { title, address, roomImg, dayPrice, _id } = cardList;
 
-    // 현재 로그인 사용자 wishList 가져오기
-    const currentUserWishList = useSelector((state) => state.user.currentUser.wishList);
+    // // 현재 로그인 사용자 wishList 가져오기
+    // const currentUserWishList = useSelector((state) => state.user.currentUser.wishList);
 
-    // 로그인 한 상태
-    const isLogin = useSelector((state) => state.user.isLogin);
+    // // 로그인 한 상태
+    // const isLogin = useSelector((state) => state.user.isLogin);
 
     const swiperOptions = {
         pagination: { dynamicBullets: true },
@@ -36,7 +36,6 @@ const CardListComponents = ({ cardList, setClickRoom }) => {
     const [ isWishList, setIsWishList ] = useState(false);
 
     const navigate = useNavigate();
-
 
 
     // _id 변경될 때마다 로그인 한 사용자의 위시리스트 목록에 있는 숙소인지 비교
