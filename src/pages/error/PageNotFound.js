@@ -7,7 +7,9 @@ const PageNotFound = () => {
     return (
         <S.PNFrootContainer>
             <Link to="/">
-                <S.PNFLogo>Logo</S.PNFLogo>
+                <S.PNFLogo>
+                    <img src="./images/pages/layout/logo.svg" alt="eggbnb"/>
+                </S.PNFLogo>
             </Link>
 
             <S.PNFMessageContainer>

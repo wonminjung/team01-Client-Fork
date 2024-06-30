@@ -56,13 +56,12 @@ const S = {};
         }
         
         &::-webkit-scrollbar-thumb {
-            /* background: ${theme.PALETTE.gray[200]}; */
-            background: ${theme.PALETTE.yellow};
+            background: ${theme.PALETTE.gray[200]};
             border-radius: 12px;
             
-            /* &:hover {
+            &:hover {
                 background: ${theme.PALETTE.yellow};
-            } */
+            }
         }
         
         &::-webkit-scrollbar-track {
@@ -131,16 +130,9 @@ const S = {};
         width: 25px;
         height: 25px;
         position: absolute;
-        right: 0;
-        transform: translate(-40%, 40%);
-        z-index: 1000;
-        opacity: 0.8;
-        filter: grayscale(0.4);
-
-        &:hover {
-            opacity: 1;
-            filter: none;
-        }
+        top: 20px;
+        right: 19px;
+        z-index: 100;
 
         & > img {
             object-fit: cover;
@@ -154,18 +146,16 @@ const S = {};
         & > div {
             display: flex;
             position: absolute;
-            width: 25px;
-            height: 25px;
-            right: 0;
-            transform: translate(-40%, 40%);
-            z-index: 1000;
+            width: 25px !important;
+            height: 25px !important;
+            top: 0 !important;
+            right: 0 !important;
+            z-index: 100;
         }
 
         & .heart {
-            right: 0 !important;
-            top: 0 !important;
-            width: inherit !important;
-            height: inherit !important;
+            top: 20px !important;
+            right: 19px !important;
         }
     `;
 
@@ -285,6 +275,7 @@ const S = {};
     S.Price = styled.div`
         padding-left: 5px;
         font-size: 14px;
+        font-weight: ${theme.FONT_WEIGHT.bold};
         color: ${theme.PALETTE.yellow};
     `;
 
