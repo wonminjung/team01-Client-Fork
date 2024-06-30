@@ -11,6 +11,8 @@ const Main = () => {
 
     const currentUser = useSelector((state)=>state.user.currentUser);
     const userStatus = useSelector((state)=>state.user.isLogin);
+
+    
     
     useEffect(()=>{
         // 선언문
@@ -42,6 +44,13 @@ const Main = () => {
         }
         // 메인 진입시 스크롤 맨 위로 이동
         window.scrollTo({ top: 0, behavior: "instant" });
+
+        let offset = document.body.style.top;
+        document.body.style.position = "unset";
+        document.body.style.top = "unset";
+        document.body.style.overflowY = "unset";
+        document.body.style.width = "unset";
+        window.scrollTo(0, offset.slice(0,-2) * -1);
         
         // 스크롤 이벤트
         window.addEventListener("scroll",scrollEvent);
