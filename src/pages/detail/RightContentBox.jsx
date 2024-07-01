@@ -7,7 +7,7 @@ import moment from 'moment';
 import { addDays } from 'date-fns';
 import PopupBox3 from './PopupBox3';
 
-const RightContentBox = ({id, dayPrice, cleanVat, roomSchedule}) => {
+const RightContentBox = ({room}) => {
     const [popupState, setPopupState] = useState(false);
     const [popup2State, setPopup2State] = useState(false);
     const [state, setState] = useState([
@@ -18,13 +18,13 @@ const RightContentBox = ({id, dayPrice, cleanVat, roomSchedule}) => {
         },
     ]);
     const formatedDate = [moment().format('YYYY.MM.DD'),moment().add(1,'days').format('YYYY.MM.DD')]
-    const [startDateState, setStartDateState] = useState(formatedDate[0]);
-    const [endDateState, setEndDateState] = useState(formatedDate[1]);
+    const [startDateState, setStartDateState] = useState("선택");
+    const [endDateState, setEndDateState] = useState("선택");
     const [guestsState,setguestsState] = useState(1);
     const [infantsState,setInfantsState] = useState(0);
     const today = moment().toDate();
     const diff = Math.ceil(Math.abs(state[0].endDate - state[0].startDate) / (1000 * 60 * 60 * 24));
-    const sub = Math.round((dayPrice * diff) + cleanVat);
+    const sub = Math.round((room.dayPrice * diff) + room.cleanVat);
     const serviceVat = sub * 0.1;
     const total = sub + serviceVat;
     const datePopupRef = useRef(null);
@@ -34,7 +34,11 @@ const RightContentBox = ({id, dayPrice, cleanVat, roomSchedule}) => {
         return result;
     }
     const reserveBtn = () => {
-        navigate(`/reservation?roomId=${id}&sdate=${startDateState}&edate=${endDateState}&guests=${guestsState}&infants=${infantsState}`);
+        if(startDateState==="선택" && endDateState==="선택"){
+            alert("체크인아웃 날짜를 선택해주세요!")
+            return
+        }
+        navigate(`/reservation?roomId=${room._id}&sdate=${startDateState}&edate=${endDateState}&guests=${guestsState}&infants=${infantsState}`);
     }
     const openPopup = () => {
         if(popupState){
@@ -66,7 +70,7 @@ const RightContentBox = ({id, dayPrice, cleanVat, roomSchedule}) => {
         <S.RightBox>
             <div className="rightBox">
                 <div className="dayPriceBox">
-                    <h6>￦ <span>{coma(dayPrice)}</span><span> / 박</span></h6>
+                    <h6>￦ <span>{coma(room.dayPrice)}</span><span> / 박</span></h6>
                 </div>
                 <div ref={datePopupRef}>
                     <div className="checkInOutBox">
@@ -89,15 +93,15 @@ const RightContentBox = ({id, dayPrice, cleanVat, roomSchedule}) => {
                     </div>
                     <div className="payListBox">
                         <ul>
-                            <li><span>￦ {coma(dayPrice)} x {diff}박</span><span>￦ {coma(dayPrice*diff)}</span></li>
-                            <li><span>청소비</span><span>￦ {coma(cleanVat)}</span></li>
+                            <li><span>￦ {coma(room.dayPrice)} x {diff}박</span><span>￦ {coma(room.dayPrice*diff)}</span></li>
+                            <li><span>청소비</span><span>￦ {coma(room.cleanVat)}</span></li>
                             <li><span>서비스 수수료</span><span>￦ {coma(serviceVat)}</span></li>
                             <hr />
                             <li className='total'><span>총 합계</span><span>￦ {coma(total)}</span></li>
                         </ul>
                     </div>
-                    <PopupBox2 popupState={popupState} today={today} state={state} setState={setState} setStartDateState={setStartDateState} setEndDateState={setEndDateState} roomSchedule={roomSchedule}/>
-                    <PopupBox3 popup2State={popup2State} guestsState={guestsState} setguestsState={setguestsState} infantsState={infantsState} setInfantsState={setInfantsState}/>
+                    <PopupBox2 popupState={popupState} today={today} state={state} setState={setState} setStartDateState={setStartDateState} setEndDateState={setEndDateState} roomSchedule={room.roomSchedule}/>
+                    <PopupBox3 popup2State={popup2State} guestsState={guestsState} setguestsState={setguestsState} infantsState={infantsState} setInfantsState={setInfantsState} maxUser={room.roomData.maxUser}/>
                 </div>
                 <BasicButton className="reserveBtn" onClick={reserveBtn}>예약하기</BasicButton>
             </div>

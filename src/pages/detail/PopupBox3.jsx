@@ -2,9 +2,9 @@ import { faMinus, faPlus } from '@fortawesome/free-solid-svg-icons';
 import { FontAwesomeIcon } from '@fortawesome/react-fontawesome';
 import React from 'react';
 
-const PopupBox3 = ({popup2State,guestsState,setguestsState,infantsState,setInfantsState}) => {
+const PopupBox3 = ({popup2State,guestsState,setguestsState,infantsState,setInfantsState,maxUser}) => {
     const guestsMinus = () => {guestsState<2? setguestsState(1) : setguestsState(guestsState - 1)};
-    const guestsPlus = () => {setguestsState(guestsState + 1)};
+    const guestsPlus = () => {guestsState>=maxUser?setguestsState(guestsState):setguestsState(guestsState + 1)};
     const infantsMinus = () => {infantsState<1? setInfantsState(0) : setInfantsState(infantsState - 1)};
     const infantsPlus = () => {guestsState<1? setInfantsState(0) : setInfantsState(infantsState + 1)};
     return (
