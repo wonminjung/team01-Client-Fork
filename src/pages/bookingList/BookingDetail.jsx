@@ -3,6 +3,8 @@ import { Link, Navigate, useNavigate } from 'react-router-dom';
 import BasicButton from '../../components/button/BasicButton';
 import S from './style';
 import KakaoMap from '../../components/kakaomap/KakaoMap.jsx';
+import { FontAwesomeIcon } from '@fortawesome/react-fontawesome';
+import { faCalendarDays, faCircleInfo, faHandHoldingDollar, faLocationDot, faPhone, faReceipt } from '@fortawesome/free-solid-svg-icons';
 
 
 const BookingDetail = ({item, isActive, index,}) => {
@@ -75,7 +77,7 @@ const BookingDetail = ({item, isActive, index,}) => {
         <div className="mapBox">
                 <div className="howToGo">
                     <div className="iconPort">
-                        <img src="./images/pages/bookingList/port.svg" alt="port" />
+                        <FontAwesomeIcon icon={faLocationDot} />
                     </div>
                     <div className='textArea'>
                         <h4 className="textBox">
@@ -99,7 +101,7 @@ const BookingDetail = ({item, isActive, index,}) => {
                 {/* 숙박 일정 */}
                 <div className='scheduleWrapper'>
                         <div className='title'>
-                            <img src="./images/pages/bookingList/moon.svg" alt="moon" />
+                            <FontAwesomeIcon icon={faCalendarDays}/>
                             <h3>숙박 일정</h3>
                         </div>
                         <div className='data'>
@@ -122,7 +124,7 @@ const BookingDetail = ({item, isActive, index,}) => {
                 {/* 호스트 연락처 */}
                 <div className='hostContactWrapper'>
                         <div className='title'>
-                            <img src="./images/pages/bookingList/phone.svg" alt="phone" />
+                        <FontAwesomeIcon icon={faPhone}/>
                             <h3>호스트 연락처</h3>
                         </div>
                         <div className='data'>
@@ -132,14 +134,14 @@ const BookingDetail = ({item, isActive, index,}) => {
                 {/* 체크인 방법 */}
                 <div className='checkInTipWrapper'>
                         <div className='title'>
-                            <img src="./images/pages/bookingList/key.svg" alt="key"/>
+                            <FontAwesomeIcon icon={faCircleInfo}/>
                             <h3>숙소 정보</h3>
                         </div>
                         <div className='data'>
                             <ul className='tipList'>
                                 {/* 고정 */}
                                 <li className='tipOne'>
-                                도어락 셀프 체크인<br />(비밀번호는 호스트가 문자로 전달)
+                                도어락 셀프 체크인<br />비밀번호는 호스트가 문자로 전달 
                                 </li> 
                                 <li className='tipTwo'>
                                   {item.roomId.convenience[0].con}
@@ -153,7 +155,7 @@ const BookingDetail = ({item, isActive, index,}) => {
                 {/* 요금 상세 내역 */}
                 <div className='chargeWrapper'>
                     <div className='title'>
-                        <img src="./images/pages/bookingList/receipt.svg" alt="receipt"/>
+                    <FontAwesomeIcon icon={faReceipt}/>
                         <h3>요금 상세 내역</h3>
                     </div>
                     <div className='data'>
@@ -177,7 +179,7 @@ const BookingDetail = ({item, isActive, index,}) => {
                 {/* 환불 정책(고정) */}
                 <div className='refundPolicyWrapper'>
                     <div className='title'> 
-                        <img src="./images/pages/bookingList/refund.svg" alt="refund"/>
+                        <FontAwesomeIcon icon={faHandHoldingDollar}/>
                         <h3>환불 정책</h3>
                     </div>
                     <p>
