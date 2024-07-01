@@ -8,10 +8,12 @@ const PALETTE = theme.PALETTE;
 
 /* 전체 페이지 */
 S.BookingListContainer = styled.div`
-    min-height: calc(100vh - 230px);
-    padding: 40px 100px;
     position: relative;
-
+    width: 100%;
+    max-width: 1180px;
+    margin: 0 auto;
+    padding: 50px;
+    min-height: calc(100vh - 230px);
     &>ul{
         max-width : 1300px;
         margin: 0 auto; //좌우 자동
@@ -19,14 +21,13 @@ S.BookingListContainer = styled.div`
 `
 /* 페이지 제목 : 여행 - 예정된 예약 */
 S.TitleWrapper = styled.div`
-    margin-bottom: 60px;
-    margin-left : 100px;
-    & .pageTitle{
-            color : ${theme.PALETTE.black};
-            font-size: 28px;
-            font-weight: bold;
-            margin-bottom: 10px;
-        }
+    margin-bottom: 50px;
+    & h1{
+        font-size: 28px;
+        font-weight: bold;
+        color: ${PALETTE.black};
+        margin-bottom: 15px;
+    }
         & .pageSubTitle{
             color : ${theme.PALETTE.black};
             font-size: 20px;
@@ -249,11 +250,11 @@ S.bookingDetailWrapper = styled.div`
             height : 80%;
             display: flex;
             flex-direction: column;
-            padding-left: 70px;
+            padding-left: 20px;
 
             /* 숙박 일정 */
             & .scheduleWrapper{
-                margin-top : 75px;
+                margin-top : 40px;
                 justify-content: center;
                 display: flex;
                 flex-direction: column;
@@ -408,10 +409,11 @@ S.bookingDetailWrapper = styled.div`
             display: flex;
             flex-direction: column;
             position: relative;
+            padding-right : 20px;
 
             /* 요금 상세 내역 */
             & .chargeWrapper {
-                margin-top : 70px;
+                margin-top : 40px;
                 width: 100%;
                 height: 163px;
                 /* border: 1px solid #73AD21; */
@@ -419,7 +421,7 @@ S.bookingDetailWrapper = styled.div`
                 justify-content: flex-start;
                 flex-direction: column;
                 align-items: flex-start;// 수평 가운데 정렬
-                margin-bottom:10px;
+                margin-bottom:20px;
                 & .title{
                     display: flex;
                     justify-content: center;
@@ -499,12 +501,13 @@ S.bookingDetailWrapper = styled.div`
                 letter-spacing: 0.5px;
                 /* word-spacing:-1px; */
                 line-height:18px;
+                font-size: 14px;
             }
         }
         & .navToDetailPage{
             position: absolute;
-            top: -20px;
-            right: 33px;
+            top: -30px;
+            right: 23px;
             & button{
                 width: 200px;
                 position: relative;
