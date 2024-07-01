@@ -20,7 +20,6 @@ const WishListContainer = () => {
     const [isWished, setIsWished] = useState(null); // 유저가 wishItem이 있는지 여부
     // isWished=null(null은 값이 아직 설정되지 않았음을 의미 => 로딩중 표현)
     // isWished=false(false는 특정 조건이 충족되지 않음을 의미=>모달창 표시 여부 표현)
-    const [isModalOpen, setIsModalOpen] = useState(true); 
     const [update, setUpdate] = useState(true);
 
 
@@ -66,11 +65,6 @@ const WishListContainer = () => {
         return <Navigate to={"/signIn"} replace={true}/>
     }
 
-    // 모달창 닫는 함수
-    const handleModalClose = () => {
-        setIsModalOpen(false);  
-    };
-
 
     return (
         <S.WishListContainer>
@@ -86,7 +80,6 @@ const WishListContainer = () => {
                          { !isWished &&  (
                             <Modal showButtons={false}>
                                 <div className='modalDecorate'>
-                                    <button  className="closeButton"  onClick={handleModalClose}>X</button>
                                     <div className='modalBody'>
                                         <img src="./images/pages/wishList/NotWished1.png" alt="숙소사진" />
                                         <h2>마음에 드는 숙소를 한곳에 저장해보세요!</h2>
