@@ -17,7 +17,6 @@ const CardListContainer = ({ contentData, roomsCount, currentPage, setCurrentPag
     // 로그인 한 상태
     const isLogin = useSelector((state) => state.user.isLogin);
 
-    console.log(currentUser, isLogin);
 
     useEffect(() => {
         // 카드리스트 스크롤 초기화

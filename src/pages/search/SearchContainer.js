@@ -14,6 +14,9 @@ const SearchContainer = () => {
 
     // 현재 페이지 상태
     const [ currentPage, setCurrentPage ] = useState(1);
+    
+    // URI 정보 가져오기
+    const [ searchParams, setSearchParams ] = useSearchParams();
 
     // 필터버튼 클릭 상태
    const [ isFilterActivate, setFilterActivate ] = useState(false);
@@ -22,14 +25,11 @@ const SearchContainer = () => {
         setFilterActivate(!isFilterActivate);
     };
 
-    const [ searchParams, setSearchParams ] = useSearchParams();
-
 
 
     return (
         <>
-            <NavSwiperContainer 
-                handleFilterStatus={handleFilterStatus} setCurrentPage={setCurrentPage} isFilterActivate={isFilterActivate} searchParams={searchParams} />
+            <NavSwiperContainer handleFilterStatus={handleFilterStatus} setCurrentPage={setCurrentPage} isFilterActivate={isFilterActivate} searchParams={searchParams} />
             <SearchMainContainer 
                 currentPage={currentPage} setCurrentPage={setCurrentPage} searchParams={searchParams} setSearchParams={setSearchParams}
                 isFilterActivate={isFilterActivate} handleFilterStatus={handleFilterStatus}
