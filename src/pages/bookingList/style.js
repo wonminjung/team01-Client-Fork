@@ -199,10 +199,13 @@ S.bookingDetailWrapper = styled.div`
                 flex-direction: row;
                 margin-bottom: 15px;
                 & .iconPort{
-                    & img{ // port-icon
-                        width: 25px;
-                        height: 25px;
-                        margin-right : 20px;
+
+                    & svg{ // port-icon
+                        font-size: 18px;
+                        & path{
+                            fill : ${PALETTE.yellow};
+                        }
+                        margin-right : 5px;
                     }}
                 & .textArea{
                     padding-left: 0px;
@@ -267,13 +270,16 @@ S.bookingDetailWrapper = styled.div`
                     align-items: center;
                     margin-bottom: 15px;
                     margin-right:50px;
-                    & img{ // 달 아이콘
-                    width : 27px;
-                    margin-right: 13px;
+                    & svg{ // 달 아이콘
+                    font-size : 22px;
+                     & path{
+                        fill : ${PALETTE.yellow}
+                     }
+                    padding-left : 10px;
                     }
                     & h3{ // 숙박일정
                     font-size: 18px;
-                    margin-left: 3px;
+                    margin-left:14px;
                     }
                 }
                 & .data{
@@ -281,7 +287,7 @@ S.bookingDetailWrapper = styled.div`
                     flex-direction: column;
                     gap:10px; 
                     font-size: 16px;
-                    padding-left: 45px;
+                    padding-left: 44px;
                 & .dat>div>h5{
                     width : 100px;                
                    }
@@ -340,19 +346,21 @@ S.bookingDetailWrapper = styled.div`
                         align-items: center;
                         margin-bottom: 10px;
                         margin-right:50px;
-                        & img{
-                            margin-bottom: 5px;
-                            width : 27px;
-                            margin-right: 13px;
+                        & svg{ 
+                        font-size : 22px;
+                        & path{
+                            fill : ${PALETTE.yellow}
                         }
-                        & h3{
-                            font-size: 18px;
-                            margin-left: 3px;
+                        padding-left : 10px;
                         }
+                    & h3{ 
+                    font-size: 18px;
+                    margin-left:11px;
+                    }
                     }
                     & .data{
                         position: relative;
-                        left : 40px;
+                        left : 43px;
                         & h5{
                             color : ${PALETTE.gray[300]}
                             }
@@ -373,27 +381,31 @@ S.bookingDetailWrapper = styled.div`
                     align-items: center;
                     margin-bottom: 10px;
                     margin-right:50px;
-                    & img{
-                        width : 27px;
-                        margin-right: 13px;
-                        transform : scale(1.3)
+                    & svg{ 
+                    font-size : 22px;
+                     & path{
+                        fill : ${PALETTE.yellow}
+                     }
+                    padding-left : 10px;
                     }
-                    & h3{
-                        font-size: 18px;
-
+                    & h3{ 
+                    font-size: 18px;
+                    margin-left:12px;
                     }
                 }
                 & .data{
                     & .tipList{
-                        padding-left: 40px;
+                        padding-left: 44px;
                         list-style-type : disc;
                         & .tipOne{
                             color : ${PALETTE.gray[300]};
                             margin-bottom: 10px;
                             white-space: pre-line;
+                            /* font-size: 15px; */
                         }
                         & .tipTwo{
                             color : ${PALETTE.gray[300]};
+                            /* font-size: 15px; */
 
                         }
                     }
@@ -428,13 +440,16 @@ S.bookingDetailWrapper = styled.div`
                     align-items: center;
                     margin-bottom: 12px;
                     margin-right:50px;
-                    & img{
-                        width : 27px;
-                        margin-right: 13px;
-                    }
-                    & h3{
-                        font-size: 18px;
-                        margin-left: -1px;
+                    & svg{ 
+                        font-size : 22px;
+                        & path{
+                            fill : ${PALETTE.yellow}
+                        }
+                        padding-left : 10px;
+                        }
+                    & h3{ 
+                    font-size: 18px;
+                    margin-left:14px;
                     }
                 }
                 & .data{
@@ -485,18 +500,21 @@ S.bookingDetailWrapper = styled.div`
                 align-items: center;
                 margin-bottom: 12px;
                 margin-right:50px;
-                & img{
-                    margin-right: 13px;
-                    width : 27px;
-                }
-                & h3{
+                & svg{ 
+                    font-size : 22px;
+                     & path{
+                        fill : ${PALETTE.yellow}
+                     }
+                    padding-left : 6px;
+                    }
+                    & h3{ 
                     font-size: 18px;
-                    margin-left: -1px;
-                }
+                    margin-left:10px;
+                    }
             }
             & p{
                 position: relative;
-                left : 40px;
+                left : 37px;
                 margin:0 5px;
                 letter-spacing: 0.5px;
                 /* word-spacing:-1px; */

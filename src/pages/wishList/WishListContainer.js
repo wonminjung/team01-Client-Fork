@@ -20,7 +20,7 @@ const WishListContainer = () => {
     const [isWished, setIsWished] = useState(null); // 유저가 wishItem이 있는지 여부
     // isWished=null(null은 값이 아직 설정되지 않았음을 의미 => 로딩중 표현)
     // isWished=false(false는 특정 조건이 충족되지 않음을 의미=>모달창 표시 여부 표현)
-    const [isModalOpen, setIsModalOpen] = useState(false); 
+    const [isModalOpen, setIsModalOpen] = useState(true); 
     const [update, setUpdate] = useState(true);
 
 
@@ -57,7 +57,7 @@ const WishListContainer = () => {
         };
         getWishList()
 
-    },[update, userStatus, userId]) // update값이 변경되면 useEffect 재실행!
+    },[update]) // update값이 변경되면 useEffect 재실행!
 
      // 로그인 상태 확인 후 로그인 안된 경우 리디렉션
     if(!userStatus) {
@@ -79,11 +79,11 @@ const WishListContainer = () => {
             {isWished === null ? (
                 <div></div>
             ) : isWished ?  (
-                <WishItemContents rooms={rooms} userId={userId} setUpdate={setUpdate}/> 
+                <WishItemContents rooms={rooms} userId={userId} setUpdate={setUpdate} update={update}/> 
             ): (
                     <div>
                         {/* 찜한 숙소가 없다면 모달창 먼저 띄우기. */}
-                         { !isWished && isModalOpen && (
+                         { !isWished &&  (
                             <Modal showButtons={false}>
                                 <div className='modalDecorate'>
                                     <button  className="closeButton"  onClick={handleModalClose}>X</button>

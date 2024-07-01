@@ -9,7 +9,7 @@ import { useDispatch } from 'react-redux';
 import { setUser } from '../../modules/user';
 
 
-const WishItemContents = ({rooms, userId, setUpdate}) => {
+const WishItemContents = ({rooms, userId, setUpdate, update}) => {
     const [showModal, setShowModal] = useState(false);// 모달의 상태
     const [roomId, setRoomId] = useState(null);// 삭제하기 위해 클릭한 하트의 해당 룸 아이템의 상태
     const navigate = useNavigate();
@@ -27,6 +27,7 @@ const WishItemContents = ({rooms, userId, setUpdate}) => {
     const clickConfirmRemove = () => {
         handleConfirmRemove();
     }
+    
     const handleConfirmRemove = async( ) => {
                 try{
                     const response = await fetch(`http://localhost:8000/room/updateWishList`,
@@ -46,7 +47,7 @@ const WishItemContents = ({rooms, userId, setUpdate}) => {
                         const updatedRooms = await response.json();
                         dispatch(setUser(updatedRooms.user));
 
-                        setUpdate(false)
+                        setUpdate(update ? false : true); // 업데이트 될때마다 update값 변경시켜야 화면에서 바뀜
                         navigate('/wishList') 
                      }else{
                         const errorData = await response.json();
