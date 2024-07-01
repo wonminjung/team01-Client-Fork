@@ -38,17 +38,16 @@ const slideButtonHoverStyle = css`
     }
 `;
 
+
 const S = {};
     /** CardListContainer.js 파일 스타일 섹션*/
 
     // 검색결과 페이지 왼쪽 컨테이너 디자인
     S.CardListContainer = styled.div`
         flex: 60%;
-        /* height: calc(100vh - 310px); */
         height: calc(100vh - 180px);
         overflow: hidden;
         overflow-y: scroll;
-
 
         /* 스크롤바 디자인 */
         &::-webkit-scrollbar {
@@ -62,13 +61,13 @@ const S = {};
             &:hover {
                 background: ${theme.PALETTE.yellow};
             }
+
         }
         
         &::-webkit-scrollbar-track {
             border-radius: 12px;
             background: ${theme.PALETTE.gray[100]};
         }
-        
     `;
 
     S.SideMarginWrapper = styled.div`
@@ -116,6 +115,7 @@ const S = {};
             .swiper-button-disabled {
                 display: none;
             }
+
         }
     `;
 
@@ -187,6 +187,7 @@ const S = {};
                 ${slideButtonAfterStyle};
                 transform: translate(-10%, 3.5%);
             }
+
             /* 마우스 오버시 디자인 */
             &:hover {
                 ${slideButtonHoverStyle};
@@ -209,6 +210,7 @@ const S = {};
             &:hover {
                 ${slideButtonHoverStyle};
             }
+            
         }
 
         /* 슬라이드 버튼 비활성화 */

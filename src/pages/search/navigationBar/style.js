@@ -4,6 +4,8 @@ import { Swiper, SwiperSlide } from 'swiper/react';
 import theme from "../../../global/theme";
 import BasicButton from "../../../components/button/BasicButton";
 
+
+
 // 해당 파일에서 여러번 쓰여서 만든 공용 스타일
 const navSlideButtonStyle = css`
     width: 60px;
@@ -43,6 +45,7 @@ const slideButtonHoverStyle = css`
         color: white;
     }
 `;
+
 
 const S = {};
     /** NavSwiperContainer.js 파일 스타일 섹션*/ 

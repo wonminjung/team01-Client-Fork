@@ -28,6 +28,9 @@ const SearchMainContainer = ({ searchParams, setSearchParams, currentPage, setCu
 
     const now = new Date().toLocaleDateString().split(" ").join("");
 
+    // 페이지 당 보일 숙소 총 개수
+    const contentPerPage = 18;
+
     
     const cate = searchParams.get("cate") ?? "searchResult";
     const lPrice = searchParams.get("lPrice") ?? 0;
@@ -70,7 +73,7 @@ const SearchMainContainer = ({ searchParams, setSearchParams, currentPage, setCu
                     setRoomsCount(res.roomsCount);
 
                     // 페이지 당 표시할 숙소로 나눠서 최대 페이지 설정
-                    setMaxPage(Math.floor(res.roomsCount / (18 + 1) + 1));
+                    setMaxPage(Math.floor(res.roomsCount / (contentPerPage + 1) + 1));
                     // body 스크롤 초기화
                     window.scrollTo({ top: 0, behavior: "smooth" });
                 }

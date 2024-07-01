@@ -20,6 +20,7 @@ const NavSwiperComponents = (props) => {
         navigate(`/search?cate=${data.cate}`);
     };
     
+    
     // URL에 cate 변경될 때마다 실행
     useEffect(() => {
         if (data.cate === cate) {

@@ -1,7 +1,6 @@
-import styled, { css } from 'styled-components';
+import styled from 'styled-components';
 import theme from '../../../../global/theme';
 import BasicButton from '../../../../components/button/BasicButton';
-import KakaoMap from '../../../../components/kakaomap/KakaoMap';
 
 const S = {};
 
@@ -179,75 +178,99 @@ const S = {};
                 height: 15px;
                 object-fit: cover;
             }
-            &.user::before{
+
+            &.user::before {
                 content: url("./images/pages/detail/user.svg");
             }
-            &.room::before{
+
+            &.room::before {
                 content: url("./images/pages/detail/house.svg");
             }
-            &.bed::before{
+            
+            &.bed::before {
                 content: url("./images/pages/detail/bed-single.svg");
             }
-            &.bath::before{
+
+            &.bath::before {
                 content: url("./images/pages/detail/bath.svg");
             }
-            &.picture::before{
+
+            &.picture::before {
                 content: url("./images/pages/detail/image.svg");
             }
-            &.wifi::before{
+
+            &.wifi::before {
                 content: url("./images/pages/detail/wifi-full.svg");
             }
-            &.tv::before{
+
+            &.tv::before {
                 content: url("./images/pages/detail/tv.svg");
             }
-            &.car::before{
+
+            &.car::before {
                 content: url("./images/pages/detail/car.svg");
             }
-            &.pool::before{
+
+            &.pool::before {
                 content: url("./images/pages/detail/pool.svg");
             }
+
             &.time::before{
                 content: url("./images/pages/detail/clock.svg");
             }
+
             &.check::before{
                 content: url("./images/pages/detail/credit-card.svg");
             }
+
             &.users::before{
                 content: url("./images/pages/detail/users.svg");
             }
+
             &.pet::before{
                 content: url("./images/pages/detail/paw.svg");
             }
+
             &.moon::before{
                 content: url("./images/pages/detail/moon.svg");
             }
+
             &.photo::before{
                 content: url("./images/pages/detail/camera.svg");
             }
+
             &.memo::before{
                 content: url("./images/pages/detail/text-document.svg");
             }
+
             &.trash::before{
                 content: url("./images/pages/detail/bin.svg");
             }
+
             &.lock::before{
                 content: url("./images/pages/detail/bag.svg");
             }
+
             &.off::before{
                 content: url("./images/pages/detail/power.svg");
             }
+
             &.note::before{
                 content: url("./images/pages/detail/note.svg");
             }
+
             &.caution::before{
                 content: url("./images/pages/detail/Combined Shape.svg");
             }
+
             &.eye::before{
                 content: url("./images/pages/detail/eye.svg");
             }
+
             &.bell::before{
                 content: url("./images/pages/detail/bell.svg");
             }
+
         }
         
         & > li {
@@ -262,8 +285,8 @@ const S = {};
                 line-height: 18px;
                 
             }
-        }
 
+        }
     `;
 
     S.MapContainer = styled.div`

@@ -8,7 +8,6 @@ import 'swiper/css/pagination';
 
 import { Navigation, Pagination } from 'swiper/modules';
 import HeartButton from '../../../../components/heartbutton/HeartButton';
-// import { useSelector } from 'react-redux';
 import { useNavigate } from 'react-router-dom';
 import { useDispatch } from 'react-redux';
 import { setUser } from '../../../../modules/user';
@@ -45,8 +44,10 @@ const CardListComponents = ({ cardList, setClickRoom, currentUser, isLogin }) =>
         let updatedWish = [];
         
         if (bool) {
+            // 위시리스트에 있는 숙소의 하트버튼을 클릭해서 위시리스트에서 제거
             updatedWish = currentWishList.filter((roomId) => roomId !== _id);
         } else {
+            // 위시리스트에 추가
             updatedWish = [...currentWishList, _id];
         }
         
@@ -59,7 +60,6 @@ const CardListComponents = ({ cardList, setClickRoom, currentUser, isLogin }) =>
                 body: JSON.stringify(
                     {
                         _id: currentUser._id,
-                        // roomId: _id
                         wishList: updatedWish,
                     }
                 )
@@ -80,8 +80,8 @@ const CardListComponents = ({ cardList, setClickRoom, currentUser, isLogin }) =>
         }
         
         if (isWishList) {
+            // 이미 위시리스트에 있는데 클릭한 경우
             if(currentWishList!==undefined && Object.keys(currentUser).length!==0) {
-                // 이미 위시리스트에 있는데 클릭한 경우
                 updateWish(isWishList)
                     .then((res) => {
                         dispatch(setUser(res.user));
@@ -89,8 +89,8 @@ const CardListComponents = ({ cardList, setClickRoom, currentUser, isLogin }) =>
                     });
             }
         } else {
+            // 위시리스트에 없는데 클릭한 경우
             if(currentWishList!==undefined && Object.keys(currentUser).length!==0) {
-                // 위시리스트에 없는데 클릭한 경우
                 updateWish(isWishList)
                     .then((res) => {
                         dispatch(setUser(res.user));
@@ -98,10 +98,11 @@ const CardListComponents = ({ cardList, setClickRoom, currentUser, isLogin }) =>
                     });
             }
         }
+        
     };
 
 
-    // _id 변경될 때마다 로그인 한 사용자의 위시리스트 목록에 있는 숙소인지 비교
+    // room_id 변경될 때마다 로그인 한 사용자의 위시리스트 목록에 있는 숙소인지 비교
     useEffect(() => {
         if (isLogin) {
             // 현재 로그인 한 유저의 WishList(roomId)와 현재 cardList의 _id값을 비교하여 isWishList 상태 변경

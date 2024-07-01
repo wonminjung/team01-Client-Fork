@@ -7,6 +7,7 @@ import { FontAwesomeIcon } from '@fortawesome/react-fontawesome';
 const PaginationComponents = ({ currentPage, setCurrentPage, maxPage }) => {
 
     let pageNumber = [];
+    // 배열에 1 ~ maxPage까지 채워넣기
     for (let i = 0; i < maxPage; i++) {
         pageNumber[i] = i + 1;
     }
@@ -35,6 +36,8 @@ const PaginationComponents = ({ currentPage, setCurrentPage, maxPage }) => {
         }
     };
 
+
+    
     return (
         <S.pageNumberContaner>
             <S.PrevButton onClick={prevClickEvent} className={currentPage === firstPage ? "prevDisabled" : ""}>

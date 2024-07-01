@@ -1,6 +1,8 @@
 import styled from 'styled-components'
 import theme from '../../../global/theme';
 
+
+
 const S = {};
 
     S.SearchMainContainer = styled.div`
@@ -30,8 +32,6 @@ const S = {};
             color: ${theme.PALETTE.gray[200]};
         }
     `;
-
-
 
 
 
@@ -65,7 +65,6 @@ const S = {};
         background-color: #fff;
         box-shadow: 0 6px 10px rgba(0,0,0,0.15);
         
-
         & .filterHeader {
             text-align: center;
             position: relative;
@@ -88,15 +87,16 @@ const S = {};
             }
         }
 
-
         & .filterListBox {
             
             padding: 20px 15px 15px;
             height: calc(100vh - 414px);
             overflow-y: scroll;
+
             &::-webkit-scrollbar{
                 width: 6px;
             }
+
             &::-webkit-scrollbar-thumb{
                 background: ${theme.PALETTE.yellow};
                 border-radius: 3px;
@@ -115,41 +115,51 @@ const S = {};
                     font-weight: bold;
                     margin-bottom: 40px;
                 }
+
                 & .range-slider{
                         height: 5px;
                         width: 400px;
                 }
+
                 & .range-slider .range-slider__thumb{
                     width: 20px;
                     height: 20px;
                 }
+
                 & .range-slider-yellow {
                     background: url("data:image/svg+xml,%3Csvg width='30' height='30' viewBox='0 0 40 40' xmlns='http://www.w3.org/2000/svg'%3E%3Cg fill='%ffff' fill-rule='evenodd'%3E%3Cpath d='M0 40L40 0H20L0 20M40 40V20L20 40'/%3E%3C/g%3E%3C/svg%3E")#ddd;
                 }
+
                 & .range-slider-yellow .range-slider__range {
                     background: #ffbf00;
                     transition: height 0.3s;
                 }
+
                 & .range-slider-yellow .range-slider__thumb {
                     background: #faa307;
                     transition: transform 0.3s;
                 }
+
                 & .range-slider-yellow .range-slider__thumb[data-active] {
                     transform: translate(-50%, -50%) scale(1.1);
                 }
+
                 & .range-slider-yellow .range-slider__range[data-active] {
                     height: 5px;
                 }
+
                 & .priceText{
                     padding-top: 30px;
                     display: flex;
                     width: 400px;
                     justify-content: space-between;
                     align-items: center;
+                    
                     &>div{
                         position: relative;
                         display: flex;
                         flex-direction: column;
+
                         &::before{
                             content: '￦';
                             position: absolute;
@@ -159,12 +169,15 @@ const S = {};
                             font-size: 14px;
                             color: ${theme.PALETTE.gray[300]};
                         }
+
                         & span{
                             font-size: 14px;
                             display: inline-block;
                             height: 22px;
                         }
+
                     }
+
                     & input{
                         width: 140px;
                         border: none;
@@ -183,35 +196,43 @@ const S = {};
             }
 
             & .roomFilter{
+
                 & h6{
                     width: 100%;
                     font-size: 20px;
                     font-weight: bold;
                     margin-bottom: 30px;
                 }
+
                 & .filterList{
+
                     & ul{
                         & li{
                             margin-bottom: 20px;
+
                             & p{
                                 display: flex;
                                 align-items: center;
                                 margin-bottom: 10px;
                                 color: ${theme.PALETTE.black};
+
                                 & svg{
                                     margin-right: 5px;
                                     font-size: 16px;
+
                                     & path{
                                         fill: ${theme.PALETTE.yellow}
                                     }
                                 }
                             }
-                            & .numberBtnBox{
+
+                            & .numberBtnBox {
                                 display: flex;
                                 justify-content: space-between;
                                 align-items: center;
                                 width: 100%;
-                                & input[type=radio]{
+
+                                & input[type=radio] {
                                     appearance: none;
                                     display: flex;
                                     justify-content: center;
@@ -224,15 +245,18 @@ const S = {};
                                     cursor: pointer;
                                     font-size: 14px;
                                     transition: 0.2s;
-                                    &::before{
+
+                                    &::before {
                                         content: attr(label);
                                         color: ${theme.PALETTE.gray[300]};
                                         transition: 0.2s;
                                     }
                                 }
-                                & input[type=radio]:checked{
+
+                                & input[type=radio]:checked {
                                     border: 1px solid ${theme.PALETTE.yellow};
                                     background-color: ${theme.PALETTE.yellow};
+
                                     &::before{
                                         color: #fff;
                                     }
@@ -244,38 +268,42 @@ const S = {};
             }
         }
 
-        & .bottomBox{
+        & .bottomBox {
             display: flex;
             justify-content: space-between;
             align-items: center;
             border-top: 1px solid ${theme.PALETTE.gray[200]};
-            &>div{
+
+            &>div {
                 & button{
                     padding: 20px 20px;
                     color: ${theme.PALETTE.black}
                 }
             }
-            & .filterRemoveBox{
+
+            & .filterRemoveBox {
                 & button{
                     border: none;
                     background-color: transparent;
                     cursor: pointer;
                 }
             }
-            & .filterSubmitBox{
+
+            & .filterSubmitBox {
                 padding-right: 6px;
+
                 & button{
                     padding: 12px 20px;
                     height: inherit;
                     width: inherit;
                     border-radius: 15px;
+
                     &:hover{
                         color: #fff;
                     }
                 }
             }
         }
-        
     `;
 
 
