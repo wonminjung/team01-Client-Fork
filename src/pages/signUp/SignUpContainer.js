@@ -33,14 +33,89 @@ const SignUpContainer = () => {
     const passwordRegex = /^(?=.*\d)(?=.*[a-z])(?=.*[!@#])[\da-zA-Z!@#]{8,}$/;
     const phoneRegex = /^01([0|1|6|7|8|9])-[0-9]{4}-[0-9]{4}$/;
 
-
-    // 주소 input 레퍼런스
-    // const addressInputRef = useRef(null);
-
     // 주소 상태 관리
     const [address, setAddress] = useState('');
 
-    // const currentUser = useSelector((state)=>state.user.currentUser);
+    
+    // 이메일 중복확인
+    async function checkEmail(e) {
+
+        // submission 되지 않도록
+        e.preventDefault();
+        // 추가된 코드, 이메일 값을 가져오기
+        const emailValue = getValues('email');
+
+        const result = await checkEmailInfo({ email: emailValue });
+        if (result.message) {
+            result.message = "이미 존재하는 이메일입니다";
+            alert(result.message);
+        } else {
+            result.message = "사용할 수 있는 이메일입니다";
+            alert(result.message);
+        }
+
+    }
+
+    
+    // 유저아이디 중복확인
+    async function checkUserId(e) {
+
+        // submission 되지 않도록
+        e.preventDefault();
+        // 추가된 코드, 이메일 값을 가져오기
+        const userIdValue = getValues('userId');
+    
+        const result = await checkUserIdInfo({ userId: userIdValue });
+        if (result.message) {
+            alert("이미 존재하는 아이디입니다");
+        } else {
+            alert("사용할 수 있는 아이디입니다");
+        }
+    
+    }
+    
+
+    // 이메일 중복 확인 fetch
+    const checkEmailInfo = async (props) => {
+        console.log(props)
+        try{
+            const response = await fetch("http://localhost:8000/user/checkEmail", {
+                method : "POST",
+                body : JSON.stringify(props),
+                headers : {
+                    "Content-Type" : "application/json; charset=utf-8"
+                },
+            })
+            // 주석된 코드
+            const message = await response.json();
+            console.log(message)
+            return message
+        }catch(error){
+            console.log(error)
+        }
+    }
+
+
+    
+    // 유저아이디 중복 확인 fetch
+    const checkUserIdInfo = async (props) => {
+        console.log(props)
+        try{
+            const response = await fetch("http://localhost:8000/user/checkUserId", {
+                method : "POST",
+                body : JSON.stringify(props),
+                headers : {
+                    "Content-Type" : "application/json; charset=utf-8"
+                },
+            })
+            const result = await response.json();
+            return result;
+        }catch(error){
+            console.log(error)
+        }
+    }
+    
+
 
 
     return (
@@ -78,19 +153,31 @@ const SignUpContainer = () => {
                 <S.LogoImage src="./images/pages/layout/logo.svg" alt="eggbnb"></S.LogoImage>
                 
                 {/* 유저아이디 */}
-                <S.Label>
-                    <S.Input
+                <S.Label htmlFor='userId'>
+                    <S.TypeTwoContainer>
+                        <S.TypeTwoInput
+                            type="text" id="userId"
+                            placeholder='아이디'
+                            {...register('userId', {
+                                required : true,
+                                
+                            })}
+                        />
+                        <S.LittleButtonBox>
+                            <S.LittleButton onClick={checkUserId}>중복확인</S.LittleButton>
+                        </S.LittleButtonBox>
+                    </S.TypeTwoContainer>
+                    {/* <S.Input
                         type="text" id="userId"
                         placeholder='아이디'
                         {...register('userId', {
                             required : true,
                             
                         })}
-                    />
+                    /> */}
                     {errors?.userId?.type === 'required' && (
                         <S.ConfirmMessage>아이디를 입력해주세요</S.ConfirmMessage>
                     )}
-
                 </S.Label>
 
                 {/* 이름 */}
@@ -109,17 +196,21 @@ const SignUpContainer = () => {
 
                 </S.Label>
 
-                {/* 이메일 */}
                 <S.Label htmlFor='email'>
-                    <S.Input
-                        type="text" id="email" placeholder='이메일 주소'
-                        {...register('email', {
-                            required : true,
-                            pattern : {
-                                value : emailRegex
-                            }
-                        })}
-                    />
+                    <S.TypeTwoContainer>
+                        <S.TypeTwoInput
+                            type="text" id="email" placeholder='이메일 주소'
+                            {...register('email', {
+                                required : true,
+                                pattern : {
+                                    value : emailRegex
+                                }
+                            })}
+                        />
+                        <S.LittleButtonBox>
+                            <S.LittleButton onClick={checkEmail}>중복확인</S.LittleButton>
+                        </S.LittleButtonBox>
+                    </S.TypeTwoContainer>
                     {errors?.email?.type === 'required' && (
                         <S.ConfirmMessage>이메일을 입력해주세요</S.ConfirmMessage>
                     )}
@@ -193,29 +284,22 @@ const SignUpContainer = () => {
 
                 {/* 주소 */}
                 <S.Label>
-                    <S.Input
-                        type="text" id="address"
-                        placeholder='주소' value={address} readOnly
-                        {...register('address', {
-                            required : false,
-                            
-                        })}
-                        // ref={addressInputRef}
-                    />
-                    <S.MyPageContainer>
-                        <div className='infoWrapper'>
-                            <InfoBox setAddress={setAddress} info={currentUser}/>
-                        </div>
-                    </S.MyPageContainer>
+                    <S.TypeTwoContainer>
+                        <S.TypeTwoInput
+                            type="text" id="address"
+                            placeholder='주소' value={address} readOnly
+                            {...register('address', {
+                                required: false,
+                            })}
+                        />
+                        <S.MyPageContainer>
+                            <div className='infoWrapper'>
+                                <InfoBox setAddress={setAddress} info={currentUser} />
+                            </div>
+                        </S.MyPageContainer>
+                    </S.TypeTwoContainer>
                 </S.Label>
 
-
-
-                {/* 약관동의 */}
-                <S.Label>
-                    
-
-                </S.Label>
 
                 {/* submit 버튼 */}
                 <S.Button disabled={isSubmitting}>회원가입</S.Button>
