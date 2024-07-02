@@ -14,13 +14,13 @@ const BookingListContainer = () => {
     ScrollEvent();
 
 
-    const userStatus = useSelector((state) => state.user.isLogin); //useSelector 훅을 사용하여 로그인 상태를 확인
+    const userStatus = useSelector((state) => state.user.isLogin); //useSelector 훅을 사용하여 리덕스로 관리중인 로그인 상태를 확인
     const userObjectId = useSelector((state) => state.user.currentUser._id); // 현재 로그인한 유저의 ObjecId(_id)
     const [isReserved, setIsReserved] = useState(null); // 유저가 예약한 숙소가 있는지 여부 상태
     const [activeIndex, setActiveIndex] = useState(null); // 열린 아코디언 패널의 인덱스를 저장하는 상태(null은 패널이 열리지 않은 상태)
     const [itemData, setItemData] = useState([]);
 
-    console.log(userObjectId);
+    // console.log(userObjectId);
        
     useEffect(() => {        
         const getBookingList = async () => {
