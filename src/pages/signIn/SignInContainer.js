@@ -29,7 +29,9 @@ const SignInContainer = () => {
             <S.SignInWrapper>
                 <S.Title>{currentUser.name}님 환영합니다!</S.Title>
                 <S.WelcomImage src="./images/pages/signIn/welcome.gif" alt="welcome"></S.WelcomImage>
-                <Link to='/'><S.LogoImageLittle src="./images/pages/layout/logo.svg" alt="eggbnb"></S.LogoImageLittle></Link>
+                {/* <Link to='/'><S.LogoImageLittle src="./images/pages/layout/logo.svg" alt="eggbnb"></S.LogoImageLittle></Link> */}
+            
+                <Link to='/'><S.Button>홈으로</S.Button></Link>
             </S.SignInWrapper>
             
         )
@@ -110,12 +112,6 @@ const SignInContainer = () => {
 
             </S.Form>
 
-            {/* 네이버, 카카오, 애플 버튼 */}
-            <S.Ul>
-                <li><Link to='https://nid.naver.com/nidlogin.login?mode=form&url=https://www.naver.com/'><S.Subtitle><S.IconImage src="./images/pages/signIn/naverIcon.png" alt="naverIcon"/></S.Subtitle></Link></li>
-                <li><Link to='https://accounts.kakao.com/login/?continue=https%3A%2F%2Faccounts.kakao.com%2Fweblogin%2Faccount#login'><S.Subtitle><S.IconImage src="./images/pages/signIn/kakaoIcon.png" alt="kakaoIcon"/></S.Subtitle></Link></li>
-                <li><Link to='https://appleid.apple.com/sign-in'><S.Subtitle><S.IconImage src="./images/pages/signIn/appleIcon.png" alt="appleIcon"/></S.Subtitle></Link></li>
-            </S.Ul>
 
         </S.SignInWrapper>
     );
