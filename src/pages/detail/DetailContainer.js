@@ -61,7 +61,7 @@ const DetailContainer = () => {
                         starAvr={starAvr}
                         setpopup1State={setpopup1State}
                     />
-                    <RightContentBox id={_id} dayPrice={dayPrice} cleanVat={cleanVat} roomSchedule={roomSchedule}/>
+                    <RightContentBox room={room}/>
                 </S.DetailContentBox>
                 <DetailGradeBox comment={comment}/>
                 <DetailCommentBox 
