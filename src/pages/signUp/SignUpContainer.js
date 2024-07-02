@@ -1,12 +1,26 @@
-import React from 'react';
+import React, { useRef, useState } from 'react';
 import S from './style';
-import { Link, useNavigate } from 'react-router-dom';
+import { Link, Navigate, useNavigate } from 'react-router-dom';
 import {useForm} from 'react-hook-form';
 import RemoveHeader from '../layout/RemoveHeader';
+import InfoBox from './InfoBox';
+import { useSelector } from 'react-redux';
+import ScrollEvent from '../layout/ScrollEvent';
 
 const SignUpContainer = () => {
 
-    RemoveHeader()
+    RemoveHeader();
+    ScrollEvent();
+
+    const currentUser = useSelector((state)=>state.user.currentUser);
+    const userStatus = useSelector((state)=>state.user.isLogin);
+    // 현재 로그인 상태를 확인하여 아닌 경우
+    if(userStatus){
+        // replace 왔던 기록을 없애버린다. history
+        alert("로그아웃 상태여야 합니다")
+        // return <Navigate to={"/signIn"} replace={true}/>
+    }
+    // console.log(currentUser)
 
     // 회원가입 완료 시 로그인 페이지로 바로 이동시켜주기 위해
     const navigate = useNavigate();
@@ -17,6 +31,17 @@ const SignUpContainer = () => {
 
     const emailRegex = /^[a-zA-Z0-9.!#$%&'*+/=?^_`{|}~-]+@[a-zA-Z0-9-]+(?:\.[a-zA-Z0-9-]+)*$/;
     const passwordRegex = /^(?=.*\d)(?=.*[a-z])(?=.*[!@#])[\da-zA-Z!@#]{8,}$/;
+    const phoneRegex = /^01([0|1|6|7|8|9])-[0-9]{4}-[0-9]{4}$/;
+
+
+    // 주소 input 레퍼런스
+    // const addressInputRef = useRef(null);
+
+    // 주소 상태 관리
+    const [address, setAddress] = useState('');
+
+    // const currentUser = useSelector((state)=>state.user.currentUser);
+
 
     return (
         <S.SignUpWrapper>
@@ -144,18 +169,6 @@ const SignUpContainer = () => {
 
                 </S.Label>
 
-                {/* 주소 */}
-                <S.Label>
-                    <S.Input
-                        type="text" id="address"
-                        placeholder='주소'
-                        {...register('address', {
-                            required : false,
-                            
-                        })}
-                    />
-                </S.Label>
-
                  {/* 핸드폰 번호 */}
                  <S.Label>
                     <S.Input
@@ -163,14 +176,39 @@ const SignUpContainer = () => {
                         placeholder='핸드폰 번호(-포함)'
                         {...register('phone', {
                             required : true,
+                            pattern : {
+                                value : phoneRegex
+                            }
                             
                         })}
                     />
                     {errors?.phone?.type === 'required' && (
                         <S.ConfirmMessage>핸드폰 번호를 입력해주세요</S.ConfirmMessage>
                     )}
+                    {errors?.phone?.type === 'pattern' && (
+                        <S.ConfirmMessage>핸드폰 양식에 맞게 입력해주세요</S.ConfirmMessage>
+                    )}
 
                 </S.Label>
+
+                {/* 주소 */}
+                <S.Label>
+                    <S.Input
+                        type="text" id="address"
+                        placeholder='주소' value={address} readOnly
+                        {...register('address', {
+                            required : false,
+                            
+                        })}
+                        // ref={addressInputRef}
+                    />
+                    <S.MyPageContainer>
+                        <div className='infoWrapper'>
+                            <InfoBox setAddress={setAddress} info={currentUser}/>
+                        </div>
+                    </S.MyPageContainer>
+                </S.Label>
+
 
 
                 {/* 약관동의 */}
