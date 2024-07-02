@@ -113,6 +113,57 @@ S.InputRadio = styled.input`
         }
     `;
 
+S.TypeTwoContainer = styled.div`
+    display: flex;
+    align-items: center;
+`;
+S.TypeTwoInput = styled.input`
+    /* flex: 1;
+    padding: 0.5rem;
+    margin-right: 0.5rem;
+    border: 1px solid #ddd;
+    border-radius: 4px; */
+
+        width: 400px;
+        height: 60px;
+        padding: 0 20px;
+        border: 1px solid #6A6A6A; 
+        border-radius: 20px;
+        outline: none;
+
+        &:focus {
+            border: 1px solid #F2AC29;
+        }
+
+        &:disabled {
+            border: none;
+            background-color: #F7F7F7;
+            color: #6A6A6A;
+        }
+`;
+
+S.LittleButtonBox = styled.div`
+    display: flex;
+    flex-direction: column;
+    padding: 0px 0 0 10px;
+`
+
+S.LittleButton = styled.button`
+    width: 120px;
+    height: 60px;
+    padding: 10px 0;
+    font-size: 16px;
+    border: 1px solid ${PALETTE.yellow};
+    color: ${PALETTE.yellow};
+    border-radius: 20px;
+    background-color: #fff;
+    transition: 0.3s;
+    cursor: pointer;
+    &:hover{
+        color: #fff;
+        background-color: ${PALETTE.yellow};
+    }
+`
 
 S.InfoBox = styled.div`
     display: block;
@@ -124,6 +175,7 @@ S.InfoBox = styled.div`
         justify-content: space-between;
         align-items: center;
         /* padding: 30px 0; */
+        padding: 0px 0 0 10px;
         &:first-child{
             padding-top: 0;
         }
@@ -145,28 +197,33 @@ S.InfoBox = styled.div`
             }
             &:last-child{
                 & button{
-                    background-color: transparent;
-                    border: 0;
-                    text-decoration: underline;
-                    font-weight: bold;
-                    font-size: 14px;
-                    color: ${PALETTE.black};
+                    width: 120px;
+                    height: 60px;
+                    padding: 10px 0;
+                    font-size: 16px;
+                    border: 1px solid ${PALETTE.yellow};
+                    color: ${PALETTE.yellow};
+                    border-radius: 20px;
+                    background-color: #fff;
+                    transition: 0.3s;
                     cursor: pointer;
-                    padding: 10px;
+                    &:hover{
+                        color: #fff;
+                        background-color: ${PALETTE.yellow};
+                    }
                 }
             }
         }
     }
 `
 
-
 S.MyPageContainer = styled.div`
-    position: relative;
-    width: 100%;
-    max-width: 1180px;
-    margin: 0 auto;
+    /* position: relative; */
+    width: 0%;
+    /* max-width: 1180px; */
+    /* margin: 0 auto; */
     /* padding: 0px; */
-    min-height: calc(100vh - 1000px);
+    /* min-height: calc(100vh - 1000px); */
     & .next-button {
         position: relative;
         float: left;

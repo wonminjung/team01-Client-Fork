@@ -24,6 +24,7 @@ const InfoBox = ({setAddress, info}) => {
     // 모달 input 레퍼런스
     const inputRef = useRef(null);
 
+
     // 우편번호 모달창 state
     const [postModal, setPostModal] = useState(false);
     // 우편번호 input 레퍼런스
@@ -37,6 +38,7 @@ const InfoBox = ({setAddress, info}) => {
     }
     // fetch로 보낼 body정보 state
     const [modify, setModify] = useState([{_id : _id}, {}]);
+
 
 
     // 주소수정 이벤트
