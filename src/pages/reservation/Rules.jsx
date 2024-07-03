@@ -17,9 +17,6 @@ const Rules = () => {
                 </ul>
             </h4>
             <S.CategoryBorder />
-            <h5>
-                버튼을 선택하면 <underline>예약 약관</underline>에 동의하시게 됩니다.
-            </h5>
         </S.CategoryBox>
     );
 };

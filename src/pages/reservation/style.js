@@ -31,15 +31,15 @@ S.ReservationContainer = styled.div`
         font-size: 12px;
         margin-bottom: 10px;
     }
-    & div {
-        position: relative;
-        & button {
-            position: absolute;
-            left: 410px;
-            top: 0px;
-        }
-    }
-    & .prev-button {
+    // & div {
+    //     position: relative;
+    //     & button {
+    //         position: absolute;
+    //         left: 410px;
+    //         top: 0px;
+    //     }
+    // }
+    & .prevButton {
         position: relative;
         float: left;
         border: 1px solid #fff;
@@ -47,7 +47,7 @@ S.ReservationContainer = styled.div`
         height: 28px;
         margin-right: 5px;
     }
-    & .prev-button::after {
+    & .prevButton::after {
         position: absolute;
         left: 12px;
         top: 8px;
@@ -58,7 +58,7 @@ S.ReservationContainer = styled.div`
         border-right: 2px solid #000; /* 선 두께 */
         transform: rotate(225deg); /* 각도 */
     }
-    & .body-top {
+    & .bodyTop {
         margin: 20px auto;
         width: 1080px;
     }
@@ -68,6 +68,10 @@ S.ReservationContainer = styled.div`
         align-items: flex-start;
         width: 1080px;
         margin: 0 auto;
+    }
+    & underline {
+        text-decoration: underline;
+        width: 100%;
     }
 `
 S.SideBox = styled.div`
@@ -132,6 +136,12 @@ S.SideBox = styled.div`
         }
     }
 `
+
+/* Charge.jsx */
+S.CardInfo = styled.div`
+    border: 1px solid ${theme.PALETTE.gray[200]};
+`
+
 S.CategoryBox = styled.div`
     display: block;
     margin: 0 0 50px;
@@ -142,10 +152,6 @@ S.CategoryBox = styled.div`
     & strong {
         display: inline;
         font-weight: bold;
-        width: 100%;
-    }
-    & underline {
-        text-decoration: underline;
         width: 100%;
     }
 `

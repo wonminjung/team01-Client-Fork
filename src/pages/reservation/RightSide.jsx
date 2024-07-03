@@ -1,7 +1,7 @@
 import React from 'react'
 import S from './style'
 
-const RightSide = () => {
+const RightSide = ({days}) => {
     // fetch()
     const contentData = [
         {
@@ -154,7 +154,7 @@ const RightSide = () => {
                     <h3>요금 세부정보</h3>
                 </div>
                 <div>
-                    <h4>₩307,400 x 5박</h4>
+                    <h4>₩307,400 x {days}박</h4>
                     <h4>₩1,537,000</h4>
                 </div>
                 <div>
@@ -166,7 +166,7 @@ const RightSide = () => {
             </div>
             <div>
                 <div>
-                    <h4 className='h4Strong'>총 합계 (KRW)</h4>
+                    <h4 className='h4Strong'>총 합계<underline>(KRW)</underline></h4>
                     <h4 className='h4Strong'>₩1,537,000</h4>
                 </div>
             </div>
