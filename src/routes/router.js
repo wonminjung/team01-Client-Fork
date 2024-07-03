@@ -12,6 +12,9 @@ import SearchContainer from "../pages/search/SearchContainer";
 import SignInContainer from "../pages/signIn/SignInContainer";
 import SignUpContainer from "../pages/signUp/SignUpContainer";
 import WishListContainer from "../pages/wishList/WishListContainer";
+import Checkout from "../pages/reservation/Checkout";
+import Success from "../pages/reservation/Success";
+import Fail from "../pages/reservation/Fail";
 
 
 const router = createBrowserRouter([
@@ -37,7 +40,19 @@ const router = createBrowserRouter([
             },
             {
                 path: '/reservation',
-                element: <ReservationContainer />
+                element: <ReservationContainer />,
+            },
+            {
+                path: '/reservation/checkout',
+                element: <Checkout />,
+            },
+            {
+                path: '/reservation/checkout/success',
+                element: <Success />,
+            },
+            {
+                path: '/reservation/checkout/fail',
+                element: <Fail />,
             },
             {
                 path: '/search',
