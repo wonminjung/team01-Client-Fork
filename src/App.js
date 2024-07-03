@@ -9,12 +9,14 @@ import GlobalStyle from './global/global';
 import { useDispatch, useSelector } from 'react-redux';
 import { useEffect } from 'react';
 import { setUser, setUserStatus } from './modules/user';
+import { QueryClient,QueryClientProvider } from "@tanstack/react-query";
 
 function App() {
 
   const currentUser = useSelector((state) => state.user.currentUser);
   const userStatus = useSelector((state) => state.user.userStatus);
   const dispatch = useDispatch();
+  const queryClient = new QueryClient();
 
   // 최초 1번 토큰의 여부 검증
   useEffect(()=>{
@@ -47,10 +49,12 @@ function App() {
 
   return (
     <>
-      <ThemeProvider theme={theme}>
-        <RouterProvider router={router} />
-        <GlobalStyle />
-      </ThemeProvider>
+      <QueryClientProvider client={queryClient}>
+        <ThemeProvider theme={theme}>
+          <RouterProvider router={router} />
+          <GlobalStyle />
+        </ThemeProvider>
+      </QueryClientProvider>
     </>
   );
 }

@@ -4,7 +4,7 @@ import S from './style';
 const PrevButton = () => {
     
     return (
-        <div className='prev-button' />
+        <div className='prevButton' />
     );
 };
 
