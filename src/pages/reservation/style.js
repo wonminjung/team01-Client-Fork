@@ -123,6 +123,9 @@ S.SideBox = styled.div`
         & h4 {
             display: inline-block;
         }
+        & .h4Strong {
+            color: ${theme.PALETTE.yellow};
+        }
         & .imgBox {
             width: 100px;
             height: 100px;

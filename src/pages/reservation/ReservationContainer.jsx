@@ -1,4 +1,4 @@
-import React, { useEffect } from 'react';
+import React, { useEffect, useState } from 'react';
 import S from './style';
 import LeftSide from './LeftSide';
 import RightSide from './RightSide';
@@ -7,6 +7,7 @@ import { useSearchParams } from 'react-router-dom';
 
 
 const ReservationContainer = () => {
+    const currentUser = () => {}
     const [searchParams, setSearchParams] = useSearchParams();
     const roomId = searchParams.get("roomId");
     const sdate = searchParams.get("sdate");
@@ -17,9 +18,27 @@ const ReservationContainer = () => {
     const newSdate = new Date(sdate);
     const days = newEdate.getDate() - newSdate.getDate();
     console.log(newEdate, newSdate, days);
+    const [roomImg, setRoomImg] = useState([]);
+    const [title, setTitle] = useState("");
+    const [dayPrice, setDayPrice] = useState(0);
+    const [cleanVat, setCleanVat] = useState(0);
     const datas = {
-        roomId, newSdate, newEdate, guests, infants
+        roomId, sdate, edate, newSdate, newEdate, guests, infants, roomImg, title, dayPrice, cleanVat
     };
+    useEffect(()=>{
+        const roomData = async () => {
+            const response = await fetch(`http://localhost:8000/booking/reservation?roomId=${roomId}`);
+            return response.json();
+        };
+        roomData().then((res) => {
+            console.log(res);
+            setRoomImg(res.roomImg[0]);
+            setTitle(res.title);
+            setDayPrice(res.dayPrice);
+            setCleanVat(res.cleanVat);
+        });
+
+    }, [])
 
     // const [room, setRoom] = useState({});
     // const [user, setUser] = useState({});
@@ -31,7 +50,7 @@ const ReservationContainer = () => {
             </div>
             <div className='LRcontainer'>
                 <LeftSide datas={datas}/>
-                <RightSide days={days} />
+                <RightSide datas={datas} days={days} />
             </div>
         </S.ReservationContainer>
     );

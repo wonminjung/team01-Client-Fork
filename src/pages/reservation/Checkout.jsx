@@ -3,6 +3,7 @@ import { PaymentWidgetInstance, loadPaymentWidget, ANONYMOUS } from "@tosspaymen
 import { nanoid } from "nanoid";
 import "./style.css";
 import { useQuery  } from "@tanstack/react-query";
+import { useSearchParams } from "react-router-dom";
 
 const selector = "#payment-widget";
 
@@ -13,10 +14,13 @@ const clientKey = "test_gck_docs_Ovk5rk1EwkEbP0W43n07xlzm";
 const customerKey = nanoid();
 
 const Checkout = () => {
+    const [searchParams, setSearchParams] = useSearchParams();
+    const title = searchParams.get("title");
+    const dayPrice = searchParams.get("dayPrice");
     const { data: paymentWidget } = usePaymentWidget(clientKey, customerKey);
     // const paymentWidget = usePaymentWidget(clientKey, ANONYMOUS); // 비회원 결제
     const paymentMethodsWidgetRef = useRef(null);
-    const [price, setPrice] = useState(500_000);
+    const [price, setPrice] = useState(2_000_000);
     const [paymentMethodsWidgetReady, isPaymentMethodsWidgetReady] = useState(false);
 
     useEffect(() => {
@@ -57,23 +61,6 @@ const Checkout = () => {
                 <div className="box_section">
                     <div id="payment-widget" />
                     <div id="agreement" />
-                    <div style={{ paddingLeft: "24px" }}>
-                        <div className="checkable typography--p">
-                            <label htmlFor="coupon-box" className="checkable__label typography--regular">
-                                <input
-                                    id="coupon-box"
-                                    className="checkable__input"
-                                    type="checkbox"
-                                    aria-checked="true"
-                                    disabled={!paymentMethodsWidgetReady}
-                                    onChange={(event) => {
-                                        setPrice(event.target.checked ? price - 5_000 : price + 5_000);
-                                    }}
-                                />
-                                <span className="checkable__label-text">5,000원 쿠폰 적용</span>
-                            </label>
-                        </div>
-                    </div>
                     <button
                         className="button"
                         style={{ marginTop: "30px" }}
@@ -90,7 +77,7 @@ const Checkout = () => {
                                     customerName: "김토스",
                                     customerEmail: "customer123@gmail.com",
                                     customerMobilePhone: "01012341234",
-                                    successUrl: `${window.location.origin}/checkout/success`,
+                                    successUrl: `${window.location.origin}/reservation/checkout/success`,
                                     failUrl: `${window.location.origin}/checkout/fail`,
                                 });
                             } catch (error) {

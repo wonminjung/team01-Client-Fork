@@ -47,11 +47,11 @@ const router = createBrowserRouter([
                 element: <Checkout />,
             },
             {
-                path: '/checkout/success',
+                path: '/reservation/checkout/success',
                 element: <Success />,
             },
             {
-                path: '/checkout/fail',
+                path: '/reservation/checkout/fail',
                 element: <Fail />,
             },
             {
