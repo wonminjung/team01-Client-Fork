@@ -13,6 +13,7 @@ const EmptyHeartButton = ({roomid,wishList,setWishList}) => {
         if(userStatus){ // 로그인판별
             // 로그인일 때
             setWishList([...wishList,roomid])
+            // setWishList((prevWishList)=>[...(prevWishList ||[]),roomid])
         }else{
             // 로그인이 아닐때
             alert("로그인이 필요합니다");
@@ -22,6 +23,7 @@ const EmptyHeartButton = ({roomid,wishList,setWishList}) => {
     const clickHeartBtn = async () => {
         // 위시리스트 삭제시
         setWishList(wishList.filter((list)=>list!==roomid))
+        // setWishList((prevWishList) => (prevWishList || []).filter((list) => list !== roomid));
     }
     return (
         <>

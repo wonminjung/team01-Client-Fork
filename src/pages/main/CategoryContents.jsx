@@ -13,6 +13,8 @@ const CategoryContents = ({roomList, searchParams}) => {
     const currentUser = useSelector((state)=>state.user.currentUser);
     const dispatch = useDispatch();
     const [wishList, setWishList] = useState(currentUser.wishList);
+    // console.log(currentUser)
+    // console.log(wishList)
     const [loading, setLoading] = useState(false);
     const getPrice = [searchParams.get("lPrice"),searchParams.get("gPrice")]; // 가격범위 params 가져오기
     const getMaxUser = searchParams.get("maxUser"); // 최대인원 params 가져오기
@@ -29,7 +31,11 @@ const CategoryContents = ({roomList, searchParams}) => {
     )
     
     useEffect(()=>{
-        setLoading(true)
+        // setLoading(true)
+        console.log(currentUser)
+        if(currentUser=={}){
+            return
+        }
         const refreshWishList = async () => {
             await fetch("http://localhost:8000/user/", {
                 method : "PATCH",
@@ -42,14 +48,19 @@ const CategoryContents = ({roomList, searchParams}) => {
                 })
             })
             .then((res)=>res.json())
-            .then((info)=>dispatch(setUser(info.user)))
-            setLoading(false);
+            .then((info)=>{
+                dispatch(setUser(info.user))
+                // setWishList(info.user.wishList)
+            })
+            // setLoading(false);
         }
-        if(wishList!==undefined && Object.keys(currentUser).length!==0 &&wishList!==currentUser.wishList) refreshWishList()
+        // if(wishList!==undefined && Object.keys(currentUser).length!==0 &&wishList!==currentUser.wishList)
+        refreshWishList()
     },[wishList,dispatch])
     return (
         <S.CategoryContentBox>
-            {loading?
+            {
+            // loading?
             filtered.length > 0?
             filtered.map((data,i)=>
                 <div key={i} className="content">
@@ -72,7 +83,7 @@ const CategoryContents = ({roomList, searchParams}) => {
                             </div>
                         </div>
                     </Link>
-                    <EmptyHeartButton roomid={data._id} wishList={wishList} setWishList={setWishList}/>
+                    <EmptyHeartButton roomid={data._id} wishList={currentUser.wishList} setWishList={setWishList}/>
                 </div>
             )
             :
@@ -80,8 +91,8 @@ const CategoryContents = ({roomList, searchParams}) => {
                 <FontAwesomeIcon icon={faSearch}/>
                 <h6>검색된 정보가 없습니다</h6>
             </div>
-            :
-            <Spinner />
+            // :
+            // <Spinner />
             }
         </S.CategoryContentBox>
     );

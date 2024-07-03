@@ -34,8 +34,8 @@ function App() {
 
     isAuthenticate()
       .then((res) => {
-        console.log(res)
         let {message, ...user} = res;
+        console.log(user)
         dispatch(setUser(user))
         dispatch(setUserStatus(true))
       })
