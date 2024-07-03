@@ -43,7 +43,7 @@ const SignInContainer = () => {
                 console.log(data)
 
                 // 로그인 로직
-                await fetch('http://localhost:8000/user/signIn', {
+                await fetch('http://localhost:8000/user/passportLogin', {
                     method : 'POST',
                     headers : {
                         'Content-Type' : 'application/json; charset=utf-8',
@@ -61,11 +61,16 @@ const SignInContainer = () => {
                 })
                 .then((res)=>{
                     // 데이터를 들고 있는 res
-                    console.log(res)
-                    
+                    // console.log(res)
+
+                    let {token, user} = res;
+                    console.log(token, user)
+
                     // Redux
                     dispatch(setUser(res.user))
                     dispatch(setUserStatus(true))
+
+                    localStorage.setItem("token", token);
                     
                 })
                 .catch((error) => {
