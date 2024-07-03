@@ -26,6 +26,7 @@ const EmptyHeartButton = ({roomid,wishList,setWishList}) => {
     return (
         <>
             {userStatus? // 로그인판별
+            wishList??
             wishList.filter((list)=>list===roomid).length?
             // 로그인, 위시리스트에 있을때
             <HeartButton onClick={clickHeartBtn}/>
