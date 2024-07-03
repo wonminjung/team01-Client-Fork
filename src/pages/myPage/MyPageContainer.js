@@ -14,6 +14,7 @@ const MyPageContainer = () => {
 
     const currentUser = useSelector((state)=>state.user.currentUser);
     const userStatus = useSelector((state)=>state.user.isLogin);
+    console.log(userStatus)
     // 현재 로그인 상태를 확인하여 아닌 경우
     if(!userStatus){
         // replace 왔던 기록을 없애버린다. history
@@ -21,7 +22,6 @@ const MyPageContainer = () => {
         return <Navigate to={"/signIn"} replace={true}/>
     }
     console.log(currentUser)
-
     return (
         <S.MyPageContainer>
             <BodyTop />

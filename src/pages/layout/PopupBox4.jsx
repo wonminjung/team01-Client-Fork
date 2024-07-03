@@ -12,6 +12,7 @@ const PopupBox4 = React.forwardRef(({menuState},ref) => {
         e.preventDefault(false);
         dispatch(setUser({}))
         dispatch(setUserStatus(false))
+        localStorage.removeItem("token")
         navigate('/');
     }
 
