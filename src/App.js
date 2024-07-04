@@ -21,29 +21,53 @@ function App() {
   // 최초 1번 토큰의 여부 검증
   useEffect(()=>{
     const isAuthenticate = async () => {
-      const response = await fetch('http://localhost:8000/user/auth', {
-        method : 'POST',
-        headers : {
-          'Authorization' : `Bearer ${localStorage.getItem('token')}`,
+      try{
+
+        if(!localStorage.getItem('token')){
+          return;
         }
-      })
-      if(!response.ok){
-        return;
+        
+        const response = await fetch('http://localhost:8000/user/auth', {
+          method : 'POST',
+          headers : {
+            'Authorization' : `Bearer ${localStorage.getItem('token')}`,
+          }
+        })
+        if(!response.ok){
+          // 401 오류 발생 시 예외 처리
+          if(response.status === 401){
+            // console.warn('Authentication failed : Unauthorized');
+            return;
+          }
+          throw new Error('Failed to authenticate');
+        }
+        const getAuthenticate = await response.json();
+        return getAuthenticate;
+
+      } catch (error) {
+        // 인증 실패 시 처리
+        return null;
       }
-      const getAuthenticate = await response.json();
-      return getAuthenticate;
     }
 
     isAuthenticate()
       .then((res) => {
+
+        if(!res){
+          return;
+        }
+
         let {message, ...user} = res;
-        console.log(user)
+  
         dispatch(setUser(user))
         dispatch(setUserStatus(true))
       })
-      .catch(console.error)
+      .catch((error)=>{
+        // 에러 로깅 제거
+        console.log('Error during authentication process', error);
+      })
 
-  }, [])
+  }, [dispatch])
 
 
 
