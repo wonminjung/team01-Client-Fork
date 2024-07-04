@@ -17,7 +17,7 @@ const NavSwiperComponents = (props) => {
 
     const clickCategory = (index) => {
         setNavActivate(index);
-        navigate(`/search?cate=${data.cate}`);
+        navigate(`/search/1?cate=${data.cate}`);
     };
     
     

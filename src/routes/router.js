@@ -56,7 +56,13 @@ const router = createBrowserRouter([
             },
             {
                 path: '/search',
-                element: <SearchContainer />
+                element: <SearchContainer />,
+                children: [
+                    {
+                        path: ":currentPage",
+                        element: <SearchContainer />,
+                    }
+                ]
             },
             {
                 path: '/signIn',
