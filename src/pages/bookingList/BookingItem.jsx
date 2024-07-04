@@ -12,6 +12,7 @@ const BookingItem = ({item, onClick, isActive }) => {
     }
 
     return (
+        // active할때 border색상 노랗게 하기 위해 isActive로 props 받음
         <S.BookingItemWrapper  className={isActive ? 'active' : ''} onClick={onClick}>
             <div className="textBox" >
                 <div className="text">
