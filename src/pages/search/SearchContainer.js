@@ -12,9 +12,6 @@ const SearchContainer = () => {
     ScrollEvent();
     ResetHeader();
 
-    // 현재 페이지 상태
-    const [ currentPage, setCurrentPage ] = useState(1);
-    
     // URI 정보 가져오기
     const [ searchParams, setSearchParams ] = useSearchParams();
 
@@ -29,9 +26,9 @@ const SearchContainer = () => {
 
     return (
         <>
-            <NavSwiperContainer handleFilterStatus={handleFilterStatus} setCurrentPage={setCurrentPage} isFilterActivate={isFilterActivate} searchParams={searchParams} />
+            <NavSwiperContainer handleFilterStatus={handleFilterStatus} isFilterActivate={isFilterActivate} searchParams={searchParams} />
             <SearchMainContainer 
-                currentPage={currentPage} setCurrentPage={setCurrentPage} searchParams={searchParams} setSearchParams={setSearchParams}
+                searchParams={searchParams} setSearchParams={setSearchParams}
                 isFilterActivate={isFilterActivate} handleFilterStatus={handleFilterStatus}
             />
         </>
