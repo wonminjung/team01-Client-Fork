@@ -78,7 +78,7 @@ const Checkout = () => {
                                     customerEmail: "customer123@gmail.com",
                                     customerMobilePhone: "01012341234",
                                     successUrl: `${window.location.origin}/reservation/checkout/success`,
-                                    failUrl: `${window.location.origin}/checkout/fail`,
+                                    failUrl: `${window.location.origin}/fail`,
                                 });
                             } catch (error) {
                             // 에러 처리하기

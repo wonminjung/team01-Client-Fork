@@ -2,11 +2,20 @@ import { useState, useEffect, React } from "react";
 import { useNavigate, useSearchParams } from "react-router-dom";
 import { Link } from "react-router-dom";
 import "./style.css";
+import { useSelector } from "react-redux";
 
 const Success = () => {
     const navigate = useNavigate();
     const [searchParams] = useSearchParams();
     const [responseData, setResponseData] = useState(null);
+    const currentUser = useSelector(state => state.user.currentUser);
+    const isLogin = useSelector(state => state.user.isLogin);
+    console.log(currentUser);
+    const userId = currentUser.userId;
+
+    // const bookingData = async() => {
+    //     const response = await fetch(`http://localhost:8000/booking/reservation/success?guests=${guests}&infants=${infants}&userId=${userId}&roomId=${roomId}&createdAt=${createdAt}&updatedAt=${updatedAt}&checkInDate=${checkInDate}&checkOutDate=${checkOutDate}`);
+    // };
 
     useEffect(() => {
         const requestData = {
@@ -92,12 +101,12 @@ const Success = () => {
                     </Link>
                 </div>
             </div>
-            <div className="box_section" style={{ width: "600px", textAlign: "left" }}>
+            {/* <div className="box_section" style={{ width: "600px", textAlign: "left" }}>
                 <b>Response Data :</b>
                 <div id="response" style={{ whiteSpace: "initial" }}>
                     {responseData && <pre>{JSON.stringify(responseData)}</pre>}
                 </div>
-            </div>
+            </div> */}
         </div>
     );
 }
