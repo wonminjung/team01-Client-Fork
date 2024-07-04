@@ -14,6 +14,11 @@ const S = {};
             display: flex;
             flex-direction: column;
             align-items: center;
+            animation-name: opacity;
+            animation-duration: 0.3s;
+            animation-delay: 0.6s;
+            animation-fill-mode: forwards;
+            opacity: 0;
             & svg{
                 position: relative;
                 top: -30px;
@@ -31,6 +36,17 @@ const S = {};
             }
             & button{
                 
+            }
+        }
+        @keyframes opacity {
+            0%{
+                opacity: 0;
+            }
+            80%{
+                opacity: 0;
+            }
+            100%{
+                opacity: 1;
             }
         }
     `;
