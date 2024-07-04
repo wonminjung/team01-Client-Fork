@@ -11,8 +11,7 @@ import BasicButton from '../../../components/button/BasicButton';
 
 
 const ModalFilterBox = ({searchParams, setSearchParams, isFilterActivate, 
-    handleFilterStatus, setContentData, setMaxPage,
-    setSearchResultMessage, setRoomsCount, setClickRoom}) => {
+    handleFilterStatus, setContentData, setMaxPage, setSearchResultMessage, setRoomsCount, setClickRoom}) => {
 
     // 필터창에서 URI 변경 전
     const [ beforeUri, setBeforeUri ] = useState("");
