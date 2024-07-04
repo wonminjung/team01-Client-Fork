@@ -32,7 +32,6 @@ const CategoryContents = ({roomList, searchParams}) => {
     
     useEffect(()=>{
         // setLoading(true)
-        console.log(currentUser)
         if(currentUser=={}){
             return
         }
@@ -54,7 +53,7 @@ const CategoryContents = ({roomList, searchParams}) => {
             })
             // setLoading(false);
         }
-        // if(wishList!==undefined && Object.keys(currentUser).length!==0 &&wishList!==currentUser.wishList)
+        if(wishList!==undefined && Object.keys(currentUser).length!==0)
         refreshWishList()
     },[wishList,dispatch])
     return (
