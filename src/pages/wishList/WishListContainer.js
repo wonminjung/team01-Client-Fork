@@ -6,14 +6,16 @@ import ScrollEvent from '../layout/ScrollEvent';
 import Modal from './modal/Modal';
 import { Navigate, useNavigate} from 'react-router-dom';
 import { useSelector } from 'react-redux';
+import NeedLogin from '../../components/needLogin/NeedLogin';
 
 
 
 const WishListContainer = () => {
+
     ResetHeader();
     ScrollEvent();
     
-    const userStatus = useSelector((state) => state.user.isLogin); //useSelector 훅을 사용하여 로그인 상태를 확인
+    const userStatus = useSelector((state) => state.user.isLogin); // 유저의 로그인 상태 (from redux)
     const userId = useSelector((state)=> state.user.currentUser.userId); // 현재 로그인한 유저의 id
     const navigate = useNavigate();
     const [rooms, setRooms] = useState([]); // 숙소의 상태
@@ -24,11 +26,10 @@ const WishListContainer = () => {
 
 
     useEffect(()=> {
-        // 비로그인 유저가 로그인화면으로 유도될때 에러 안뜨도록 
+        // 새로고침할 때, Modal창 잠깐 뜨는 것 방지
         if(!userStatus) {
             return;
         }
-
         const getWishList = async () => {
             try{
                 const response = await fetch(`http://localhost:8000/room/wishList`,{
@@ -56,42 +57,41 @@ const WishListContainer = () => {
         };
         getWishList()
 
-    },[update]) // update값이 변경되면 useEffect 재실행!
+    },[userId, update]) // update값이 변경되면 useEffect 재실행!
 
-     // 로그인 상태 확인 후 로그인 안된 경우 리디렉션
-    if(!userStatus) {
-        alert("로그인이 필요합니다.")
-        // replace로 왔던 기록을 없애고 로그인 페이지로 이동(뒤로가기시 메인페이지로)
-        return <Navigate to={"/signIn"} replace={true}/>
-    }
 
 
     return (
         <S.WishListContainer>
-            <S.PageTitle>위시리스트</S.PageTitle>
-            {/* 찜한 숙소가 있다면 바로 위시리스트 페이지 보이게 하기 */}
-            {isWished === null ? (
-                <div></div>
-            ) : isWished ?  (
-                <WishItemContents rooms={rooms} userId={userId} setUpdate={setUpdate} update={update}/> 
-            ): (
-                    <div>
-                        {/* 찜한 숙소가 없다면 모달창 먼저 띄우기. */}
-                         { !isWished &&  (
+            {userStatus?
+            <>
+                <S.PageTitle>위시리스트</S.PageTitle>
+                {/* 찜한 숙소가 있다면 바로 위시리스트 페이지 보이게 하기 */}
+                {isWished === null ? (
+                    <div></div>
+                    ) : isWished ?  (
+                        <WishItemContents rooms={rooms} userId={userId} setUpdate={setUpdate} update={update}/>
+                    ): (
+                        <div>
                             <Modal showButtons={false}>
                                 <div className='modalDecorate'>
                                     <div className='modalBody'>
                                         <img src="./images/pages/wishList/NotWished1.png" alt="숙소사진" />
                                         <h2>마음에 드는 숙소를 한곳에 저장해보세요!</h2>
                                         <h3>검색 중에 발견한 숙소를 위시리스트에 저장하려면<br /> 하트 아이콘을 클릭해보세요.</h3>
-                                    </div> 
+                                    </div>
                                     <button className="searchButton"onClick={() => navigate('/')}>숙소 검색하러 가기</button>
-                                </div> 
+                                </div>
                             </Modal>
-                         )} 
-                    </div>
-                )}
-
+                        </div>
+                    )} 
+            </>
+            :
+            // 현재 로그인 상태를 확인하여 아닌 경우
+            <>
+                <NeedLogin />
+            </>
+            }
         </S.WishListContainer>
     );
 };
