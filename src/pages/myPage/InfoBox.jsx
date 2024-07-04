@@ -312,6 +312,10 @@ const InfoBox = ({info}) => {
             setModalState(false)
         }else if(title === "주소"){
             // 주소 수정
+            if(!post3Val){
+                alert("주소를 입력해주세요!")
+                return
+            }
             setModify(modify[1] = {address : post2Ref.current.value + ` ${post3Val}` })
             updateUserInfo()
             setModalState(false)

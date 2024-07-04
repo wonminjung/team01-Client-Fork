@@ -10,8 +10,8 @@ import { useSelector } from 'react-redux';
 const Main = () => {
 
     const currentUser = useSelector((state)=>state.user.currentUser);
-    const userStatus = useSelector((state)=>state.user.isLogin);
-    
+    // const userStatus = useSelector((state)=>state.user.isLogin);
+    console.log(currentUser)
     useEffect(()=>{
         // 선언문
         const header = document.querySelector("header");
