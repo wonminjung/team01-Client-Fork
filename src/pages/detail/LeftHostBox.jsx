@@ -2,6 +2,7 @@ import React from 'react';
 import S from './style';
 
 const LeftHostBox = ({profileImg, userId, commentData, starAvr, setpopup1State}) => {
+    const publicUrl = process.env.PUBLIC_URL;
     const openPopup1 = () => {
         setpopup1State(true)
         let scrollY = "";
@@ -17,8 +18,9 @@ const LeftHostBox = ({profileImg, userId, commentData, starAvr, setpopup1State})
             <div>
                 <div className="hostImg">
                     <img src={profileImg
-                        ?profileImg
-                        :"./images/pages/detail/emptyUser.jpg"
+                        ?
+                        `http://localhost:8000/${profileImg}`
+                        :`${publicUrl}/images/pages/detail/emptyUser.jpg`
                     } alt="호스트썸네일" />
                 </div>
                 <div className="hostName">

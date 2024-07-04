@@ -4,6 +4,7 @@ import React, { useState } from 'react';
 import DetailGradeBox from './DetailGradeBox';
 
 const PopupBox1 = ({title,commentData,commentUsers,popup1State,setpopup1State}) => {
+    const publicUrl = process.env.PUBLIC_URL;
     const starAvr = () => {
         let number = 0;
         for(let i = 0; i < commentData.length; i++){
@@ -70,8 +71,8 @@ const PopupBox1 = ({title,commentData,commentUsers,popup1State,setpopup1State}) 
                                         <div className="commentTL">
                                             <div className="userProfileImg">
                                                 <img src={commentUsers.filter((user)=>user._id===comment.userId)[0].profileImg
-                                                    ?commentUsers.filter((user)=>user._id===comment.userId)[0].profileImg
-                                                    :"./images/pages/detail/emptyUser.jpg"
+                                                    ?`http://localhost:8000/${commentUsers.filter((user)=>user._id===comment.userId)[0].profileImg}`
+                                                    :`${publicUrl}/images/pages/detail/emptyUser.jpg`
                                                 } alt={`userProfileImg${i+1}`} />
                                             </div>
                                             <div className="userId">{commentUsers.filter((user)=>user._id === comment.userId)[0].userId}</div>

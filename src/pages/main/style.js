@@ -181,6 +181,7 @@ S.CategoryContainer = styled.div`
     position: relative;
     /* 카테고리 슬라이드 */
     & .swiper-slide{
+        padding-bottom: 10px;
         /* 카테고리 카드 */
         & .categoryCard{
             display: flex;
@@ -194,6 +195,17 @@ S.CategoryContainer = styled.div`
             /* 카드 활성화시 */
             &.active{
                 opacity: 1;
+                &>div:last-child::after{
+                    content: '';
+                    width: 100%;
+                    height: 3px;
+                    display: block;
+                    background: ${PALETTE.yellow};
+                    position: relative;
+                    top: 7px;
+                    left: 50%;
+                    transform: translateX(-50%);
+                }
             }
             &>div{
                 &:first-child{
@@ -207,7 +219,7 @@ S.CategoryContainer = styled.div`
                 &:last-child{
                     font-size: 12px;
                     font-weight: 500;
-                    width: 100%;
+                    width: fit-content;
                     text-align: center;
                     white-space: nowrap;
                 }
@@ -216,7 +228,6 @@ S.CategoryContainer = styled.div`
                 transform: scale(1.07);
             }
         }
-        
     }
     & .swiper-button-prev, .swiper-button-next{
         width: 60px;
