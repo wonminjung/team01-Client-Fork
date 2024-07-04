@@ -10,24 +10,25 @@ import { setUser } from '../../modules/user';
 
 
 const WishItemContents = ({rooms, userId, setUpdate, update}) => {
-    const [showModal, setShowModal] = useState(false);// 모달의 상태
-    const [roomId, setRoomId] = useState(null);// 삭제하기 위해 클릭한 하트의 해당 룸 아이템의 상태
+
+    const [showModal, setShowModal] = useState(false);// 모달 창의 표시 여부를 관리
+    const [roomId, setRoomId] = useState(null);// 삭제할 항목의 ID를 저장
     const navigate = useNavigate();
     const dispatch = useDispatch();
 
-
-    // 하트버튼 클릭시, 해당 아이템 삭제위해 컨펌 모달메시지 띄우는 메서드
+    // 하트 버튼 클릭 시 '삭제 확인 모달'을 표시
     const handleRemoveItem = (data) => {
-        let roomId = data;
+        let roomId = data; // data는 하트 버튼이 클릭된 특정 아이템의 데이터
         setRoomId(roomId);
-        setShowModal(true);
+        setShowModal(true); // 재확인 위해 '확인 모달창' 띄우기
     };
 
-    // 삭제 확인 모달창의 O 버튼 클릭시, user데이터의 wishList배열에서 해당 아이템 삭제하는 메서드
+    // 모달의 확인 버튼 클릭 시 삭제를 실행
     const clickConfirmRemove = () => {
         handleConfirmRemove();
     }
     
+    // 서버에 요청하여 위시리스트에서 항목을 삭제
     const handleConfirmRemove = async( ) => {
                 try{
                     const response = await fetch(`http://localhost:8000/room/updateWishList`,
@@ -42,12 +43,15 @@ const WishItemContents = ({rooms, userId, setUpdate, update}) => {
                                 userId : userId
                             })
                         });
-
+                    
+                    // 요청이 성공하면 Redux 상태를 업데이트하고 setUpdate를 호출하여 컴포넌트를 리렌더링
                      if(response.ok){
                         const updatedRooms = await response.json();
+                        // Redux 상태를 업데이트하여 사용자 정보를 최신 상태로 유지
                         dispatch(setUser(updatedRooms.user));
-
-                        setUpdate(update ? false : true); // 업데이트 될때마다 update값 변경시켜야 화면에서 바뀜
+                        // 상태를 반전시켜 컴포넌트를 리렌더링 (이는 useEffect 훅을 재실행하여 화면을 새로 고치기 위함)
+                        setUpdate(update ? false : true); 
+                        // 사용자를 위시리스트 페이지로 리디렉션
                         navigate('/wishList') 
                      }else{
                         const errorData = await response.json();
@@ -56,16 +60,15 @@ const WishItemContents = ({rooms, userId, setUpdate, update}) => {
                 }catch(error){
                     console.log('Error:', error);
                 }
-            
+                // 업데이트 완료되어 모달 창을 닫기 위해 setShowModal(false);를 호출
                 setShowModal(false);  
        
     };
 
-    // 삭제 확인 모달창의 x 버튼 클릭시, 모달 창 종료
+    // 모달의 취소 버튼 클릭 시 모달 닫기
     const handleCancelRemove = () => {
         setShowModal(false);
     };
-
 
 
     return (

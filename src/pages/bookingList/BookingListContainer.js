@@ -20,12 +20,15 @@ const BookingListContainer = () => {
     const [activeIndex, setActiveIndex] = useState(null); // 열린 아코디언 패널의 인덱스를 저장하는 상태 (null은 패널이 열리지 않은 상태)
     const [itemData, setItemData] = useState([]); // 예약한 숙소 데이터를 저장
 
-    // bookingList 가져오기   
+     
     useEffect(() => {
-        // 새로고침할 때, Modal창 잠깐 뜨는 것 방지
+
+        // 새로고침할 때, Modal창 잠깐 뜨는 것 방지 (userStatus가 null로 초기화되면 실행중지시킴)
         if(!userStatus) {
             return;
         }
+
+        // bookingList 가져오기  
         const getBookingList = async () => {
             try{    
                     const response = await fetch(`http://localhost:8000/booking/bookingList`,{
@@ -103,13 +106,13 @@ const BookingListContainer = () => {
                                              </S.panel>) : <div></div>}
                                     </div>
                                 ))
-                                ) : ( // 예약한 숙소 없을 때, 보이는 컴포넌트
+                                ) : ( // 예약한 숙소 없을 때, 띄우는 화면
                                 <NotBooking />
                             )}
                     </ul>
                 </>
                 :
-                // 현재 로그인 상태를 확인하여 아닌 경우
+                // 현재 로그인 상태를 확인하여 아닌 경우 띄우는 '로그인 권유하는 화면'
                 <>
                 <NeedLogin />
             </>}
