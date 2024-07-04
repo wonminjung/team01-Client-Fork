@@ -58,7 +58,7 @@ function App() {
         }
 
         let {message, ...user} = res;
-        console.log(user)
+  
         dispatch(setUser(user))
         dispatch(setUserStatus(true))
       })
