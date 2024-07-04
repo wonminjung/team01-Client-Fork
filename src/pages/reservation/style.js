@@ -141,10 +141,6 @@ S.SideBox = styled.div`
 `
 
 /* Charge.jsx */
-S.CardInfo = styled.div`
-    border: 1px solid ${theme.PALETTE.gray[200]};
-`
-
 S.CategoryBox = styled.div`
     display: block;
     margin: 0 0 50px;
@@ -156,6 +152,132 @@ S.CategoryBox = styled.div`
         display: inline;
         font-weight: bold;
         width: 100%;
+    }
+    & .payIcon {
+        padding-right: 16px;
+        width: 40px;
+        height: 25px;
+        display: flex;
+        align-items: center;
+
+        & > div {
+            width: 100%;
+
+            & > img {
+                object-fit: cover;
+                width: 100%;
+                height: 100%;
+            }
+        }
+
+        & > svg {
+            width: 100%;
+            height: 100%;
+        }
+
+    }
+
+    & .payTitle {
+        height: 25px;
+        display: flex;
+        align-items: center;
+        text-align: center;
+        font-size: 16px;
+    }
+    & .chargeBox {
+        position: relative;
+        width: 450px;
+        & input {
+            width: 100%;
+            margin-bottom: 12px;
+        }
+        & .chargeTop {
+            margin-bottom: 30px;
+            display: flex;
+            justify-content: space-between;
+            & h3 {
+                font-size: 22px;
+                font-weight: 600;
+                margin: 0;
+            }
+            & > img {
+                width: 100%;
+                height: 100%;
+            }
+        }
+        & .selectButton {
+            width: 100%;
+            background-color: white;
+            border: 1px solid ${theme.PALETTE.gray[300]};
+            border-radius: 20px;
+            cursor: pointer;
+            transition: 0.2s;
+            margin-bottom: 12px;
+
+            & .arrow {
+                transform: rotate(0deg);
+                transition: 250ms;
+            }
+
+            &.clickedButton {
+                filter: brightness(0.95);
+                transition: 0.2s;
+
+                & .arrow {
+                    transform: rotate(180deg);
+                    transition: 250ms;
+                }
+            }
+
+            & > div {
+                display: flex;
+                justify-content: space-between;
+                align-items: center;
+                padding: 16px;
+
+                & > div {
+                    display: flex;
+                }
+            }
+        }
+        & .payList {
+            position: absolute;
+            width: 100%;
+            border: 1px solid ${theme.PALETTE.gray[300]};
+            border-radius: 20px;
+            background-color: white;
+            top: 120px;
+            overflow: hidden;
+
+            &.notClickedList {
+                display: none;
+            }
+
+            &.clickedList {
+                display: block;
+            }
+
+            & li {
+                display: flex;
+                list-style: none;
+                padding: 18px 16px;
+                cursor: pointer;
+                background-color: white;
+                margin: 0;
+
+                &.checkedList {
+                    filter: brightness(0.95);
+                }
+                &:hover {
+                    filter: brightness(0.95);
+                }
+            }
+        }
+        & .isInvisible {
+            &:focus::placeholder {
+                color: transparent;
+            }
+        }
     }
 `
 S.CategoryBorder = styled.div`

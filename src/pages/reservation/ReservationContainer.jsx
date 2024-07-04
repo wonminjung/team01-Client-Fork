@@ -30,6 +30,7 @@ const ReservationContainer = () => {
             const response = await fetch(`http://localhost:8000/booking/reservation?roomId=${roomId}`);
             return response.json();
         };
+        
         roomData().then((res) => {
             console.log(res);
             setRoomImg(res.roomImg[0]);
