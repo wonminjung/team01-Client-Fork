@@ -3,6 +3,7 @@ import S from './style';
 
 const BookingItem = ({item, onClick, isActive }) => {
 
+    // 년월일 형태로 변형해주는 메서드
     const formatDate = (dateString) => {
         const date = new Date(dateString);
         const year = date.getFullYear(); 

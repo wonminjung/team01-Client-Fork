@@ -88,11 +88,13 @@ const BookingListContainer = () => {
                             <BookingItem 
                                 item={item}  
                                 onClick={() => handleAccordionClick(index)}   
-                                isActive={activeIndex === index} // isActive 속성으로 현재 항목이 활성 상태인지 여부를 전달(클래스 붙여 css변화 줌)
+                                // isActive 속성으로 현재 항목이 활성 상태인지 여부를 전달(클래스 붙여 css변화 줌)
+                                isActive={activeIndex === index} 
                                 />
                                 {/* activeIndex가 현재 항목의 index와 같으면 상세 정보를 표시 */}
                                 {activeIndex === index ? (
-                                <S.panel style={{ maxHeight: activeIndex === index ? '500px' : '0' }}>
+                                    // activeIndex가 현재 항목의 index와 같으면 500px(열림), 아니면 0으로 설정
+                                <S.panel style={{ maxHeight: (activeIndex === index) ? '500px' : '0' }}>
                                     <BookingDetail 
                                         item={item}
                                         index={index}
@@ -101,7 +103,7 @@ const BookingListContainer = () => {
                                  </S.panel>) : <div></div>}
                         </div>
                     ))
-                ) : ( // 예약한 숙소 없을 때,
+                ) : ( // 예약한 숙소 없을 때, 보이는 컴포넌트
                     <NotBooking />
                 )}
             </ul>
