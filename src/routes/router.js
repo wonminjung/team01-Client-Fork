@@ -51,7 +51,7 @@ const router = createBrowserRouter([
                 element: <Success />,
             },
             {
-                path: '/reservation/checkout/fail',
+                path: '/fail',
                 element: <Fail />,
             },
             {
