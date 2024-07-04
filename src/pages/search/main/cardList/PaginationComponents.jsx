@@ -3,8 +3,9 @@ import S from './style';
 
 import { faGreaterThan, faLessThan } from '@fortawesome/free-solid-svg-icons';
 import { FontAwesomeIcon } from '@fortawesome/react-fontawesome';
+import { useNavigate, useParams } from 'react-router-dom';
 
-const PaginationComponents = ({ currentPage, setCurrentPage, maxPage }) => {
+const PaginationComponents = ({ maxPage }) => {
 
     let pageNumber = [];
     // 배열에 1 ~ maxPage까지 채워넣기
@@ -16,23 +17,27 @@ const PaginationComponents = ({ currentPage, setCurrentPage, maxPage }) => {
     const firstPage = pageNumber[0];
     const lastPage = pageNumber[pageNumber.length - 1];
 
+    const currentPage = +useParams().currentPage;
+
+    const navigate = useNavigate();
+
 
     // 페이지 클릭 함수
     const pagenationClickEvent = (e) => {
-        setCurrentPage(+e.currentTarget.innerText); // Number(e.currnetTarget.innerText)
+        navigate(`${+e.currentTarget.innerText}`);
     };
 
     // 이전 페이지 클릭 함수
     const prevClickEvent = () => {
         if (currentPage > firstPage) {
-            setCurrentPage(currentPage - 1);
+            navigate(`${+currentPage - 1}`);
         }
     };
 
     // 다음 페이지 클릭 함수
     const nextClickEvent = () => {
         if (currentPage < lastPage) {
-            setCurrentPage(currentPage + 1);
+            navigate(`${+currentPage + 1}`);
         }
     };
 

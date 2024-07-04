@@ -3,10 +3,11 @@ import S from './style';
 import CardListComponents from './CardListComponents';
 import PaginationComponents from './PaginationComponents';
 import { useSelector } from 'react-redux';
+import { useParams } from 'react-router-dom';
 
 
 
-const CardListContainer = ({ contentData, roomsCount, currentPage, setCurrentPage, maxPage, setClickRoom }) => {
+const CardListContainer = ({ contentData, roomsCount, maxPage, setClickRoom }) => {
 
     // 카드리스트 컨테이너 태그 참조(스크롤바 이동시킬 목적으로 사용)
     const cardListScrollRef = useRef();
@@ -16,6 +17,8 @@ const CardListContainer = ({ contentData, roomsCount, currentPage, setCurrentPag
 
     // 로그인 한 상태
     const isLogin = useSelector((state) => state.user.isLogin);
+
+    const { currentPage } = useParams();
 
 
     useEffect(() => {
@@ -43,7 +46,7 @@ const CardListContainer = ({ contentData, roomsCount, currentPage, setCurrentPag
                 </S.CardListsWrapper>
 
                 {   // 페이지 수가 1 초과하면 페이지네이션 표시
-                    maxPage > 1 ? <PaginationComponents currentPage={currentPage} setCurrentPage={setCurrentPage} maxPage={maxPage}/> : <></>
+                    maxPage > 1 ? <PaginationComponents maxPage={maxPage}/> : <></>
                 }
             </S.SideMarginWrapper>
         </S.CardListContainer>

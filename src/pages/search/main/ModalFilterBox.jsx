@@ -5,17 +5,19 @@ import { faBath, faBed, faHouse, faUser, faXmark } from '@fortawesome/free-solid
 
 import RangeSlider from 'react-range-slider-input';
 import 'react-range-slider-input/dist/style.css';
-import { createSearchParams } from 'react-router-dom';
+import { createSearchParams, useParams } from 'react-router-dom';
 import BasicButton from '../../../components/button/BasicButton';
 
 
 
 const ModalFilterBox = ({searchParams, setSearchParams, isFilterActivate, 
-    handleFilterStatus, setContentData, setMaxPage, setCurrentPage, currentPage,
+    handleFilterStatus, setContentData, setMaxPage,
     setSearchResultMessage, setRoomsCount, setClickRoom}) => {
 
     // 필터창에서 URI 변경 전
     const [ beforeUri, setBeforeUri ] = useState("");
+
+    const { currentPage } = useParams();
 
     const getKey = searchParams.get('cate') ?? "searchResult"; // 카테고리 params 가져오기
     const getPrice = [searchParams.get("lPrice") ?? 0, searchParams.get("gPrice") ?? 1000000]; // 가격범위 params 가져오기
@@ -119,14 +121,24 @@ const ModalFilterBox = ({searchParams, setSearchParams, isFilterActivate,
             const params = createSearchParams(
                 {
                     cate: getKey, val: val, sdate: sdate, edate: edate, guests: guests, lPrice: value[0], gPrice: value[1], 
-                    maxUser: maxUser, bedroom: bedroom, bed: bed, bathroom: bathroom, guests: guests, page: currentPage
+                    maxUser: maxUser, bedroom: bedroom, bed: bed, bathroom: bathroom, guests: guests
                 }
             );
             setSearchParams(params);
 
             // 숙소 요청
             const getRoomList = async () => {
-                const response = await fetch(`http://localhost:8000/room/search?${params.toString()}`);
+                const response = await fetch(`http://localhost:8000/room/search?${params.toString()}`, 
+                    {
+                        method: "POST",
+                        headers: {
+                            "Content-Type": "application/json; charset=utf-8"
+                        },
+                        body: JSON.stringify({
+                            page: currentPage
+                        })
+                    }
+                );
                 const rooms = await response.json();
                 
                 return rooms;
@@ -145,9 +157,6 @@ const ModalFilterBox = ({searchParams, setSearchParams, isFilterActivate,
                 }
                 // 숙소 전체 결과 개수
                 setTempContentCount(res.roomsCount);
-
-                // 페이지 1로 초기화
-                setCurrentPage(1);
 
                 // 숙소 결과 임시 저장 상태에 담기
                 setTempContentData(res.rooms);

@@ -7,7 +7,7 @@ import { Link } from 'react-router-dom';
 
 
 
-const MiniDetailComponents = ({ currentPage, clickRoom }) => {
+const MiniDetailComponents = ({ clickRoom }) => {
     const { title, roomImg, roomData, description, address, convenience } = clickRoom;
 
     // 기존 숙소 이미지 30개에서 mini Detail에 쓸 이미지 5개만 추출
@@ -33,7 +33,7 @@ const MiniDetailComponents = ({ currentPage, clickRoom }) => {
 
         // 해당 페이지의 스크롤도 초기화
         window.scrollTo({ top: 0, behavior: "smooth" });
-    }, [currentPage, clickRoom]);
+    }, [clickRoom]);
 
 
 
@@ -69,7 +69,7 @@ const MiniDetailComponents = ({ currentPage, clickRoom }) => {
                         <S.OverviewList>
                             <li>
                                 <span>
-                                    <img src={"./images/pages/search/main/miniDetail/overview/user.svg"} alt="이미지" />
+                                    <img src={`${process.env.PUBLIC_URL}/images/pages/search/main/miniDetail/overview/user.svg`} alt="이미지" />
                                 </span>
                                 <span>
                                     {`최대인원 ${roomData.maxUser}명`}
@@ -77,7 +77,7 @@ const MiniDetailComponents = ({ currentPage, clickRoom }) => {
                             </li>
                             <li>
                                 <span>
-                                    <img src={"./images/pages/search/main/miniDetail/overview/house.svg"} alt="이미지" />
+                                    <img src={`${process.env.PUBLIC_URL}/images/pages/search/main/miniDetail/overview/house.svg`} alt="이미지" />
                                 </span>
                                 <span>
                                     {`침실 ${roomData.bedroom}개`}
@@ -85,7 +85,7 @@ const MiniDetailComponents = ({ currentPage, clickRoom }) => {
                             </li>
                             <li>
                                 <span>
-                                    <img src={"./images/pages/search/main/miniDetail/overview/bed-single.svg"} alt="이미지" />
+                                    <img src={`${process.env.PUBLIC_URL}/images/pages/search/main/miniDetail/overview/bed-single.svg`} alt="이미지" />
                                 </span>
                                 <span>
                                     {`침대 ${roomData.bed}개`}
@@ -93,7 +93,7 @@ const MiniDetailComponents = ({ currentPage, clickRoom }) => {
                             </li>
                             <li>
                                 <span>
-                                    <img src={"./images/pages/search/main/miniDetail/overview/bath.svg"} alt="이미지" />
+                                    <img src={`${process.env.PUBLIC_URL}/images/pages/search/main/miniDetail/overview/bath.svg`} alt="이미지" />
                                 </span>
                                 <span>
                                     {`욕실 ${roomData.bathroom}개`}

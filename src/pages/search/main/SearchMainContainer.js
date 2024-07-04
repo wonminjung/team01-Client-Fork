@@ -4,12 +4,12 @@ import MiniDetailComponents from './miniDetail/MiniDetailComponents';
 import S from './style';
 import { FontAwesomeIcon } from '@fortawesome/react-fontawesome';
 import { faSearch } from '@fortawesome/free-solid-svg-icons';
-import { createSearchParams } from 'react-router-dom';
+import { createSearchParams, useParams } from 'react-router-dom';
 import ModalFilterBox from './ModalFilterBox';
 
 
 
-const SearchMainContainer = ({ searchParams, setSearchParams, currentPage, setCurrentPage, isFilterActivate, handleFilterStatus }) => {
+const SearchMainContainer = ({ searchParams, setSearchParams, isFilterActivate, handleFilterStatus }) => {
 
     // 숙소 목록
     const [ contentData, setContentData ] = useState([]);
@@ -31,6 +31,7 @@ const SearchMainContainer = ({ searchParams, setSearchParams, currentPage, setCu
     // 페이지 당 보일 숙소 총 개수
     const contentPerPage = 18;
 
+    const currentPage = +useParams().currentPage;
     
     const cate = searchParams.get("cate") ?? "searchResult";
     const lPrice = searchParams.get("lPrice") ?? 0;
@@ -51,14 +52,24 @@ const SearchMainContainer = ({ searchParams, setSearchParams, currentPage, setCu
             const params = createSearchParams(
                 {
                     cate: cate, val: val, sdate: sdate, edate: edate, guests: guests, lPrice: lPrice, gPrice: gPrice, 
-                    maxUser: maxUser, bedroom: bedroom, bed: bed, bathroom: bathroom, page: currentPage
+                    maxUser: maxUser, bedroom: bedroom, bed: bed, bathroom: bathroom
                 }
             );
             setSearchParams(params, { replace: true });
 
             // 숙소 요청
             const getRoomList = async () => {
-                const response = await fetch(`http://localhost:8000/room/search?${params.toString()}`);
+                const response = await fetch(`http://localhost:8000/room/search?${params.toString()}`, 
+                    {
+                        method: "POST",
+                        headers: {
+                            "Content-Type": "application/json; charset=utf-8"
+                        },
+                        body: JSON.stringify({
+                            page: currentPage
+                        })
+                    }
+                );
                 const rooms = await response.json();
 
                 return rooms;
@@ -102,12 +113,10 @@ const SearchMainContainer = ({ searchParams, setSearchParams, currentPage, setCu
                             <CardListContainer
                                 contentData={contentData}
                                 roomsCount={roomsCount}
-                                currentPage={currentPage}
-                                setCurrentPage={setCurrentPage}
                                 maxPage={maxPage}
                                 setClickRoom={setClickRoom}
                             />
-                            <MiniDetailComponents currentPage={currentPage} clickRoom={clickRoom} />
+                            <MiniDetailComponents clickRoom={clickRoom} />
                         </>
                     )
                     :
@@ -120,7 +129,7 @@ const SearchMainContainer = ({ searchParams, setSearchParams, currentPage, setCu
             }
             </S.SearchMainContainer>
             <ModalFilterBox 
-                searchParams={searchParams} setSearchParams={setSearchParams} currentPage={currentPage} setCurrentPage={setCurrentPage}
+                searchParams={searchParams} setSearchParams={setSearchParams} 
                 setContentData={setContentData} isFilterActivate={isFilterActivate} handleFilterStatus={handleFilterStatus} 
                 setMaxPage={setMaxPage} setSearchResultMessage={setSearchResultMessage} setRoomsCount={setRoomsCount} setClickRoom={setClickRoom}
             />

@@ -125,7 +125,7 @@ const CardListComponents = ({ cardList, setClickRoom, currentUser, isLogin }) =>
                     : 
                     (
                         <S.HeartDisabled>
-                            <img src="./images/pages/search/main/heart-regular.svg"/>
+                            <img src={`${process.env.PUBLIC_URL}/images/pages/search/main/heart-regular.svg`}/>
                         </S.HeartDisabled>
                     )
                 }
