@@ -24,20 +24,20 @@ const PaginationComponents = ({ maxPage }) => {
 
     // 페이지 클릭 함수
     const pagenationClickEvent = (e) => {
-        navigate(`${+e.currentTarget.innerText}`);
+        navigate(`${+e.currentTarget.innerText}/`);
     };
 
     // 이전 페이지 클릭 함수
     const prevClickEvent = () => {
         if (currentPage > firstPage) {
-            navigate(`${+currentPage - 1}`);
+            navigate(`${+currentPage - 1}/`);
         }
     };
 
     // 다음 페이지 클릭 함수
     const nextClickEvent = () => {
         if (currentPage < lastPage) {
-            navigate(`${+currentPage + 1}`);
+            navigate(`${+currentPage + 1}/`);
         }
     };
 
