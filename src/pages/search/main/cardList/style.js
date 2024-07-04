@@ -251,6 +251,13 @@ const S = {};
             margin-bottom: 13px;
             font-size: 18px;
             line-height: 20px;
+            letter-spacing: 0.6px;
+            word-break: keep-all;
+            text-overflow: ellipsis;
+            overflow: hidden;
+            display: -webkit-box;
+            -webkit-box-orient: vertical;
+            -webkit-line-clamp: 2;
         }
     `;
 

@@ -108,7 +108,7 @@ const CardListComponents = ({ cardList, setClickRoom, currentUser, isLogin }) =>
             // 현재 로그인 한 유저의 WishList(roomId)와 현재 cardList의 _id값을 비교하여 isWishList 상태 변경
             currentWishList?.includes(_id) ? setIsWishList(true) : setIsWishList(false);
         }
-    }, [_id]);
+    }, [_id, currentWishList, isLogin]);
     
 
 
@@ -125,7 +125,7 @@ const CardListComponents = ({ cardList, setClickRoom, currentUser, isLogin }) =>
                     : 
                     (
                         <S.HeartDisabled>
-                            <img src={`${process.env.PUBLIC_URL}/images/pages/search/main/heart-regular.svg`}/>
+                            <img src={`${process.env.PUBLIC_URL}/images/pages/search/main/heart-regular.svg`} alt="하트 비활성화"/>
                         </S.HeartDisabled>
                     )
                 }
