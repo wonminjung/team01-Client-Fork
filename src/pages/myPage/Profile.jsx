@@ -7,6 +7,7 @@ import { useDispatch } from 'react-redux';
 import { setUser } from '../../modules/user';
 
 const Profile = ({info}) => {
+    const publicUrl = process.env.PUBLIC_URL;
     const userId = info.userId;
     const time = 1;
     const imgRef = useRef(null);
@@ -26,7 +27,7 @@ const Profile = ({info}) => {
                 </div>
             </>)
         }else{
-            imgRef.current.src = `http://localhost:8000/${info.profileImg}`;
+            imgRef.current.src = info.profileImg?`http://localhost:8000/${info.profileImg}`:`${publicUrl}/images/pages/detail/emptyUser.jpg`;
             setContent(<></>);
         }
     }
@@ -60,7 +61,10 @@ const Profile = ({info}) => {
                 <form encType='multipart/form-data' onSubmit={handleSubmit}>
                     <label htmlFor="profileImg">
                         <div>
-                            <img src={`http://localhost:8000/${info.profileImg}`} ref={imgRef} alt="프로필 이미지" />
+                            <img src={info.profileImg?
+                                `http://localhost:8000/${info.profileImg}`
+                                :`${publicUrl}/images/pages/detail/emptyUser.jpg`
+                                } ref={imgRef} alt="프로필 이미지" />
                         </div>
                         <span><FontAwesomeIcon icon={faPen}/></span>
                     </label>

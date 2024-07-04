@@ -3,6 +3,7 @@ import S from './style';
 import BasicButton from '../../components/button/BasicButton';
 
 const DetailCommentBox = ({commentData, commentUsers, setpopup1State}) => {
+    const publicUrl = process.env.PUBLIC_URL;
     const allCommentAction = () => {
         setpopup1State(true);
         let scrollY = "";
@@ -23,8 +24,8 @@ const DetailCommentBox = ({commentData, commentUsers, setpopup1State}) => {
                                 <div className="commentImg">
                                     <img src={
                                         commentUsers.filter((user)=>user._id === comment.userId)[0].profileImg
-                                        ?commentUsers.filter((user)=>user._id === comment.userId)[0].profileImg
-                                        :"./images/pages/detail/emptyUser.jpg"
+                                        ?`http://localhost:8000/${commentUsers.filter((user)=>user._id === comment.userId)[0].profileImg}`
+                                        :`${publicUrl}/images/pages/detail/emptyUser.jpg`
                                     } alt="유저 썸네일" />
                                 </div>
                                 <div className="commentId">{commentUsers.filter((user)=>user._id === comment.userId)[0].userId}</div>
