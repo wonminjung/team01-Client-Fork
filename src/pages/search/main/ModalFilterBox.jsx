@@ -11,11 +11,10 @@ import BasicButton from '../../../components/button/BasicButton';
 
 
 const ModalFilterBox = ({searchParams, setSearchParams, isFilterActivate, 
-    handleFilterStatus, setContentData, setMaxPage,
-    setSearchResultMessage, setRoomsCount, setClickRoom}) => {
+    handleFilterStatus, setContentData, setMaxPage, setSearchResultMessage, setRoomsCount, setClickRoom}) => {
 
     // 필터창에서 URI 변경 전
-    const [ beforeUri, setBeforeUri ] = useState("");
+    const [ beforeUri ] = useState("");
 
     const { currentPage } = useParams();
 
@@ -121,7 +120,7 @@ const ModalFilterBox = ({searchParams, setSearchParams, isFilterActivate,
             const params = createSearchParams(
                 {
                     cate: getKey, val: val, sdate: sdate, edate: edate, guests: guests, lPrice: value[0], gPrice: value[1], 
-                    maxUser: maxUser, bedroom: bedroom, bed: bed, bathroom: bathroom, guests: guests
+                    maxUser: maxUser, bedroom: bedroom, bed: bed, bathroom: bathroom
                 }
             );
             setSearchParams(params);
@@ -167,7 +166,7 @@ const ModalFilterBox = ({searchParams, setSearchParams, isFilterActivate,
                 setSearchResultMessage("서버와 통신 실패");
             });
         }
-    }, [isFilterActivate, filterValue, maxUser, bedroom, bed, bathroom]);
+    }, [isFilterActivate, filterValue, maxUser, bedroom, bed, bathroom, currentPage, edate, getKey, guests, sdate, setSearchParams, setSearchResultMessage, val]);
 
 
 
