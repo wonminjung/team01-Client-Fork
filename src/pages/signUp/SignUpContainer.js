@@ -12,18 +12,18 @@ const SignUpContainer = () => {
     RemoveHeader();
     ScrollEvent();
 
+    // 회원가입 완료 시 로그인 페이지로 바로 이동시켜주기 위해
+    const navigate = useNavigate();
+
     const currentUser = useSelector((state)=>state.user.currentUser);
     const userStatus = useSelector((state)=>state.user.isLogin);
     // 현재 로그인 상태를 확인하여 아닌 경우
     if(userStatus){
         // replace 왔던 기록을 없애버린다. history
         alert("로그아웃 상태여야 합니다")
-        // return <Navigate to={"/signIn"} replace={true}/>
+        navigate('/')
     }
-    // console.log(currentUser)
 
-    // 회원가입 완료 시 로그인 페이지로 바로 이동시켜주기 위해
-    const navigate = useNavigate();
 
     const {register, handleSubmit, getValues,
         formState : {isSubmitting, isSubmitted, errors}
@@ -143,10 +143,10 @@ const SignUpContainer = () => {
                     if(res.registerSuccess){
                         alert(res.message)
                     }
-                    // 로그인 페이지로 보내기
-                    navigate('/signIn')
+                    // 회원가입 막기 , 페이지 그대로 유지
+                    navigate('/signUp')
                 })
-                .catch(console.error)
+                .catch(alert("아이디나 이메일의 중복을 확인해주세요"))
 
             })}>
 
@@ -167,14 +167,6 @@ const SignUpContainer = () => {
                             <S.LittleButton onClick={checkUserId}>중복확인</S.LittleButton>
                         </S.LittleButtonBox>
                     </S.TypeTwoContainer>
-                    {/* <S.Input
-                        type="text" id="userId"
-                        placeholder='아이디'
-                        {...register('userId', {
-                            required : true,
-                            
-                        })}
-                    /> */}
                     {errors?.userId?.type === 'required' && (
                         <S.ConfirmMessage>아이디를 입력해주세요</S.ConfirmMessage>
                     )}
