@@ -21,11 +21,17 @@ const Checkout = () => {
     const guests = searchParams.get("guests");
     const infants = searchParams.get("infants");
     const title = searchParams.get("title");
+    const days = Number(searchParams.get("days"));
+    const dayPrice = Number(searchParams.get("dayPrice"));
+    const cleanVat = Number(searchParams.get("cleanVat"));
     console.log(title);
     const { data: paymentWidget } = usePaymentWidget(clientKey, customerKey);
     // const paymentWidget = usePaymentWidget(clientKey, ANONYMOUS); // 비회원 결제
     const paymentMethodsWidgetRef = useRef(null);
-    const [price, setPrice] = useState(2_000_000);
+    const sum = dayPrice * days + cleanVat;
+    const [price, setPrice] = useState(sum + sum/10);
+    console.log(price);
+    console.log(typeof price);
     const [paymentMethodsWidgetReady, isPaymentMethodsWidgetReady] = useState(false);
     const params = createSearchParams({roomId, sdate, edate, guests, infants}).toString();
     console.log(params);

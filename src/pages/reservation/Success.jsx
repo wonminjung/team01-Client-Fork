@@ -111,10 +111,10 @@ const Success = () => {
                 </div>
                 <div className="p-grid typography--p" style={{ marginTop: "10px" }}>
                     <div className="p-grid-col text--left">
-                        <b>주문번호</b>
+                        <b>예약된 숙소</b>{/* <b>주문번호</b> */}
                     </div>
                     <div className="p-grid-col text--right" id="orderId">
-                        {`${searchParams.get("orderId")}`}
+                    {`${searchParams.get("title")}`}{/* {`${searchParams.get("orderId")}`} */}
                     </div>
                 </div>
                 {/* <div className="p-grid typography--p" style={{ marginTop: "10px" }}>
@@ -126,12 +126,20 @@ const Success = () => {
                     </div>
                 </div> */}
                 <div className="p-grid-col">
-                    <Link to="https://docs.tosspayments.com/guides/payment-widget/integration">
+                    {/* <Link to="https://docs.tosspayments.com/guides/payment-widget/integration">
                         <button className="button p-grid-col5">연동 문서</button>
                     </Link>
                     <Link to="https://discord.gg/A4fRFXQhRu">
                         <button className="button p-grid-col5" style={{ backgroundColor: "#e8f3ff", color: "#1b64da" }}>
                             실시간 문의
+                        </button>
+                    </Link> */}
+                    <Link to="/">
+                        <button className="button p-grid-col5">예약 목록 보러가기</button>
+                    </Link>
+                    <Link to="/">
+                        <button className="button p-grid-col5" style={{ backgroundColor: "#e8f3ff", color: "#1b64da" }}>
+                            메인 페이지 바로가기
                         </button>
                     </Link>
                 </div>
