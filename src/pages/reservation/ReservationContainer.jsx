@@ -7,8 +7,7 @@ import { useSearchParams } from 'react-router-dom';
 
 
 const ReservationContainer = () => {
-    const currentUser = () => {}
-    const [searchParams, setSearchParams] = useSearchParams();
+    const [searchParams] = useSearchParams();
     const roomId = searchParams.get("roomId");
     const sdate = searchParams.get("sdate");
     const edate = searchParams.get("edate");
@@ -17,7 +16,6 @@ const ReservationContainer = () => {
     const newEdate = new Date(edate);
     const newSdate = new Date(sdate);
     const days = newEdate.getDate() - newSdate.getDate();
-    console.log(newEdate, newSdate, days);
     const [roomImg, setRoomImg] = useState([]);
     const [title, setTitle] = useState("");
     const [dayPrice, setDayPrice] = useState(0);
@@ -32,14 +30,13 @@ const ReservationContainer = () => {
         };
         
         roomData().then((res) => {
-            console.log(res);
             setRoomImg(res.roomImg[0]);
             setTitle(res.title);
             setDayPrice(res.dayPrice);
             setCleanVat(res.cleanVat);
         });
 
-    }, [])
+    }, [roomId])
 
     // const [room, setRoom] = useState({});
     // const [user, setUser] = useState({});

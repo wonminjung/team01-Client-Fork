@@ -10,9 +10,7 @@ const Success = () => {
     const [responseData, setResponseData] = useState(null);
     const currentUser = useSelector(state => state.user.currentUser);
     const isLogin = useSelector(state => state.user.isLogin);
-    console.log(currentUser);
     const userOId = currentUser._id;
-    console.log(userOId);
     const roomId = searchParams.get("roomId");
     const sdate = searchParams.get("sdate");
     const edate = searchParams.get("edate");
@@ -20,20 +18,12 @@ const Success = () => {
     const infants = searchParams.get("infants");
     const title = searchParams.get("title");
     const token = localStorage.getItem("token");
-    console.log(token);
 
     // const bookingData = async() => {
     //     const response = await fetch(`http://localhost:8000/booking/reservation/success?guests=${guests}&infants=${infants}&userId=${userId}&roomId=${roomId}&createdAt=${createdAt}&updatedAt=${updatedAt}&checkInDate=${checkInDate}&checkOutDate=${checkOutDate}`);
     // };
 
     useEffect(() => {
-        console.log("userOId", userOId);
-        console.log("roomId", roomId);
-        console.log("sdate", sdate);
-        console.log("edate", edate);
-        console.log("guests", guests);
-        console.log("infants", infants);
-        
 
         // bookingList fetch() 보내기
         async function bookingData () {
@@ -82,7 +72,6 @@ const Success = () => {
 
             if (!response.ok) {
             // TODO: 구매 실패 비즈니스 로직 구현
-                console.log(json);
                 navigate(`/fail?code=${json.code}&message=${json.message}`);
                 return;
             }
@@ -99,7 +88,7 @@ const Success = () => {
     return (
         <div className="container">
             <div className="box_section" style={{ width: "600px" }}>
-                <img width="100px" src="https://static.toss.im/illusts/check-blue-spot-ending-frame.png" />
+                <img width="100px" src="https://static.toss.im/illusts/check-blue-spot-ending-frame.png" alt="success" />
                 <h2>결제를 완료했어요</h2>
                 <div className="p-grid typography--p" style={{ marginTop: "50px" }}>
                     <div className="p-grid-col text--left">
@@ -134,7 +123,7 @@ const Success = () => {
                             실시간 문의
                         </button>
                     </Link> */}
-                    <Link to="/">
+                    <Link to="/bookingList">
                         <button className="button p-grid-col5">예약 목록 보러가기</button>
                     </Link>
                     <Link to="/">
