@@ -1,9 +1,10 @@
 import { useEffect, useRef, useState, React } from "react";
-import { PaymentWidgetInstance, loadPaymentWidget, ANONYMOUS } from "@tosspayments/payment-widget-sdk";
+import { loadPaymentWidget } from "@tosspayments/payment-widget-sdk";
 import { nanoid } from "nanoid";
 import "./style.css";
 import { useQuery  } from "@tanstack/react-query";
 import { createSearchParams, useSearchParams } from "react-router-dom";
+import { useSelector } from "react-redux";
 
 const selector = "#payment-widget";
 
@@ -14,7 +15,7 @@ const clientKey = "test_gck_docs_Ovk5rk1EwkEbP0W43n07xlzm";
 const customerKey = nanoid();
 
 const Checkout = () => {
-    const [searchParams, setSearchParams] = useSearchParams();
+    const [searchParams] = useSearchParams();
     const roomId = searchParams.get("roomId");
     const sdate = searchParams.get("sdate");
     const edate = searchParams.get("edate");
@@ -24,17 +25,17 @@ const Checkout = () => {
     const days = Number(searchParams.get("days"));
     const dayPrice = Number(searchParams.get("dayPrice"));
     const cleanVat = Number(searchParams.get("cleanVat"));
-    console.log(title);
     const { data: paymentWidget } = usePaymentWidget(clientKey, customerKey);
     // const paymentWidget = usePaymentWidget(clientKey, ANONYMOUS); // 비회원 결제
     const paymentMethodsWidgetRef = useRef(null);
     const sum = dayPrice * days + cleanVat;
-    const [price, setPrice] = useState(sum + sum/10);
-    console.log(price);
-    console.log(typeof price);
+    const [price] = useState(sum + sum/10);
     const [paymentMethodsWidgetReady, isPaymentMethodsWidgetReady] = useState(false);
     const params = createSearchParams({roomId, sdate, edate, guests, infants}).toString();
-    console.log(params);
+    const currentUser = useSelector(state => state.user.currentUser);
+    const userName = currentUser.name;
+    const userEmail = currentUser.email;
+    const userPhone = currentUser.phone;
 
     useEffect(() => {
         if (paymentWidget == null) {
@@ -54,7 +55,7 @@ const Checkout = () => {
             paymentMethodsWidgetRef.current = paymentMethodsWidget;
             isPaymentMethodsWidgetReady(true);
         });
-    }, [paymentWidget]);
+    }, [paymentWidget,price]);
 
     useEffect(() => {
         const paymentMethodsWidget = paymentMethodsWidgetRef.current;
@@ -86,10 +87,10 @@ const Checkout = () => {
                             // @docs https://docs.tosspayments.com/reference/widget-sdk#requestpayment결제-정보
                                 await paymentWidget?.requestPayment({
                                     orderId: nanoid(),
-                                    orderName: "토스 티셔츠 외 2건",
-                                    customerName: "김토스",
-                                    customerEmail: "customer123@gmail.com",
-                                    customerMobilePhone: "01012341234",
+                                    orderName: title,
+                                    customerName: userName,
+                                    customerEmail: userEmail,
+                                    customerMobilePhone: userPhone.replaceAll("-",""),
                                     successUrl: `${window.location.origin}/reservation/checkout/success?${params}&title=${title}`,
                                     failUrl: `${window.location.origin}/fail`,
                                 });
