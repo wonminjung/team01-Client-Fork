@@ -20,24 +20,22 @@ const BookingListContainer = () => {
     const [activeIndex, setActiveIndex] = useState(null); // 열린 아코디언 패널의 인덱스를 저장하는 상태 (null은 패널이 열리지 않은 상태)
     const [itemData, setItemData] = useState([]); // 예약한 숙소 데이터를 저장
 
-     
     useEffect(() => {
-
         // 새로고침할 때, Modal창 잠깐 뜨는 것 방지 (userStatus가 null로 초기화되면 실행중지시킴)
-        if(!userStatus) {
+        if (!userStatus) {
             return;
         }
 
         // bookingList 가져오기  
         const getBookingList = async () => {
-            try{    
-                    const response = await fetch(`http://localhost:8000/booking/bookingList`,{
-                    method : "POST", // 사용자정보 노출 안되기 위해서 GET대신 PUT사용
-                    headers : {
-                        'Content-Type' : 'application/json; charset=utf-8'
+            try {
+                const response = await fetch(`http://localhost:8000/booking/bookingList`, {
+                    method: "POST", // 사용자정보 노출 안되기 위해서 GET대신 PUT사용
+                    headers: {
+                        'Content-Type': 'application/json; charset=utf-8'
                     },
                     body: JSON.stringify({
-                        userId : userObjectId // user스키마를 참조하기 위해 bookingList에 userId가 userObjectId로 지정해둠
+                        userId: userObjectId // user스키마를 참조하기 위해 bookingList에 userId가 userObjectId로 지정해둠
                     })
                 });
                 if (!response.ok) {
@@ -45,26 +43,27 @@ const BookingListContainer = () => {
                 }
                 // 서버로부터 가져온 bookingList 데이터
                 const data = await response.json();
-                if(data.length>0){ // 예약 내역이 있는 경우,
-                    setIsReserved(true);// 예약한 숙소가 있어서 상태여부 true로 바꿔서 예약한숙소 보여줌
-                    setItemData(data);// 뿌려줄 예약한 숙소 데이터 상태관리 시작
-                }else{
+                if (data.length > 0) { // 예약 내역이 있는 경우,
+                    // 체크인 날짜 오름차순으로 정렬 (가장 이른 예약건부터 정렬)
+                    // sort는 비교 함수가 음수를 반환하면, 첫 번째 인수가 두 번째 인수보다 앞에 오도록 해준다.
+                    data.sort((a, b) => new Date(a.checkInDate) - new Date(b.checkInDate));
+                    setIsReserved(true); // 예약한 숙소가 있어서 상태여부 true로 바꿔서 예약한숙소 보여줌
+                    setItemData(data); // 뿌려줄 예약한 숙소 데이터 상태관리 시작
+                } else {
                     setIsReserved(false);
                 }
-            }catch(error){ // 데이터를 못가져왔을 경우
+            } catch (error) { // 데이터를 못가져왔을 경우
                 console.error("Error fetching bookingList:", error);
                 setIsReserved(false);
             }
         }
         getBookingList();
+    }, [userStatus, userObjectId]) // 사용자가 바뀔때마다 새롭게 요청하기
 
-    },[userStatus, userObjectId]) // 사용자가 바뀔때마다 새롭게 요청하기
-
-    
     // 아코디언 클릭 핸들러 (BookingItem 부분 클릭시, BookingDetail 열림)
     const handleAccordionClick = (index) => {
         if (typeof index !== 'undefined') { // 클릭한 bookingItem이 있다면,
-            setActiveIndex(activeIndex === index ? null : index); 
+            setActiveIndex(activeIndex === index ? null : index);
             // 이미 열려있는 bookingItem은 닫고(activeIndex=null)
             // 클릭한 bookingItem은 연다.(activeIndex=index)
         } else {
@@ -72,51 +71,50 @@ const BookingListContainer = () => {
         }
     };
 
-
     return (
-            <S.BookingListContainer>
-                {userStatus ?
+        <S.BookingListContainer>
+            {userStatus ?
                 <>
                     <S.TitleWrapper>
                         <h1 className="pageTitle">여행</h1>
                         <h4 className="pageSubTitle">예정된 예약</h4>
                     </S.TitleWrapper>
                     <ul>
-                            {/* 로딩중일 때(데이터를 가져오는 중일 때 처리) */}
-                            {isReserved === null ? (
-                                <div></div> // 빈화면
-                                ) : isReserved ? ( // 예약한 숙소 있을 때,
-                                itemData.map((item, index) => (
-                                    <div key={index} style={{marginBottom :'50px'}}>
-                                        <BookingItem
-                                            item={item}
-                                            onClick={() => handleAccordionClick(index)}
-                                            // isActive 속성으로 현재 항목이 활성 상태인지 여부를 전달(클래스 붙여 css변화 줌)
-                                            isActive={activeIndex === index}
+                        {/* 로딩중일 때(데이터를 가져오는 중일 때 처리) */}
+                        {isReserved === null ? (
+                            <div></div> // 빈화면
+                        ) : isReserved ? ( // 예약한 숙소 있을 때,
+                            itemData.map((item, index) => (
+                                <div key={index} style={{ marginBottom: '50px' }}>
+                                    <BookingItem
+                                        item={item}
+                                        onClick={() => handleAccordionClick(index)}
+                                        // isActive 속성으로 현재 항목이 활성 상태인지 여부를 전달(클래스 붙여 css변화 줌)
+                                        isActive={activeIndex === index}
+                                    />
+                                    {/* activeIndex가 현재 항목의 index와 같으면 상세 정보를 표시 */}
+                                    {activeIndex === index ? (
+                                        // activeIndex가 현재 항목의 index와 같으면 500px(열림), 아니면 0으로 설정
+                                        <S.panel style={{ maxHeight: (activeIndex === index) ? '500px' : '0' }}>
+                                            <BookingDetail
+                                                item={item}
+                                                index={index}
+                                                isActive={activeIndex === index}
                                             />
-                                            {/* activeIndex가 현재 항목의 index와 같으면 상세 정보를 표시 */}
-                                            {activeIndex === index ? (
-                                                // activeIndex가 현재 항목의 index와 같으면 500px(열림), 아니면 0으로 설정
-                                            <S.panel style={{ maxHeight: (activeIndex === index) ? '500px' : '0' }}>
-                                                <BookingDetail
-                                                    item={item}
-                                                    index={index}
-                                                    isActive={ activeIndex === index}
-                                                    />
-                                             </S.panel>) : <div></div>}
-                                    </div>
-                                ))
-                                ) : ( // 예약한 숙소 없을 때, 띄우는 화면
-                                <NotBooking />
-                            )}
+                                        </S.panel>) : <div></div>}
+                                </div>
+                            ))
+                        ) : ( // 예약한 숙소 없을 때, 띄우는 화면
+                            <NotBooking />
+                        )}
                     </ul>
                 </>
                 :
                 // 현재 로그인 상태를 확인하여 아닌 경우 띄우는 '로그인 권유하는 화면'
                 <>
-                <NeedLogin />
-            </>}
-            </S.BookingListContainer>
+                    <NeedLogin />
+                </>}
+        </S.BookingListContainer>
     );
 };
 
