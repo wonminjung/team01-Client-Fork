@@ -20,7 +20,7 @@ const LeftSide = ({datas}) => {
             <Charge />
             <Refund datas={datas}/>
             <Rules />
-            <Link to={`/reservation/checkout?title=${datas.title}&dayPrice=${datas.dayPrice}`}>
+            <Link to={`/reservation/checkout?roomId=${datas.roomId}&sdate=${datas.sdate}&edate=${datas.edate}&guests=${datas.guests}&infants=${datas.infants}&title=${datas.title}&`}>
                 <S.ChargeButton>
                     확인 및 결제
                 </S.ChargeButton>

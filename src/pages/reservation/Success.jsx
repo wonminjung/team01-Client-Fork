@@ -11,13 +11,48 @@ const Success = () => {
     const currentUser = useSelector(state => state.user.currentUser);
     const isLogin = useSelector(state => state.user.isLogin);
     console.log(currentUser);
-    const userId = currentUser.userId;
+    const userOId = currentUser._id;
+    console.log(userOId);
+    const roomId = searchParams.get("roomId");
+    const sdate = searchParams.get("sdate");
+    const edate = searchParams.get("edate");
+    const guests = searchParams.get("guests");
+    const infants = searchParams.get("infants");
+    const title = searchParams.get("title");
+    const token = localStorage.getItem("token");
+    console.log(token);
 
     // const bookingData = async() => {
     //     const response = await fetch(`http://localhost:8000/booking/reservation/success?guests=${guests}&infants=${infants}&userId=${userId}&roomId=${roomId}&createdAt=${createdAt}&updatedAt=${updatedAt}&checkInDate=${checkInDate}&checkOutDate=${checkOutDate}`);
     // };
 
     useEffect(() => {
+        console.log("userOId", userOId);
+        console.log("roomId", roomId);
+        console.log("sdate", sdate);
+        console.log("edate", edate);
+        console.log("guests", guests);
+        console.log("infants", infants);
+        
+
+        // bookingList fetch() 보내기
+        async function bookingData () {
+            const response = await fetch(`http://localhost:8000/booking/bookingsuccess`, {
+                method: 'POST',
+                body: JSON.stringify({
+                    roomId: roomId,
+                    checkInDate: sdate,
+                    checkOutDate: edate,
+                    guests: guests,
+                    infants: infants,
+                }),
+                headers: {
+                    "Content-Type" : "application/json; charset=utf-8",
+                    'Authorization' : `Bearer ${token}`,
+                },
+            });
+        };
+        bookingData().then(console.log).catch(console.error)
         const requestData = {
             orderId: searchParams.get("orderId"),
             amount: searchParams.get("amount"),
@@ -82,14 +117,14 @@ const Success = () => {
                         {`${searchParams.get("orderId")}`}
                     </div>
                 </div>
-                <div className="p-grid typography--p" style={{ marginTop: "10px" }}>
+                {/* <div className="p-grid typography--p" style={{ marginTop: "10px" }}>
                     <div className="p-grid-col text--left">
                         <b>paymentKey</b>
                     </div>
                     <div className="p-grid-col text--right" id="paymentKey" style={{ whiteSpace: "initial", width: "250px" }}>
                         {`${searchParams.get("paymentKey")}`}
                     </div>
-                </div>
+                </div> */}
                 <div className="p-grid-col">
                     <Link to="https://docs.tosspayments.com/guides/payment-widget/integration">
                         <button className="button p-grid-col5">연동 문서</button>
