@@ -15,16 +15,17 @@ const WishListContainer = () => {
     ResetHeader();
     ScrollEvent();
     
-    const userStatus = useSelector((state) => state.user.isLogin); // 유저의 로그인 상태 (from redux)
-    const userId = useSelector((state)=> state.user.currentUser.userId); // 현재 로그인한 유저의 id
     const navigate = useNavigate();
-    const [rooms, setRooms] = useState([]); // 숙소의 상태
-    const [isWished, setIsWished] = useState(null); // 유저가 wishItem이 있는지 여부
+    const userStatus = useSelector((state) => state.user.isLogin); // 유저의 로그인 상태 (from redux)
+    const userId = useSelector((state)=> state.user.currentUser.userId); // 현재 로그인한 유저의 id (from redux)
+    const [rooms, setRooms] = useState([]); // 사용자가 찜한 숙소 목록을 저장
+    const [isWished, setIsWished] = useState(null); // 용자가 위시리스트에 항목이 있는지 여부를 저장
     // isWished=null(null은 값이 아직 설정되지 않았음을 의미 => 로딩중 표현)
-    // isWished=false(false는 특정 조건이 충족되지 않음을 의미=>모달창 표시 여부 표현)
-    const [update, setUpdate] = useState(true);
+    // isWished=false(false는 특정 조건이 충족되지 않음을 의미=> wishList가 없어서 모달창 띄우기)
+    const [update, setUpdate] = useState(true); //위시리스트가 갱신될 때 상태를 트리거하는 변수
 
 
+    // 컴포넌트가 마운트되거나 userId, update가 변경될 때 실행
     useEffect(()=> {
         // 새로고침할 때, Modal창 잠깐 뜨는 것 방지
         if(!userStatus) {
@@ -43,35 +44,40 @@ const WishListContainer = () => {
                 })
 
                 const data = await response.json();
-                if(data && data.rooms) { //rooms = user.wishList
+
+                //데이터가 성공적으로 로드되면 rooms와 isWished 상태를 업데이트
+                if(data && data.rooms) { // data.rooms = user.wishList
                     setRooms(data.rooms);
-                    setIsWished(data.rooms.length > 0); //찜한 숙소가 1개 이상이면 모달창 안 띄움.
+                    //찜한 숙소가 1개 이상이면 모달창 안 띄우기 위한 isWished 상태 설정
+                    setIsWished(data.rooms.length > 0); 
                 }else{
-                    setIsWished(false); // 데이터가 없을경우, isWished false로
+                    // 데이터가 없을경우, isWished false로
+                    setIsWished(false); 
                 }
             }catch(error){
                 console.error("Error fetching wishList:", error);
                 setIsWished(false); // 에러 발생 시에도, isWished false로 
             }
-
         };
         getWishList()
-
     },[userId, update]) // update값이 변경되면 useEffect 재실행!
 
 
 
     return (
         <S.WishListContainer>
+            {/* 유저가 로그인 상태인 경우, */}
             {userStatus?
             <>
                 <S.PageTitle>위시리스트</S.PageTitle>
-                {/* 찜한 숙소가 있다면 바로 위시리스트 페이지 보이게 하기 */}
+                {/* isWished가 null이면 로딩 상태를 표시 */}
                 {isWished === null ? (
                     <div></div>
+                    // isWished가 true이면 위시리스트 항목들을 표시
                     ) : isWished ?  (
                         <WishItemContents rooms={rooms} userId={userId} setUpdate={setUpdate} update={update}/>
                     ): (
+                        // isWished가 false이면 모달 창을 표시하여 위시리스트가 비어 있음을 알림
                         <div>
                             <Modal showButtons={false}>
                                 <div className='modalDecorate'>
@@ -88,6 +94,7 @@ const WishListContainer = () => {
             </>
             :
             // 현재 로그인 상태를 확인하여 아닌 경우
+            // 로그인 필요를 알리는 NeedLogin 컴포넌트를 렌더링
             <>
                 <NeedLogin />
             </>

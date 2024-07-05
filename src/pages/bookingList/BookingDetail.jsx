@@ -9,16 +9,20 @@ import { faCalendarDays, faCircleInfo, faHandHoldingDollar, faLocationDot, faPho
 
 const BookingDetail = ({item, isActive, index,}) => {
 
-    const[isHovered, setIsHovered] = useState(false);
     const navigate = useNavigate();
-    const stayStartDate = new Date(item.checkInDate);
-    const stayEndDate = new Date(item.checkOutDate);
-    const timeDiff = Math.abs(stayEndDate.getTime() - stayStartDate.getTime());
-    const stayPeriod = Math.ceil(timeDiff / (1000 * 3600 *24));
-    const sub = Math.round((item.roomId.dayPrice*stayPeriod) + item.roomId.cleanVat)
-    const serviceVat = sub * 0.1;
-    const total = sub + serviceVat;
+    const[isHovered, setIsHovered] = useState(false); // 마우스 호버 상태를 표시하는 데 사용
+    
+    const stayStartDate = new Date(item.checkInDate); // 체크인 날짜
+    const stayEndDate = new Date(item.checkOutDate); // 체크아웃 날짜
 
+    const timeDiff = Math.abs(stayEndDate.getTime() - stayStartDate.getTime()); 
+    const stayPeriod = Math.ceil(timeDiff / (1000 * 3600 *24)); // 숙박기간
+
+    const sub = Math.round((item.roomId.dayPrice*stayPeriod) + item.roomId.cleanVat) 
+    const serviceVat = sub * 0.1;
+    const total = sub + serviceVat;// 총 지불할 금액
+
+    // 날짜 포맷팅
     const formatDate = (dateString) => {
         const date = new Date(dateString);
         const month = date.getMonth() + 1;
@@ -34,13 +38,13 @@ const BookingDetail = ({item, isActive, index,}) => {
         const pm = partsForTime[1];
         const time = partsForTime[2];
 
-        // 오후/오전 여부를 판별하고 시간을 12시간 형식으로 변경
         if (pm === "오후") {
             return `오후 ${time}시`;
         }
-            return timeString; // 예외 처리
+            return timeString;
     };
 
+    // 체크아웃 문자열 추출 함수
     const extractCheckOutTime = (timeString) => {
         // 시간 문자열에서 ":"를 기준으로 분리
         const parts = timeString.split(' ');
@@ -49,14 +53,13 @@ const BookingDetail = ({item, isActive, index,}) => {
         const partsForTime = part.split(':');
         const time = partsForTime[0]; //4
     
-        // 오후/오전 여부를 판별하고 시간을 12시간 형식으로 변경
         if (amPm === "오전") {
             return `오전 ${time}시`;
         }
-            return timeString; // 예외 처리
+            return timeString; 
     };
 
-
+    //  onClickCopy 함수를 통해 주소를 클립보드에 복사하는 기능을 구현
     const onClickCopy = async (text) => {
         try {
           await navigator.clipboard.writeText(text);
@@ -66,6 +69,7 @@ const BookingDetail = ({item, isActive, index,}) => {
         }
       };
 
+      // 원화 단위 화폐 포맷팅 (1,000단위 콤마 찍기)
       const coma = (prop) => {
         const result = prop.toLocaleString('ko-KR');
         return result;
