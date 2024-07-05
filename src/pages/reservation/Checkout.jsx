@@ -3,7 +3,7 @@ import { PaymentWidgetInstance, loadPaymentWidget, ANONYMOUS } from "@tosspaymen
 import { nanoid } from "nanoid";
 import "./style.css";
 import { useQuery  } from "@tanstack/react-query";
-import { useSearchParams } from "react-router-dom";
+import { createSearchParams, useSearchParams } from "react-router-dom";
 
 const selector = "#payment-widget";
 
@@ -15,13 +15,26 @@ const customerKey = nanoid();
 
 const Checkout = () => {
     const [searchParams, setSearchParams] = useSearchParams();
+    const roomId = searchParams.get("roomId");
+    const sdate = searchParams.get("sdate");
+    const edate = searchParams.get("edate");
+    const guests = searchParams.get("guests");
+    const infants = searchParams.get("infants");
     const title = searchParams.get("title");
-    const dayPrice = searchParams.get("dayPrice");
+    const days = Number(searchParams.get("days"));
+    const dayPrice = Number(searchParams.get("dayPrice"));
+    const cleanVat = Number(searchParams.get("cleanVat"));
+    console.log(title);
     const { data: paymentWidget } = usePaymentWidget(clientKey, customerKey);
     // const paymentWidget = usePaymentWidget(clientKey, ANONYMOUS); // 비회원 결제
     const paymentMethodsWidgetRef = useRef(null);
-    const [price, setPrice] = useState(2_000_000);
+    const sum = dayPrice * days + cleanVat;
+    const [price, setPrice] = useState(sum + sum/10);
+    console.log(price);
+    console.log(typeof price);
     const [paymentMethodsWidgetReady, isPaymentMethodsWidgetReady] = useState(false);
+    const params = createSearchParams({roomId, sdate, edate, guests, infants}).toString();
+    console.log(params);
 
     useEffect(() => {
         if (paymentWidget == null) {
@@ -77,7 +90,7 @@ const Checkout = () => {
                                     customerName: "김토스",
                                     customerEmail: "customer123@gmail.com",
                                     customerMobilePhone: "01012341234",
-                                    successUrl: `${window.location.origin}/reservation/checkout/success`,
+                                    successUrl: `${window.location.origin}/reservation/checkout/success?${params}&title=${title}`,
                                     failUrl: `${window.location.origin}/fail`,
                                 });
                             } catch (error) {
