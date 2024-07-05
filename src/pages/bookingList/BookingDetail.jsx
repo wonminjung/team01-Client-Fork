@@ -193,6 +193,14 @@ const BookingDetail = ({item, isActive, index,}) => {
                     게스트는 호스트에게 문제 시정, 부분 환불 또는 예약 취소 및 전액 환불을 요청할 수 있습니다. 
                     </p>
                 </div>
+                {/* 예약 취소 버튼 */}
+                <div className="cancelBooking">
+                        <BasicButton  onMouseEnter={() => setIsHovered(true)} onMouseLeave={() => setIsHovered(false)}>
+                            <div>
+                                <Link to={`/detail?roomId=${item.roomId._id}`}><img src = { isHovered ? "./images/pages/bookingList/home.svg" : "./images/pages/bookingList/home_y.svg"} alt="home"/>예약 취소</Link> 
+                            </div>
+                        </BasicButton> 
+                </div>
                 {/* 숙소 페이지로 이동 버튼 */}
                 <div className="navToDetailPage">
                         <BasicButton  onMouseEnter={() => setIsHovered(true)} onMouseLeave={() => setIsHovered(false)}>

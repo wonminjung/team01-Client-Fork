@@ -522,6 +522,39 @@ S.bookingDetailWrapper = styled.div`
                 font-size: 14px;
             }
         }
+        & .cancelBooking{
+            position: absolute;
+            top: -30px;
+            right: 250px;
+            & button{
+                width: 200px;
+                position: relative;
+                margin: 4px;
+                padding: 0;
+                &>div{
+                    width: 100%;
+                    height: 100%;
+                    & a{
+                        display: flex;
+                        justify-content: center;
+                        align-items: center;
+                        height: 100%;
+                        margin: 0;
+                        color : ${PALETTE.yellow};
+                        &:hover{
+                            color: white;
+                        }
+                    }
+                    & img{
+                        position: relative;
+                        width: 20px;
+                        margin-right: 5px;
+                        top: -1px;
+                    }
+                }
+            }
+        }
+                
         & .navToDetailPage{
             position: absolute;
             top: -30px;
