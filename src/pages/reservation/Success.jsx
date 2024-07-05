@@ -134,7 +134,7 @@ const Success = () => {
                             실시간 문의
                         </button>
                     </Link> */}
-                    <Link to="/">
+                    <Link to="/bookingList">
                         <button className="button p-grid-col5">예약 목록 보러가기</button>
                     </Link>
                     <Link to="/">

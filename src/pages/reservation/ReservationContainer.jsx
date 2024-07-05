@@ -7,7 +7,6 @@ import { useSearchParams } from 'react-router-dom';
 
 
 const ReservationContainer = () => {
-    const currentUser = () => {}
     const [searchParams, setSearchParams] = useSearchParams();
     const roomId = searchParams.get("roomId");
     const sdate = searchParams.get("sdate");
