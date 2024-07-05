@@ -50,7 +50,7 @@ const ReservationContainer = () => {
                 <h2>확인 및 결제</h2>
             </div>
             <div className='LRcontainer'>
-                <LeftSide datas={datas}/>
+                <LeftSide datas={datas} days={days}/>
                 <RightSide datas={datas} days={days} />
             </div>
         </S.ReservationContainer>
