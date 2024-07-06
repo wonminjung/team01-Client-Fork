@@ -30,8 +30,6 @@ const SearchMainContainer = ({ searchParams, setSearchParams, isFilterActivate, 
 
     // 페이지 당 보일 숙소 총 개수
     const contentPerPage = 18;
-
-    const currentPage = +useParams().currentPage;
     
     const cate = searchParams.get("cate") ?? "searchResult";
     const lPrice = searchParams.get("lPrice") ?? 0;
@@ -45,6 +43,7 @@ const SearchMainContainer = ({ searchParams, setSearchParams, isFilterActivate, 
     const edate = searchParams.get("edate") ?? now;
     const guests = searchParams.get("guests") ?? 0;
 
+    const currentPage = +useParams().currentPage;
 
     // URI 변경될 때마다 렌더링
     useEffect(() => {
@@ -99,7 +98,7 @@ const SearchMainContainer = ({ searchParams, setSearchParams, isFilterActivate, 
             });
 
         }
-    }, [searchParams, currentPage]);
+    }, [searchParams, currentPage, bathroom, bed, bedroom, cate, edate, gPrice, guests, isFilterActivate, lPrice, maxUser, sdate, setSearchParams, val]);
 
 
 

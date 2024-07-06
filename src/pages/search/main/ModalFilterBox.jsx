@@ -5,18 +5,17 @@ import { faBath, faBed, faHouse, faUser, faXmark } from '@fortawesome/free-solid
 
 import RangeSlider from 'react-range-slider-input';
 import 'react-range-slider-input/dist/style.css';
-import { createSearchParams, useParams } from 'react-router-dom';
+import { createSearchParams, useNavigate, useParams } from 'react-router-dom';
 import BasicButton from '../../../components/button/BasicButton';
 
 
 
-const ModalFilterBox = ({searchParams, setSearchParams, isFilterActivate, 
-    handleFilterStatus, setContentData, setMaxPage, setSearchResultMessage, setRoomsCount, setClickRoom}) => {
+const ModalFilterBox = ({ searchParams, setSearchParams, isFilterActivate, handleFilterStatus, setMaxPage, setSearchResultMessage, setRoomsCount }) => {
 
     // 필터창에서 URI 변경 전
     const [ beforeUri ] = useState("");
 
-    const { currentPage } = useParams();
+    const currentPage = +useParams().currentPage;
 
     const getKey = searchParams.get('cate') ?? "searchResult"; // 카테고리 params 가져오기
     const getPrice = [searchParams.get("lPrice") ?? 0, searchParams.get("gPrice") ?? 1000000]; // 가격범위 params 가져오기
@@ -24,10 +23,10 @@ const ModalFilterBox = ({searchParams, setSearchParams, isFilterActivate,
     const getBedroom = searchParams.get("bedroom") ?? 0; // 침실 params 가져오기
     const getBed = searchParams.get("bed") ?? 0; // 침대 params 가져오기
     const getBathroom = searchParams.get("bathroom") ?? 0; // 욕실 params 가져오기
-    const val = searchParams.get("val");
-    const sdate = searchParams.get("sdate");
-    const edate = searchParams.get("edate");
-    const guests = searchParams.get("guests");
+    const val = searchParams.get("val") ?? "";
+    const sdate = searchParams.get("sdate") ?? new Date();
+    const edate = searchParams.get("edate") ?? new Date();
+    const guests = searchParams.get("guests") ?? 0;
 
     const [value, setValue] = useState([getPrice[0], getPrice[1]]); // 가격범위 초기세팅을 params로 세팅
     const [filterValue, setFilterValue] = useState([getPrice[0], getPrice[1]]);
@@ -42,12 +41,18 @@ const ModalFilterBox = ({searchParams, setSearchParams, isFilterActivate,
     const bedBoxRef = useRef(0); // 최대침대박스 참조
     const bathroomBoxRef = useRef(0); // 최대욕조박스 참조
 
-    // 임시 숙소 저장
-    const [ tempContentData, setTempContentData ] = useState([]);
     // 임시 최대 페이지 저장
     const [ tempMaxPage, setTempMaxPage ] = useState(0);
     // 임시 숙소 개수 저장
     const [ tempContentCount, setTempContentCount ] = useState(0);
+
+    const navigate = useNavigate();
+
+    // 변경되는 쿼리스트링 담아줄 변수
+    const [ finishUrl, setFinishUrl ] = useState();
+
+    // 페이지 당 보일 숙소 총 개수
+    const contentPerPage = 18;
 
 
     const setVal = () => { // 가격범위 값 조건 함수
@@ -84,19 +89,18 @@ const ModalFilterBox = ({searchParams, setSearchParams, isFilterActivate,
     }
 
     const viewFiltered = () => {
-        // 임시 저장소에 있던거 클릭 이벤트 발생하면 contentData에 업데이트
-        setContentData(tempContentData);
         // 임시로 넣어둔 맥스 페이지 maxPage에 업데이트
         setMaxPage(tempMaxPage);
         // 임시 숙소 개수 업데이트
         setRoomsCount(tempContentCount);
-        // 검색결과 첫 숙소를 미니디테일에 표시
-        setClickRoom(tempContentData[0]);
 
         // 조건 초기화
         resetCondition();
         // 모달 닫기
         handleFilterStatus();
+
+        // 숙소보기 버튼 누르면 1페이지로 초기화
+        navigate(finishUrl);
     }
 
     // 필터창 닫기
@@ -117,25 +121,20 @@ const ModalFilterBox = ({searchParams, setSearchParams, isFilterActivate,
     // 필터 데이터 선택할 때마다 숙소 개수 업데이트
     useEffect(() => {
         if (isFilterActivate) {
-            const params = createSearchParams(
-                {
+            const params = {
                     cate: getKey, val: val, sdate: sdate, edate: edate, guests: guests, lPrice: value[0], gPrice: value[1], 
-                    maxUser: maxUser, bedroom: bedroom, bed: bed, bathroom: bathroom
-                }
-            );
-            setSearchParams(params);
+                    maxUser: maxUser, bedroom: bedroom, bed: bed, bathroom: bathroom, page: currentPage
+            }
 
             // 숙소 요청
             const getRoomList = async () => {
-                const response = await fetch(`http://localhost:8000/room/search?${params.toString()}`, 
+                const response = await fetch(`http://localhost:8000/room/search`, 
                     {
                         method: "POST",
                         headers: {
                             "Content-Type": "application/json; charset=utf-8"
                         },
-                        body: JSON.stringify({
-                            page: currentPage
-                        })
+                        body: JSON.stringify({ ...params })
                     }
                 );
                 const rooms = await response.json();
@@ -149,7 +148,7 @@ const ModalFilterBox = ({searchParams, setSearchParams, isFilterActivate,
                     setSearchResultMessage(res.message);
                 } else {
                     // 페이지 당 표시할 숙소로 나눠서 임시 최대 페이지 설정
-                    setTempMaxPage(Math.floor(res.roomsCount / (18 + 1) + 1));
+                    setTempMaxPage(Math.floor(res.roomsCount / (contentPerPage + 1) + 1));
 
                     // body 스크롤 초기화
                     window.scrollTo({ top: 0, behavior: "smooth" });
@@ -157,16 +156,16 @@ const ModalFilterBox = ({searchParams, setSearchParams, isFilterActivate,
                 // 숙소 전체 결과 개수
                 setTempContentCount(res.roomsCount);
 
-                // 숙소 결과 임시 저장 상태에 담기
-                setTempContentData(res.rooms);
-
+                // 숙소보기 버튼 누르기 전 쿼리스트링 업데이트
+                const finishParams = createSearchParams(params);
+                setFinishUrl(`1/?${finishParams}`);
             })
             .catch((err) => {
                 console.error(err);
-                setSearchResultMessage("서버와 통신 실패");
             });
+
         }
-    }, [isFilterActivate, filterValue, maxUser, bedroom, bed, bathroom, currentPage, edate, getKey, guests, sdate, setSearchParams, setSearchResultMessage, val]);
+    }, [isFilterActivate, filterValue, maxUser, bedroom, bed, bathroom, guests, edate, getKey, sdate, setSearchResultMessage, val, currentPage]);
 
 
 
