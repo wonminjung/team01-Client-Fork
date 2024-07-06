@@ -3,8 +3,11 @@ import theme from '../../global/theme';
 const S = {};
 
 S.ReservationContainer = styled.div`
+    max-width: 1080px;
+    width: 100%;
     position: relative;
     padding: 50px 50px 50px;
+    margin: 0 auto;
     & h1 {
         font-size: 50px;
         margin-bottom: 50px;
@@ -46,6 +49,12 @@ S.ReservationContainer = styled.div`
         width: 28px;
         height: 28px;
         margin-right: 5px;
+        cursor: pointer;
+        &:hover {
+            &::after {
+                border-color: ${theme.PALETTE.yellow};
+            }
+        }
     }
     & .prevButton::after {
         position: absolute;
@@ -57,19 +66,19 @@ S.ReservationContainer = styled.div`
         border-top: 2px solid #000; /* 선 두께 */
         border-right: 2px solid #000; /* 선 두께 */
         transform: rotate(225deg); /* 각도 */
+        transition: 0.3s;
     }
     & .bodyTop {
         margin: 20px auto;
-        width: 1080px;
     }
     & .LRcontainer {
+        width: 100%;
         display: flex;
         justify-content: flex-start;
         align-items: flex-start;
-        width: 1080px;
         margin: 0 auto;
     }
-    & underline {
+    & span {
         text-decoration: underline;
         width: 100%;
     }
@@ -84,13 +93,19 @@ S.SideBox = styled.div`
     width: calc(100% - 430px);
     & img {
         height: 9px;
+        margin-right: 5px;
+
+    }
+    & a {
+        width: fit-content;
+        display: block;
     }
     &.rightBox {
         position: -webkit-sticky;
         position: sticky;
         top: 125px;
         padding: 0 20px;
-        width: 40%;
+        width: 430px;
         min-height: 360px;
         border: 1px solid ${theme.PALETTE.gray[200]};
         border-radius: 20px;
@@ -103,6 +118,7 @@ S.SideBox = styled.div`
             &:first-child div:nth-child(2) {
                 display: flex;
                 align-items: center; /*위 아래 정렬. flex-direction: column이면 좌우 정렬*/
+                width: calc(100% - 120px);
             }
             &:nth-child(2) {
                 flex-direction: column;
@@ -186,7 +202,7 @@ S.CategoryBox = styled.div`
     }
     & .chargeBox {
         position: relative;
-        width: 450px;
+        width: 100%;
         & input {
             width: 100%;
             margin-bottom: 12px;
@@ -295,7 +311,7 @@ S.ChargeButton = styled.div`
     background-color: ${theme.PALETTE.orange};
     color: #fff;
     border-radius: 20px;
-    font-size: 20px;
+    font-size: 16px;
     font-weight: 500;
 `
 

@@ -4,7 +4,9 @@ import S from './style';
 const PrevButton = () => {
     
     return (
-        <div className='prevButton' />
+        <div className='prevButton' onClick={()=>{
+            window.history.back();
+        }}/>
     );
 };
 
