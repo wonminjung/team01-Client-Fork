@@ -5,11 +5,15 @@ import { faPen } from '@fortawesome/free-solid-svg-icons';
 import BasicButton from '../../components/button/BasicButton';
 import { useDispatch } from 'react-redux';
 import { setUser } from '../../modules/user';
+import { now } from 'moment';
 
 const Profile = ({info}) => {
     const publicUrl = process.env.PUBLIC_URL;
     const userId = info.userId;
-    const time = 1;
+    const cTime = new Date(info.createdAt);
+    const nTime = new Date(now()); 
+    const timeDiff = nTime.getTime() - cTime.getTime();
+    const time = Math.ceil(timeDiff / (1000*60*60*24*12));
     const imgRef = useRef(null);
     const fileInputRef = useRef(null);
     const dispatch = useDispatch();
