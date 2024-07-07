@@ -1,26 +1,32 @@
-import React, { useState } from 'react';
+import React, { useEffect, useState } from 'react';
 import { Link, Navigate, useNavigate } from 'react-router-dom';
 import BasicButton from '../../components/button/BasicButton';
 import S from './style';
 import KakaoMap from '../../components/kakaomap/KakaoMap.jsx';
 import { FontAwesomeIcon } from '@fortawesome/react-fontawesome';
 import { faCalendarDays, faCircleInfo, faHandHoldingDollar, faLocationDot, faPhone, faReceipt } from '@fortawesome/free-solid-svg-icons';
+import Modal from './modal/Modal.jsx';
+import { useDispatch } from 'react-redux';
 
 
-const BookingDetail = ({item, isActive, index,}) => {
+const BookingDetail = ({item, isActive, index,setItemData, itemData}) => {
 
     const navigate = useNavigate();
     const[isHovered, setIsHovered] = useState(false); // 마우스 호버 상태를 표시하는 데 사용
+    const[isHovered2,setIsHovered2] = useState(false);
     
     const stayStartDate = new Date(item.checkInDate); // 체크인 날짜
     const stayEndDate = new Date(item.checkOutDate); // 체크아웃 날짜
-
     const timeDiff = Math.abs(stayEndDate.getTime() - stayStartDate.getTime()); 
     const stayPeriod = Math.ceil(timeDiff / (1000 * 3600 *24)); // 숙박기간
-
     const sub = Math.round((item.roomId.dayPrice*stayPeriod) + item.roomId.cleanVat) 
     const serviceVat = sub * 0.1;
     const total = sub + serviceVat;// 총 지불할 금액
+
+    const [roomId, setRoomId] = useState(null); //삭제할 숙소의 ID 저장
+    const [showModal, setShowModal] = useState(false);// 모달 창의 표시 여부를 관리
+    const dispatch = useDispatch();
+    
 
     // 날짜 포맷팅
     const formatDate = (dateString) => {
@@ -74,6 +80,73 @@ const BookingDetail = ({item, isActive, index,}) => {
         const result = prop.toLocaleString('ko-KR');
         return result;
     }
+
+    const handleRemoveItem = (data) => {
+        let roomId = data;
+        console.log(roomId);
+        setRoomId(roomId);
+        setShowModal(true);
+    }
+
+    // 모달의 확인 버튼 클릭 시 삭제를 실행
+    const clickConfirmRemove = () => {
+        handleConfirmRemove();
+        // console.log("삭제완료")
+    }
+
+       
+
+    // // cancleBooking함수를 통해 예약취소버튼 클릭시 예약내역에서 사라지는 기능 구현
+    // // 클릭한 item이 뭔지
+    // // 그냥 booking에서 delete. 
+    const handleConfirmRemove =  async() => {
+        
+        try{ const response = await fetch(`http://localhost:8000/booking/updateBookingList`,
+                { 
+                    method : "POST",
+                    headers : {
+                        "Content-Type" : "application/json; charset=utf-8",
+                    },
+                    body : JSON.stringify({
+                        roomId : roomId._id,
+                    })
+                });
+            
+            // 요청이 성공하여 정상적으로 삭제되었다면,
+             if(response.ok){
+                // server에서 받아온 삭제한 예약 건
+                const deletedBooking = await response.json();
+                console.log("Deleted booking:", deletedBooking);
+
+
+                const updatedBookingList = itemData.filter(booking => booking.roomId._id !== deletedBooking.data.roomId._id);
+
+                //  예약 취소 후 화면에서 삭제 처리
+                setItemData(updatedBookingList);
+
+                // 사용자를 bookingList 페이지로 리디렉션
+                navigate('/bookingList') 
+                
+             }else{
+                const errorData = await response.json();
+                console.error('Failed to update wishList', errorData.message || response.statusText);
+             } 
+
+        }catch(error){
+                console.log('Error:', error);
+            }
+        // 업데이트 완료되어 모달 창을 닫기 위해 setShowModal(false);를 호출
+        setShowModal(false);  
+    }
+
+
+
+     // 모달의 취소 버튼 클릭 시 모달 닫기
+     const handleCancelRemove = () => {
+        setShowModal(false);
+    };
+
+
 
     return (
     <S.bookingDetailWrapper className={isActive ? 'active' : ''} >
@@ -193,6 +266,14 @@ const BookingDetail = ({item, isActive, index,}) => {
                     게스트는 호스트에게 문제 시정, 부분 환불 또는 예약 취소 및 전액 환불을 요청할 수 있습니다. 
                     </p>
                 </div>
+                {/* 예약 취소 버튼 */}
+                <div className="cancelBooking">
+                        <BasicButton  onClick ={() => handleRemoveItem(item.roomId)} onMouseEnter={() => setIsHovered2(true)} onMouseLeave={() => setIsHovered2(false)}>
+                            <div>
+                                <Link onClick={(e)=> e.preventDefault}><img src = { isHovered2 ? "./images/pages/bookingList/xCircle.svg" : "./images/pages/bookingList/xCircle_y.svg"} alt="home"/>예약 취소하기</Link> 
+                            </div>
+                        </BasicButton> 
+                </div>
                 {/* 숙소 페이지로 이동 버튼 */}
                 <div className="navToDetailPage">
                         <BasicButton  onMouseEnter={() => setIsHovered(true)} onMouseLeave={() => setIsHovered(false)}>
@@ -204,6 +285,19 @@ const BookingDetail = ({item, isActive, index,}) => {
             </div>
             
         </div>
+        {showModal && (
+
+                <Modal
+                    message={
+                        <>
+                          예약 취소를 진행하시겠습니까?<br />
+                          취소 후에는 복구가 불가능합니다.
+                        </>
+                    }
+                    onCancel={handleCancelRemove}
+                    onConfirm={clickConfirmRemove}
+                />
+            )} 
     </S.bookingDetailWrapper >
     );
 };

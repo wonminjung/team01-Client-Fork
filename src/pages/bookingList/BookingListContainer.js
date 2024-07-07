@@ -18,7 +18,7 @@ const BookingListContainer = () => {
     const userObjectId = useSelector((state) => state.user.currentUser._id); // 현재 로그인한 유저의 ObjecId(_id)
     const [isReserved, setIsReserved] = useState(null); // 유저가 예약한 숙소가 있는지 여부 상태 (null은 컴포넌트가 아직 데이터를 가져오는 중)
     const [activeIndex, setActiveIndex] = useState(null); // 열린 아코디언 패널의 인덱스를 저장하는 상태 (null은 패널이 열리지 않은 상태)
-    const [itemData, setItemData] = useState([]); // 예약한 숙소 데이터를 저장
+    const [itemData, setItemData] = useState([]); // 예약한 숙소 데이터를 저장 ( 예약한 숙소가 취소될 때 상태를 트리거하는 변수 )
 
     useEffect(() => {
         // 새로고침할 때, Modal창 잠깐 뜨는 것 방지 (userStatus가 null로 초기화되면 실행중지시킴)
@@ -58,7 +58,7 @@ const BookingListContainer = () => {
             }
         }
         getBookingList();
-    }, [userStatus, userObjectId]) // 사용자가 바뀔때마다 새롭게 요청하기
+    }, [userStatus, userObjectId, itemData ]) // 사용자가 바뀌거나, 예약한 숙소를 예약 취소할때마다 리랜더링되게 하는 의존성객체들
 
     // 아코디언 클릭 핸들러 (BookingItem 부분 클릭시, BookingDetail 열림)
     const handleAccordionClick = (index) => {
@@ -100,6 +100,8 @@ const BookingListContainer = () => {
                                                 item={item}
                                                 index={index}
                                                 isActive={activeIndex === index}
+                                                itemData={itemData}
+                                                setItemData={setItemData}
                                             />
                                         </S.panel>) : <div></div>}
                                 </div>
