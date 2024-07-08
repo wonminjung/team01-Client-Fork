@@ -83,7 +83,6 @@ const BookingDetail = ({item, isActive, index,setItemData, itemData}) => {
 
     const handleRemoveItem = (data) => {
         let roomId = data;
-        console.log(roomId);
         setRoomId(roomId);
         setShowModal(true);
     }
@@ -116,8 +115,6 @@ const BookingDetail = ({item, isActive, index,setItemData, itemData}) => {
              if(response.ok){
                 // server에서 받아온 삭제한 예약 건
                 const deletedBooking = await response.json();
-                console.log("Deleted booking:", deletedBooking);
-
 
                 const updatedBookingList = itemData.filter(booking => booking.roomId._id !== deletedBooking.data.roomId._id);
 
