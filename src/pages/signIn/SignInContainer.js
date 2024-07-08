@@ -40,7 +40,7 @@ const SignInContainer = () => {
     return (
         <S.SignInWrapper>
             <S.Form onSubmit={handleSubmit(async (data)=>{
-                console.log(data)
+                // console.log(data)
 
                 // 로그인 로직
                 await fetch('http://localhost:8000/user/passportLogin', {
@@ -64,7 +64,7 @@ const SignInContainer = () => {
                     // console.log(res)
 
                     let {token, user} = res;
-                    console.log(token, user)
+                    // console.log(token, user)
 
                     // Redux
                     dispatch(setUser(res.user))
