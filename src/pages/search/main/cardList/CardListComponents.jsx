@@ -41,6 +41,7 @@ const CardListComponents = ({ cardList, setClickRoom, currentUser, isLogin }) =>
 
     // 위시리스트 업데이트 함수
     const updateWish = async (bool) => {
+        console.log(1);
         let updatedWish = [];
         
         if (bool) {
@@ -78,25 +79,14 @@ const CardListComponents = ({ cardList, setClickRoom, currentUser, isLogin }) =>
             navigate("/signIn");
             return;
         }
-        
-        if (isWishList) {
-            // 이미 위시리스트에 있는데 클릭한 경우
-            if(currentWishList!==undefined && Object.keys(currentUser).length!==0) {
-                updateWish(isWishList)
-                    .then((res) => {
-                        dispatch(setUser(res.user));
-                        setIsWishList(!isWishList);
-                    });
-            }
-        } else {
-            // 위시리스트에 없는데 클릭한 경우
-            if(currentWishList!==undefined && Object.keys(currentUser).length!==0) {
-                updateWish(isWishList)
-                    .then((res) => {
-                        dispatch(setUser(res.user));
-                        setIsWishList(!isWishList);
-                    });
-            }
+
+        // 이미 위시리스트에 있을 땐 제거, 없으면 추가
+        if(currentWishList!==undefined && Object.keys(currentUser).length!==0) {
+            updateWish(isWishList)
+            .then((res) => {
+                dispatch(setUser(res.user));
+                setIsWishList(!isWishList);
+            });
         }
         
     };
