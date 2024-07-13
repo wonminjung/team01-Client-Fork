@@ -3,7 +3,7 @@ import S from './style';
 
 import { faGreaterThan, faLessThan } from '@fortawesome/free-solid-svg-icons';
 import { FontAwesomeIcon } from '@fortawesome/react-fontawesome';
-import { useNavigate, useParams } from 'react-router-dom';
+import { useNavigate, useParams, useSearchParams } from 'react-router-dom';
 
 const PaginationComponents = ({ maxPage }) => {
 
@@ -20,24 +20,25 @@ const PaginationComponents = ({ maxPage }) => {
     const currentPage = +useParams().currentPage;
 
     const navigate = useNavigate();
+    const [ searchParams, setSearchParams ] = useSearchParams();
 
 
     // 페이지 클릭 함수
     const pagenationClickEvent = (e) => {
-        navigate(`${+e.currentTarget.innerText}/`);
+        navigate(`${+e.currentTarget.innerText}/?${searchParams.toString()}`);
     };
 
     // 이전 페이지 클릭 함수
     const prevClickEvent = () => {
         if (currentPage > firstPage) {
-            navigate(`${+currentPage - 1}/`);
+            navigate(`${+currentPage - 1}/?${searchParams.toString()}`);
         }
     };
 
     // 다음 페이지 클릭 함수
     const nextClickEvent = () => {
         if (currentPage < lastPage) {
-            navigate(`${+currentPage + 1}/`);
+            navigate(`${+currentPage + 1}/?${searchParams.toString()}`);
         }
     };
 
